@@ -1,0 +1,17 @@
+{
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/bo-suu-tap/page": "app/bo-suu-tap/page.js",
+  "/chinh-sach/doi-tra/page": "app/chinh-sach/doi-tra/page.js",
+  "/chinh-sach/freeship/page": "app/chinh-sach/freeship/page.js",
+  "/chinh-sach/giao-hang/page": "app/chinh-sach/giao-hang/page.js",
+  "/dich-vu/hoa-chia-buon/page": "app/dich-vu/hoa-chia-buon/page.js",
+  "/dich-vu/hoa-cuoi/page": "app/dich-vu/hoa-cuoi/page.js",
+  "/dich-vu/hoa-khai-truong/page": "app/dich-vu/hoa-khai-truong/page.js",
+  "/dich-vu/hoa-sinh-nhat/page": "app/dich-vu/hoa-sinh-nhat/page.js",
+  "/dich-vu/hoa-tet/page": "app/dich-vu/hoa-tet/page.js",
+  "/dich-vu/hoa-trang-tri/page": "app/dich-vu/hoa-trang-tri/page.js",
+  "/dich-vu/page": "app/dich-vu/page.js",
+  "/page": "app/page.js",
+  "/san-pham/[slug]/page": "app/san-pham/[slug]/page.js"
+}

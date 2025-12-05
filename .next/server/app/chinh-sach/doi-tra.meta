@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/chinh-sach/layout,_N_T_/chinh-sach/doi-tra/layout,_N_T_/chinh-sach/doi-tra/page,_N_T_/chinh-sach/doi-tra"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/chinh-sach/doi-tra/__PAGE__",
+    "/chinh-sach/doi-tra",
+    "/chinh-sach",
+    "/_index",
+    "/_head"
+  ]
+}

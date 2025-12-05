@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/dich-vu/layout,_N_T_/dich-vu/hoa-khai-truong/layout,_N_T_/dich-vu/hoa-khai-truong/page,_N_T_/dich-vu/hoa-khai-truong"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/dich-vu/hoa-khai-truong/__PAGE__",
+    "/dich-vu/hoa-khai-truong",
+    "/dich-vu",
+    "/_index",
+    "/_head"
+  ]
+}

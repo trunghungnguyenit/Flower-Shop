@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/chinh-sach/layout,_N_T_/chinh-sach/freeship/layout,_N_T_/chinh-sach/freeship/page,_N_T_/chinh-sach/freeship"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/chinh-sach/freeship/__PAGE__",
+    "/chinh-sach/freeship",
+    "/chinh-sach",
+    "/_index",
+    "/_head"
+  ]
+}
