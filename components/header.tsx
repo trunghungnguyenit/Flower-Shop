@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useState } from "react"
 import { Menu, X, Phone, MessageCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { CartButton } from "@/components/cart-button"
 
 const navigation = [
   { name: "Trang chủ", href: "/" },
@@ -52,16 +53,20 @@ export function Header() {
             <MessageCircle className="h-4 w-4 mr-2" />
             Zalo
           </Button>
+          <CartButton />
         </div>
 
-        {/* Mobile menu button */}
-        <button
-          type="button"
-          className="lg:hidden p-2 text-foreground"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        {/* Mobile menu button & cart */}
+        <div className="lg:hidden flex items-center gap-2">
+          <CartButton />
+          <button
+            type="button"
+            className="p-2 text-foreground"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile Navigation */}

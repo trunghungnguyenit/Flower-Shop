@@ -5,6 +5,7 @@ import { FeaturedProducts } from "@/components/featured-products"
 import { OccasionCategories } from "@/components/occasion-categories"
 import { FreeshipPromo } from "@/components/freeship-promo"
 import { AboutSection } from "@/components/about-section"
+import { CustomerReviews } from "@/components/customer-reviews"
 import { ContactForm } from "@/components/contact-form"
 
 export default function HomePage() {
@@ -17,6 +18,7 @@ export default function HomePage() {
         <OccasionCategories />
         <FreeshipPromo />
         <AboutSection />
+        <CustomerReviews />
         <ContactForm />
       </div>
       <Footer />
