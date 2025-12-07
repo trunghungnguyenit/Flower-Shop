@@ -6,8 +6,10 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
-import { Minus, Plus, Phone, MessageCircle, Truck, ChevronLeft } from "lucide-react"
+import { Textarea } from "@/components/ui/textarea"
+import { Minus, Plus, Phone, MessageCircle, Truck, ChevronLeft, ShoppingCart, Check } from "lucide-react"
 import { ProductCard } from "@/components/product-card"
+import { useCart } from "@/lib/cart-context"
 import type { Product } from "@/lib/products"
 
 const additionalServices = [
@@ -25,11 +27,23 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
   const [selectedImage, setSelectedImage] = useState(0)
   const [quantity, setQuantity] = useState(1)
   const [selectedServices, setSelectedServices] = useState<string[]>([])
+  const [note, setNote] = useState("")
+  const [isAdded, setIsAdded] = useState(false)
+  const { addToCart } = useCart()
 
   const toggleService = (serviceId: string) => {
     setSelectedServices((prev) =>
       prev.includes(serviceId) ? prev.filter((id) => id !== serviceId) : [...prev, serviceId],
     )
+  }
+
+  const handleAddToCart = () => {
+    const serviceNames = selectedServices.map(
+      (id) => additionalServices.find((s) => s.id === id)?.name || ""
+    )
+    addToCart(product, quantity, serviceNames, note)
+    setIsAdded(true)
+    setTimeout(() => setIsAdded(false), 2000)
   }
 
   return (
@@ -133,6 +147,20 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
                 </div>
               </div>
 
+              {/* Note */}
+              <div className="mb-6">
+                <Label className="text-sm font-semibold text-foreground uppercase tracking-wider mb-3 block">
+                  Ghi chú đặc biệt
+                </Label>
+                <Textarea
+                  placeholder="VD: Giao trước 10h sáng, viết thiệp 'Chúc mừng sinh nhật'..."
+                  value={note}
+                  onChange={(e) => setNote(e.target.value)}
+                  rows={3}
+                  className="resize-none"
+                />
+              </div>
+
               {/* Freeship Info */}
               <div className="bg-accent/20 rounded-lg p-4 mb-8">
                 <div className="flex items-center gap-3">
@@ -145,19 +173,47 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
               </div>
 
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Button size="lg" className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground">
-                  <Phone className="h-4 w-4 mr-2" />
-                  Gọi đặt hàng: 090 123 4567
-                </Button>
+              <div className="space-y-3">
                 <Button
                   size="lg"
-                  variant="outline"
-                  className="flex-1 border-primary text-primary hover:bg-primary/10 bg-transparent"
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+                  onClick={handleAddToCart}
+                  disabled={isAdded}
                 >
-                  <MessageCircle className="h-4 w-4 mr-2" />
-                  Chat Zalo
+                  {isAdded ? (
+                    <>
+                      <Check className="h-5 w-5 mr-2" />
+                      Đã thêm vào giỏ hàng
+                    </>
+                  ) : (
+                    <>
+                      <ShoppingCart className="h-5 w-5 mr-2" />
+                      Thêm vào giỏ hàng
+                    </>
+                  )}
                 </Button>
+
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="flex-1 border-primary text-primary hover:bg-primary/10"
+                    asChild
+                  >
+                    <a href="tel:0901234567">
+                      <Phone className="h-4 w-4 mr-2" />
+                      Gọi: 090 123 4567
+                    </a>
+                  </Button>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="flex-1 border-primary text-primary hover:bg-primary/10"
+                  >
+                    <MessageCircle className="h-4 w-4 mr-2" />
+                    Chat Zalo
+                  </Button>
+                </div>
               </div>
             </div>
           </div>

@@ -23,10 +23,10 @@ const orderSteps = [
 
 export default function HoaSinhNhatPage() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-gradient-to-b from-pink-50 via-white to-purple-50">
       <Header />
       <div className="pt-[73px]">
-        {/* Hero Banner */}
+        {/* Hero Banner - Pink & Purple theme */}
         <section className="relative h-[50vh] lg:h-[60vh] overflow-hidden">
           <Image
             src="/birthday-flower-bouquet-celebration.jpg"
@@ -35,32 +35,42 @@ export default function HoaSinhNhatPage() {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-foreground/60 to-foreground/20" />
+          <div className="absolute inset-0 bg-gradient-to-r from-pink-900/70 via-purple-900/50 to-transparent" />
           <div className="absolute inset-0 flex items-center">
             <div className="mx-auto max-w-7xl px-4 lg:px-8">
               <div className="max-w-xl">
-                <p className="text-primary-foreground/80 text-sm tracking-[0.3em] uppercase mb-3">
-                  Ngày Đặc Biệt
-                </p>
-                <h1 className="text-4xl lg:text-5xl font-semibold text-card mb-4">Hoa Sinh Nhật</h1>
-                <p className="text-card/90 text-lg mb-8">
+                <div className="inline-block mb-4 px-4 py-2 bg-pink-500/20 backdrop-blur-sm rounded-full border border-pink-300/30">
+                  <p className="text-pink-100 text-sm tracking-[0.3em] uppercase">🎂 Ngày Đặc Biệt</p>
+                </div>
+                <h1 className="text-4xl lg:text-6xl font-bold text-white mb-4 drop-shadow-lg">Hoa Sinh Nhật</h1>
+                <p className="text-pink-50 text-lg mb-8 leading-relaxed">
                   Gửi gắm yêu thương trong ngày đặc biệt với những bó hoa tươi thắm nhất
                 </p>
-                <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground" asChild>
-                  <a href="#san-pham">Xem Bộ Sưu Tập</a>
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white shadow-lg shadow-pink-500/50"
+                  asChild
+                >
+                  <a href="#san-pham">✨ Xem Bộ Sưu Tập</a>
                 </Button>
               </div>
             </div>
           </div>
+          {/* Decorative elements */}
+          <div className="absolute top-10 right-10 text-6xl animate-bounce">🎈</div>
+          <div className="absolute bottom-20 right-20 text-4xl animate-pulse">🎁</div>
         </section>
 
         {/* Description */}
-        <section className="py-12 lg:py-16 bg-secondary/30">
+        <section className="py-12 lg:py-16 bg-gradient-to-r from-pink-100/50 to-purple-100/50">
           <div className="mx-auto max-w-4xl px-4 lg:px-8 text-center">
-            <h2 className="text-2xl lg:text-3xl font-semibold text-foreground mb-6">
+            <div className="inline-block mb-4">
+              <span className="text-5xl">🌸</span>
+            </div>
+            <h2 className="text-2xl lg:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 mb-6">
               Hoa Sinh Nhật - Món Quà Ý Nghĩa
             </h2>
-            <p className="text-muted-foreground leading-relaxed mb-4">
+            <p className="text-gray-700 leading-relaxed mb-4">
               Tặng hoa sinh nhật là cách thể hiện tình cảm chân thành nhất. Chúng tôi có đa dạng mẫu hoa sinh nhật từ
               nhẹ nhàng đến sang trọng, phù hợp với mọi đối tượng và sở thích.
             </p>
@@ -93,16 +103,21 @@ export default function HoaSinhNhatPage() {
         </section>
 
         {/* How to Order */}
-        <section className="py-12 lg:py-16 bg-secondary/30">
+        <section className="py-12 lg:py-16 bg-white">
           <div className="mx-auto max-w-4xl px-4 lg:px-8">
-            <h2 className="text-2xl font-semibold text-foreground mb-8 text-center">Hướng Dẫn Đặt Hàng</h2>
+            <h2 className="text-2xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">
+              Hướng Dẫn Đặt Hàng
+            </h2>
             <div className="space-y-4">
               {orderSteps.map((step, index) => (
-                <div key={index} className="flex items-start gap-4 bg-card p-4 rounded-lg">
-                  <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-semibold shrink-0">
+                <div
+                  key={index}
+                  className="flex items-start gap-4 bg-gradient-to-r from-pink-50 to-purple-50 p-6 rounded-xl border border-pink-200 hover:shadow-lg transition-shadow"
+                >
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 flex items-center justify-center text-white font-bold shrink-0 shadow-md">
                     {index + 1}
                   </div>
-                  <p className="text-foreground pt-1">{step}</p>
+                  <p className="text-gray-700 pt-2 font-medium">{step}</p>
                 </div>
               ))}
             </div>
@@ -110,25 +125,32 @@ export default function HoaSinhNhatPage() {
         </section>
 
         {/* CTA */}
-        <section className="py-16 bg-primary/10">
+        <section className="py-16 bg-gradient-to-r from-pink-100 to-purple-100">
           <div className="mx-auto max-w-3xl px-4 text-center">
-            <h2 className="text-2xl lg:text-3xl font-semibold text-foreground mb-4">Đặt Hoa Sinh Nhật Ngay</h2>
-            <p className="text-muted-foreground mb-8">
+            <div className="text-6xl mb-4">🎉</div>
+            <h2 className="text-2xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 mb-4">
+              Đặt Hoa Sinh Nhật Ngay
+            </h2>
+            <p className="text-gray-700 mb-8 text-lg">
               Liên hệ ngay để được tư vấn và nhận ưu đãi đặc biệt cho đơn hàng sinh nhật
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground" asChild>
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white shadow-lg shadow-pink-500/50"
+                asChild
+              >
                 <a href="tel:0901234567">
-                  <Phone className="h-4 w-4 mr-2" />
+                  <Phone className="h-5 w-5 mr-2" />
                   Gọi: 090 123 4567
                 </a>
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="border-primary text-primary hover:bg-primary/10 bg-transparent"
+                className="border-2 border-pink-500 text-pink-600 hover:bg-pink-50 bg-white"
               >
-                <MessageCircle className="h-4 w-4 mr-2" />
+                <MessageCircle className="h-5 w-5 mr-2" />
                 Chat Zalo
               </Button>
             </div>
