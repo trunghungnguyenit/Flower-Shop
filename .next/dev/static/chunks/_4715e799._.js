@@ -110,7 +110,7 @@ function CartProvider({ children }) {
     };
     const getTotalPrice = ()=>{
         return items.reduce((total, item)=>{
-            const price = parseFloat(item.product.price.replace(/[^\d]/g, "")) || 0;
+            const price = typeof item.product.Gia === 'number' ? item.product.Gia : 0;
             return total + price * item.quantity;
         }, 0);
     };
@@ -120,7 +120,7 @@ function CartProvider({ children }) {
     const getSelectedTotalPrice = ()=>{
         return items.reduce((total, item)=>{
             if (!item.selected) return total;
-            const price = parseFloat(item.product.price.replace(/[^\d]/g, "")) || 0;
+            const price = typeof item.product.Gia === 'number' ? item.product.Gia : 0;
             return total + price * item.quantity;
         }, 0);
     };

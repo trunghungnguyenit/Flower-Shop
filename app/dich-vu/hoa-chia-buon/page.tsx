@@ -2,7 +2,8 @@ import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { ProductCard } from "@/components/product-card"
-import { products } from "@/lib/products"
+import { FirebaseApi, formatImageUrl, getFirstImage, formatPrice } from "@/api/firebase"
+import type { SanPham } from "@/api/api.type"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Phone, MessageCircle } from "lucide-react"
@@ -12,8 +13,6 @@ export const metadata: Metadata = {
   description: "Hoa chia buồn, vòng hoa tang lễ tại Đà Nẵng. Chia sẻ nỗi đau, đồng hành trong mất mát.",
 }
 
-const sympathyProducts = products.filter((p) => p.occasion.includes("chia-buon"))
-
 const orderSteps = [
   "Chọn mẫu hoa chia buồn yêu thích hoặc mô tả ý tưởng của bạn",
   "Liên hệ qua điện thoại hoặc Zalo để được tư vấn chi tiết",
@@ -21,7 +20,14 @@ const orderSteps = [
   "Nhận hoa đúng thời gian và địa điểm mong muốn",
 ]
 
-export default function HoaChiaBuonPage() {
+export default async function HoaChiaBuonPage() {
+  const res = await FirebaseApi.getSanPham()
+  const allProducts: SanPham[] = res.ok ? res.data : []
+  
+  const sympathyProducts = allProducts.filter((product) => 
+    product.loai_hoa === 'hoa-chia-buon' || 
+    (product.su_kiens && product.su_kiens.includes('chia-buon'))
+  )
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-50 via-gray-50 to-slate-100">
       <Header />
@@ -94,10 +100,10 @@ export default function HoaChiaBuonPage() {
                 <ProductCard
                   key={product.id}
                   id={product.id}
-                  name={product.name}
-                  price={product.price}
-                  image={product.image}
-                  slug={product.slug}
+                  name={product.TenHoa}
+                  price={formatPrice(product.Gia)}
+                  image={formatImageUrl(getFirstImage(product.image))}
+                  slug={product.slug || ''}
                 />
               ))}
             </div>

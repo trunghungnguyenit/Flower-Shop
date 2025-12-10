@@ -133,7 +133,7 @@ export default function ShippingPolicyPage() {
           <p className="text-muted-foreground mb-4">Có thắc mắc về giao hàng?</p>
           <Button size="lg" className="gap-2">
             <Phone className="w-5 h-5" />
-            Liên hệ: 0905.XXX.XXX
+            Liên hệ: 090 123 4567
           </Button>
         </div>
       </div>

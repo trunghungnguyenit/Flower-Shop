@@ -28,14 +28,14 @@ const categories = [
   {
     id: 4,
     name: "Cưới & Khai Trương",
-    image: "/wedding-flowers-white-elegant-ceremony.jpg",
+    image: "/white-wedding-bouquet-elegant-roses.jpg",
     href: "/dich-vu/hoa-cuoi",
     description: "Sang trọng & Tinh tế",
   },
   {
     id: 5,
     name: "Chia Buồn",
-    image: "/sympathy-funeral-flowers-white-lily.jpg",
+    image: "/funeral-wreath-white.jpg",
     href: "/dich-vu/hoa-chia-buon",
     description: "Trang nghiêm & Tôn kính",
   },

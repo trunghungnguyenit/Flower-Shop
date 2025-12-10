@@ -19,7 +19,7 @@ export function AboutSection() {
             <div className="space-y-4">
               <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
                 <Image
-                  src="/placeholder.svg?height=500&width=400"
+                  src="thiet-ke-shop-hoa-tuoi-nho.jpg?height=500&width=400"
                   alt="Không gian tiệm hoa"
                   fill
                   className="object-cover"
@@ -29,7 +29,7 @@ export function AboutSection() {
             <div className="space-y-4 pt-8">
               <div className="relative aspect-square overflow-hidden rounded-lg">
                 <Image
-                  src="/placeholder.svg?height=400&width=400"
+                  src="hoa-1.jpeg?height=400&width=400"
                   alt="Hoa tươi mỗi ngày"
                   fill
                   className="object-cover"
@@ -37,7 +37,7 @@ export function AboutSection() {
               </div>
               <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
                 <Image
-                  src="/placeholder.svg?height=300&width=400"
+                  src="fresh-green.jpg?height=300&width=400"
                   alt="Giao hàng cẩn thận"
                   fill
                   className="object-cover"

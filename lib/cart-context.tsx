@@ -1,10 +1,10 @@
 "use client"
 
 import React, { createContext, useContext, useState, useEffect } from "react"
-import type { Product } from "./products"
+import type { SanPham } from "@/api/api.type"
 
 export interface CartItem {
-  product: Product
+  product: SanPham
   quantity: number
   additionalServices: string[]
   note?: string
@@ -13,7 +13,7 @@ export interface CartItem {
 
 interface CartContextType {
   items: CartItem[]
-  addToCart: (product: Product, quantity: number, services: string[], note?: string) => void
+  addToCart: (product: SanPham, quantity: number, services: string[], note?: string) => void
   removeFromCart: (productId: string) => void
   updateQuantity: (productId: string, quantity: number) => void
   toggleSelectItem: (productId: string) => void
@@ -51,7 +51,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
   }, [items, isLoaded])
 
-  const addToCart = (product: Product, quantity: number, services: string[], note?: string) => {
+  const addToCart = (product: SanPham, quantity: number, services: string[], note?: string) => {
     setItems((prevItems) => {
       const existingItemIndex = prevItems.findIndex((item) => item.product.id === product.id)
 
@@ -111,7 +111,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const getTotalPrice = () => {
     return items.reduce((total, item) => {
-      const price = parseFloat(item.product.price.replace(/[^\d]/g, "")) || 0
+      const price = typeof item.product.Gia === 'number' ? item.product.Gia : 0
       return total + price * item.quantity
     }, 0)
   }
@@ -123,7 +123,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const getSelectedTotalPrice = () => {
     return items.reduce((total, item) => {
       if (!item.selected) return total
-      const price = parseFloat(item.product.price.replace(/[^\d]/g, "")) || 0
+      const price = typeof item.product.Gia === 'number' ? item.product.Gia : 0
       return total + price * item.quantity
     }, 0)
   }

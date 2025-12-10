@@ -3,6 +3,7 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { useCart } from "@/lib/cart-context"
+import { formatImageUrl, getFirstImage } from "@/api/firebase"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -61,8 +62,8 @@ export default function CartPage() {
     message += `🛒 SẢN PHẨM:\n`
 
     selectedItems.forEach((item, index) => {
-      const price = parseFloat(item.product.price.replace(/[^\d]/g, "")) || 0
-      message += `${index + 1}. ${item.product.name}\n`
+      const price = typeof item.product.Gia === 'number' ? item.product.Gia : 0
+      message += `${index + 1}. ${item.product.TenHoa}\n`
       message += `   - Số lượng: ${item.quantity}\n`
       message += `   - Giá: ${formatPrice(price * item.quantity)}\n`
       if (item.additionalServices.length > 0) {
@@ -150,7 +151,7 @@ export default function CartPage() {
             {/* Cart Items */}
             <div className="lg:col-span-2 space-y-4">
               {items.map((item) => {
-                const price = parseFloat(item.product.price.replace(/[^\d]/g, "")) || 0
+                const price = typeof item.product.Gia === 'number' ? item.product.Gia : 0
                 const itemTotal = price * item.quantity
 
                 return (
@@ -176,8 +177,8 @@ export default function CartPage() {
                         className="relative w-24 h-24 rounded-lg overflow-hidden shrink-0"
                       >
                         <Image
-                          src={item.product.image}
-                          alt={item.product.name}
+                          src={formatImageUrl(getFirstImage(item.product.image))}
+                          alt={item.product.TenHoa}
                           fill
                           className="object-cover hover:scale-105 transition-transform"
                         />
@@ -187,7 +188,7 @@ export default function CartPage() {
                       <div className="flex-1 min-w-0">
                         <Link href={`/san-pham/${item.product.slug}`}>
                           <h3 className="font-semibold text-foreground hover:text-primary mb-2">
-                            {item.product.name}
+                            {item.product.TenHoa}
                           </h3>
                         </Link>
 

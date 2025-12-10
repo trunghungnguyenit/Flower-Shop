@@ -164,7 +164,7 @@ export default function ReturnPolicyPage() {
           </p>
           <Button size="lg" className="gap-2">
             <Phone className="w-5 h-5" />
-            Hotline: 0905.XXX.XXX
+            Hotline: 090 123 4567
           </Button>
         </section>
       </div>

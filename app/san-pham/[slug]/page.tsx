@@ -2,54 +2,106 @@ import Link from "next/link"
 import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { getProductBySlug, products } from "@/lib/products"
+import { FirebaseApi, getFirstImage, formatImageUrl, formatPrice } from "@/api/firebase"
 import { ProductDetailClient } from "@/components/product-detail-client"
+import type { SanPham } from "@/api/api.type"
 
-const additionalServices = [
-  { id: "card", name: "Thiệp chúc mừng", price: "20.000đ" },
-  { id: "premium-wrap", name: "Giấy gói cao cấp", price: "50.000đ" },
-  { id: "express", name: "Giao hàng siêu tốc (1h)", price: "30.000đ" },
-]
-
-// Generate static params for all products
 export async function generateStaticParams() {
-  return products.map((product) => ({
-    slug: product.slug,
-  }))
+  try {
+    const res = await FirebaseApi.getSanPham()
+    if (res.ok && Array.isArray(res.data)) {
+      return res.data
+        .filter((product: SanPham) => product.slug)
+        .map((product: SanPham) => ({
+          slug: product.slug!,
+        }))
+    }
+  } catch (error) {
+    console.error("Error generating static params:", error)
+  }
+  return []
 }
 
-// Generate metadata for each product
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
-  const product = getProductBySlug(slug)
-
-  if (!product) {
-    return {
-      title: "Không tìm thấy sản phẩm | Hoa Tươi Đà Nẵng",
+  
+  try {
+    const res = await FirebaseApi.getSanPhamBySlug(slug)
+    if (res.ok && res.data) {
+      const product = res.data as SanPham
+      const price = formatPrice(product.Gia)
+      const firstImage = formatImageUrl(getFirstImage(product.image))
+      
+      return {
+        title: `${product.TenHoa} | Hoa Tươi Đà Nẵng`,
+        description: product.MoTa || `${product.TenHoa} - Hoa tươi chất lượng cao tại Đà Nẵng`,
+        openGraph: {
+          title: product.TenHoa,
+          description: product.MoTa || `${product.TenHoa} - Hoa tươi chất lượng cao tại Đà Nẵng`,
+          images: firstImage ? [firstImage] : [],
+        },
+      }
     }
+  } catch (error) {
+    console.error("Error generating metadata:", error)
   }
 
   return {
-    title: `${product.name} - ${product.price} | Hoa Tươi Đà Nẵng`,
-    description: product.description,
-    openGraph: {
-      title: product.name,
-      description: product.description,
-      images: [product.image],
-    },
+    title: "Không tìm thấy sản phẩm | Hoa Tươi Đà Nẵng",
   }
 }
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const product = getProductBySlug(slug)
+  
+  try {
+    const res = await FirebaseApi.getSanPhamBySlug(slug)
+    
+    if (!res.ok || !res.data) {
+      return (
+        <main className="min-h-screen">
+          <Header />
+          <div className="pt-[73px] py-24 text-center">
+            <h1 className="text-2xl font-semibold text-foreground mb-4">Không tìm thấy sản phẩm</h1>
+            <Link href="/bo-suu-tap" className="text-primary hover:underline">
+              Quay lại bộ sưu tập
+            </Link>
+          </div>
+          <Footer />
+        </main>
+      )
+    }
 
-  if (!product) {
+    const product = res.data as SanPham
+
+    // Lấy sản phẩm liên quan (cùng loại hoa)
+    const allProductsRes = await FirebaseApi.getSanPham()
+    const relatedProducts = allProductsRes.ok && Array.isArray(allProductsRes.data) 
+      ? allProductsRes.data
+          .filter((p: SanPham) => p.loai_hoa === product.loai_hoa && p.id !== product.id)
+          .slice(0, 4)
+      : []
+
+
+
+    // Pass SanPham objects directly to ProductDetailClient
+    const productForClient = product
+    const relatedProductsForClient = relatedProducts
+
+    return (
+      <main className="min-h-screen">
+        <Header />
+        <ProductDetailClient product={productForClient} relatedProducts={relatedProductsForClient} />
+        <Footer />
+      </main>
+    )
+  } catch (error) {
+    console.error("Error loading product:", error)
     return (
       <main className="min-h-screen">
         <Header />
         <div className="pt-[73px] py-24 text-center">
-          <h1 className="text-2xl font-semibold text-foreground mb-4">Không tìm thấy sản phẩm</h1>
+          <h1 className="text-2xl font-semibold text-foreground mb-4">Lỗi khi tải sản phẩm</h1>
           <Link href="/bo-suu-tap" className="text-primary hover:underline">
             Quay lại bộ sưu tập
           </Link>
@@ -58,14 +110,4 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       </main>
     )
   }
-
-  const relatedProducts = products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4)
-
-  return (
-    <main className="min-h-screen">
-      <Header />
-      <ProductDetailClient product={product} relatedProducts={relatedProducts} />
-      <Footer />
-    </main>
-  )
 }

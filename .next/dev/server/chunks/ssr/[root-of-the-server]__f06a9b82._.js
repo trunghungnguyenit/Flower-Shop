@@ -512,42 +512,42 @@ const services = [
         id: 1,
         name: "Hoa Sinh Nhật",
         description: "Gửi tặng yêu thương đến người thân yêu trong ngày sinh nhật với những bó hoa tươi thắm.",
-        image: "/placeholder.svg?height=400&width=600",
+        image: "/hoa-sinh-nhat.jpg?height=400&width=600",
         href: "/dich-vu/hoa-sinh-nhat"
     },
     {
         id: 2,
         name: "Hoa Tết",
         description: "Chào đón năm mới với những lẵng hoa Tết rực rỡ, mang may mắn và tài lộc.",
-        image: "/placeholder.svg?height=400&width=600",
+        image: "/vietnamese-tet-new-year-flowers-peach-blossom-apri.jpg?height=400&width=600",
         href: "/dich-vu/hoa-tet"
     },
     {
         id: 3,
         name: "Hoa Cưới",
         description: "Trang trí ngày trọng đại của bạn với những bó hoa cưới tinh tế và lãng mạn.",
-        image: "/placeholder.svg?height=400&width=600",
+        image: "white-bridal-bouquet.jpg?height=400&width=600",
         href: "/dich-vu/hoa-cuoi"
     },
     {
         id: 4,
         name: "Hoa Khai Trương",
         description: "Chúc mừng khai trương với lẵng hoa hoành tráng, mang đến thành công và phát đạt.",
-        image: "/placeholder.svg?height=400&width=600",
+        image: "/vip-opening-flower.jpg?height=400&width=600",
         href: "/dich-vu/hoa-khai-truong"
     },
     {
         id: 5,
         name: "Hoa Chia Buồn",
         description: "Gửi lời chia buồn sâu sắc với vòng hoa tang lễ trang nghiêm và tôn kính.",
-        image: "/placeholder.svg?height=400&width=600",
+        image: "/wedding-flowers-white-elegant-ceremony.jpg?height=400&width=600",
         href: "/dich-vu/hoa-chia-buon"
     },
     {
         id: 6,
         name: "Hoa Trang Trí",
         description: "Làm đẹp không gian sống với những bình hoa trang trí tinh tế và nghệ thuật.",
-        image: "/placeholder.svg?height=400&width=600",
+        image: "/decorative-flowers-home-interior-design.jpg?height=400&width=600",
         href: "/dich-vu/hoa-trang-tri"
     }
 ];

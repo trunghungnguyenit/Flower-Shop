@@ -3,6 +3,7 @@
 import { X, Minus, Plus, Trash2, ShoppingBag } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useCart } from "@/lib/cart-context"
+import { formatImageUrl, getFirstImage } from "@/api/firebase"
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useState } from "react"
@@ -80,7 +81,7 @@ export function CartSheet({ isOpen, onClose }: CartSheetProps) {
           ) : (
             <div className="space-y-4">
               {items.map((item) => {
-                const price = parseFloat(item.product.price.replace(/[^\d]/g, "")) || 0
+                const price = typeof item.product.Gia === 'number' ? item.product.Gia : 0
                 const itemTotal = price * item.quantity
 
                 return (
@@ -89,8 +90,8 @@ export function CartSheet({ isOpen, onClose }: CartSheetProps) {
                       {/* Image */}
                       <div className="relative w-20 h-20 rounded-md overflow-hidden shrink-0">
                         <Image
-                          src={item.product.image}
-                          alt={item.product.name}
+                          src={formatImageUrl(getFirstImage(item.product.image))}
+                          alt={item.product.TenHoa}
                           fill
                           className="object-cover"
                         />
@@ -99,7 +100,7 @@ export function CartSheet({ isOpen, onClose }: CartSheetProps) {
                       {/* Info */}
                       <div className="flex-1 min-w-0">
                         <h3 className="font-medium text-sm line-clamp-2 mb-1">
-                          {item.product.name}
+                          {item.product.TenHoa}
                         </h3>
                         <p className="text-primary font-semibold text-sm mb-2">
                           {formatPrice(itemTotal)}

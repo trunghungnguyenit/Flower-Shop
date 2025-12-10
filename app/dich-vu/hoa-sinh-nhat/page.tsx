@@ -2,17 +2,16 @@ import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { ProductCard } from "@/components/product-card"
-import { products } from "@/lib/products"
+import { FirebaseApi, formatImageUrl, getFirstImage, formatPrice } from "@/api/firebase"
+import type { SanPham } from "@/api/api.type"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Phone, MessageCircle } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Hoa Sinh Nhật | Hoa Tươi Đà Nẵng",
+  title: "Hoa Sinh Nhật Đẹp | Giao Nhanh Đà Nẵng & Quảng Nam",
   description: "Tặng hoa sinh nhật đẹp, giao nhanh tại Đà Nẵng & Quảng Nam. Đa dạng mẫu hoa từ nhẹ nhàng đến sang trọng.",
 }
-
-const birthdayProducts = products.filter((p) => p.occasion.includes("sinh-nhat"))
 
 const orderSteps = [
   "Chọn mẫu hoa sinh nhật yêu thích hoặc mô tả ý tưởng của bạn",
@@ -21,7 +20,15 @@ const orderSteps = [
   "Nhận hoa đúng thời gian và địa điểm mong muốn",
 ]
 
-export default function HoaSinhNhatPage() {
+export default async function HoaSinhNhatPage() {
+  // Gọi API để lấy sản phẩm hoa sinh nhật
+  const res = await FirebaseApi.getSanPham()
+  const allProducts: SanPham[] = res.ok ? res.data : []
+  
+  // Lọc sản phẩm hoa sinh nhật
+  const birthdayProducts = allProducts.filter((product) => 
+    product.su_kiens && product.su_kiens.includes('sinh-nhat')
+  )
   return (
     <main className="min-h-screen bg-gradient-to-b from-pink-50 via-white to-purple-50">
       <Header />
@@ -89,10 +96,10 @@ export default function HoaSinhNhatPage() {
                 <ProductCard
                   key={product.id}
                   id={product.id}
-                  name={product.name}
-                  price={product.price}
-                  image={product.image}
-                  slug={product.slug}
+                  name={product.TenHoa}
+                  price={formatPrice(product.Gia)}
+                  image={formatImageUrl(getFirstImage(product.image))}
+                  slug={product.slug || ''}
                 />
               ))}
             </div>

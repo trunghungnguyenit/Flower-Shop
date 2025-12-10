@@ -2,8 +2,10 @@ import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { ProductCard } from "@/components/product-card"
-import { products, categories, occasions } from "@/lib/products"
+import { categories, occasions } from "@/lib/products"
 import { CollectionFilters } from "@/components/collection-filters"
+import { FirebaseApi, getFirstImage, formatImageUrl, formatPrice } from "@/api/firebase"
+import type { SanPham } from "@/api/api.type"
 
 export const metadata: Metadata = {
   title: "Bộ Sưu Tập Hoa Tươi | Hoa Tươi Đà Nẵng",
@@ -19,9 +21,13 @@ export default async function CollectionPage({
   const selectedCategory = params.category || "all"
   const selectedOccasion = params.occasion || "all"
 
-  const filteredProducts = products.filter((product) => {
-    const categoryMatch = selectedCategory === "all" || product.category === selectedCategory
-    const occasionMatch = selectedOccasion === "all" || product.occasion.includes(selectedOccasion)
+  const res = await FirebaseApi.getSanPham()
+  const sanPhams: SanPham[] = res.ok ? res.data : []
+
+  const filteredProducts = sanPhams.filter((product) => {
+    const categoryMatch = selectedCategory === "all" || product.loai_hoa === selectedCategory
+    const occasionMatch = selectedOccasion === "all" || 
+      (product.su_kiens && product.su_kiens.includes(selectedOccasion))
     return categoryMatch && occasionMatch
   })
 
@@ -60,10 +66,10 @@ export default async function CollectionPage({
                 <ProductCard
                   key={product.id}
                   id={product.id}
-                  name={product.name}
-                  price={product.price}
-                  image={product.image}
-                  slug={product.slug}
+                  name={product.TenHoa}
+                  price={formatPrice(product.Gia)}
+                  image={formatImageUrl(getFirstImage(product.image))}
+                  slug={product.slug || ''}
                 />
               ))}
             </div>

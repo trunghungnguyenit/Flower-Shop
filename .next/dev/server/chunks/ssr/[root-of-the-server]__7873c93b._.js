@@ -615,7 +615,7 @@ const products = [
         name: "Giỏ Hoa Trang Trí Văn Phòng",
         price: "350.000đ",
         image: "/placeholder.svg?height=400&width=400",
-        slug: "gio-hoa-van-phong",
+        slug: "",
         category: "hoa-trang-tri",
         occasion: [
             "trang-tri"

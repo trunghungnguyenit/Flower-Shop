@@ -2,9 +2,8 @@
 
 import { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
-import { ChevronLeft, ChevronRight, Edit3 } from "lucide-react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { ReviewDialog } from "@/components/review-dialog"
 
 interface Review {
   id: number
@@ -75,7 +74,6 @@ const reviews: Review[] = [
 export function CustomerReviews() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [itemsPerView, setItemsPerView] = useState(3)
-  const [isReviewDialogOpen, setIsReviewDialogOpen] = useState(false)
 
   useEffect(() => {
     const handleResize = () => {
@@ -132,17 +130,9 @@ export function CustomerReviews() {
           <h2 className="text-3xl lg:text-4xl font-semibold text-foreground mb-4">
             Khách Hàng Nói Gì Về Chúng Tôi
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
+          <p className="text-muted-foreground max-w-2xl mx-auto">
             Hàng nghìn khách hàng đã tin tưởng và hài lòng với dịch vụ của chúng tôi
           </p>
-          <Button
-            size="lg"
-            onClick={() => setIsReviewDialogOpen(true)}
-            className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white shadow-lg"
-          >
-            <Edit3 className="h-4 w-4 mr-2" />
-            Viết đánh giá của bạn
-          </Button>
         </div>
 
         {/* Reviews Slider */}
@@ -244,9 +234,6 @@ export function CustomerReviews() {
           </div>
         </div>
       </div>
-
-      {/* Review Dialog */}
-      <ReviewDialog isOpen={isReviewDialogOpen} onClose={() => setIsReviewDialogOpen(false)} />
     </section>
   )
 }

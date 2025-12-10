@@ -17,7 +17,7 @@ const slides = [
   {
     id: 2,
     image: "/beautiful-white-and-pink-flower-arrangement-studio.jpg",
-    title: "Bộ Sưu Tập Tết 2024",
+    title: "Bộ Sưu Tập Tết 2025",
     subtitle: "Hoa Tết Sang Trọng",
     description: "Đặt trước để nhận ưu đãi đặc biệt",
   },

@@ -2,7 +2,8 @@ import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { ProductCard } from "@/components/product-card"
-import { products } from "@/lib/products"
+import { FirebaseApi, formatImageUrl, getFirstImage, formatPrice } from "@/api/firebase"
+import type { SanPham } from "@/api/api.type"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Phone, MessageCircle } from "lucide-react"
@@ -12,8 +13,6 @@ export const metadata: Metadata = {
   description: "Hoa Tết đẹp, mai vàng, đào Tết tại Đà Nẵng. Đón xuân sang với hoa Tết rực rỡ, mang may mắn và tài lộc.",
 }
 
-const tetProducts = products.filter((p) => p.occasion.includes("tet"))
-
 const orderSteps = [
   "Chọn mẫu hoa Tết yêu thích hoặc mô tả ý tưởng của bạn",
   "Liên hệ qua điện thoại hoặc Zalo để được tư vấn chi tiết",
@@ -21,7 +20,16 @@ const orderSteps = [
   "Nhận hoa đúng thời gian và địa điểm mong muốn",
 ]
 
-export default function HoaTetPage() {
+export default async function HoaTetPage() {
+  // Gọi API để lấy sản phẩm hoa Tết
+  const res = await FirebaseApi.getSanPham()
+  const allProducts: SanPham[] = res.ok ? res.data : []
+  
+  // Lọc sản phẩm hoa Tết
+  const tetProducts = allProducts.filter((product) => 
+    product.loai_hoa === 'hoa-tet' || 
+    (product.su_kiens && product.su_kiens.includes('tet'))
+  )
   return (
     <main className="min-h-screen bg-gradient-to-b from-red-50 via-yellow-50 to-orange-50">
       <Header />
@@ -94,10 +102,10 @@ export default function HoaTetPage() {
                 <ProductCard
                   key={product.id}
                   id={product.id}
-                  name={product.name}
-                  price={product.price}
-                  image={product.image}
-                  slug={product.slug}
+                  name={product.TenHoa}
+                  price={formatPrice(product.Gia)}
+                  image={formatImageUrl(getFirstImage(product.image))}
+                  slug={product.slug || ''}
                 />
               ))}
             </div>
