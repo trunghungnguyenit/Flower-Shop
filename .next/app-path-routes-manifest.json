@@ -1,17 +1,7 @@
 {
   "/_global-error/page": "/_global-error",
   "/_not-found/page": "/_not-found",
-  "/bo-suu-tap/page": "/bo-suu-tap",
-  "/chinh-sach/doi-tra/page": "/chinh-sach/doi-tra",
-  "/chinh-sach/freeship/page": "/chinh-sach/freeship",
-  "/chinh-sach/giao-hang/page": "/chinh-sach/giao-hang",
-  "/dich-vu/hoa-chia-buon/page": "/dich-vu/hoa-chia-buon",
-  "/dich-vu/hoa-cuoi/page": "/dich-vu/hoa-cuoi",
-  "/dich-vu/hoa-khai-truong/page": "/dich-vu/hoa-khai-truong",
-  "/dich-vu/hoa-sinh-nhat/page": "/dich-vu/hoa-sinh-nhat",
-  "/dich-vu/hoa-tet/page": "/dich-vu/hoa-tet",
-  "/dich-vu/hoa-trang-tri/page": "/dich-vu/hoa-trang-tri",
-  "/dich-vu/page": "/dich-vu",
-  "/page": "/",
-  "/san-pham/[slug]/page": "/san-pham/[slug]"
+  "/decor/[slug]/page": "/decor/[slug]",
+  "/gift-guide/[slug]/page": "/gift-guide/[slug]",
+  "/page": "/"
 }

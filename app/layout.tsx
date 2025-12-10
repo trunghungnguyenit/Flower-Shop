@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Cormorant_Garamond, Inter } from "next/font/google"
+import { Cormorant_Garamond, Be_Vietnam_Pro } from "next/font/google"
 import "./globals.css"
 import { CartProvider } from "@/lib/cart-context"
 
@@ -10,9 +10,10 @@ const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
 })
 
-const inter = Inter({
+const beVietnamPro = Be_Vietnam_Pro({
   subsets: ["latin", "vietnamese"],
-  variable: "--font-inter",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-be-vietnam",
 })
 
 export const metadata: Metadata = {
@@ -30,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi">
-      <body className={`${cormorant.variable} ${inter.variable} font-sans antialiased`}>
+      <body className={`${cormorant.variable} ${beVietnamPro.variable} font-sans antialiased`}>
         <CartProvider>{children}</CartProvider>
       </body>
     </html>

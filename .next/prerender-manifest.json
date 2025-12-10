@@ -52,7 +52,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/bo-suu-tap": {
+    "/gift-guide/cho-ban-than": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -65,8 +65,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/bo-suu-tap",
-      "dataRoute": "/bo-suu-tap.rsc",
+      "srcRoute": "/gift-guide/[slug]",
+      "dataRoute": "/gift-guide/cho-ban-than.rsc",
       "prefetchDataRoute": null,
       "allowHeader": [
         "host",
@@ -77,7 +77,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/chinh-sach/doi-tra": {
+    "/gift-guide/cho-me": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -90,8 +90,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/chinh-sach/doi-tra",
-      "dataRoute": "/chinh-sach/doi-tra.rsc",
+      "srcRoute": "/gift-guide/[slug]",
+      "dataRoute": "/gift-guide/cho-me.rsc",
       "prefetchDataRoute": null,
       "allowHeader": [
         "host",
@@ -102,7 +102,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/chinh-sach/freeship": {
+    "/gift-guide/cho-nguoi-yeu": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -115,8 +115,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/chinh-sach/freeship",
-      "dataRoute": "/chinh-sach/freeship.rsc",
+      "srcRoute": "/gift-guide/[slug]",
+      "dataRoute": "/gift-guide/cho-nguoi-yeu.rsc",
       "prefetchDataRoute": null,
       "allowHeader": [
         "host",
@@ -127,7 +127,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/chinh-sach/giao-hang": {
+    "/gift-guide/cho-sep": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -140,8 +140,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/chinh-sach/giao-hang",
-      "dataRoute": "/chinh-sach/giao-hang.rsc",
+      "srcRoute": "/gift-guide/[slug]",
+      "dataRoute": "/gift-guide/cho-sep.rsc",
       "prefetchDataRoute": null,
       "allowHeader": [
         "host",
@@ -152,7 +152,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/dich-vu/hoa-chia-buon": {
+    "/gift-guide/cho-vo-chong": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -165,158 +165,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/dich-vu/hoa-chia-buon",
-      "dataRoute": "/dich-vu/hoa-chia-buon.rsc",
-      "prefetchDataRoute": null,
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/dich-vu/hoa-cuoi": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "next-action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/dich-vu/hoa-cuoi",
-      "dataRoute": "/dich-vu/hoa-cuoi.rsc",
-      "prefetchDataRoute": null,
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/dich-vu/hoa-khai-truong": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "next-action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/dich-vu/hoa-khai-truong",
-      "dataRoute": "/dich-vu/hoa-khai-truong.rsc",
-      "prefetchDataRoute": null,
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/dich-vu/hoa-sinh-nhat": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "next-action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/dich-vu/hoa-sinh-nhat",
-      "dataRoute": "/dich-vu/hoa-sinh-nhat.rsc",
-      "prefetchDataRoute": null,
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/dich-vu/hoa-tet": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "next-action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/dich-vu/hoa-tet",
-      "dataRoute": "/dich-vu/hoa-tet.rsc",
-      "prefetchDataRoute": null,
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/dich-vu/hoa-trang-tri": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "next-action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/dich-vu/hoa-trang-tri",
-      "dataRoute": "/dich-vu/hoa-trang-tri.rsc",
-      "prefetchDataRoute": null,
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/dich-vu": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "next-action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/dich-vu",
-      "dataRoute": "/dich-vu.rsc",
+      "srcRoute": "/gift-guide/[slug]",
+      "dataRoute": "/gift-guide/cho-vo-chong.rsc",
       "prefetchDataRoute": null,
       "allowHeader": [
         "host",
@@ -353,11 +203,39 @@
       ]
     }
   },
-  "dynamicRoutes": {},
+  "dynamicRoutes": {
+    "/gift-guide/[slug]": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "routeRegex": "^/gift\\-guide/([^/]+?)(?:/)?$",
+      "dataRoute": "/gift-guide/[slug].rsc",
+      "fallback": null,
+      "fallbackRouteParams": [],
+      "dataRouteRegex": "^/gift\\-guide/([^/]+?)\\.rsc$",
+      "prefetchDataRoute": null,
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    }
+  },
   "notFoundRoutes": [],
   "preview": {
-    "previewModeId": "3c8254d42cca70961b5dc812a80e39e3",
-    "previewModeSigningKey": "672dd6c485061f8b6407e5d1134ac9823a638d80c22680cd5a3cf24f5eff720a",
-    "previewModeEncryptionKey": "22f11cc46a0c74dd73ca974cc35061ce4c3d21099360253aeafc712b8fe6fd2b"
+    "previewModeId": "bd0582d280ff50c321f01e96a980c38b",
+    "previewModeSigningKey": "a37f63d021bd18d54d17b871dbb684ef819666d39a3b37069281d3f21f04b397",
+    "previewModeEncryptionKey": "3f9f139c6c07f4fb5c6c50101c300c965e11bf143b933988ff1b5e5d1387ee2d"
   }
 }

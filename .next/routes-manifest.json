@@ -21,12 +21,20 @@
   },
   "dynamicRoutes": [
     {
-      "page": "/san-pham/[slug]",
-      "regex": "^/san\\-pham/([^/]+?)(?:/)?$",
+      "page": "/decor/[slug]",
+      "regex": "^/decor/([^/]+?)(?:/)?$",
       "routeKeys": {
         "nxtPslug": "nxtPslug"
       },
-      "namedRegex": "^/san\\-pham/(?<nxtPslug>[^/]+?)(?:/)?$"
+      "namedRegex": "^/decor/(?<nxtPslug>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/gift-guide/[slug]",
+      "regex": "^/gift\\-guide/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPslug": "nxtPslug"
+      },
+      "namedRegex": "^/gift\\-guide/(?<nxtPslug>[^/]+?)(?:/)?$"
     }
   ],
   "staticRoutes": [
@@ -47,72 +55,6 @@
       "regex": "^/_not\\-found(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/_not\\-found(?:/)?$"
-    },
-    {
-      "page": "/bo-suu-tap",
-      "regex": "^/bo\\-suu\\-tap(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/bo\\-suu\\-tap(?:/)?$"
-    },
-    {
-      "page": "/chinh-sach/doi-tra",
-      "regex": "^/chinh\\-sach/doi\\-tra(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/chinh\\-sach/doi\\-tra(?:/)?$"
-    },
-    {
-      "page": "/chinh-sach/freeship",
-      "regex": "^/chinh\\-sach/freeship(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/chinh\\-sach/freeship(?:/)?$"
-    },
-    {
-      "page": "/chinh-sach/giao-hang",
-      "regex": "^/chinh\\-sach/giao\\-hang(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/chinh\\-sach/giao\\-hang(?:/)?$"
-    },
-    {
-      "page": "/dich-vu",
-      "regex": "^/dich\\-vu(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/dich\\-vu(?:/)?$"
-    },
-    {
-      "page": "/dich-vu/hoa-chia-buon",
-      "regex": "^/dich\\-vu/hoa\\-chia\\-buon(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/dich\\-vu/hoa\\-chia\\-buon(?:/)?$"
-    },
-    {
-      "page": "/dich-vu/hoa-cuoi",
-      "regex": "^/dich\\-vu/hoa\\-cuoi(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/dich\\-vu/hoa\\-cuoi(?:/)?$"
-    },
-    {
-      "page": "/dich-vu/hoa-khai-truong",
-      "regex": "^/dich\\-vu/hoa\\-khai\\-truong(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/dich\\-vu/hoa\\-khai\\-truong(?:/)?$"
-    },
-    {
-      "page": "/dich-vu/hoa-sinh-nhat",
-      "regex": "^/dich\\-vu/hoa\\-sinh\\-nhat(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/dich\\-vu/hoa\\-sinh\\-nhat(?:/)?$"
-    },
-    {
-      "page": "/dich-vu/hoa-tet",
-      "regex": "^/dich\\-vu/hoa\\-tet(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/dich\\-vu/hoa\\-tet(?:/)?$"
-    },
-    {
-      "page": "/dich-vu/hoa-trang-tri",
-      "regex": "^/dich\\-vu/hoa\\-trang\\-tri(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/dich\\-vu/hoa\\-trang\\-tri(?:/)?$"
     }
   ],
   "dataRoutes": [],
