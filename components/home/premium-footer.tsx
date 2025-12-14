@@ -11,18 +11,18 @@ import { Button, FormInput } from "@/components/ui/premium"
 
 const footerLinks = {
   services: [
-    { name: "Bó hoa tươi", href: "/bo-suu-tap?category=bo-hoa" },
-    { name: "Lẵng hoa", href: "/bo-suu-tap?category=lang-hoa" },
-    { name: "Hoa cưới", href: "/bo-suu-tap?category=hoa-cuoi" },
-    { name: "Hoa khai trương", href: "/bo-suu-tap?category=hoa-khai-truong" },
-    { name: "Hoa chia buồn", href: "/bo-suu-tap?category=hoa-chia-buon" },
+    { name: "Bó hoa tươi", href: "/collection?category=bo-hoa" },
+    { name: "Lẵng hoa", href: "/collection?category=lang-hoa" },
+    { name: "Hoa cưới", href: "/collection?category=hoa-cuoi" },
+    { name: "Hoa khai trương", href: "/collection?category=hoa-khai-truong" },
+    { name: "Hoa chia buồn", href: "/collection?category=hoa-chia-buon" },
   ],
   occasions: [
-    { name: "Sinh nhật", href: "/bo-suu-tap?occasion=sinh-nhat" },
-    { name: "Tình yêu", href: "/bo-suu-tap?occasion=tinh-yeu" },
-    { name: "Cưới hỏi", href: "/bo-suu-tap?occasion=cuoi" },
-    { name: "Tết", href: "/bo-suu-tap?occasion=tet" },
-    { name: "Khai trương", href: "/bo-suu-tap?occasion=khai-truong" },
+    { name: "Sinh nhật", href: "/collection?occasion=sinh-nhat" },
+    { name: "Tình yêu", href: "/collection?occasion=tinh-yeu" },
+    { name: "Cưới hỏi", href: "/collection?occasion=cuoi" },
+    { name: "Tết", href: "/collection?occasion=tet" },
+    { name: "Khai trương", href: "/collection?occasion=khai-truong" },
   ],
   policies: [
     { name: "Chính sách giao hàng", href: "/chinh-sach/giao-hang" },
@@ -32,7 +32,7 @@ const footerLinks = {
   ],
   quickLinks: [
     { name: "Về chúng tôi", href: "/gioi-thieu" },
-    { name: "Bộ sưu tập", href: "/bo-suu-tap" },
+    { name: "Bộ sưu tập", href: "/collection" },
     { name: "Liên hệ", href: "#lien-he" },
     { name: "Blog", href: "/blog" },
   ],

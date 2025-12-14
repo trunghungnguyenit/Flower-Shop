@@ -111,7 +111,18 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const getTotalPrice = () => {
     return items.reduce((total, item) => {
-      const price = parseFloat(item.product.price.replace(/[^\d]/g, "")) || 0
+      // Handle cases where price might be undefined or not a string
+      if (!item.product?.price || typeof item.product.price !== 'string') {
+        return total
+      }
+      
+      // Extract numeric value from price string (e.g., "450.000đ" -> 450000)
+      const priceMatch = item.product.price.match(/[\d.]+/)
+      if (!priceMatch) {
+        return total // Skip items with non-numeric prices like "Liên hệ báo giá"
+      }
+      
+      const price = parseFloat(priceMatch[0].replace(/\./g, '')) || 0
       return total + price * item.quantity
     }, 0)
   }

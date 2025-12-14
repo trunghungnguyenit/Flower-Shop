@@ -52,7 +52,7 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
       <div className="bg-secondary/30 py-4">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <Link
-            href="/bo-suu-tap"
+            href="/collection"
             className="inline-flex items-center text-sm text-muted-foreground hover:text-primary"
           >
             <ChevronLeft className="h-4 w-4 mr-1" />

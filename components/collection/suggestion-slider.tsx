@@ -83,7 +83,7 @@ export function SuggestionSlider({
           {products.map((product, index) => (
             <Link
               key={product.id}
-              href={`/san-pham/${product.slug}`}
+              href={`/product/${product.slug}`}
               className="group flex-shrink-0 animate-fade-in-up"
               style={{
                 scrollSnapAlign: "start",

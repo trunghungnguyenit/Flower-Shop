@@ -33,7 +33,7 @@ export function CollectionFilters({
       params.set(type, value)
     }
 
-    router.push(`/bo-suu-tap?${params.toString()}`, { scroll: false })
+    router.push(`/collection?${params.toString()}`, { scroll: false })
   }
 
   return (

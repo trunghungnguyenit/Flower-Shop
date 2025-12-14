@@ -124,8 +124,8 @@ function Confetti({ active, position }: { active: boolean; position: { x: number
 
 const navigation = [
   { name: "Trang chủ", href: "/" },
-  { name: "Dịch vụ", href: "/dich-vu" },
-  { name: "Bộ sưu tập", href: "/bo-suu-tap" },
+  { name: "Dịch vụ", href: "/occasions" },
+  { name: "Bộ sưu tập", href: "/collection" },
   { name: "Liên hệ", href: "/#lien-he" },
 ]
 
@@ -480,7 +480,7 @@ function ProductCard({
       whileHover={{ y: -8, transition: { duration: 0.3 } }}
       className="group"
     >
-      <Link href={`/san-pham/${product.slug}`}>
+      <Link href={`/product/${product.slug}`}>
         <div
           className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
           style={{ border: "1px solid var(--border-soft)" }}
@@ -640,7 +640,7 @@ function ProductSuggestionsSection({ productIds }: { productIds: string[] }) {
           transition={{ duration: 0.5, delay: 0.5, ease: premiumEase }}
         >
           <Link
-            href="/bo-suu-tap"
+            href="/collection"
             className="inline-flex items-center gap-2 font-body text-[var(--primary)] font-medium hover:gap-3 transition-all duration-300"
             style={{ fontSize: "15px" }}
           >
@@ -916,7 +916,7 @@ function FooterSection() {
               title: "Liên kết",
               links: [
                 { name: "Về chúng tôi", href: "#" },
-                { name: "Bộ sưu tập", href: "/bo-suu-tap" },
+                { name: "Bộ sưu tập", href: "/collection" },
                 { name: "Liên hệ", href: "/#lien-he" },
                 { name: "Blog", href: "#" },
               ],
@@ -926,8 +926,8 @@ function FooterSection() {
               links: [
                 { name: "Bó hoa tươi", href: "#" },
                 { name: "Lẵng hoa", href: "#" },
-                { name: "Hoa cưới", href: "/dich-vu/hoa-cuoi" },
-                { name: "Hoa khai trương", href: "/dich-vu/hoa-khai-truong" },
+                { name: "Hoa cưới", href: "/occasions/hoa-cuoi" },
+                { name: "Hoa khai trương", href: "/occasions/hoa-khai-truong" },
               ],
             },
             {

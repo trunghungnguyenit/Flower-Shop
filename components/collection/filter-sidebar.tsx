@@ -91,11 +91,11 @@ export function FilterSidebar({
       params.set(key, value)
     }
 
-    router.push(`/bo-suu-tap?${params.toString()}`, { scroll: false })
+    router.push(`/collection?${params.toString()}`, { scroll: false })
   }
 
   const clearAllFilters = () => {
-    router.push("/bo-suu-tap", { scroll: false })
+    router.push("/collection", { scroll: false })
   }
 
   const hasActiveFilters = selectedOccasion !== "all" || selectedPrice !== "all" || selectedColor !== "all"
@@ -352,7 +352,7 @@ export function SortDropdown({ sortBy }: { sortBy: string }) {
     } else {
       params.set("sort", value)
     }
-    router.push(`/bo-suu-tap?${params.toString()}`, { scroll: false })
+    router.push(`/collection?${params.toString()}`, { scroll: false })
   }
 
   return (

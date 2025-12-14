@@ -1,4 +1,3 @@
-export { PremiumHeader } from "./premium-header"
 export { HeroSection } from "./hero-section"
 export { BestSellerSection } from "./best-seller-section"
 export { CategorySection } from "./category-section"

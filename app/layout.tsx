@@ -3,6 +3,8 @@ import type { Metadata } from "next"
 import { Cormorant_Garamond, Be_Vietnam_Pro } from "next/font/google"
 import "./globals.css"
 import { CartProvider } from "@/lib/cart-context"
+import { CartSheetProvider } from "@/contexts/cart-sheet-context"
+import { GlobalCartSheet } from "@/components/global-cart-sheet"
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin", "vietnamese"],
@@ -32,7 +34,12 @@ export default function RootLayout({
   return (
     <html lang="vi">
       <body className={`${cormorant.variable} ${beVietnamPro.variable} font-sans antialiased`}>
-        <CartProvider>{children}</CartProvider>
+        <CartProvider>
+          <CartSheetProvider>
+            {children}
+            <GlobalCartSheet />
+          </CartSheetProvider>
+        </CartProvider>
       </body>
     </html>
   )

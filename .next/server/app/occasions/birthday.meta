@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/occasions/layout,_N_T_/occasions/birthday/layout,_N_T_/occasions/birthday/page,_N_T_/occasions/birthday"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/occasions/birthday/__PAGE__",
+    "/occasions/birthday",
+    "/occasions",
+    "/_index",
+    "/_head"
+  ]
+}

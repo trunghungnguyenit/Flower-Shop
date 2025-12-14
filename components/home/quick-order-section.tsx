@@ -1,106 +1,27 @@
 "use client"
 
-import { useRef, useEffect, useState } from "react"
-import { Phone, MessageCircle, Send, CheckCircle, MapPin, Clock } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { Button, FormInput, FormSelect, FormTextarea } from "@/components/ui/premium"
-import { ConfettiEffect } from "@/components/ui/premium/confetti-effect"
+import { useState, useRef } from "react"
+import { motion, useInView, AnimatePresence } from "framer-motion"
+import { Clock, MapPin, Check, Phone, MessageCircle, Send } from "lucide-react"
+import { CONTACT } from "@/lib/constants"
+import { staggerContainer, staggerItemLeft, premiumEase } from "@/components/animations/framer-variants"
 
-// ================================================
-// Quick Order Form Data
-// ================================================
-
-const occasionOptions = [
-  { value: "sinh-nhat", label: "Sinh nhật" },
-  { value: "tinh-yeu", label: "Tình yêu / Valentine" },
-  { value: "cuoi", label: "Cưới hỏi" },
-  { value: "khai-truong", label: "Khai trương" },
-  { value: "chia-buon", label: "Chia buồn" },
-  { value: "khac", label: "Dịp khác" },
-]
-
-const budgetOptions = [
-  { value: "200-500", label: "200.000đ - 500.000đ" },
-  { value: "500-1000", label: "500.000đ - 1.000.000đ" },
-  { value: "1000-2000", label: "1.000.000đ - 2.000.000đ" },
-  { value: "2000+", label: "Trên 2.000.000đ" },
-]
-
-const benefits = [
-  { icon: Clock, text: "Phản hồi trong 15 phút" },
-  { icon: MapPin, text: "Giao hàng nhanh 2 giờ" },
-  { icon: CheckCircle, text: "Tư vấn miễn phí" },
-]
-
-// ================================================
-// Quick Order Section Component
-// ================================================
-
+// ================================================================
+// QUICK ORDER SECTION
+// ================================================================
 export function QuickOrderSection() {
-  const [isVisible, setIsVisible] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
-  const [showConfetti, setShowConfetti] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
-
-  // Form state
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    occasion: "",
-    budget: "",
-    message: "",
-  })
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.1 }
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [])
+  const isInView = useInView(sectionRef, { once: true, amount: 0.15 })
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-
-    // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1500))
-
     setIsSubmitting(false)
     setIsSuccess(true)
-    setShowConfetti(true)
-
-    // Reset after 5 seconds
-    setTimeout(() => {
-      setIsSuccess(false)
-      setFormData({
-        name: "",
-        phone: "",
-        occasion: "",
-        budget: "",
-        message: "",
-      })
-    }, 5000)
-  }
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
-  ) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }))
+    setTimeout(() => setIsSuccess(false), 5000)
   }
 
   return (
@@ -110,158 +31,161 @@ export function QuickOrderSection() {
       className="relative bg-[var(--background-muted)] overflow-hidden"
       style={{ padding: "clamp(80px, 10vw, 140px) 0" }}
     >
-      {/* Confetti Effect */}
-      <ConfettiEffect
-        active={showConfetti}
-        duration={3000}
-        pieceCount={60}
-        onComplete={() => setShowConfetti(false)}
-      />
-
-      {/* Background Decorations */}
-      <div
-        className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full opacity-30 blur-3xl pointer-events-none"
-        style={{
-          background: "radial-gradient(circle, var(--primary-light) 0%, transparent 70%)",
-        }}
-      />
-      <div
-        className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full opacity-20 blur-3xl pointer-events-none"
-        style={{
-          background: "radial-gradient(circle, var(--accent-gold) 0%, transparent 70%)",
-        }}
-      />
-
-      <div className="relative mx-auto max-w-[1240px] px-4 lg:px-8">
+      <div className="mx-auto max-w-[1240px] px-4 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left - Content */}
-          <div
-            className={cn(
-              "transition-all duration-700",
-              isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-12"
-            )}
+          <motion.div
+            initial="initial"
+            animate={isInView ? "animate" : "initial"}
+            variants={staggerContainer}
           >
-            {/* Label */}
-            <span
+            <motion.span
+              variants={staggerItemLeft}
               className="inline-block font-body text-[var(--primary)] tracking-[0.25em] uppercase mb-4"
               style={{ fontSize: "13px", fontWeight: 500 }}
             >
               Đặt hoa nhanh
-            </span>
+            </motion.span>
 
-            {/* Title */}
-            <h2
+            <motion.h2
+              variants={staggerItemLeft}
               className="font-display text-[var(--text-primary)] mb-6"
               style={{ fontSize: "clamp(32px, 4vw, 44px)", fontWeight: 600, lineHeight: 1.2 }}
             >
               Gửi Yêu Thương
               <br />
               <span className="text-gradient-primary">Chỉ 3 Bước Đơn Giản</span>
-            </h2>
+            </motion.h2>
 
-            {/* Description */}
-            <p
+            <motion.p
+              variants={staggerItemLeft}
               className="font-body text-[var(--text-secondary)] mb-8 max-w-lg"
               style={{ fontSize: "16px", lineHeight: 1.8 }}
             >
               Điền thông tin bên dưới, đội ngũ tư vấn sẽ liên hệ bạn ngay trong vòng 15 phút để hỗ trợ
               chọn mẫu hoa phù hợp nhất.
-            </p>
+            </motion.p>
 
             {/* Benefits */}
-            <div className="space-y-4 mb-10">
-              {benefits.map((benefit, index) => {
-                const Icon = benefit.icon
-                return (
+            <motion.div variants={staggerItemLeft} className="space-y-4 mb-10">
+              {[
+                { icon: Clock, text: "Phản hồi trong 15 phút" },
+                { icon: MapPin, text: "Giao hàng nhanh 2 giờ" },
+                { icon: Check, text: "Tư vấn miễn phí" },
+              ].map((benefit, index) => (
+                <motion.div
+                  key={index}
+                  className="flex items-center gap-4"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                  transition={{ duration: 0.5, delay: 0.4 + index * 0.1, ease: premiumEase }}
+                >
                   <div
-                    key={index}
-                    className={cn(
-                      "flex items-center gap-4 transition-all duration-500",
-                      isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-                    )}
-                    style={{ transitionDelay: `${300 + index * 100}ms` }}
+                    className="w-10 h-10 flex items-center justify-center"
+                    style={{
+                      borderRadius: "var(--radius-medium)",
+                      background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%)",
+                    }}
                   >
-                    <div
-                      className="w-10 h-10 flex items-center justify-center flex-shrink-0"
-                      style={{
-                        borderRadius: "var(--radius-medium)",
-                        background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%)",
-                      }}
-                    >
-                      <Icon className="w-5 h-5 text-white" strokeWidth={1.5} />
-                    </div>
-                    <span
-                      className="font-body text-[var(--text-primary)]"
-                      style={{ fontSize: "15px", fontWeight: 500 }}
-                    >
-                      {benefit.text}
-                    </span>
+                    <benefit.icon className="w-5 h-5 text-white" strokeWidth={1.5} />
                   </div>
-                )
-              })}
-            </div>
+                  <span
+                    className="font-body text-[var(--text-primary)]"
+                    style={{ fontSize: "15px", fontWeight: 500 }}
+                  >
+                    {benefit.text}
+                  </span>
+                </motion.div>
+              ))}
+            </motion.div>
 
             {/* Alternative Contact */}
-            <div className="flex flex-wrap gap-4">
-              <a
-                href="tel:0905123456"
-                className="inline-flex items-center gap-2 px-5 py-3 bg-white rounded-full border border-[var(--border-soft)] text-[var(--text-primary)] hover:border-[var(--primary)] hover:text-[var(--primary)] transition-all duration-300"
+            <motion.div
+              variants={staggerItemLeft}
+              className="flex flex-wrap gap-4"
+            >
+              <motion.a
+                href={CONTACT.phoneLink}
+                className="inline-flex items-center gap-2 px-5 py-3 bg-white rounded-full border border-[var(--border-soft)] text-[var(--text-primary)] hover:border-[var(--primary)] hover:text-[var(--primary)] transition-colors duration-300"
                 style={{ fontSize: "14px", fontWeight: 500 }}
+                whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
+                whileTap={{ scale: 0.98 }}
               >
                 <Phone className="w-4 h-4" strokeWidth={1.5} />
-                0905 123 456
-              </a>
-              <a
-                href="https://zalo.me/0905123456"
+                {CONTACT.phoneDisplay}
+              </motion.a>
+
+              <motion.a
+                href={CONTACT.zaloLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-3 bg-[#0068FF] rounded-full text-white hover:bg-[#0058DD] transition-all duration-300"
+                className="inline-flex items-center gap-2 px-5 py-3 bg-[#0068FF] rounded-full text-white hover:bg-[#0058DD] transition-colors duration-300"
                 style={{ fontSize: "14px", fontWeight: 500 }}
+                whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
+                whileTap={{ scale: 0.98 }}
               >
                 <MessageCircle className="w-4 h-4" strokeWidth={1.5} />
                 Chat Zalo
-              </a>
-            </div>
-          </div>
+              </motion.a>
+            </motion.div>
+          </motion.div>
 
           {/* Right - Form */}
-          <div
-            className={cn(
-              "transition-all duration-700",
-              isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-12"
-            )}
-            style={{ transitionDelay: "200ms" }}
+          <motion.div
+            initial={{ opacity: 0, x: 40, scale: 0.97 }}
+            animate={isInView ? { opacity: 1, x: 0, scale: 1 } : { opacity: 0, x: 40, scale: 0.97 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: premiumEase }}
           >
-            <div
+            <motion.div
               className="bg-white p-6 lg:p-10 relative"
               style={{
                 borderRadius: "var(--radius-xl)",
                 boxShadow: "0 16px 48px rgba(0,0,0,0.1)",
               }}
+              whileHover={{ boxShadow: "0 20px 60px rgba(0,0,0,0.12)", transition: { duration: 0.3 } }}
             >
               {/* Success Overlay */}
-              {isSuccess && (
-                <div
-                  className="absolute inset-0 bg-white/95 backdrop-blur-sm flex flex-col items-center justify-center z-20 animate-fade-up"
-                  style={{ borderRadius: "var(--radius-xl)" }}
-                >
-                  <div className="w-20 h-20 mb-6 flex items-center justify-center bg-[var(--success)]/10 rounded-full">
-                    <CheckCircle className="w-10 h-10 text-[var(--success)]" strokeWidth={1.5} />
-                  </div>
-                  <h3
-                    className="font-display text-[var(--text-primary)] mb-2 text-center"
-                    style={{ fontSize: "24px", fontWeight: 600 }}
+              <AnimatePresence>
+                {isSuccess && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.3, ease: premiumEase }}
+                    className="absolute inset-0 bg-white/95 backdrop-blur-sm flex flex-col items-center justify-center z-20"
+                    style={{ borderRadius: "var(--radius-xl)" }}
                   >
-                    Gửi thành công!
-                  </h3>
-                  <p
-                    className="font-body text-[var(--text-secondary)] text-center"
-                    style={{ fontSize: "15px" }}
-                  >
-                    Chúng tôi sẽ liên hệ bạn trong 15 phút
-                  </p>
-                </div>
-              )}
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ duration: 0.4, delay: 0.1, type: "spring", stiffness: 200 }}
+                      className="w-20 h-20 mb-6 flex items-center justify-center bg-[var(--success)]/10 rounded-full"
+                    >
+                      <Check className="w-10 h-10 text-[var(--success)]" strokeWidth={1.5} />
+                    </motion.div>
+
+                    <motion.h3
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.2 }}
+                      className="font-display text-[var(--text-primary)] mb-2 text-center"
+                      style={{ fontSize: "24px", fontWeight: 600 }}
+                    >
+                      Gửi thành công!
+                    </motion.h3>
+
+                    <motion.p
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.3 }}
+                      className="font-body text-[var(--text-secondary)] text-center"
+                      style={{ fontSize: "15px" }}
+                    >
+                      Chúng tôi sẽ liên hệ bạn trong 15 phút
+                    </motion.p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               {/* Form Header */}
               <div className="text-center mb-8">
@@ -282,63 +206,99 @@ export function QuickOrderSection() {
               {/* Form */}
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <FormInput
-                    name="name"
-                    label="Họ tên"
-                    placeholder="Nguyễn Văn A"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                  />
-                  <FormInput
-                    name="phone"
-                    type="tel"
-                    label="Số điện thoại"
-                    placeholder="0905 xxx xxx"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    required
-                  />
+                  <div>
+                    <label className="block font-body text-[var(--text-primary)] mb-2" style={{ fontSize: "14px", fontWeight: 500 }}>
+                      Họ tên <span className="text-[var(--danger)]">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Nguyễn Văn A"
+                      className="w-full h-12 px-4 bg-[var(--background-muted)] border border-[var(--border-soft)] font-body text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary)] transition-colors duration-300"
+                      style={{ borderRadius: "var(--radius-medium)", fontSize: "15px" }}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-body text-[var(--text-primary)] mb-2" style={{ fontSize: "14px", fontWeight: 500 }}>
+                      Số điện thoại <span className="text-[var(--danger)]">*</span>
+                    </label>
+                    <input
+                      type="tel"
+                      placeholder="0905 xxx xxx"
+                      className="w-full h-12 px-4 bg-[var(--background-muted)] border border-[var(--border-soft)] font-body text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary)] transition-colors duration-300"
+                      style={{ borderRadius: "var(--radius-medium)", fontSize: "15px" }}
+                      required
+                    />
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <FormSelect
-                    name="occasion"
-                    label="Dịp đặt hoa"
-                    options={occasionOptions}
-                    placeholder="Chọn dịp..."
-                    value={formData.occasion}
-                    onChange={handleChange}
-                  />
-                  <FormSelect
-                    name="budget"
-                    label="Ngân sách"
-                    options={budgetOptions}
-                    placeholder="Chọn ngân sách..."
-                    value={formData.budget}
-                    onChange={handleChange}
+                  <div>
+                    <label className="block font-body text-[var(--text-primary)] mb-2" style={{ fontSize: "14px", fontWeight: 500 }}>
+                      Dịp đặt hoa
+                    </label>
+                    <select
+                      className="w-full h-12 px-4 bg-[var(--background-muted)] border border-[var(--border-soft)] font-body text-[var(--text-primary)] focus:outline-none focus:border-[var(--primary)] transition-colors duration-300 appearance-none"
+                      style={{ borderRadius: "var(--radius-medium)", fontSize: "15px" }}
+                    >
+                      <option value="">Chọn dịp...</option>
+                      <option value="sinh-nhat">Sinh nhật</option>
+                      <option value="tinh-yeu">Tình yêu / Valentine</option>
+                      <option value="cuoi">Cưới hỏi</option>
+                      <option value="khai-truong">Khai trương</option>
+                      <option value="chia-buon">Chia buồn</option>
+                      <option value="khac">Dịp khác</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block font-body text-[var(--text-primary)] mb-2" style={{ fontSize: "14px", fontWeight: 500 }}>
+                      Ngân sách
+                    </label>
+                    <select
+                      className="w-full h-12 px-4 bg-[var(--background-muted)] border border-[var(--border-soft)] font-body text-[var(--text-primary)] focus:outline-none focus:border-[var(--primary)] transition-colors duration-300 appearance-none"
+                      style={{ borderRadius: "var(--radius-medium)", fontSize: "15px" }}
+                    >
+                      <option value="">Chọn ngân sách...</option>
+                      <option value="200-500">200.000đ - 500.000đ</option>
+                      <option value="500-1000">500.000đ - 1.000.000đ</option>
+                      <option value="1000-2000">1.000.000đ - 2.000.000đ</option>
+                      <option value="2000+">Trên 2.000.000đ</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block font-body text-[var(--text-primary)] mb-2" style={{ fontSize: "14px", fontWeight: 500 }}>
+                    Ghi chú (tùy chọn)
+                  </label>
+                  <textarea
+                    placeholder="Mô tả yêu cầu của bạn: màu sắc, loại hoa, thời gian giao..."
+                    rows={3}
+                    className="w-full px-4 py-3 bg-[var(--background-muted)] border border-[var(--border-soft)] font-body text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary)] transition-colors duration-300 resize-none"
+                    style={{ borderRadius: "var(--radius-medium)", fontSize: "15px" }}
                   />
                 </div>
 
-                <FormTextarea
-                  name="message"
-                  label="Ghi chú (tùy chọn)"
-                  placeholder="Mô tả yêu cầu của bạn: màu sắc, loại hoa, thời gian giao..."
-                  value={formData.message}
-                  onChange={handleChange}
-                />
-
-                <Button
+                <motion.button
                   type="submit"
-                  variant="primary"
-                  size="lg"
-                  loading={isSubmitting}
-                  icon={<Send className="w-5 h-5" />}
-                  iconPosition="right"
-                  className="w-full"
+                  disabled={isSubmitting}
+                  className="w-full h-14 flex items-center justify-center gap-2 bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white font-body font-medium transition-colors duration-300 disabled:opacity-70"
+                  style={{ borderRadius: "var(--radius-round)", fontSize: "16px" }}
+                  whileHover={{ scale: 1.02, boxShadow: "0 8px 30px rgba(var(--primary-rgb), 0.3)", transition: { duration: 0.2 } }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  {isSubmitting ? "Đang gửi..." : "Gửi yêu cầu tư vấn"}
-                </Button>
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      Đang gửi...
+                    </>
+                  ) : (
+                    <>
+                      Gửi yêu cầu tư vấn
+                      <Send className="w-5 h-5" />
+                    </>
+                  )}
+                </motion.button>
 
                 <p
                   className="font-body text-[var(--text-muted)] text-center"
@@ -347,8 +307,8 @@ export function QuickOrderSection() {
                   Thông tin của bạn được bảo mật tuyệt đối
                 </p>
               </form>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>
