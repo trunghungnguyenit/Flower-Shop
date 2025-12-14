@@ -1,357 +1,206 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
-import { MessageCircle, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react"
+import { useState, useEffect, useRef } from "react"
+import Image from "next/image"
 import Link from "next/link"
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/premium"
-import { FloatingPetals } from "@/components/ui/premium/floating-petals"
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
+import { ArrowRight, MessageCircle } from "lucide-react"
+import { CONTACT } from "@/lib/constants"
+import { heroSlides } from "@/data/homepage-data"
+import { premiumEase } from "@/components/animations/framer-variants"
+import { SoftGradientMotion, PremiumFloatingPetals, SoftLightLeaks } from "@/components/animations/background-effects"
 
-// ================================================
-// Hero Slides Data
-// ================================================
-
-const heroSlides = [
-  {
-    image: "/pastel-pink-roses-bouquet-soft-elegant.jpg",
-    title: "Hoa Tươi Mỗi Ngày",
-    subtitle: "Sang Trọng & Tinh Tế",
-    accent: "Đặt hoa online – Giao nhanh 2 giờ",
-  },
-  {
-    image: "/red-roses-luxury-basket-arrangement.jpg",
-    title: "Tình Yêu Trọn Vẹn",
-    subtitle: "Hồng Đỏ Đam Mê",
-    accent: "Bó hoa hồng đỏ từ 299.000đ",
-  },
-  {
-    image: "/white-wedding-bouquet-elegant-roses.jpg",
-    title: "Hạnh Phúc Viên Mãn",
-    subtitle: "Hoa Cưới Cao Cấp",
-    accent: "Thiết kế riêng theo yêu cầu",
-  },
-  {
-    image: "/mixed-pastel-flowers-bouquet-soft-colors.jpg",
-    title: "Pastel Ngọt Ngào",
-    subtitle: "Nhẹ Nhàng Tinh Khôi",
-    accent: "BST mùa xuân 2025",
-  },
-]
-
-// ================================================
-// Hero Section Component
-// ================================================
-
+// ================================================================
+// HERO SECTION - PREMIUM FRAMER MOTION
+// ================================================================
 export function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0)
-  const [isAnimating, setIsAnimating] = useState(false)
-  const [isPaused, setIsPaused] = useState(false)
+  const sectionRef = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"]
+  })
 
-  const nextSlide = useCallback(() => {
-    if (isAnimating) return
-    setIsAnimating(true)
-    setCurrentSlide((prev) => (prev + 1) % heroSlides.length)
-    setTimeout(() => setIsAnimating(false), 800)
-  }, [isAnimating])
+  // Parallax transforms for depth effect
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"])
+  const backgroundScale = useTransform(scrollYProgress, [0, 1], [1, 1.1])
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"])
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
 
-  const prevSlide = useCallback(() => {
-    if (isAnimating) return
-    setIsAnimating(true)
-    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)
-    setTimeout(() => setIsAnimating(false), 800)
-  }, [isAnimating])
-
-  const goToSlide = (index: number) => {
-    if (isAnimating || index === currentSlide) return
-    setIsAnimating(true)
-    setCurrentSlide(index)
-    setTimeout(() => setIsAnimating(false), 800)
-  }
-
-  // Auto-play slider
   useEffect(() => {
-    if (isPaused) return
-    const interval = setInterval(nextSlide, 6000)
-    return () => clearInterval(interval)
-  }, [nextSlide, isPaused])
-
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") prevSlide()
-      if (e.key === "ArrowRight") nextSlide()
-    }
-    window.addEventListener("keydown", handleKeyDown)
-    return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [nextSlide, prevSlide])
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length)
+    }, 6000)
+    return () => clearInterval(timer)
+  }, [])
 
   return (
-    <section
-      className="relative h-screen w-full overflow-hidden"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
-      {/* Background Slides */}
-      {heroSlides.map((slide, index) => (
-        <div
-          key={index}
-          className={cn(
-            "absolute inset-0 transition-all duration-1000 ease-out",
-            index === currentSlide ? "opacity-100 scale-100" : "opacity-0 scale-105"
-          )}
+    <section ref={sectionRef} className="relative h-screen min-h-[700px] overflow-hidden">
+      {/* Background Slides with Parallax */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentSlide}
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 1.05 }}
+          transition={{ duration: 1.2, ease: premiumEase }}
+          className="absolute inset-0"
+          style={{ y: backgroundY, scale: backgroundScale }}
         >
-          {/* Background Image with Ken Burns Effect */}
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: `url('${slide.image}')`,
-              transform: index === currentSlide ? "scale(1.05)" : "scale(1)",
-              transition: "transform 8s ease-out",
-            }}
+          <Image
+            src={heroSlides[currentSlide].image}
+            alt={heroSlides[currentSlide].title}
+            fill
+            className="object-cover"
+            priority
           />
-        </div>
-      ))}
+          {/* Multi-layer gradient for depth */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent" />
+        </motion.div>
+      </AnimatePresence>
 
-      {/* Premium Gradient Overlay */}
-      <div
-        className="absolute inset-0 z-[1]"
-        style={{
-          background: `
-            linear-gradient(
-              to top,
-              rgba(217, 124, 138, 0.45) 0%,
-              rgba(217, 124, 138, 0.2) 30%,
-              transparent 60%
-            ),
-            linear-gradient(
-              to bottom,
-              rgba(0, 0, 0, 0.35) 0%,
-              transparent 40%
-            ),
-            linear-gradient(
-              to right,
-              rgba(0, 0, 0, 0.25) 0%,
-              transparent 50%
-            )
-          `,
-        }}
-      />
+      {/* Premium Animation Layers */}
+      <SoftGradientMotion />
+      <PremiumFloatingPetals />
+      <SoftLightLeaks />
 
-      {/* Floating Petals Effect */}
-      <FloatingPetals count={20} className="z-[2]" />
-
-      {/* Content Container */}
-      <div className="relative z-10 h-full flex items-center">
-        <div className="mx-auto max-w-[1240px] w-full px-4 lg:px-8">
+      {/* Content with Parallax */}
+      <motion.div
+        className="relative z-10 h-full flex items-center"
+        style={{ y: contentY, opacity: contentOpacity }}
+      >
+        <div className="mx-auto max-w-[1240px] px-4 lg:px-8 w-full">
           <div className="max-w-2xl">
-            {/* Badge / Accent Text */}
-            <div className="overflow-hidden mb-4">
-              <span
-                key={`accent-${currentSlide}`}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-white/15 backdrop-blur-sm text-white/95 font-body animate-fade-up"
-                style={{
-                  fontSize: "13px",
-                  fontWeight: 500,
-                  letterSpacing: "0.05em",
-                  borderRadius: "var(--radius-round)",
-                  animationDelay: "0ms",
-                  animationDuration: "0.6s",
-                }}
-              >
-                <span className="text-[var(--accent-gold)]">✨</span>
-                {heroSlides[currentSlide].accent}
-              </span>
-            </div>
+            {/* Tagline */}
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: premiumEase }}
+              className="inline-block font-body text-[var(--primary-light)] tracking-[0.25em] uppercase mb-4"
+              style={{ fontSize: "13px", fontWeight: 500 }}
+            >
+              Hoa tươi mỗi ngày
+            </motion.span>
 
-            {/* Main Title */}
-            <div className="overflow-hidden mb-3">
-              <h1
+            {/* Title with AnimatePresence for smooth transitions */}
+            <AnimatePresence mode="wait">
+              <motion.h1
                 key={`title-${currentSlide}`}
-                className="font-display text-white animate-fade-up"
-                style={{
-                  fontSize: "clamp(48px, 8vw, 72px)",
-                  fontWeight: 600,
-                  lineHeight: 1.1,
-                  textShadow: "0 4px 40px rgba(0,0,0,0.3)",
-                  animationDelay: "100ms",
-                  animationDuration: "0.6s",
-                }}
+                initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
+                transition={{ duration: 0.8, ease: premiumEase }}
+                className="font-display text-white mb-4"
+                style={{ fontSize: "clamp(40px, 6vw, 64px)", fontWeight: 600, lineHeight: 1.1 }}
               >
                 {heroSlides[currentSlide].title}
-              </h1>
-            </div>
-
-            {/* Subtitle */}
-            <div className="overflow-hidden mb-8">
-              <p
-                key={`subtitle-${currentSlide}`}
-                className="font-display text-white/90 animate-fade-up"
-                style={{
-                  fontSize: "clamp(28px, 4vw, 44px)",
-                  fontWeight: 500,
-                  lineHeight: 1.2,
-                  textShadow: "0 2px 20px rgba(0,0,0,0.2)",
-                  animationDelay: "200ms",
-                  animationDuration: "0.6s",
-                }}
-              >
-                {heroSlides[currentSlide].subtitle}
-              </p>
-            </div>
+                <br />
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3, duration: 0.6 }}
+                  className="text-[var(--primary-light)]"
+                >
+                  {heroSlides[currentSlide].subtitle}
+                </motion.span>
+              </motion.h1>
+            </AnimatePresence>
 
             {/* Description */}
-            <p
-              className="font-body text-white/85 mb-10 max-w-lg animate-fade-up"
-              style={{
-                fontSize: "18px",
-                lineHeight: 1.75,
-                textShadow: "0 2px 10px rgba(0,0,0,0.2)",
-                animationDelay: "300ms",
-                animationDuration: "0.6s",
-              }}
-            >
-              Giao nhanh Đà Nẵng & Quảng Nam – Cam kết 100% hoa tươi mới
-              <br />
-              <span className="text-[var(--accent-gold)] font-medium">
-                🎁 Freeship nội thành 5km
-              </span>
-            </p>
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={`desc-${currentSlide}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.6, delay: 0.2, ease: premiumEase }}
+                className="font-body text-white/80 mb-8 max-w-lg"
+                style={{ fontSize: "18px", lineHeight: 1.7 }}
+              >
+                {heroSlides[currentSlide].description}
+              </motion.p>
+            </AnimatePresence>
 
             {/* CTA Buttons */}
-            <div
-              className="flex flex-col sm:flex-row gap-4 animate-fade-up"
-              style={{ animationDelay: "400ms", animationDuration: "0.6s" }}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4, ease: premiumEase }}
+              className="flex flex-wrap gap-4"
             >
-              <Link href="/bo-suu-tap">
-                <Button
-                  variant="primary"
-                  size="xl"
-                  icon={<ArrowRight className="w-5 h-5" />}
-                  iconPosition="right"
-                  className="shadow-[0_8px_32px_rgba(217,124,138,0.5)] hover:shadow-[0_12px_40px_rgba(217,124,138,0.6)]"
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+                <Link
+                  href="/collection"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white font-body font-medium transition-colors duration-300"
+                  style={{ borderRadius: "var(--radius-round)", fontSize: "15px" }}
                 >
                   Xem Bộ Sưu Tập
-                </Button>
-              </Link>
+                  <motion.span
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+                  >
+                    <ArrowRight className="w-5 h-5" />
+                  </motion.span>
+                </Link>
+              </motion.div>
 
-              <a href="https://zalo.me/0905123456" target="_blank" rel="noopener noreferrer">
-                <Button
-                  variant="outline"
-                  size="xl"
-                  icon={<MessageCircle className="w-5 h-5" />}
-                  className="bg-white/10 backdrop-blur-sm border-white/40 text-white hover:bg-white/20 hover:border-white/60"
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+                <a
+                  href={CONTACT.zaloLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-body font-medium border border-white/30 transition-colors duration-300"
+                  style={{ borderRadius: "var(--radius-round)", fontSize: "15px" }}
                 >
-                  Tư vấn qua Zalo
-                </Button>
-              </a>
-            </div>
+                  <MessageCircle className="w-5 h-5" />
+                  Tư Vấn Qua Zalo
+                </a>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Slide Navigation */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex items-center gap-6">
-        {/* Prev Button */}
-        <button
-          onClick={prevSlide}
-          disabled={isAnimating}
-          className="w-12 h-12 flex items-center justify-center rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-white hover:bg-white/25 hover:border-white/40 transition-all duration-300 hover:scale-110 disabled:opacity-50"
-          aria-label="Previous slide"
-        >
-          <ChevronLeft className="w-5 h-5" strokeWidth={1.5} />
-        </button>
-
-        {/* Progress Dots */}
-        <div className="flex gap-3">
-          {heroSlides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              disabled={isAnimating}
-              className={cn(
-                "relative h-2 rounded-full transition-all duration-500 overflow-hidden",
-                index === currentSlide
-                  ? "w-10 bg-white/30"
-                  : "w-2 bg-white/40 hover:bg-white/60"
-              )}
-              aria-label={`Go to slide ${index + 1}`}
-              aria-current={index === currentSlide ? "true" : "false"}
-            >
-              {/* Progress Bar */}
-              {index === currentSlide && (
-                <span
-                  className="absolute inset-0 bg-white origin-left"
-                  style={{
-                    animation: isPaused ? "none" : "progress 6s linear",
-                  }}
-                />
-              )}
-            </button>
-          ))}
-        </div>
-
-        {/* Next Button */}
-        <button
-          onClick={nextSlide}
-          disabled={isAnimating}
-          className="w-12 h-12 flex items-center justify-center rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-white hover:bg-white/25 hover:border-white/40 transition-all duration-300 hover:scale-110 disabled:opacity-50"
-          aria-label="Next slide"
-        >
-          <ChevronRight className="w-5 h-5" strokeWidth={1.5} />
-        </button>
+      {/* Slide Indicators */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10">
+        {heroSlides.map((_, index) => (
+          <motion.button
+            key={index}
+            onClick={() => setCurrentSlide(index)}
+            className={cn(
+              "h-2 transition-all duration-300",
+              currentSlide === index
+                ? "w-8 bg-white"
+                : "w-2 bg-white/50 hover:bg-white/70"
+            )}
+            style={{ borderRadius: "var(--radius-round)" }}
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+          />
+        ))}
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-12 right-8 z-20 hidden lg:flex flex-col items-center gap-3">
-        <span
-          className="font-body text-white/60 text-xs tracking-[0.2em] uppercase"
-          style={{ writingMode: "vertical-rl" }}
-        >
-          Cuộn xuống
-        </span>
-        <div className="w-px h-16 bg-gradient-to-b from-white/60 to-transparent relative overflow-hidden">
-          <span className="absolute top-0 left-0 w-full h-1/2 bg-white animate-scroll-indicator" />
-        </div>
-      </div>
-
-      {/* Slide Counter */}
-      <div className="absolute bottom-12 left-8 z-20 hidden lg:flex items-baseline gap-1">
-        <span
-          className="font-display text-white"
-          style={{ fontSize: "32px", fontWeight: 600 }}
-        >
-          {String(currentSlide + 1).padStart(2, "0")}
-        </span>
-        <span
-          className="font-body text-white/50"
-          style={{ fontSize: "14px" }}
-        >
-          / {String(heroSlides.length).padStart(2, "0")}
-        </span>
-      </div>
-
-      {/* Progress Animation Keyframes */}
-      <style jsx>{`
-        @keyframes progress {
-          from {
-            transform: scaleX(0);
-          }
-          to {
-            transform: scaleX(1);
-          }
-        }
-        @keyframes scroll-indicator {
-          0% {
-            transform: translateY(-100%);
-          }
-          100% {
-            transform: translateY(200%);
-          }
-        }
-        .animate-scroll-indicator {
-          animation: scroll-indicator 1.5s ease-in-out infinite;
-        }
-      `}</style>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 0.8 }}
+        className="absolute bottom-8 right-8 hidden lg:flex flex-col items-center gap-2 text-white/60"
+      >
+        <span className="font-body text-xs tracking-wider uppercase">Cuộn xuống</span>
+        <motion.div className="w-px h-12 bg-white/30 relative overflow-hidden">
+          <motion.div
+            className="w-full h-4 bg-white"
+            animate={{ y: ["-100%", "400%"] }}
+            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+          />
+        </motion.div>
+      </motion.div>
     </section>
   )
+}
+
+function cn(...classes: (string | undefined | false)[]): string {
+  return classes.filter(Boolean).join(' ')
 }

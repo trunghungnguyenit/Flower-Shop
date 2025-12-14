@@ -1,0 +1,3 @@
+module.exports=[2168,a=>{"use strict";function b({children:a}){return a}a.s(["default",()=>b,"metadata",0,{title:{template:"%s - Hoa Tươi Đà Nẵng",default:"Sản phẩm - Hoa Tươi Đà Nẵng"},description:"Khám phá bộ sưu tập hoa tươi cao cấp tại Đà Nẵng và Quảng Nam. Giao hàng nhanh, hoa tươi 100%.",keywords:"hoa tươi, đà nẵng, quảng nam, giao hoa, hoa sinh nhật, hoa cưới"}])}];
+
+//# sourceMappingURL=app_product_layout_tsx_1568ac86._.js.map

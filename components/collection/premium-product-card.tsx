@@ -31,7 +31,7 @@ export function PremiumProductCard({
 
   return (
     <Link
-      href={`/san-pham/${slug}`}
+      href={`/product/${slug}`}
       className="group block animate-fade-in-up"
       style={{ animationDelay: `${index * 50}ms` }}
     >

@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/occasions/layout,_N_T_/occasions/new-year/layout,_N_T_/occasions/new-year/page,_N_T_/occasions/new-year"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/occasions/new-year/__PAGE__",
+    "/occasions/new-year",
+    "/occasions",
+    "/_index",
+    "/_head"
+  ]
+}

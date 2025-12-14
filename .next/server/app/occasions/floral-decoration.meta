@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/occasions/layout,_N_T_/occasions/floral-decoration/layout,_N_T_/occasions/floral-decoration/page,_N_T_/occasions/floral-decoration"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/occasions/floral-decoration/__PAGE__",
+    "/occasions/floral-decoration",
+    "/occasions",
+    "/_index",
+    "/_head"
+  ]
+}

@@ -1,3 +1,4 @@
+import React from "react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import GiftGuideClient from "@/components/gift-guide/gift-guide-client";
@@ -56,7 +57,7 @@ const GIFT_GUIDES = {
         image: "/images/combos/minimal-elegant.jpg",
       },
     ],
-    collectionLink: "/bo-suu-tap?scenario=tinh-yeu",
+    collectionLink: "/collection?scenario=tinh-yeu",
   },
   "cho-me": {
     slug: "cho-me",
@@ -107,7 +108,7 @@ const GIFT_GUIDES = {
         image: "/images/combos/mom-health.jpg",
       },
     ],
-    collectionLink: "/bo-suu-tap?scenario=tang-me",
+    collectionLink: "/collection?scenario=tang-me",
   },
   "cho-ban-than": {
     slug: "cho-ban-than",
@@ -158,7 +159,7 @@ const GIFT_GUIDES = {
         image: "/images/combos/friend-modern.jpg",
       },
     ],
-    collectionLink: "/bo-suu-tap?scenario=ban-be",
+    collectionLink: "/collection?scenario=ban-be",
   },
   "cho-sep": {
     slug: "cho-sep",
@@ -209,7 +210,7 @@ const GIFT_GUIDES = {
         image: "/images/combos/boss-success.jpg",
       },
     ],
-    collectionLink: "/bo-suu-tap?scenario=cong-viec",
+    collectionLink: "/collection?scenario=cong-viec",
   },
   "cho-vo-chong": {
     slug: "cho-vo-chong",
@@ -261,7 +262,7 @@ const GIFT_GUIDES = {
         image: "/images/combos/spouse-surprise.jpg",
       },
     ],
-    collectionLink: "/bo-suu-tap?scenario=gia-dinh",
+    collectionLink: "/collection?scenario=gia-dinh",
   },
 };
 
@@ -273,9 +274,10 @@ type GiftGuideSlug = keyof typeof GIFT_GUIDES;
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const guide = GIFT_GUIDES[params.slug as GiftGuideSlug];
+  const { slug } = await params;
+  const guide = GIFT_GUIDES[slug as GiftGuideSlug];
 
   if (!guide) {
     return {
@@ -301,8 +303,9 @@ export async function generateStaticParams() {
 // ================================================
 // PAGE COMPONENT
 // ================================================
-export default function GiftGuidePage({ params }: { params: { slug: string } }) {
-  const guide = GIFT_GUIDES[params.slug as GiftGuideSlug];
+export default function GiftGuidePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = React.use(params);
+  const guide = GIFT_GUIDES[slug as GiftGuideSlug];
 
   if (!guide) {
     notFound();

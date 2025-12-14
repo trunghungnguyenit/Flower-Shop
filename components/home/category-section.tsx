@@ -14,7 +14,7 @@ const categories = [
     name: "Hoa Sinh Nhật",
     description: "Niềm vui trọn vẹn",
     image: "/pastel-pink-roses-bouquet-soft-elegant.jpg",
-    href: "/bo-suu-tap?occasion=sinh-nhat",
+    href: "/collection?occasion=sinh-nhat",
     productCount: 45,
   },
   {
@@ -22,7 +22,7 @@ const categories = [
     name: "Hoa Tình Yêu",
     description: "Yêu thương nồng nàn",
     image: "/red-roses-luxury-basket-arrangement.jpg",
-    href: "/bo-suu-tap?occasion=tinh-yeu",
+    href: "/collection?occasion=tinh-yeu",
     productCount: 38,
   },
   {
@@ -30,7 +30,7 @@ const categories = [
     name: "Hoa Cưới",
     description: "Hạnh phúc viên mãn",
     image: "/white-wedding-bouquet-elegant-roses.jpg",
-    href: "/bo-suu-tap?occasion=cuoi",
+    href: "/collection?occasion=cuoi",
     productCount: 32,
   },
   {
@@ -38,7 +38,7 @@ const categories = [
     name: "Hoa Tết",
     description: "Rộn ràng xuân mới",
     image: "/vietnamese-new-year-flower-arrangement-yellow-peac.jpg",
-    href: "/bo-suu-tap?occasion=tet",
+    href: "/collection?occasion=tet",
     productCount: 28,
   },
   {
@@ -46,7 +46,7 @@ const categories = [
     name: "Hoa Khai Trương",
     description: "Phát tài phát lộc",
     image: "/mixed-pastel-flowers-bouquet-soft-colors.jpg",
-    href: "/bo-suu-tap?occasion=khai-truong",
+    href: "/collection?occasion=khai-truong",
     productCount: 24,
   },
   {
@@ -54,7 +54,7 @@ const categories = [
     name: "Hoa Chia Buồn",
     description: "Chia sẻ & đồng cảm",
     image: "/placeholder.svg?height=400&width=400",
-    href: "/bo-suu-tap?occasion=chia-buon",
+    href: "/collection?occasion=chia-buon",
     productCount: 18,
   },
 ]

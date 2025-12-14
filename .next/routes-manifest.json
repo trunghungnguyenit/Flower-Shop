@@ -21,6 +21,14 @@
   },
   "dynamicRoutes": [
     {
+      "page": "/blog/[slug]",
+      "regex": "^/blog/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPslug": "nxtPslug"
+      },
+      "namedRegex": "^/blog/(?<nxtPslug>[^/]+?)(?:/)?$"
+    },
+    {
       "page": "/decor/[slug]",
       "regex": "^/decor/([^/]+?)(?:/)?$",
       "routeKeys": {
@@ -35,6 +43,14 @@
         "nxtPslug": "nxtPslug"
       },
       "namedRegex": "^/gift\\-guide/(?<nxtPslug>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/product/[slug]",
+      "regex": "^/product/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPslug": "nxtPslug"
+      },
+      "namedRegex": "^/product/(?<nxtPslug>[^/]+?)(?:/)?$"
     }
   ],
   "staticRoutes": [
@@ -55,6 +71,72 @@
       "regex": "^/_not\\-found(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/blog",
+      "regex": "^/blog(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/blog(?:/)?$"
+    },
+    {
+      "page": "/cart",
+      "regex": "^/cart(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/cart(?:/)?$"
+    },
+    {
+      "page": "/collection",
+      "regex": "^/collection(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/collection(?:/)?$"
+    },
+    {
+      "page": "/occasions",
+      "regex": "^/occasions(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/occasions(?:/)?$"
+    },
+    {
+      "page": "/occasions/birthday",
+      "regex": "^/occasions/birthday(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/occasions/birthday(?:/)?$"
+    },
+    {
+      "page": "/occasions/condolences",
+      "regex": "^/occasions/condolences(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/occasions/condolences(?:/)?$"
+    },
+    {
+      "page": "/occasions/event-flowers",
+      "regex": "^/occasions/event\\-flowers(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/occasions/event\\-flowers(?:/)?$"
+    },
+    {
+      "page": "/occasions/floral-decoration",
+      "regex": "^/occasions/floral\\-decoration(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/occasions/floral\\-decoration(?:/)?$"
+    },
+    {
+      "page": "/occasions/new-year",
+      "regex": "^/occasions/new\\-year(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/occasions/new\\-year(?:/)?$"
+    },
+    {
+      "page": "/occasions/opening",
+      "regex": "^/occasions/opening(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/occasions/opening(?:/)?$"
+    },
+    {
+      "page": "/occasions/wedding",
+      "regex": "^/occasions/wedding(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/occasions/wedding(?:/)?$"
     }
   ],
   "dataRoutes": [],

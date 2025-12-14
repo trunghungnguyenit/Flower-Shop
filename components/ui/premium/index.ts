@@ -28,5 +28,13 @@ export {
 export { FloatingPetals } from "./floating-petals"
 export { ConfettiEffect } from "./confetti-effect"
 
-// Header
-export { HeaderPremium } from "./header-premium"
+// Case & Scenario Cards
+export { CaseCard, CaseCardCompact } from "./case-card"
+export { ScenarioCard, ScenarioCardFeatured, ScenarioCardMini } from "./scenario-card"
+
+// Decor Cards
+export { DecorCard, DecorCardLarge, DecorCardCompact } from "./decor-card"
+
+// Effects
+export { HeartPopEffect, SuccessCheck } from "./confetti-effect"
+export { FloatingBubbles } from "./floating-petals"

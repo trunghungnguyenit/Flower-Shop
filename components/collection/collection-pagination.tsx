@@ -25,7 +25,7 @@ export function CollectionPagination({
     } else {
       params.set("page", page.toString())
     }
-    router.push(`/bo-suu-tap?${params.toString()}`)
+    router.push(`/collection?${params.toString()}`)
   }
 
   if (totalPages <= 1) return null
