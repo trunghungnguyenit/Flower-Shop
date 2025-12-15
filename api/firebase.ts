@@ -109,8 +109,8 @@ const mapProduct = (docId: string, p: AnyObject): Product => {
     images: normalizeStringArray(p.images),
     description: String(p.description ?? ""),
 
-    categoryIds: normalizeStringArray(p.category),
-    occasionIds: normalizeStringArray(p.occasion),
+    categoryIds: normalizeStringArray(p.categoryIds),
+    occasionIds: normalizeStringArray(p.occasionIds),
 
     rating: normalizeNumber(p.rating),
     sold: normalizeNumber(p.sold),

@@ -8,6 +8,20 @@ import { cn } from "@/lib/utils"
 import { useCart } from "@/lib/cart-context"
 import { getSafeImageSrc, getSafeAltText } from "@/lib/image-utils"
 import { Checkbox } from "@/components/ui/checkbox"
+import Link from "next/link"
+
+// Helper function to get product image
+function getProductImage(product: any): string {
+  // Handle API Product type (has images array)
+  if (product.images && Array.isArray(product.images) && product.images.length > 0) {
+    return product.images[0]
+  }
+  // Handle lib Product type (has image string)
+  if (product.image && typeof product.image === 'string') {
+    return product.image
+  }
+  return "/placeholder.svg?height=64&width=64"
+}
 
 interface CartSheetProps {
   isOpen: boolean
@@ -15,17 +29,17 @@ interface CartSheetProps {
 }
 
 export function CartSheet({ isOpen, onClose }: CartSheetProps) {
-  const { 
-    items: cartItems, 
-    updateQuantity, 
-    removeFromCart, 
+  const {
+    items: cartItems,
+    updateQuantity,
+    removeFromCart,
     toggleSelectItem,
     selectAllItems,
     getSelectedItems,
     getSelectedTotalPrice
   } = useCart()
   const [isLoading, setIsLoading] = useState(false)
-  
+
   // Calculate derived values using selected items
   const selectedItems = getSelectedItems()
   const subtotal = getSelectedTotalPrice()
@@ -78,7 +92,7 @@ export function CartSheet({ isOpen, onClose }: CartSheetProps) {
                   </p>
                 </div>
               </div>
-              
+
               <button
                 onClick={onClose}
                 className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--background-muted)] transition-colors"
@@ -116,8 +130,8 @@ export function CartSheet({ isOpen, onClose }: CartSheetProps) {
                       checked={allSelected}
                       onCheckedChange={(checked) => selectAllItems(!!checked)}
                     />
-                    <label 
-                      htmlFor="select-all-cart-sheet" 
+                    <label
+                      htmlFor="select-all-cart-sheet"
                       className="text-sm font-medium cursor-pointer flex-1"
                     >
                       Chọn tất cả ({cartItems.length})
@@ -135,8 +149,8 @@ export function CartSheet({ isOpen, onClose }: CartSheetProps) {
                       layout
                       className={cn(
                         "flex gap-4 p-4 rounded-xl transition-colors",
-                        item.selected 
-                          ? "bg-[var(--primary)]/10 border border-[var(--primary)]" 
+                        item.selected
+                          ? "bg-[var(--primary)]/10 border border-[var(--primary)]"
                           : "bg-[var(--background-muted)]"
                       )}
                     >
@@ -152,7 +166,7 @@ export function CartSheet({ isOpen, onClose }: CartSheetProps) {
                       {/* Product Image */}
                       <div className="relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
                         <Image
-                          src={getSafeImageSrc(item.product?.image, "/placeholder.svg?height=64&width=64")}
+                          src={getSafeImageSrc(getProductImage(item.product), "/placeholder.svg?height=64&width=64")}
                           alt={getSafeAltText(item.product?.name, "Sản phẩm")}
                           fill
                           className="object-cover"
@@ -169,7 +183,7 @@ export function CartSheet({ isOpen, onClose }: CartSheetProps) {
                             Ghi chú: {item.note}
                           </p>
                         )}
-                        
+
                         {/* Price */}
                         <div className="flex items-center gap-2 mb-3">
                           <span className="font-semibold text-[var(--primary)] text-sm">
@@ -289,17 +303,17 @@ export function CartSheet({ isOpen, onClose }: CartSheetProps) {
                       <span className="text-[var(--text-secondary)]">Tạm tính</span>
                       <span className="font-medium">{subtotal.toLocaleString()}đ</span>
                     </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-[var(--text-secondary)]">Phí vận chuyển</span>
-                    <span className={cn("font-medium", shipping === 0 && "text-green-600")}>
-                      {shipping === 0 ? "Miễn phí" : `${shipping.toLocaleString()}đ`}
-                    </span>
-                  </div>
-                  {shipping === 0 && (
-                    <p className="text-xs text-green-600">
-                      🎉 Bạn được miễn phí vận chuyển!
-                    </p>
-                  )}
+                    <div className="flex justify-between text-sm">
+                      <span className="text-[var(--text-secondary)]">Phí vận chuyển</span>
+                      <span className={cn("font-medium", shipping === 0 && "text-green-600")}>
+                        {shipping === 0 ? "Miễn phí" : `${shipping.toLocaleString()}đ`}
+                      </span>
+                    </div>
+                    {shipping === 0 && (
+                      <p className="text-xs text-green-600">
+                        🎉 Bạn được miễn phí vận chuyển!
+                      </p>
+                    )}
                     <div className="border-t border-[var(--border-soft)] pt-2 flex justify-between font-semibold">
                       <span>Tổng cộng</span>
                       <span className="text-[var(--primary)]">{total.toLocaleString()}đ</span>
@@ -308,34 +322,38 @@ export function CartSheet({ isOpen, onClose }: CartSheetProps) {
                 </div>
 
                 {/* Checkout Button */}
-                <motion.button
-                  onClick={handleCheckout}
-                  disabled={isLoading || selectedItems.length === 0}
-                  className={cn(
-                    "w-full flex items-center justify-center gap-2 py-4 font-semibold rounded-xl transition-colors",
-                    selectedItems.length === 0
-                      ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                      : "bg-[var(--primary)] text-white hover:bg-[var(--primary-dark)] disabled:opacity-70"
-                  )}
-                  whileHover={{ scale: selectedItems.length > 0 ? 1.02 : 1 }}
-                  whileTap={{ scale: selectedItems.length > 0 ? 0.98 : 1 }}
+                <Link
+                  href="/cart"
+                  className={selectedItems.length === 0 || isLoading ? "pointer-events-none" : ""}
                 >
-                  {isLoading ? (
-                    <>
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      Đang xử lý...
-                    </>
-                  ) : selectedItems.length === 0 ? (
-                    <>
-                      Chọn sản phẩm để thanh toán
-                    </>
-                  ) : (
-                    <>
-                      Thanh toán ({selectedItems.length} sản phẩm)
-                      <ArrowRight className="w-5 h-5" strokeWidth={1.5} />
-                    </>
-                  )}
-                </motion.button>
+                  <motion.button
+                    type="button"
+                    disabled={isLoading || selectedItems.length === 0}
+                    className={cn(
+                      "w-full flex items-center justify-center gap-2 py-4 font-semibold rounded-xl transition-colors",
+                      selectedItems.length === 0
+                        ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                        : "bg-[var(--primary)] text-white hover:bg-[var(--primary-dark)] disabled:opacity-70"
+                    )}
+                    whileHover={{ scale: selectedItems.length > 0 ? 1.02 : 1 }}
+                    whileTap={{ scale: selectedItems.length > 0 ? 0.98 : 1 }}
+                  >
+                    {isLoading ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        Đang xử lý...
+                      </>
+                    ) : selectedItems.length === 0 ? (
+                      <>Chọn sản phẩm để thanh toán</>
+                    ) : (
+                      <>
+                        Xem Giỏ Hàng ({selectedItems.length} sản phẩm)
+                        <ArrowRight className="w-5 h-5" strokeWidth={1.5} />
+                      </>
+                    )}
+                  </motion.button>
+                </Link>
+
 
                 {/* Continue Shopping */}
                 <button
