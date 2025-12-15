@@ -29,7 +29,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Textarea } from "@/components/ui/textarea"
 import { useCart } from "@/lib/cart-context"
 import { useCartSheet } from "@/contexts/cart-sheet-context"
-import { products, getProductBySlug } from "@/lib/products"
+import { convertApiProductToLibProduct } from "@/lib/product-adapter"
 import { getSafeImageSrc, getSafeAltText } from "@/lib/image-utils"
 import { cn } from "@/lib/utils"
 import { CONTACT } from "@/lib/constants"
@@ -39,6 +39,8 @@ import {
   fadeInUp, 
   premiumEase 
 } from "@/components/animations/framer-variants"
+import { Product } from "@/api/api.type"
+import { FirebaseApi } from "@/api/firebase"
 
 // Additional services options
 const additionalServices = [
@@ -56,14 +58,14 @@ interface ProductDetailPageProps {
 
 export default function ProductDetailPage({ params }: ProductDetailPageProps) {
   const { slug } = React.use(params)
-  const product = getProductBySlug(slug)
   
-  if (!product) {
-    notFound()
-  }
-
   const { addToCart } = useCart()
   const { openCart } = useCartSheet()
+  
+  // API state
+  const [product, setProduct] = useState<Product | null>(null)
+  const [relatedProducts, setRelatedProducts] = useState<Product[]>([])
+  const [loading, setLoading] = useState(true)
   
   const [selectedImage, setSelectedImage] = useState(0)
   const [quantity, setQuantity] = useState(1)
@@ -73,18 +75,112 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
   const [isWishlisted, setIsWishlisted] = useState(false)
   const [showSuccessMessage, setShowSuccessMessage] = useState(false)
 
-  // Get related products (same category, excluding current product)
-  const relatedProducts = products
-    .filter(p => p.category === product.category && p.id !== product.id)
-    .slice(0, 4)
+  // Fetch product data from API
+  useEffect(() => {
+    const fetchProductData = async () => {
+      try {
+        // Fetch main product
+        const productRes = await FirebaseApi.getProductBySlug(slug)
+        console.log("Product API response:", productRes)
+        
+        if (productRes.ok && productRes.data) {
+          setProduct(productRes.data)
+          
+          // Fetch all products for related products
+          const allProductsRes = await FirebaseApi.getProduct()
+          if (allProductsRes.ok && Array.isArray(allProductsRes.data)) {
+            // Filter related products (same category, excluding current product, only active)
+            const related = allProductsRes.data
+              .filter((p: Product) => 
+                p.isActive && 
+                p.id !== productRes.data.id &&
+                p.categoryIds?.some(catId => productRes.data.categoryIds?.includes(catId))
+              )
+              .slice(0, 4)
+            setRelatedProducts(related)
+          }
+        } else {
+          // Product not found
+          notFound()
+        }
+      } catch (error) {
+        console.error("Error fetching product:", error)
+        notFound()
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProductData()
+  }, [slug])
+
+  // Set document title
+  useEffect(() => {
+    if (product?.name) {
+      document.title = `${product.name} - Hoa Tươi Đà Nẵng`
+    }
+  }, [product?.name])
+
+  // Keyboard navigation for images
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!product?.images || product.images.length <= 1) return
+      
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault()
+        setSelectedImage(selectedImage === 0 ? product.images.length - 1 : selectedImage - 1)
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault()
+        setSelectedImage(selectedImage === product.images.length - 1 ? 0 : selectedImage + 1)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [selectedImage, product?.images])
+
+  // Show loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white">
+        <HeaderSection />
+        <main className="pt-24 pb-16">
+          <div className="mx-auto max-w-[1240px] px-4 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
+              {/* Image skeleton */}
+              <div className="space-y-4">
+                <div className="aspect-square bg-gray-200 rounded-xl animate-pulse" />
+                <div className="grid grid-cols-4 gap-3">
+                  {[...Array(4)].map((_, i) => (
+                    <div key={i} className="aspect-square bg-gray-200 rounded-lg animate-pulse" />
+                  ))}
+                </div>
+              </div>
+              {/* Content skeleton */}
+              <div className="space-y-6">
+                <div className="space-y-3">
+                  <div className="h-8 bg-gray-200 rounded animate-pulse" />
+                  <div className="h-6 bg-gray-200 rounded w-3/4 animate-pulse" />
+                  <div className="h-8 bg-gray-200 rounded w-1/2 animate-pulse" />
+                </div>
+                <div className="space-y-2">
+                  <div className="h-4 bg-gray-200 rounded animate-pulse" />
+                  <div className="h-4 bg-gray-200 rounded w-5/6 animate-pulse" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    )
+  }
+
+  if (!product) {
+    notFound()
+  }
 
   // Calculate total price including services
-  const basePrice = (() => {
-    if (!product.price || typeof product.price !== 'string') return 0
-    const priceMatch = product.price.match(/[\d.]+/)
-    if (!priceMatch) return 0
-    return parseFloat(priceMatch[0].replace(/\./g, '')) || 0
-  })()
+  const basePrice = product.price || 0
 
   const servicesTotal = selectedServices.reduce((total, serviceId) => {
     const service = additionalServices.find(s => s.id === serviceId)
@@ -98,7 +194,9 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
     setIsAddingToCart(true)
     
     try {
-      addToCart(product, quantity, selectedServices, note)
+      // Convert API product to lib product format for cart
+      const cartProduct = convertApiProductToLibProduct(product)
+      addToCart(cartProduct, quantity, selectedServices, note)
       
       // Show success feedback
       setShowSuccessMessage(true)
@@ -122,11 +220,7 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
     )
   }
 
-  // Set document title
-  useEffect(() => {
-    document.title = `${product.name} - Hoa Tươi Đà Nẵng`
-  }, [product.name])
-
+  
   return (
     <div className="min-h-screen bg-white">
       <HeaderSection />
@@ -164,17 +258,49 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, ease: premiumEase }}
-              className="space-y-4"
+              className="space-y-4 group"
             >
               {/* Main Image */}
               <div className="relative aspect-square overflow-hidden rounded-xl bg-[var(--background-muted)]">
                 <Image
-                  src={getSafeImageSrc(product.images[selectedImage], "/placeholder.svg?height=600&width=600")}
+                  src={getSafeImageSrc(product.images?.[selectedImage], "/placeholder.svg?height=600&width=600")}
                   alt={getSafeAltText(product.name, "Sản phẩm")}
                   fill
                   className="object-cover"
                   priority
                 />
+                
+                {/* Navigation Arrows - only show if more than 1 image */}
+                {product.images && product.images.length > 1 && (
+                  <>
+                    {/* Previous Image */}
+                    <button
+                      onClick={() => setSelectedImage(selectedImage === 0 ? product.images!.length - 1 : selectedImage - 1)}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--primary)] transition-all duration-300 opacity-0 hover:opacity-100 group-hover:opacity-100"
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
+                    
+                    {/* Next Image */}
+                    <button
+                      onClick={() => setSelectedImage(selectedImage === product.images!.length - 1 ? 0 : selectedImage + 1)}
+                      className="absolute right-16 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--primary)] transition-all duration-300 opacity-0 hover:opacity-100 group-hover:opacity-100"
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </>
+                )}
+                
+                {/* Image Counter */}
+                {product.images && product.images.length > 1 && (
+                  <div className="absolute bottom-4 left-4 bg-black/50 text-white text-sm px-3 py-1 rounded-full">
+                    {selectedImage + 1} / {product.images.length}
+                  </div>
+                )}
                 
                 {/* Wishlist Button */}
                 <button
@@ -190,33 +316,42 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
                 </button>
 
                 {/* Share Button */}
-                <button className="absolute top-4 left-4 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors">
+                <button className="absolute top-16 right-4 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors">
                   <Share2 className="w-5 h-5" strokeWidth={1.5} />
                 </button>
               </div>
 
               {/* Thumbnail Images */}
-              <div className="grid grid-cols-4 gap-3">
-                {product.images.map((image, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedImage(index)}
-                    className={cn(
-                      "relative aspect-square overflow-hidden rounded-lg border-2 transition-all duration-300",
-                      selectedImage === index 
-                        ? "border-[var(--primary)] shadow-lg" 
-                        : "border-[var(--border-soft)] hover:border-[var(--primary)]/50"
-                    )}
-                  >
-                    <Image
-                      src={getSafeImageSrc(image, "/placeholder.svg?height=150&width=150")}
-                      alt={`${product.name} - Ảnh ${index + 1}`}
-                      fill
-                      className="object-cover"
-                    />
-                  </button>
-                ))}
-              </div>
+              {product.images && product.images.length > 1 && (
+                <div className={cn(
+                  "grid gap-3",
+                  product.images.length <= 4 
+                    ? "grid-cols-4" 
+                    : product.images.length <= 6 
+                    ? "grid-cols-3" 
+                    : "grid-cols-2"
+                )}>
+                  {product.images.map((image, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setSelectedImage(index)}
+                      className={cn(
+                        "relative aspect-square overflow-hidden rounded-lg border-2 transition-all duration-300",
+                        selectedImage === index 
+                          ? "border-[var(--primary)] shadow-lg" 
+                          : "border-[var(--border-soft)] hover:border-[var(--primary)]/50"
+                      )}
+                    >
+                      <Image
+                        src={getSafeImageSrc(image, "/placeholder.svg?height=150&width=150")}
+                        alt={`${product.name} - Ảnh ${index + 1}`}
+                        fill
+                        className="object-cover"
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
             </motion.div>
 
             {/* Product Info */}
@@ -235,18 +370,29 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
                 <div className="flex items-center gap-4 mb-4">
                   <div className="flex items-center gap-1">
                     {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" strokeWidth={1.5} />
+                      <Star 
+                        key={i} 
+                        className={cn(
+                          "w-5 h-5",
+                          i < Math.floor(product.rating || 4) 
+                            ? "fill-yellow-400 text-yellow-400" 
+                            : "text-gray-300"
+                        )} 
+                        strokeWidth={1.5} 
+                      />
                     ))}
-                    <span className="text-sm text-[var(--text-muted)] ml-2">(4.9 • 127 đánh giá)</span>
+                    <span className="text-sm text-[var(--text-muted)] ml-2">
+                      ({product.rating || 4.9} • {product.sold || 127} đã bán)
+                    </span>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3">
                   <span className="font-display text-3xl font-bold text-[var(--primary)]">
-                    {product.price}
+                    {product.price.toLocaleString("vi-VN")}đ
                   </span>
                   <span className="px-3 py-1 bg-green-100 text-green-700 text-sm font-medium rounded-full">
-                    Còn hàng
+                    {product.badge || "Còn hàng"}
                   </span>
                 </div>
               </div>
@@ -433,8 +579,8 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
                     key={relatedProduct.id}
                     id={relatedProduct.id}
                     name={relatedProduct.name}
-                    price={relatedProduct.price}
-                    image={relatedProduct.image}
+                    price={`${relatedProduct.price.toLocaleString("vi-VN")}đ`}
+                    image={relatedProduct.images?.[0] || "/placeholder.svg?height=400&width=400"}
                     slug={relatedProduct.slug}
                   />
                 ))}

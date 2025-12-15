@@ -26,34 +26,20 @@ import {
   Instagram,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { products, type Product } from "@/lib/products"
 import { CONTACT } from "@/lib/constants"
 import { useCart } from "@/lib/cart-context"
+import { convertApiProductToLibProduct } from "@/lib/product-adapter"
 import { FooterSection } from "@/components/footer"
 import { HeaderSection } from "@/components/header"
+import { Product } from "@/api/api.type"
+import { FirebaseApi } from "@/api/firebase"
+import { useEffect } from "react"
 
 // ================================================================
 // ANIMATION VARIANTS
 // ================================================================
 
 const premiumEase = [0.25, 0.1, 0.25, 1] as const
-
-const fadeInUp = {
-  initial: { opacity: 0, y: 30 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.7, ease: premiumEase } },
-}
-
-const staggerContainer = {
-  initial: {},
-  animate: {
-    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
-  },
-}
-
-const staggerItem = {
-  initial: { opacity: 0, y: 24 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.5, ease: premiumEase } },
-}
 
 // ================================================================
 // CONFETTI COMPONENT
@@ -117,8 +103,9 @@ function ProductCard({
     e.stopPropagation()
     setIsAdding(true)
 
-    // Add to cart
-    addToCart(product, 1, [], "")
+    // Convert API product to lib product format for cart
+    const cartProduct = convertApiProductToLibProduct(product)
+    addToCart(cartProduct, 1, [], "")
 
     // Trigger confetti
     onConfetti(e)
@@ -142,7 +129,7 @@ function ProductCard({
           {/* Image */}
           <div className="relative aspect-square overflow-hidden">
             <Image
-              src={product.image || "/placeholder.svg?height=400&width=400"}
+              src={product.images?.[0] || "/placeholder.svg?height=400&width=400"}
               alt={product.name}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -152,7 +139,7 @@ function ProductCard({
               <span
                 className="px-3 py-1 bg-[var(--primary)] text-white text-xs font-body font-medium rounded-full"
               >
-                {product.category === "bo-hoa" ? "Bó hoa" : "Lẵng hoa"}
+                {product.badge || "Hoa tươi"}
               </span>
             </div>
             {/* Wishlist */}
@@ -181,10 +168,10 @@ function ProductCard({
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
-                  className={cn("w-3.5 h-3.5", i < 4 ? "text-yellow-400 fill-yellow-400" : "text-gray-300")}
+                  className={cn("w-3.5 h-3.5", i < Math.floor(product.rating || 4) ? "text-yellow-400 fill-yellow-400" : "text-gray-300")}
                 />
               ))}
-              <span className="text-xs text-[var(--text-muted)] ml-1">(4.8)</span>
+              <span className="text-xs text-[var(--text-muted)] ml-1">({product.rating || 4.8})</span>
             </div>
 
             {/* Price & CTA */}
@@ -193,7 +180,7 @@ function ProductCard({
                 className="font-display text-[var(--primary)] font-semibold"
                 style={{ fontSize: "17px" }}
               >
-                {product.price}
+                {product.price.toLocaleString("vi-VN")}đ
               </span>
               <motion.button
                 onClick={handleAddToCart}
@@ -233,6 +220,34 @@ export default function CollectionPage() {
     position: { x: 0, y: 0 },
   })
 
+  // API state
+  const [products, setProducts] = useState<Product[]>([])
+  const [loading, setLoading] = useState(true)
+
+  // Fetch products from API
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await FirebaseApi.getProduct()
+        console.log("API TEST: ", res.data)
+        
+        if (res.ok && Array.isArray(res.data)) {
+          // Filter only active products
+          const activeProducts = res.data.filter((product: Product) => product.isActive)
+          setProducts(activeProducts)
+        } else {
+          console.error("API error:", res)
+        }
+      } catch (error) {
+        console.error("Error fetching products:", error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProducts()
+  }, [])
+
   const handleConfetti = (e: React.MouseEvent) => {
     const rect = (e.target as HTMLElement).getBoundingClientRect()
     setConfettiState({
@@ -245,12 +260,14 @@ export default function CollectionPage() {
   // Filter products based on selected category
   const filteredProducts = selectedCategory === "all" 
     ? products 
-    : products.filter(product => product.category === selectedCategory)
+    : products.filter(product => product.categoryIds?.includes(selectedCategory))
 
   const categories = [
     { id: "all", name: "Tất cả", count: products.length },
-    { id: "bo-hoa", name: "Bó hoa", count: products.filter(p => p.category === "bo-hoa").length },
-    { id: "lang-hoa", name: "Lẵng hoa", count: products.filter(p => p.category === "lang-hoa").length },
+    { id: "bo-hoa", name: "Bó hoa", count: products.filter(p => p.categoryIds?.includes("bo-hoa")).length },
+    { id: "lang-hoa", name: "Lẵng hoa", count: products.filter(p => p.categoryIds?.includes("lang-hoa")).length },
+    { id: "hoa-cuoi", name: "Hoa cưới", count: products.filter(p => p.categoryIds?.includes("hoa-cuoi")).length },
+    { id: "hoa-tet", name: "Hoa Tết", count: products.filter(p => p.categoryIds?.includes("hoa-tet")).length },
   ]
 
   return (
@@ -348,36 +365,57 @@ export default function CollectionPage() {
             </div>
           </div>
 
-          {/* Products Grid */}
-          <div className={cn(
-            "grid gap-6 lg:gap-8",
-            viewMode === "grid" 
-              ? "grid-cols-2 md:grid-cols-3 lg:grid-cols-4" 
-              : "grid-cols-1 md:grid-cols-2"
-          )}>
-            {filteredProducts.map((product, index) => (
-              <ProductCard 
-                key={product.id} 
-                product={product} 
-                index={index} 
-                onConfetti={handleConfetti} 
-              />
-            ))}
-          </div>
-
-          {/* Empty State */}
-          {filteredProducts.length === 0 && (
-            <div className="text-center py-16">
-              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Search className="w-8 h-8 text-gray-400" />
-              </div>
-              <h3 className="font-display text-[var(--text-primary)] font-semibold mb-2" style={{ fontSize: "20px" }}>
-                Không tìm thấy sản phẩm
-              </h3>
-              <p className="font-body text-[var(--text-secondary)]" style={{ fontSize: "16px" }}>
-                Thử chọn danh mục khác hoặc liên hệ với chúng tôi để được tư vấn.
-              </p>
+          {/* Loading State */}
+          {loading ? (
+            <div className="grid gap-6 lg:gap-8 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+              {[...Array(8)].map((_, i) => (
+                <div key={i} className="bg-white rounded-xl overflow-hidden shadow-sm border border-[var(--border-soft)]">
+                  <div className="aspect-square bg-gray-200 animate-pulse" />
+                  <div className="p-4 space-y-3">
+                    <div className="h-4 bg-gray-200 rounded animate-pulse" />
+                    <div className="h-3 bg-gray-200 rounded w-3/4 animate-pulse" />
+                    <div className="flex justify-between items-center">
+                      <div className="h-5 bg-gray-200 rounded w-20 animate-pulse" />
+                      <div className="w-9 h-9 bg-gray-200 rounded-full animate-pulse" />
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
+          ) : (
+            <>
+              {/* Products Grid */}
+              <div className={cn(
+                "grid gap-6 lg:gap-8",
+                viewMode === "grid" 
+                  ? "grid-cols-2 md:grid-cols-3 lg:grid-cols-4" 
+                  : "grid-cols-1 md:grid-cols-2"
+              )}>
+                {filteredProducts.map((product, index) => (
+                  <ProductCard 
+                    key={product.id} 
+                    product={product} 
+                    index={index} 
+                    onConfetti={handleConfetti} 
+                  />
+                ))}
+              </div>
+
+              {/* Empty State */}
+              {filteredProducts.length === 0 && (
+                <div className="text-center py-16">
+                  <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Search className="w-8 h-8 text-gray-400" />
+                  </div>
+                  <h3 className="font-display text-[var(--text-primary)] font-semibold mb-2" style={{ fontSize: "20px" }}>
+                    Không tìm thấy sản phẩm
+                  </h3>
+                  <p className="font-body text-[var(--text-secondary)]" style={{ fontSize: "16px" }}>
+                    Thử chọn danh mục khác hoặc liên hệ với chúng tôi để được tư vấn.
+                  </p>
+                </div>
+              )}
+            </>
           )}
         </div>
       </section>

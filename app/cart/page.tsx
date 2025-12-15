@@ -32,6 +32,32 @@ import {
   premiumEase
 } from "@/components/animations/framer-variants"
 
+// Helper function to get product image
+function getProductImage(product: any): string {
+  // Handle API Product type (has images array)
+  if (product.images && Array.isArray(product.images) && product.images.length > 0) {
+    return product.images[0]
+  }
+  // Handle lib Product type (has image string)
+  if (product.image && typeof product.image === 'string') {
+    return product.image
+  }
+  return "/placeholder.svg?height=128&width=128"
+}
+
+// Helper function to get product category
+function getProductCategory(product: any): string | null {
+  // Handle lib Product type (has category string)
+  if (product.category && typeof product.category === 'string') {
+    return product.category
+  }
+  // Handle API Product type (has categoryIds array)
+  if (product.categoryIds && Array.isArray(product.categoryIds) && product.categoryIds.length > 0) {
+    return product.categoryIds[0]
+  }
+  return null
+}
+
 export default function CartPage() {
   const {
     items: cartItems,
@@ -205,7 +231,7 @@ export default function CartPage() {
                       {/* Product Image */}
                       <div className="relative w-24 h-24 lg:w-32 lg:h-32 rounded-xl overflow-hidden flex-shrink-0">
                         <Image
-                          src={getSafeImageSrc(item.product?.image, "/placeholder.svg?height=128&width=128")}
+                          src={getSafeImageSrc(getProductImage(item.product), "/placeholder.svg?height=128&width=128")}
                           alt={getSafeAltText(item.product?.name, "Sản phẩm")}
                           fill
                           className="object-cover"
@@ -224,9 +250,9 @@ export default function CartPage() {
                             <h3 className="font-display text-lg font-semibold text-[var(--text-primary)] mb-1">
                               {getSafeAltText(item.product?.name, "Sản phẩm")}
                             </h3>
-                            {item.product.category && (
+                            {getProductCategory(item.product) && (
                               <p className="text-xs text-[var(--text-muted)] mt-1">
-                                Danh mục: {item.product.category}
+                                Danh mục: {getProductCategory(item.product)}
                               </p>
                             )}
                             {item.note && (

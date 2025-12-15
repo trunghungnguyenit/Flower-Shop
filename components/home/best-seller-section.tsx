@@ -1,15 +1,17 @@
 "use client"
 
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion, useInView } from "framer-motion"
-import { ArrowRight, Heart } from "lucide-react"
+import { ArrowRight, Heart, ShoppingCart, Check } from "lucide-react"
 import { Product } from "@/api/api.type"
 import { formatImageUrl } from "@/api/firebase"
 import { staggerContainer, staggerItem, staggerItemScale, premiumEase } from "@/components/animations/framer-variants"
 import { ParticleGlow } from "@/components/animations/background-effects"
 import { BestSellerSkeleton } from "./best-seller-skeleton"
+import { useCart } from "@/lib/cart-context"
+import { convertApiProductToLibProduct } from "@/lib/product-adapter"
 import { cn } from "@/lib/utils"
 
 // ================================================================
@@ -25,12 +27,28 @@ interface BestSellerSectionProps {
 export function BestSellerSection({ products, loading }: BestSellerSectionProps) {
   const sectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 })
+  const { addToCart } = useCart()
+  const [addingStates, setAddingStates] = useState<Record<string, boolean>>({})
 
   // Process products: filter active, sort by sold, limit to 5
   const bestSellerProducts = products
     .filter(product => product.isActive)
     .sort((a, b) => (b.sold || 0) - (a.sold || 0))
     .slice(0, 5)
+
+  const handleAddToCart = (e: React.MouseEvent, product: Product) => {
+    e.preventDefault()
+    e.stopPropagation()
+    
+    setAddingStates(prev => ({ ...prev, [product.id]: true }))
+    
+    const cartProduct = convertApiProductToLibProduct(product)
+    addToCart(cartProduct, 1, [], "")
+    
+    setTimeout(() => {
+      setAddingStates(prev => ({ ...prev, [product.id]: false }))
+    }, 1000)
+  }
 
   return (
     <section
@@ -128,14 +146,23 @@ export function BestSellerSection({ products, loading }: BestSellerSectionProps)
                   </button>
 
                   {/* Quick Add */}
-                  <div className="absolute bottom-0 left-0 right-0 p-3 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                    <button
-                      className="w-full py-2.5 bg-white/95 backdrop-blur-sm text-[var(--text-primary)] font-body font-medium text-sm hover:bg-[var(--primary)] hover:text-white transition-colors duration-300"
-                      style={{ borderRadius: "var(--radius-soft)" }}
-                      onClick={(e) => e.preventDefault()}
+                  <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                    <motion.button
+                      onClick={(e) => handleAddToCart(e, product)}
+                      className={cn(
+                        "w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300",
+                        addingStates[product.id]
+                          ? "bg-green-500 text-white"
+                          : "bg-[var(--primary)]/10 text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white"
+                      )}
+                      whileTap={{ scale: 0.9 }}
                     >
-                      Thêm vào giỏ
-                    </button>
+                      {addingStates[product.id] ? (
+                        <Check className="w-4 h-4" />
+                      ) : (
+                        <ShoppingCart className="w-4 h-4" strokeWidth={1.5} />
+                      )}
+                    </motion.button>
                   </div>
                 </div>
 

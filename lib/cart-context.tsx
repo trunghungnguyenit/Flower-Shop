@@ -1,7 +1,11 @@
 "use client"
 
 import React, { createContext, useContext, useState, useEffect } from "react"
-import type { Product } from "./products"
+import type { Product as LibProduct } from "./products"
+import type { Product as ApiProduct } from "@/api/api.type"
+
+// Union type to support both product types
+export type Product = LibProduct | ApiProduct
 
 export interface CartItem {
   product: Product
@@ -26,6 +30,23 @@ interface CartContextType {
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined)
+
+function getProductPrice(product: Product): number {
+  if (typeof product.price === 'number') {
+    // API Product type
+    return product.price
+  } else if (typeof product.price === 'string') {
+    // Lib Product type
+    if (product.price.includes('Liên hệ') || product.price.includes('liên hệ')) {
+      return 0 // Handle "Liên hệ báo giá" case
+    }
+    const priceMatch = product.price.match(/[\d.]+/)
+    if (priceMatch) {
+      return parseFloat(priceMatch[0].replace(/\./g, '')) || 0
+    }
+  }
+  return 0
+}
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([])
@@ -111,18 +132,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const getTotalPrice = () => {
     return items.reduce((total, item) => {
-      // Handle cases where price might be undefined or not a string
-      if (!item.product?.price || typeof item.product.price !== 'string') {
-        return total
-      }
-      
-      // Extract numeric value from price string (e.g., "450.000đ" -> 450000)
-      const priceMatch = item.product.price.match(/[\d.]+/)
-      if (!priceMatch) {
-        return total // Skip items with non-numeric prices like "Liên hệ báo giá"
-      }
-      
-      const price = parseFloat(priceMatch[0].replace(/\./g, '')) || 0
+      const price = getProductPrice(item.product)
       return total + price * item.quantity
     }, 0)
   }
@@ -134,7 +144,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const getSelectedTotalPrice = () => {
     return items.reduce((total, item) => {
       if (!item.selected) return total
-      const price = parseFloat(item.product.price.replace(/[^\d]/g, "")) || 0
+      const price = getProductPrice(item.product)
       return total + price * item.quantity
     }, 0)
   }
