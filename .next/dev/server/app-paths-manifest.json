@@ -1,9 +1,5 @@
 {
-  "/api/order/route": "app/api/order/route.js",
   "/blog/[slug]/page": "app/blog/[slug]/page.js",
-  "/blog/page": "app/blog/page.js",
   "/collection/page": "app/collection/page.js",
-  "/occasions/page": "app/occasions/page.js",
-  "/page": "app/page.js",
-  "/product/[slug]/page": "app/product/[slug]/page.js"
+  "/page": "app/page.js"
 }
