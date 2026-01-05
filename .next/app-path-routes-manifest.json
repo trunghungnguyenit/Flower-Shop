@@ -1,9 +1,9 @@
 {
   "/_global-error/page": "/_global-error",
   "/_not-found/page": "/_not-found",
+  "/api/order/route": "/api/order",
   "/blog/[slug]/page": "/blog/[slug]",
   "/blog/page": "/blog",
-  "/cart/page": "/cart",
   "/collection/page": "/collection",
   "/decor/[slug]/page": "/decor/[slug]",
   "/gift-guide/[slug]/page": "/gift-guide/[slug]",

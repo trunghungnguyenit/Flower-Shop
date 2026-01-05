@@ -6,6 +6,7 @@ import { Plus, Minus, Check, Send, MapPin, Clock, Gift } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
+import { premiumEase } from '@/components/animations/framer-variants';
 import type { Product } from '@/api/api.type';
 
 interface ProductOrderFormProps {
@@ -149,7 +150,7 @@ export default function ProductOrderForm({ product, onClose }: ProductOrderFormP
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6 max-w-2xl mx-auto">
+    <div className="bg-white rounded-lg shadow-lg p-6 max-w-2xl mx-auto relative">
       {/* Success Overlay */}
       <AnimatePresence>
         {isSuccess && (
@@ -157,23 +158,37 @@ export default function ProductOrderForm({ product, onClose }: ProductOrderFormP
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.3, ease: premiumEase }}
             className="absolute inset-0 bg-white/95 backdrop-blur-sm flex flex-col items-center justify-center z-20 rounded-lg"
           >
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.4, delay: 0.1, type: "spring", stiffness: 200 }}
-              className="w-20 h-20 mb-6 flex items-center justify-center bg-green-100 rounded-full"
+              className="w-20 h-20 mb-6 flex items-center justify-center bg-[var(--success)]/10 rounded-full"
             >
-              <Check className="w-10 h-10 text-green-600" strokeWidth={1.5} />
+              <Check className="w-10 h-10 text-[var(--success)]" strokeWidth={1.5} />
             </motion.div>
 
-            <h3 className="text-2xl font-semibold text-gray-800 mb-2 text-center">
-              Đặt hoa thành công!
-            </h3>
-            <p className="text-gray-600 text-center">
-              Chúng tôi sẽ liên hệ bạn sớm nhất để xác nhận đơn hàng
-            </p>
+            <motion.h3
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="font-display text-[var(--text-primary)] mb-2 text-center"
+              style={{ fontSize: "24px", fontWeight: 600 }}
+            >
+              Gửi thành công!
+            </motion.h3>
+
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.3 }}
+              className="font-body text-[var(--text-secondary)] text-center"
+              style={{ fontSize: "15px" }}
+            >
+              Chúng tôi sẽ liên hệ bạn trong 15 phút
+            </motion.p>
           </motion.div>
         )}
       </AnimatePresence>

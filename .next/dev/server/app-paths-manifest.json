@@ -2,14 +2,9 @@
   "/_not-found/page": "app/_not-found/page.js",
   "/api/order/route": "app/api/order/route.js",
   "/blog/[slug]/page": "app/blog/[slug]/page.js",
-  "/blog/page": "app/blog/page.js",
   "/collection/page": "app/collection/page.js",
-  "/occasions/birthday/page": "app/occasions/birthday/page.js",
-  "/occasions/floral-decoration/page": "app/occasions/floral-decoration/page.js",
   "/occasions/new-year/page": "app/occasions/new-year/page.js",
-  "/occasions/opening/page": "app/occasions/opening/page.js",
   "/occasions/page": "app/occasions/page.js",
-  "/occasions/wedding/page": "app/occasions/wedding/page.js",
   "/page": "app/page.js",
   "/product/[slug]/page": "app/product/[slug]/page.js"
 }
