@@ -1145,6 +1145,7 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 "[project]/api/firebase.ts [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
+// api/firebase.ts
 __turbopack_context__.s([
     "FirebaseApi",
     ()=>FirebaseApi,
@@ -1160,45 +1161,38 @@ __turbopack_context__.s([
     ()=>mapProduct
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = /*#__PURE__*/ __turbopack_context__.i("[project]/node_modules/.pnpm/next@16.0.7_@opentelemetry+_ab12fbf9041281d71cca4574e50b85ac/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$firebase$40$12$2e$6$2e$0$2f$node_modules$2f$firebase$2f$app$2f$dist$2f$esm$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/firebase@12.6.0/node_modules/firebase/app/dist/esm/index.esm.js [app-client] (ecmascript) <locals>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$app$40$0$2e$14$2e$6$2f$node_modules$2f40$firebase$2f$app$2f$dist$2f$esm$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/@firebase+app@0.14.6/node_modules/@firebase/app/dist/esm/index.esm.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$firebase$40$12$2e$6$2e$0$2f$node_modules$2f$firebase$2f$firestore$2f$dist$2f$esm$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/firebase@12.6.0/node_modules/firebase/firestore/dist/esm/index.esm.js [app-client] (ecmascript) <locals>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$4$2e$9$2e$2_$40$firebase$2b$app$40$0$2e$14$2e$6$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/@firebase+firestore@4.9.2_@firebase+app@0.14.6/node_modules/@firebase/firestore/dist/index.esm.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$firebase$40$9$2e$23$2e$0$2f$node_modules$2f$firebase$2f$app$2f$dist$2f$esm$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/firebase@9.23.0/node_modules/firebase/app/dist/esm/index.esm.js [app-client] (ecmascript) <locals>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$app$40$0$2e$9$2e$13$2f$node_modules$2f40$firebase$2f$app$2f$dist$2f$esm$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/@firebase+app@0.9.13/node_modules/@firebase/app/dist/esm/index.esm2017.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$firebase$40$9$2e$23$2e$0$2f$node_modules$2f$firebase$2f$firestore$2f$dist$2f$esm$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/firebase@9.23.0/node_modules/firebase/firestore/dist/esm/index.esm.js [app-client] (ecmascript) <locals>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$3$2e$13$2e$0_$40$firebase$2b$app$40$0$2e$9$2e$13$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/@firebase+firestore@3.13.0_@firebase+app@0.9.13/node_modules/@firebase/firestore/dist/index.esm2017.js [app-client] (ecmascript)");
 ;
 ;
 const getFirstImage = (image)=>{
     if (!image || !Array.isArray(image) || image.length === 0) return null;
     const firstItem = image[0];
-    if (typeof firstItem === 'string') return firstItem;
-    if (typeof firstItem === 'object' && firstItem.url) return firstItem.url;
+    if (typeof firstItem === "string") return firstItem;
+    if (typeof firstItem === "object" && firstItem?.url) return firstItem.url;
     return null;
 };
 const formatImageUrl = (imageName)=>{
-    if (!imageName) return '/placeholder.svg?height=400&width=400';
-    // Nếu đã là URL đầy đủ (có http/https), return as is
-    if (imageName.startsWith('http://') || imageName.startsWith('https://')) {
-        return imageName;
-    }
-    // Nếu đã có slash đầu, return as is
-    if (imageName.startsWith('/')) {
-        return imageName;
-    }
-    // Thêm slash đầu cho relative path
+    if (!imageName) return "/placeholder.svg?height=400&width=400";
+    if (imageName.startsWith("http://") || imageName.startsWith("https://")) return imageName;
+    if (imageName.startsWith("/")) return imageName;
     return `/${imageName}`;
 };
 const formatPrice = (gia)=>{
-    if (typeof gia === 'number' && gia > 0) {
-        return `${gia.toLocaleString('vi-VN')}đ`;
-    }
-    if (typeof gia === 'string') {
-        const numPrice = Number(gia.replace(/[^\d.-]/g, ''));
+    if (typeof gia === "number" && gia > 0) return `${gia.toLocaleString("vi-VN")}đ`;
+    if (typeof gia === "string") {
+        const numPrice = Number(gia.replace(/[^\d.-]/g, ""));
         if (!isNaN(numPrice) && numPrice > 0) {
-            return `${numPrice.toLocaleString('vi-VN')}đ`;
+            return `${numPrice.toLocaleString("vi-VN")}đ`;
         }
     }
-    return 'Liên hệ báo giá';
+    return "Liên hệ báo giá";
 };
-const firebaseConfig = {
+/* =========================
+   Firebase init
+========================= */ const firebaseConfig = {
     apiKey: ("TURBOPACK compile-time value", "AIzaSyBNRF447uclLSkHIEUd_flzwqEaMBDOv3E"),
     authDomain: ("TURBOPACK compile-time value", "flower-shop-b33ff.firebaseapp.com"),
     projectId: ("TURBOPACK compile-time value", "flower-shop-b33ff"),
@@ -1207,13 +1201,15 @@ const firebaseConfig = {
     appId: ("TURBOPACK compile-time value", "1:286808347868:web:df6df7f4ebd78f88451019")
 };
 const ensureFirebase = ()=>{
-    if (!(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$app$40$0$2e$14$2e$6$2f$node_modules$2f40$firebase$2f$app$2f$dist$2f$esm$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getApps"])().length) (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$app$40$0$2e$14$2e$6$2f$node_modules$2f40$firebase$2f$app$2f$dist$2f$esm$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["initializeApp"])(firebaseConfig);
-    const db = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$4$2e$9$2e$2_$40$firebase$2b$app$40$0$2e$14$2e$6$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getFirestore"])();
+    const app = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$app$40$0$2e$9$2e$13$2f$node_modules$2f40$firebase$2f$app$2f$dist$2f$esm$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getApps"])().length ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$app$40$0$2e$9$2e$13$2f$node_modules$2f40$firebase$2f$app$2f$dist$2f$esm$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getApp"])() : (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$app$40$0$2e$9$2e$13$2f$node_modules$2f40$firebase$2f$app$2f$dist$2f$esm$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["initializeApp"])(firebaseConfig);
+    const db = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$3$2e$13$2e$0_$40$firebase$2b$app$40$0$2e$9$2e$13$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getFirestore"])(app);
     return {
         db
     };
 };
-const okResponse = (data, status = 200)=>({
+/* =========================
+   Response helpers
+========================= */ const okResponse = (data, status = 200)=>({
         ok: true,
         status,
         data
@@ -1227,7 +1223,9 @@ const errorResponse = (message, status = 500)=>({
             }
         }
     });
-const normalizeStringArray = (v)=>{
+/* =========================
+   Normalizers
+========================= */ const normalizeStringArray = (v)=>{
     if (!v) return [];
     if (Array.isArray(v)) return v.filter((i)=>typeof i === "string");
     if (typeof v === "string") return [
@@ -1243,8 +1241,7 @@ const normalizeNumber = (v)=>{
     }
     return undefined;
 };
-const mapProduct = (docId, p)=>{
-    return {
+const mapProduct = (docId, p)=>({
         id: docId,
         name: String(p.name ?? ""),
         slug: String(p.slug ?? ""),
@@ -1258,10 +1255,8 @@ const mapProduct = (docId, p)=>{
         sold: normalizeNumber(p.sold),
         badge: p.badge ?? undefined,
         isActive: p.isActive ?? true
-    };
-};
-const mapBlog = (docId, b)=>{
-    return {
+    });
+const mapBlog = (docId, b)=>({
         id: docId,
         slug: String(b.slug ?? ""),
         title: String(b.title ?? ""),
@@ -1272,50 +1267,49 @@ const mapBlog = (docId, b)=>{
         content: String(b.content ?? ""),
         publishedAt: b.publishedAt ?? null,
         isActive: b.isActive ?? true
-    };
-};
-const fetchAll = async (colName, mapper)=>{
+    });
+/* =========================
+   Firestore fetchers
+========================= */ const fetchAll = async (colName, mapper)=>{
     const { db } = ensureFirebase();
-    const snap = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$4$2e$9$2e$2_$40$firebase$2b$app$40$0$2e$14$2e$6$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getDocs"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$4$2e$9$2e$2_$40$firebase$2b$app$40$0$2e$14$2e$6$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["collection"])(db, colName));
+    const snap = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$3$2e$13$2e$0_$40$firebase$2b$app$40$0$2e$9$2e$13$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getDocs"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$3$2e$13$2e$0_$40$firebase$2b$app$40$0$2e$9$2e$13$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["collection"])(db, colName));
     return snap.docs.map((d)=>mapper(d.id, d.data()));
 };
 const fetchBySlug = async (colName, slug, mapper)=>{
     const { db } = ensureFirebase();
-    const q = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$4$2e$9$2e$2_$40$firebase$2b$app$40$0$2e$14$2e$6$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["query"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$4$2e$9$2e$2_$40$firebase$2b$app$40$0$2e$14$2e$6$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["collection"])(db, colName), (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$4$2e$9$2e$2_$40$firebase$2b$app$40$0$2e$14$2e$6$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["where"])("slug", "==", slug), (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$4$2e$9$2e$2_$40$firebase$2b$app$40$0$2e$14$2e$6$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["limit"])(1));
-    const snap = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$4$2e$9$2e$2_$40$firebase$2b$app$40$0$2e$14$2e$6$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getDocs"])(q);
+    const q = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$3$2e$13$2e$0_$40$firebase$2b$app$40$0$2e$9$2e$13$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["query"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$3$2e$13$2e$0_$40$firebase$2b$app$40$0$2e$9$2e$13$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["collection"])(db, colName), (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$3$2e$13$2e$0_$40$firebase$2b$app$40$0$2e$9$2e$13$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["where"])("slug", "==", slug), (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$3$2e$13$2e$0_$40$firebase$2b$app$40$0$2e$9$2e$13$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["limit"])(1));
+    const snap = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$3$2e$13$2e$0_$40$firebase$2b$app$40$0$2e$9$2e$13$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getDocs"])(q);
     if (snap.empty) return null;
     const d = snap.docs[0];
     return mapper(d.id, d.data());
 };
-const create = ()=>{
+/* =========================
+   Public API
+========================= */ const create = ()=>{
     const getProduct = async ()=>{
         try {
-            const items = await fetchAll("Product", mapProduct);
-            return okResponse(items);
+            return okResponse(await fetchAll("Product", mapProduct));
         } catch (e) {
             return errorResponse(e?.message || "Failed to load products");
         }
     };
     const getProductBySlug = async (slug)=>{
         try {
-            const item = await fetchBySlug("Product", slug, mapProduct);
-            return okResponse(item);
+            return okResponse(await fetchBySlug("Product", slug, mapProduct));
         } catch (e) {
             return errorResponse(e?.message || "Failed to load product detail");
         }
     };
     const getBlog = async ()=>{
         try {
-            const items = await fetchAll("Blog", mapBlog);
-            return okResponse(items);
+            return okResponse(await fetchAll("Blog", mapBlog));
         } catch (e) {
             return errorResponse(e?.message || "Failed to load blogs");
         }
     };
     const getBlogBySlug = async (slug)=>{
         try {
-            const item = await fetchBySlug("Blog", slug, mapBlog);
-            return okResponse(item);
+            return okResponse(await fetchBySlug("Blog", slug, mapBlog));
         } catch (e) {
             return errorResponse(e?.message || "Failed to load blog detail");
         }
@@ -1328,7 +1322,6 @@ const create = ()=>{
     };
 };
 const FirebaseApi = create();
-;
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
@@ -1666,7 +1659,10 @@ _s(ProductCard, "pNygUYfwaxnKJiNvy3f6z3ci1QE=", false, function() {
     ];
 });
 _c1 = ProductCard;
-function CollectionPage() {
+// ================================================================
+// MAIN PAGE COMPONENT
+// ================================================================
+function CollectionPageContent() {
     _s1();
     const ref = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const isInView = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$framer$2d$motion$40$12$2e$23$2e$26_reac_af3f220a974878ee62300544df5db6e6$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$utils$2f$use$2d$in$2d$view$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useInView"])(ref, {
@@ -1690,7 +1686,7 @@ function CollectionPage() {
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(true);
     // Get initial filters from URL params
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "CollectionPage.useEffect": ()=>{
+        "CollectionPageContent.useEffect": ()=>{
             const scenario = searchParams.get('scenario');
             const category = searchParams.get('category');
             const giftGuide = searchParams.get('giftGuide');
@@ -1704,21 +1700,21 @@ function CollectionPage() {
                 setSelectedGiftGuide(__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$product$2d$filters$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["giftGuideToIdMap"][giftGuide]);
             }
         }
-    }["CollectionPage.useEffect"], [
+    }["CollectionPageContent.useEffect"], [
         searchParams
     ]);
     // Fetch products from API
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "CollectionPage.useEffect": ()=>{
+        "CollectionPageContent.useEffect": ()=>{
             const fetchProducts = {
-                "CollectionPage.useEffect.fetchProducts": async ()=>{
+                "CollectionPageContent.useEffect.fetchProducts": async ()=>{
                     try {
                         const res = await __TURBOPACK__imported__module__$5b$project$5d2f$api$2f$firebase$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FirebaseApi"].getProduct();
                         if (res.ok && Array.isArray(res.data)) {
                             // Filter only active products
                             const activeProducts = res.data.filter({
-                                "CollectionPage.useEffect.fetchProducts.activeProducts": (product)=>product.isActive
-                            }["CollectionPage.useEffect.fetchProducts.activeProducts"]);
+                                "CollectionPageContent.useEffect.fetchProducts.activeProducts": (product)=>product.isActive
+                            }["CollectionPageContent.useEffect.fetchProducts.activeProducts"]);
                             setProducts(activeProducts);
                         } else {
                             console.error("API error:", res);
@@ -1729,10 +1725,10 @@ function CollectionPage() {
                         setLoading(false);
                     }
                 }
-            }["CollectionPage.useEffect.fetchProducts"];
+            }["CollectionPageContent.useEffect.fetchProducts"];
             fetchProducts();
         }
-    }["CollectionPage.useEffect"], []);
+    }["CollectionPageContent.useEffect"], []);
     const handleConfetti = (e)=>{
         const rect = e.target.getBoundingClientRect();
         setConfettiState({
@@ -2444,17 +2440,77 @@ function CollectionPage() {
         columnNumber: 5
     }, this);
 }
-_s1(CollectionPage, "bT8oxS1cAyJSsEats1b/YA/KNSg=", false, function() {
+_s1(CollectionPageContent, "bT8oxS1cAyJSsEats1b/YA/KNSg=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$framer$2d$motion$40$12$2e$23$2e$26_reac_af3f220a974878ee62300544df5db6e6$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$utils$2f$use$2d$in$2d$view$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useInView"],
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useSearchParams"]
     ];
 });
-_c2 = CollectionPage;
-var _c, _c1, _c2;
+_c2 = CollectionPageContent;
+function CollectionPage() {
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Suspense"], {
+        fallback: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
+            className: "min-h-screen bg-white",
+            children: [
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$header$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HeaderSection"], {}, void 0, false, {
+                    fileName: "[project]/app/collection/page.tsx",
+                    lineNumber: 539,
+                    columnNumber: 9
+                }, void 0),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "flex items-center justify-center min-h-screen",
+                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "text-center",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "w-16 h-16 border-4 border-[var(--primary)] border-t-transparent rounded-full animate-spin mx-auto mb-4"
+                            }, void 0, false, {
+                                fileName: "[project]/app/collection/page.tsx",
+                                lineNumber: 542,
+                                columnNumber: 13
+                            }, void 0),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                className: "text-[var(--text-secondary)]",
+                                children: "Đang tải..."
+                            }, void 0, false, {
+                                fileName: "[project]/app/collection/page.tsx",
+                                lineNumber: 543,
+                                columnNumber: 13
+                            }, void 0)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/app/collection/page.tsx",
+                        lineNumber: 541,
+                        columnNumber: 11
+                    }, void 0)
+                }, void 0, false, {
+                    fileName: "[project]/app/collection/page.tsx",
+                    lineNumber: 540,
+                    columnNumber: 9
+                }, void 0)
+            ]
+        }, void 0, true, {
+            fileName: "[project]/app/collection/page.tsx",
+            lineNumber: 538,
+            columnNumber: 7
+        }, void 0),
+        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(CollectionPageContent, {}, void 0, false, {
+            fileName: "[project]/app/collection/page.tsx",
+            lineNumber: 548,
+            columnNumber: 7
+        }, this)
+    }, void 0, false, {
+        fileName: "[project]/app/collection/page.tsx",
+        lineNumber: 537,
+        columnNumber: 5
+    }, this);
+}
+_c3 = CollectionPage;
+var _c, _c1, _c2, _c3;
 __turbopack_context__.k.register(_c, "Confetti");
 __turbopack_context__.k.register(_c1, "ProductCard");
-__turbopack_context__.k.register(_c2, "CollectionPage");
+__turbopack_context__.k.register(_c2, "CollectionPageContent");
+__turbopack_context__.k.register(_c3, "CollectionPage");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }

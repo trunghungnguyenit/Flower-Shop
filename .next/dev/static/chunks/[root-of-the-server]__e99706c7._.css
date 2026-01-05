@@ -484,7 +484,6 @@
     --color-red-50: #fef2f2;
     --color-red-100: #ffe2e2;
     --color-red-200: #ffcaca;
-    --color-red-300: #ffa3a3;
     --color-red-500: #fb2c36;
     --color-red-600: #e40014;
     --color-red-700: #bf000f;
@@ -494,16 +493,11 @@
     --color-orange-700: #c53c00;
     --color-amber-100: #fef3c6;
     --color-amber-600: #dd7400;
-    --color-yellow-50: #fefce8;
     --color-yellow-100: #fef9c2;
-    --color-yellow-200: #fff085;
     --color-yellow-400: #fac800;
     --color-yellow-500: #edb200;
     --color-yellow-600: #cd8900;
-    --color-yellow-700: #a36100;
-    --color-yellow-800: #874b00;
     --color-green-100: #dcfce7;
-    --color-green-300: #7bf1a8;
     --color-green-500: #00c758;
     --color-green-600: #00a544;
     --color-green-700: #008138;
@@ -635,7 +629,6 @@
       --color-red-50: lab(96.5005% 4.18511 1.52329);
       --color-red-100: lab(92.243% 10.2865 3.83865);
       --color-red-200: lab(86.017% 19.8815 7.75869);
-      --color-red-300: lab(76.5514% 36.4219 15.5335);
       --color-red-500: lab(55.4814% 75.0732 48.8528);
       --color-red-600: lab(48.4493% 77.4328 61.5452);
       --color-red-700: lab(40.4273% 67.2623 53.7441);
@@ -645,16 +638,11 @@
       --color-orange-700: lab(46.4615% 57.7275 70.8507);
       --color-amber-100: lab(95.916% -1.2165 23.111);
       --color-amber-600: lab(60.3514% 40.5624 87.1228);
-      --color-yellow-50: lab(98.6846% -1.79058 9.77662);
       --color-yellow-100: lab(97.3564% -4.51407 27.344);
-      --color-yellow-200: lab(94.3433% -5.00426 52.9663);
       --color-yellow-400: lab(83.2664% 8.65132 106.895);
       --color-yellow-500: lab(76.3898% 14.5258 98.4589);
       --color-yellow-600: lab(62.7799% 22.4198 86.1544);
-      --color-yellow-700: lab(47.8202% 25.2426 66.5015);
-      --color-yellow-800: lab(38.7484% 23.5833 51.4916);
       --color-green-100: lab(96.186% -13.8464 6.52362);
-      --color-green-300: lab(86.9953% -47.2691 25.0054);
       --color-green-500: lab(70.5521% -66.5147 45.8072);
       --color-green-600: lab(59.0978% -58.6621 41.2579);
       --color-green-700: lab(47.0329% -47.0239 31.4788);
@@ -2340,18 +2328,6 @@
     scroll-margin-block: calc(var(--spacing) * 1);
   }
 
-  .list-inside {
-    list-style-position: inside;
-  }
-
-  .list-decimal {
-    list-style-type: decimal;
-  }
-
-  .list-disc {
-    list-style-type: disc;
-  }
-
   .appearance-none {
     appearance: none;
   }
@@ -2709,6 +2685,11 @@
     border-width: 2px;
   }
 
+  .border-4 {
+    border-style: var(--tw-border-style);
+    border-width: 4px;
+  }
+
   .border-\[1\.5px\] {
     border-style: var(--tw-border-style);
     border-width: 1.5px;
@@ -2815,10 +2796,6 @@
     border-color: var(--color-gray-700);
   }
 
-  .border-green-300 {
-    border-color: var(--color-green-300);
-  }
-
   .border-input {
     border-color: var(--input);
   }
@@ -2845,10 +2822,6 @@
 
   .border-red-200 {
     border-color: var(--color-red-200);
-  }
-
-  .border-red-300 {
-    border-color: var(--color-red-300);
   }
 
   .border-red-600 {
@@ -2907,12 +2880,12 @@
     }
   }
 
-  .border-yellow-200 {
-    border-color: var(--color-yellow-200);
-  }
-
   .border-t-\[var\(--primary\)\] {
     border-top-color: var(--primary);
+  }
+
+  .border-t-transparent {
+    border-top-color: #0000;
   }
 
   .border-t-white {
@@ -3413,10 +3386,6 @@
     .bg-white\/98 {
       background-color: color-mix(in oklab, var(--color-white) 98%, transparent);
     }
-  }
-
-  .bg-yellow-50 {
-    background-color: var(--color-yellow-50);
   }
 
   .bg-yellow-100 {
@@ -4526,14 +4495,6 @@
 
   .text-yellow-600 {
     color: var(--color-yellow-600);
-  }
-
-  .text-yellow-700 {
-    color: var(--color-yellow-700);
-  }
-
-  .text-yellow-800 {
-    color: var(--color-yellow-800);
   }
 
   .text-zinc-600 {

@@ -2399,7 +2399,7 @@ function ProductOrderForm({ product, onClose }) {
         columnNumber: 5
     }, this);
 }
-_s(ProductOrderForm, "onSm+q+xsf2NR1rxAtiD7vkhQ14=");
+_s(ProductOrderForm, "kqlQjFjVR2bu+dl5vdwwbGXiclQ=");
 _c = ProductOrderForm;
 var _c;
 __turbopack_context__.k.register(_c, "ProductOrderForm");
@@ -2410,6 +2410,7 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 "[project]/api/firebase.ts [app-client] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
+// api/firebase.ts
 __turbopack_context__.s([
     "FirebaseApi",
     ()=>FirebaseApi,
@@ -2425,45 +2426,38 @@ __turbopack_context__.s([
     ()=>mapProduct
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = /*#__PURE__*/ __turbopack_context__.i("[project]/node_modules/.pnpm/next@16.0.7_@opentelemetry+_ab12fbf9041281d71cca4574e50b85ac/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$firebase$40$12$2e$6$2e$0$2f$node_modules$2f$firebase$2f$app$2f$dist$2f$esm$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/firebase@12.6.0/node_modules/firebase/app/dist/esm/index.esm.js [app-client] (ecmascript) <locals>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$app$40$0$2e$14$2e$6$2f$node_modules$2f40$firebase$2f$app$2f$dist$2f$esm$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/@firebase+app@0.14.6/node_modules/@firebase/app/dist/esm/index.esm.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$firebase$40$12$2e$6$2e$0$2f$node_modules$2f$firebase$2f$firestore$2f$dist$2f$esm$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/firebase@12.6.0/node_modules/firebase/firestore/dist/esm/index.esm.js [app-client] (ecmascript) <locals>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$4$2e$9$2e$2_$40$firebase$2b$app$40$0$2e$14$2e$6$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/@firebase+firestore@4.9.2_@firebase+app@0.14.6/node_modules/@firebase/firestore/dist/index.esm.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$firebase$40$9$2e$23$2e$0$2f$node_modules$2f$firebase$2f$app$2f$dist$2f$esm$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/firebase@9.23.0/node_modules/firebase/app/dist/esm/index.esm.js [app-client] (ecmascript) <locals>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$app$40$0$2e$9$2e$13$2f$node_modules$2f40$firebase$2f$app$2f$dist$2f$esm$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/@firebase+app@0.9.13/node_modules/@firebase/app/dist/esm/index.esm2017.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$firebase$40$9$2e$23$2e$0$2f$node_modules$2f$firebase$2f$firestore$2f$dist$2f$esm$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/firebase@9.23.0/node_modules/firebase/firestore/dist/esm/index.esm.js [app-client] (ecmascript) <locals>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$3$2e$13$2e$0_$40$firebase$2b$app$40$0$2e$9$2e$13$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/@firebase+firestore@3.13.0_@firebase+app@0.9.13/node_modules/@firebase/firestore/dist/index.esm2017.js [app-client] (ecmascript)");
 ;
 ;
 const getFirstImage = (image)=>{
     if (!image || !Array.isArray(image) || image.length === 0) return null;
     const firstItem = image[0];
-    if (typeof firstItem === 'string') return firstItem;
-    if (typeof firstItem === 'object' && firstItem.url) return firstItem.url;
+    if (typeof firstItem === "string") return firstItem;
+    if (typeof firstItem === "object" && firstItem?.url) return firstItem.url;
     return null;
 };
 const formatImageUrl = (imageName)=>{
-    if (!imageName) return '/placeholder.svg?height=400&width=400';
-    // Nếu đã là URL đầy đủ (có http/https), return as is
-    if (imageName.startsWith('http://') || imageName.startsWith('https://')) {
-        return imageName;
-    }
-    // Nếu đã có slash đầu, return as is
-    if (imageName.startsWith('/')) {
-        return imageName;
-    }
-    // Thêm slash đầu cho relative path
+    if (!imageName) return "/placeholder.svg?height=400&width=400";
+    if (imageName.startsWith("http://") || imageName.startsWith("https://")) return imageName;
+    if (imageName.startsWith("/")) return imageName;
     return `/${imageName}`;
 };
 const formatPrice = (gia)=>{
-    if (typeof gia === 'number' && gia > 0) {
-        return `${gia.toLocaleString('vi-VN')}đ`;
-    }
-    if (typeof gia === 'string') {
-        const numPrice = Number(gia.replace(/[^\d.-]/g, ''));
+    if (typeof gia === "number" && gia > 0) return `${gia.toLocaleString("vi-VN")}đ`;
+    if (typeof gia === "string") {
+        const numPrice = Number(gia.replace(/[^\d.-]/g, ""));
         if (!isNaN(numPrice) && numPrice > 0) {
-            return `${numPrice.toLocaleString('vi-VN')}đ`;
+            return `${numPrice.toLocaleString("vi-VN")}đ`;
         }
     }
-    return 'Liên hệ báo giá';
+    return "Liên hệ báo giá";
 };
-const firebaseConfig = {
+/* =========================
+   Firebase init
+========================= */ const firebaseConfig = {
     apiKey: ("TURBOPACK compile-time value", "AIzaSyBNRF447uclLSkHIEUd_flzwqEaMBDOv3E"),
     authDomain: ("TURBOPACK compile-time value", "flower-shop-b33ff.firebaseapp.com"),
     projectId: ("TURBOPACK compile-time value", "flower-shop-b33ff"),
@@ -2472,13 +2466,15 @@ const firebaseConfig = {
     appId: ("TURBOPACK compile-time value", "1:286808347868:web:df6df7f4ebd78f88451019")
 };
 const ensureFirebase = ()=>{
-    if (!(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$app$40$0$2e$14$2e$6$2f$node_modules$2f40$firebase$2f$app$2f$dist$2f$esm$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getApps"])().length) (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$app$40$0$2e$14$2e$6$2f$node_modules$2f40$firebase$2f$app$2f$dist$2f$esm$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["initializeApp"])(firebaseConfig);
-    const db = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$4$2e$9$2e$2_$40$firebase$2b$app$40$0$2e$14$2e$6$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getFirestore"])();
+    const app = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$app$40$0$2e$9$2e$13$2f$node_modules$2f40$firebase$2f$app$2f$dist$2f$esm$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getApps"])().length ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$app$40$0$2e$9$2e$13$2f$node_modules$2f40$firebase$2f$app$2f$dist$2f$esm$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getApp"])() : (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$app$40$0$2e$9$2e$13$2f$node_modules$2f40$firebase$2f$app$2f$dist$2f$esm$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["initializeApp"])(firebaseConfig);
+    const db = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$3$2e$13$2e$0_$40$firebase$2b$app$40$0$2e$9$2e$13$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getFirestore"])(app);
     return {
         db
     };
 };
-const okResponse = (data, status = 200)=>({
+/* =========================
+   Response helpers
+========================= */ const okResponse = (data, status = 200)=>({
         ok: true,
         status,
         data
@@ -2492,7 +2488,9 @@ const errorResponse = (message, status = 500)=>({
             }
         }
     });
-const normalizeStringArray = (v)=>{
+/* =========================
+   Normalizers
+========================= */ const normalizeStringArray = (v)=>{
     if (!v) return [];
     if (Array.isArray(v)) return v.filter((i)=>typeof i === "string");
     if (typeof v === "string") return [
@@ -2508,8 +2506,7 @@ const normalizeNumber = (v)=>{
     }
     return undefined;
 };
-const mapProduct = (docId, p)=>{
-    return {
+const mapProduct = (docId, p)=>({
         id: docId,
         name: String(p.name ?? ""),
         slug: String(p.slug ?? ""),
@@ -2523,10 +2520,8 @@ const mapProduct = (docId, p)=>{
         sold: normalizeNumber(p.sold),
         badge: p.badge ?? undefined,
         isActive: p.isActive ?? true
-    };
-};
-const mapBlog = (docId, b)=>{
-    return {
+    });
+const mapBlog = (docId, b)=>({
         id: docId,
         slug: String(b.slug ?? ""),
         title: String(b.title ?? ""),
@@ -2537,50 +2532,49 @@ const mapBlog = (docId, b)=>{
         content: String(b.content ?? ""),
         publishedAt: b.publishedAt ?? null,
         isActive: b.isActive ?? true
-    };
-};
-const fetchAll = async (colName, mapper)=>{
+    });
+/* =========================
+   Firestore fetchers
+========================= */ const fetchAll = async (colName, mapper)=>{
     const { db } = ensureFirebase();
-    const snap = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$4$2e$9$2e$2_$40$firebase$2b$app$40$0$2e$14$2e$6$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getDocs"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$4$2e$9$2e$2_$40$firebase$2b$app$40$0$2e$14$2e$6$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["collection"])(db, colName));
+    const snap = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$3$2e$13$2e$0_$40$firebase$2b$app$40$0$2e$9$2e$13$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getDocs"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$3$2e$13$2e$0_$40$firebase$2b$app$40$0$2e$9$2e$13$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["collection"])(db, colName));
     return snap.docs.map((d)=>mapper(d.id, d.data()));
 };
 const fetchBySlug = async (colName, slug, mapper)=>{
     const { db } = ensureFirebase();
-    const q = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$4$2e$9$2e$2_$40$firebase$2b$app$40$0$2e$14$2e$6$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["query"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$4$2e$9$2e$2_$40$firebase$2b$app$40$0$2e$14$2e$6$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["collection"])(db, colName), (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$4$2e$9$2e$2_$40$firebase$2b$app$40$0$2e$14$2e$6$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["where"])("slug", "==", slug), (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$4$2e$9$2e$2_$40$firebase$2b$app$40$0$2e$14$2e$6$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["limit"])(1));
-    const snap = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$4$2e$9$2e$2_$40$firebase$2b$app$40$0$2e$14$2e$6$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getDocs"])(q);
+    const q = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$3$2e$13$2e$0_$40$firebase$2b$app$40$0$2e$9$2e$13$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["query"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$3$2e$13$2e$0_$40$firebase$2b$app$40$0$2e$9$2e$13$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["collection"])(db, colName), (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$3$2e$13$2e$0_$40$firebase$2b$app$40$0$2e$9$2e$13$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["where"])("slug", "==", slug), (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$3$2e$13$2e$0_$40$firebase$2b$app$40$0$2e$9$2e$13$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["limit"])(1));
+    const snap = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f40$firebase$2b$firestore$40$3$2e$13$2e$0_$40$firebase$2b$app$40$0$2e$9$2e$13$2f$node_modules$2f40$firebase$2f$firestore$2f$dist$2f$index$2e$esm2017$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getDocs"])(q);
     if (snap.empty) return null;
     const d = snap.docs[0];
     return mapper(d.id, d.data());
 };
-const create = ()=>{
+/* =========================
+   Public API
+========================= */ const create = ()=>{
     const getProduct = async ()=>{
         try {
-            const items = await fetchAll("Product", mapProduct);
-            return okResponse(items);
+            return okResponse(await fetchAll("Product", mapProduct));
         } catch (e) {
             return errorResponse(e?.message || "Failed to load products");
         }
     };
     const getProductBySlug = async (slug)=>{
         try {
-            const item = await fetchBySlug("Product", slug, mapProduct);
-            return okResponse(item);
+            return okResponse(await fetchBySlug("Product", slug, mapProduct));
         } catch (e) {
             return errorResponse(e?.message || "Failed to load product detail");
         }
     };
     const getBlog = async ()=>{
         try {
-            const items = await fetchAll("Blog", mapBlog);
-            return okResponse(items);
+            return okResponse(await fetchAll("Blog", mapBlog));
         } catch (e) {
             return errorResponse(e?.message || "Failed to load blogs");
         }
     };
     const getBlogBySlug = async (slug)=>{
         try {
-            const item = await fetchBySlug("Blog", slug, mapBlog);
-            return okResponse(item);
+            return okResponse(await fetchBySlug("Blog", slug, mapBlog));
         } catch (e) {
             return errorResponse(e?.message || "Failed to load blog detail");
         }
@@ -2593,7 +2587,6 @@ const create = ()=>{
     };
 };
 const FirebaseApi = create();
-;
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
