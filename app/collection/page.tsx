@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState, useEffect } from "react"
+import { useRef, useState, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
@@ -202,7 +202,7 @@ function ProductCard({
 // MAIN PAGE COMPONENT
 // ================================================================
 
-export default function CollectionPage() {
+function CollectionPageContent() {
   const ref = useRef<HTMLElement>(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
   const searchParams = useSearchParams()
@@ -529,5 +529,23 @@ export default function CollectionPage() {
     {/* Footer */}
           <FooterSection />
     </main>
+  )
+}
+
+export default function CollectionPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-white">
+        <HeaderSection />
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center">
+            <div className="w-16 h-16 border-4 border-[var(--primary)] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-[var(--text-secondary)]">Đang tải...</p>
+          </div>
+        </div>
+      </main>
+    }>
+      <CollectionPageContent />
+    </Suspense>
   )
 }
