@@ -151,8 +151,8 @@ function Breadcrumb({ slug, title }: { slug: string; title: string }) {
             textDecoration: "none",
             transition: `color ${animation.duration.fast}`,
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = colors.primary)}
-          onMouseLeave={(e) => (e.currentTarget.style.color = colors.textSecondary)}
+          onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = colors.primary)}
+          onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = colors.textSecondary)}
         >
           Trang chủ
         </Link>
@@ -164,8 +164,8 @@ function Breadcrumb({ slug, title }: { slug: string; title: string }) {
             textDecoration: "none",
             transition: `color ${animation.duration.fast}`,
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = colors.primary)}
-          onMouseLeave={(e) => (e.currentTarget.style.color = colors.textSecondary)}
+          onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = colors.primary)}
+          onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = colors.textSecondary)}
         >
           Gợi ý quà
         </Link>
@@ -791,12 +791,12 @@ function ComboCard({
               transition: `all ${animation.duration.normal} ${animation.ease.smooth}`,
               boxShadow: shadows.md,
             }}
-            onMouseEnter={(e) => {
+            onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => {
               e.currentTarget.style.background = colors.primaryDark;
               e.currentTarget.style.transform = "scale(1.03)";
               e.currentTarget.style.boxShadow = shadows.glowPrimary;
             }}
-            onMouseLeave={(e) => {
+            onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => {
               e.currentTarget.style.background = colors.primary;
               e.currentTarget.style.transform = "scale(1)";
               e.currentTarget.style.boxShadow = shadows.md;
@@ -822,12 +822,12 @@ function ComboCard({
               display: "inline-block",
               transition: `all ${animation.duration.normal} ${animation.ease.smooth}`,
             }}
-            onMouseEnter={(e) => {
+            onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
               e.currentTarget.style.background = colors.primaryLight;
               e.currentTarget.style.borderColor = colors.primaryDark;
               e.currentTarget.style.color = colors.primaryDark;
             }}
-            onMouseLeave={(e) => {
+            onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
               e.currentTarget.style.background = "transparent";
               e.currentTarget.style.borderColor = colors.primary;
               e.currentTarget.style.color = colors.primary;

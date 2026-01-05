@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { motion, useInView } from "framer-motion"
@@ -9,120 +9,27 @@ import {
   Calendar,
   User,
   Clock,
-  Tag,
   ChevronRight,
   Phone,
   MessageCircle,
-  Menu,
-  X,
   Share2,
   ArrowRight,
   BookOpen,
-  Heart,
-  MapPin,
-  Mail,
-  Facebook,
-  Instagram,
-  Twitter,
   Copy,
+  Facebook,
+  Twitter,
 } from "lucide-react"
-import { cn } from "@/lib/utils"
 import { CONTACT } from "@/lib/constants"
 import { HeaderSection } from "@/components/header"
 import { FooterSection } from "@/components/footer"
+import { FirebaseApi } from "@/api/firebase"
+import { Blog } from "@/api/api.type"
 
 // ================================================================
 // ANIMATION VARIANTS
 // ================================================================
 
 const premiumEase = [0.25, 0.1, 0.25, 1] as const
-
-const fadeInUp = {
-  initial: { opacity: 0, y: 30 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.7, ease: premiumEase } },
-}
-
-// ================================================================
-// BLOG POST DATA
-// ================================================================
-
-function getBlogPostBySlug(slug: string) {
-  const blogPosts = {
-    "cach-cham-soc-hoa-tuoi": {
-      id: 1,
-      title: "Cách Chăm Sóc Hoa Tươi Để Giữ Được Lâu Nhất",
-      excerpt: "Những bí quyết đơn giản giúp hoa tươi của bạn tươi đẹp và bền lâu hơn, tiết kiệm chi phí và mang lại niềm vui lâu dài.",
-      image: "/blog/flower-care-tips.jpg",
-      category: "Chăm sóc hoa",
-      author: "Hoa Tươi Đà Nẵng",
-      date: "15/12/2024",
-      readTime: "5 phút đọc",
-      slug: "cach-cham-soc-hoa-tuoi",
-      content: `
-        <p>Hoa tươi là món quà tuyệt vời của thiên nhiên, mang lại vẻ đẹp và hương thơm cho không gian sống. Tuy nhiên, để giữ hoa tươi lâu và đẹp nhất, bạn cần biết cách chăm sóc đúng cách.</p>
-
-        <h2>1. Chuẩn Bị Bình Hoa Sạch Sẽ</h2>
-        <p>Trước khi cắm hoa, hãy đảm bảo bình hoa được rửa sạch bằng nước ấm và xà phòng. Điều này giúp loại bỏ vi khuẩn có thể làm hỏng hoa.</p>
-
-        <h2>2. Cắt Gốc Hoa Đúng Cách</h2>
-        <p>Cắt gốc hoa xiên góc 45 độ dưới vòi nước chảy. Điều này giúp tăng diện tích hấp thụ nước và ngăn không khí vào thân hoa.</p>
-
-        <h2>3. Sử dụng Nước Sạch và Thay Đổi Thường Xuyên</h2>
-        <p>Sử dụng nước sạch, tốt nhất là nước đã được lọc. Thay nước mỗi 2-3 ngày và rửa sạch bình hoa mỗi lần thay.</p>
-
-        <h2>4. Loại Bỏ Lá Dưới Mực Nước</h2>
-        <p>Tất cả lá nằm dưới mực nước cần được loại bỏ để tránh thối rữa và nhiễm khuẩn.</p>
-
-        <h2>5. Đặt Hoa Ở Vị Trí Phù Hợp</h2>
-        <p>Tránh đặt hoa dưới ánh nắng trực tiếp, gần nguồn nhiệt hoặc trong gió lùa. Chọn nơi thoáng mát, có ánh sáng gián tiếp.</p>
-
-        <h2>6. Sử dụng Chất Bảo Quản Hoa</h2>
-        <p>Có thể thêm một ít đường, giấm hoặc thuốc bảo quản hoa chuyên dụng vào nước để kéo dài tuổi thọ của hoa.</p>
-
-        <p><strong>Kết luận:</strong> Với những mẹo đơn giản này, bạn có thể giữ hoa tươi đẹp từ 7-14 ngày, thậm chí lâu hơn tùy loại hoa. Hãy áp dụng ngay để tận hưởng vẻ đẹp của hoa tươi lâu nhất có thể!</p>
-      `
-    },
-    "y-nghia-cac-loai-hoa": {
-      id: 2,
-      title: "Ý Nghĩa Của Các Loại Hoa Trong Văn Hóa Việt Nam",
-      excerpt: "Tìm hiểu về ý nghĩa sâu sắc của từng loại hoa trong văn hóa truyền thống Việt Nam và cách chọn hoa phù hợp cho từng dịp.",
-      image: "/blog/flower-meanings.jpg",
-      category: "Văn hóa",
-      author: "Hoa Tươi Đà Nẵng",
-      date: "12/12/2024",
-      readTime: "7 phút đọc",
-      slug: "y-nghia-cac-loai-hoa",
-      content: `
-        <p>Trong văn hóa Việt Nam, mỗi loài hoa đều mang một ý nghĩa riêng biệt, thể hiện tình cảm và lời chúc của người tặng. Hãy cùng tìm hiểu ý nghĩa của các loại hoa phổ biến.</p>
-
-        <h2>1. Hoa Hồng - Biểu Tượng Tình Yêu</h2>
-        <p><strong>Hoa hồng đỏ:</strong> Tình yêu nồng cháy, đam mê</p>
-        <p><strong>Hoa hồng hồng:</strong> Tình yêu ngọt ngào, lãng mạn</p>
-        <p><strong>Hoa hồng trắng:</strong> Tình yêu thuần khiết, tôn kính</p>
-        <p><strong>Hoa hồng vàng:</strong> Tình bạn, sự quan tâm</p>
-
-        <h2>2. Hoa Sen - Biểu Tượng Thanh Cao</h2>
-        <p>Hoa sen tượng trưng cho sự thanh cao, thuần khiết và vượt lên khỏi bùn nhơ. Trong Phật giáo, sen là biểu tượng của sự giác ngộ.</p>
-
-        <h2>3. Hoa Cúc - Trường Thọ và May Mắn</h2>
-        <p>Hoa cúc vàng mang ý nghĩa trường thọ, thịnh vượng. Hoa cúc trắng thường dùng trong tang lễ, thể hiện lòng thương tiếc.</p>
-
-        <h2>4. Hoa Đào - Đón Xuân và May Mắn</h2>
-        <p>Hoa đào là biểu tượng của mùa xuân, sự khởi đầu mới và may mắn. Không thể thiếu trong dịp Tết Nguyên Đán.</p>
-
-        <h2>5. Hoa Mai - Kiên Cường và Hy Vọng</h2>
-        <p>Hoa mai vàng tượng trưng cho sự kiên cường, bền bỉ và hy vọng. Cũng là hoa không thể thiếu trong dịp Tết.</p>
-
-        <h2>6. Hoa Ly - Thuần Khiết và Cao Quý</h2>
-        <p>Hoa ly trắng biểu tượng của sự thuần khiết, cao quý. Thường được sử dụng trong các dịp trang trọng.</p>
-
-        <p><strong>Lời khuyên:</strong> Khi chọn hoa tặng, hãy chú ý đến ý nghĩa của từng loại hoa để thể hiện đúng tình cảm và lời chúc của mình.</p>
-      `
-    }
-  }
-
-  return blogPosts[slug as keyof typeof blogPosts] || null
-}
 
 // ================================================================
 // MAIN PAGE COMPONENT
@@ -132,10 +39,79 @@ export default function BlogPostPage() {
   const params = useParams()
   const slug = params.slug as string
   const [shareMenuOpen, setShareMenuOpen] = useState(false)
+  const [blog, setBlog] = useState<Blog | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [notFound, setNotFound] = useState(false)
 
-  const post = getBlogPostBySlug(slug)
+  // Fetch blog by slug from Firebase
+  useEffect(() => {
+    const fetchBlog = async () => {
+      try {
+        const res = await FirebaseApi.getBlogBySlug(slug)
+        if (res.ok && res.data) {
+          setBlog(res.data)
+        } else {
+          setNotFound(true)
+        }
+      } catch (error) {
+        console.error("Error fetching blog:", error)
+        setNotFound(true)
+      } finally {
+        setLoading(false)
+      }
+    }
 
-  if (!post) {
+    if (slug) {
+      fetchBlog()
+    }
+  }, [slug])
+
+  // Format date helper
+  const formatDate = (publishedAt: any) => {
+    if (!publishedAt) return "Chưa có ngày"
+    
+    try {
+      // Handle Firebase Timestamp
+      if (publishedAt.toDate) {
+        return publishedAt.toDate().toLocaleDateString('vi-VN')
+      }
+      // Handle regular Date
+      if (publishedAt instanceof Date) {
+        return publishedAt.toLocaleDateString('vi-VN')
+      }
+      // Handle string
+      return new Date(publishedAt).toLocaleDateString('vi-VN')
+    } catch (error) {
+      return "Chưa có ngày"
+    }
+  }
+
+  // Loading state
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-white">
+        <HeaderSection />
+        <div className="pt-24 pb-16 lg:pb-24">
+          <div className="mx-auto max-w-[800px] px-4 lg:px-8">
+            <div className="animate-pulse">
+              <div className="h-4 bg-gray-200 rounded w-1/3 mb-8" />
+              <div className="h-8 bg-gray-200 rounded w-3/4 mb-4" />
+              <div className="h-4 bg-gray-200 rounded w-1/2 mb-8" />
+              <div className="aspect-[16/9] bg-gray-200 rounded-2xl mb-12" />
+              <div className="space-y-4">
+                <div className="h-4 bg-gray-200 rounded" />
+                <div className="h-4 bg-gray-200 rounded w-5/6" />
+                <div className="h-4 bg-gray-200 rounded w-4/5" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    )
+  }
+
+  // Not found state
+  if (notFound || !blog) {
     return (
       <main className="min-h-screen bg-white">
         <HeaderSection />
@@ -162,7 +138,7 @@ export default function BlogPostPage() {
 
   const handleShare = (platform: string) => {
     const url = window.location.href
-    const title = post.title
+    const title = blog?.title || "Blog Hoa Tươi"
 
     switch (platform) {
       case 'facebook':
@@ -197,7 +173,7 @@ export default function BlogPostPage() {
               Blog
             </Link>
             <ChevronRight className="w-4 h-4 text-[var(--text-muted)]" />
-            <span className="text-[var(--text-primary)] font-medium line-clamp-1">{post.title}</span>
+            <span className="text-[var(--text-primary)] font-medium line-clamp-1">{blog.title}</span>
           </nav>
 
           {/* Article Header */}
@@ -208,30 +184,28 @@ export default function BlogPostPage() {
             transition={{ duration: 0.7, ease: premiumEase }}
           >
             {/* Category */}
-            <div className="mb-4">
-              <span className="px-3 py-1 bg-[var(--primary)] text-white text-sm font-body font-medium rounded-full">
-                {post.category}
-              </span>
-            </div>
+            {blog.category && (
+              <div className="mb-4">
+                <span className="px-3 py-1 bg-[var(--primary)] text-white text-sm font-body font-medium rounded-full">
+                  {blog.category}
+                </span>
+              </div>
+            )}
 
             {/* Title */}
             <h1 className="font-display text-[var(--text-primary)] mb-6" style={{ fontSize: "clamp(28px, 4vw, 40px)", fontWeight: 600, lineHeight: 1.3 }}>
-              {post.title}
+              {blog.title}
             </h1>
 
             {/* Meta */}
             <div className="flex flex-wrap items-center gap-6 text-sm text-[var(--text-muted)] mb-6">
               <div className="flex items-center gap-2">
                 <User className="w-4 h-4" />
-                <span>{post.author}</span>
+                <span>{blog.author || "Hoa Tươi Đà Nẵng"}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
-                <span>{post.date}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4" />
-                <span>{post.readTime}</span>
+                <span>{formatDate(blog.publishedAt)}</span>
               </div>
             </div>
 
@@ -284,8 +258,8 @@ export default function BlogPostPage() {
             transition={{ duration: 0.7, delay: 0.2, ease: premiumEase }}
           >
             <Image
-              src={post.image}
-              alt={post.title}
+              src={blog.image || '/placeholder.svg?height=400&width=800'}
+              alt={blog.title}
               fill
               className="object-cover"
               priority
@@ -303,8 +277,15 @@ export default function BlogPostPage() {
               lineHeight: 1.8,
               color: "var(--text-primary)"
             }}
-            dangerouslySetInnerHTML={{ __html: post.content }}
-          />
+          >
+            {blog.content ? (
+              <div dangerouslySetInnerHTML={{ __html: blog.content }} />
+            ) : (
+              <div>
+                <p>{blog.excerpt || "Nội dung bài viết đang được cập nhật..."}</p>
+              </div>
+            )}
+          </motion.div>
 
           {/* Article Footer */}
           <motion.footer

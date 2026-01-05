@@ -23,7 +23,7 @@ export const navigation = [
   { name: "Dịch vụ", href: "/occasions" },
   { name: "Bộ sưu tập", href: "/collection" },
   { name: "Blog", href: "/blog" },
-  { name: "Liên hệ", href: "#lien-he" },
+  { name: "Liên hệ", href: "/#lien-he" },
 ]
 
 export const heroSlides = [
@@ -137,13 +137,14 @@ export const scenarios: {
   tagline: string
   href: string
   count: number
+  occasionId: string  // Thêm field này để mapping
 }[] = [
-  { icon: HeartHandshake, title: "Tặng người yêu", tagline: "Nói những điều khó nói bằng sắc hoa lãng mạn.", href: "/collection?scenario=tinh-yeu", count: 86 },
-  { icon: Cake, title: "Sinh nhật", tagline: "Gửi lời chúc trọn vẹn và đầy bất ngờ.", href: "/collection?scenario=sinh-nhat", count: 72 },
-  { icon: Flower2, title: "Tặng mẹ", tagline: "Tri ân dịu dàng dành cho người phụ nữ tuyệt vời nhất.", href: "/collection?scenario=tang-me", count: 54 },
-  { icon: Store, title: "Khai trương", tagline: "Tượng trưng cho may mắn và khởi đầu thuận lợi.", href: "/collection?scenario=khai-truong", count: 48 },
-  { icon: Gem, title: "Cưới hỏi", tagline: "Thanh lịch – trang trọng – hoàn hảo cho ngày trọng đại.", href: "/collection?scenario=cuoi", count: 65 },
-  { icon: Home, title: "Trang trí nhà", tagline: "Làm bừng sáng không gian sống mỗi ngày.", href: "/collection?scenario=trang-tri", count: 42 },
+  { icon: HeartHandshake, title: "Tặng người yêu", tagline: "Nói những điều khó nói bằng sắc hoa lãng mạn.", href: "/collection?scenario=tinh-yeu", count: 86, occasionId: "tinh-yeu" },
+  { icon: Cake, title: "Sinh nhật", tagline: "Gửi lời chúc trọn vẹn và đầy bất ngờ.", href: "/collection?scenario=sinh-nhat", count: 72, occasionId: "sinh-nhat" },
+  { icon: Flower2, title: "Tặng mẹ", tagline: "Tri ân dịu dàng dành cho người phụ nữ tuyệt vời nhất.", href: "/collection?scenario=tang-me", count: 54, occasionId: "tang-me" },
+  { icon: Store, title: "Khai trương", tagline: "Tượng trưng cho may mắn và khởi đầu thuận lợi.", href: "/collection?scenario=khai-truong", count: 48, occasionId: "khai-truong" },
+  { icon: Gem, title: "Cưới hỏi", tagline: "Thanh lịch – trang trọng – hoàn hảo cho ngày trọng đại.", href: "/collection?scenario=cuoi", count: 65, occasionId: "cuoi" },
+  { icon: Home, title: "Trang trí nhà", tagline: "Làm bừng sáng không gian sống mỗi ngày.", href: "/collection?scenario=trang-tri", count: 42, occasionId: "trang-tri" },
 ]
 
 export const decorIdeas = [
@@ -178,24 +179,25 @@ export const giftGuides: {
   title: string
   description: string
   href: string
+  giftGuideId: string  // Thêm field này để mapping
 }[] = [
-  { icon: Heart, title: "Cho người yêu", description: "Hoa hồng – hoa lan: đại diện cho tình yêu sâu đậm và chân thành.", href: "#" },
-  { icon: Flower2, title: "Cho mẹ", description: "Hoa ly – cẩm chướng: gửi lời tri ân đến đấng sinh thành.", href: "#" },
-  { icon: Sparkles, title: "Cho bạn thân", description: "Hoa hướng dương – hoa mix: mang đến sự vui tươi và năng lượng tích cực.", href: "#" },
-  { icon: Gift, title: "Cho sếp", description: "Lẵng hoa sang trọng – tinh tế, thể hiện sự trân trọng và chuyên nghiệp.", href: "#" },
-  { icon: Gem, title: "Cho vợ/chồng", description: "Thiết kế cao cấp – giúp giữ trọn ngọn lửa yêu thương.", href: "#" },
+  { icon: Heart, title: "Cho người yêu", description: "Hoa hồng – hoa lan: đại diện cho tình yêu sâu đậm và chân thành.", href: "/collection?giftGuide=nguoi-yeu", giftGuideId: "nguoi-yeu" },
+  { icon: Flower2, title: "Cho mẹ", description: "Hoa ly – cẩm chướng: gửi lời tri ân đến đấng sinh thành.", href: "/collection?giftGuide=me", giftGuideId: "me" },
+  { icon: Sparkles, title: "Cho bạn thân", description: "Hoa hướng dương – hoa mix: mang đến sự vui tươi và năng lượng tích cực.", href: "/collection?giftGuide=ban-than", giftGuideId: "ban-than" },
+  { icon: Gift, title: "Cho sếp", description: "Lẵng hoa sang trọng – tinh tế, thể hiện sự trân trọng và chuyên nghiệp.", href: "/collection?giftGuide=sep", giftGuideId: "sep" },
+  { icon: Gem, title: "Cho vợ/chồng", description: "Thiết kế cao cấp – giúp giữ trọn ngọn lửa yêu thương.", href: "/collection?giftGuide=vo-chong", giftGuideId: "vo-chong" },
 ]
 
 export const categories = [
-  { name: "Sinh nhật", image: "/birthday-flower-bouquet-celebration.jpg", href: "/collection?category=sinh-nhat", count: 45 },
-  { name: "Tình yêu", image: "/romantic-red-roses-bouquet-luxury-gift.jpg", href: "/collection?category=tinh-yeu", count: 62 },
-  { name: "Cưới hỏi", image: "/wedding-flowers-bridal-bouquet-elegant.jpg", href: "/collection?category=cuoi", count: 38 },
-  { name: "Khai trương", image: "/grand-opening-flower-stand.jpg", href: "/collection?category=khai-truong", count: 28 },
-  { name: "Chia buồn", image: "/sympathy-white-flowers-arrangement.jpg", href: "/collection?category=chia-buon", count: 22 },
-  { name: "Trang trí", image: "/decorative-flowers-interior-design.jpg", href: "/collection?category=trang-tri", count: 35 },
-  { name: "Hoa Tết", image: "/vietnamese-tet-flowers-mai-dao.jpg", href: "/collection?category=tet", count: 40 },
-  { name: "Chúc mừng", image: "/congratulation-flower-basket.jpg", href: "/collection?category=chuc-mung", count: 32 },
-  { name: "Sự kiện", image: "/event-flower-decoration.jpg", href: "/collection?category=su-kien", count: 25 },
+  { name: "Sinh nhật", image: "/birthday-flower-bouquet-celebration.jpg", href: "/collection?scenario=sinh-nhat", count: 45, occasionId: "sinh-nhat" },
+  { name: "Tình yêu", image: "/romantic-red-roses-bouquet-luxury-gift.jpg", href: "/collection?scenario=tinh-yeu", count: 62, occasionId: "tinh-yeu" },
+  { name: "Cưới hỏi", image: "/wedding-flowers-bridal-bouquet-elegant.jpg", href: "/collection?scenario=cuoi", count: 38, occasionId: "cuoi" },
+  { name: "Khai trương", image: "/grand-opening-flower-stand.jpg", href: "/collection?scenario=khai-truong", count: 28, occasionId: "khai-truong" },
+  { name: "Chia buồn", image: "/sympathy-white-flowers-arrangement.jpg", href: "/collection?scenario=chia-buon", count: 22, occasionId: "chia-buon" },
+  { name: "Trang trí", image: "/decorative-flowers-interior-design.jpg", href: "/collection?scenario=trang-tri", count: 35, occasionId: "trang-tri" },
+  { name: "Hoa Tết", image: "/vietnamese-tet-flowers-mai-dao.jpg", href: "/collection?scenario=tet", count: 40, occasionId: "tet" },
+  { name: "Chúc mừng", image: "/congratulation-flower-basket.jpg", href: "/collection?scenario=chuc-mung", count: 32, occasionId: "chuc-mung" },
+  { name: "Sự kiện", image: "/event-flower-decoration.jpg", href: "/collection?scenario=su-kien", count: 25, occasionId: "su-kien" },
 ]
 
 export const uspItems = [

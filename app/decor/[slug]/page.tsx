@@ -32,7 +32,7 @@ import { cn } from "@/lib/utils"
 import { getDecorIdeaBySlug, getAllDecorSlugs, sectionIcons } from "@/lib/decor-ideas"
 import { products } from "@/lib/products"
 import { CONTACT, SHOP_INFO } from "@/lib/constants"
-import { useCart } from "@/lib/cart-context"
+import { useOrderRedirect } from "@/lib/order-utils"
 
 // ================================================================
 // ANIMATION VARIANTS
@@ -455,7 +455,7 @@ function ProductCard({
   index: number
   onConfetti: (e: React.MouseEvent) => void
 }) {
-  const { addToCart } = useCart()
+  const { addToCart } = useOrderRedirect()
   const [isAdding, setIsAdding] = useState(false)
 
   const handleAddToCart = (e: React.MouseEvent) => {

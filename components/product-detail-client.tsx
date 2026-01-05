@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Minus, Plus, Phone, MessageCircle, Truck, ChevronLeft, ShoppingCart, Check } from "lucide-react"
 import { ProductCard } from "@/components/product-card"
-import { useCart } from "@/lib/cart-context"
+import { useOrderRedirect } from "@/lib/order-utils"
 import type { Product } from "@/lib/products"
 
 const additionalServices = [
@@ -29,7 +29,7 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
   const [selectedServices, setSelectedServices] = useState<string[]>([])
   const [note, setNote] = useState("")
   const [isAdded, setIsAdded] = useState(false)
-  const { addToCart } = useCart()
+  const { addToCart } = useOrderRedirect()
 
   const toggleService = (serviceId: string) => {
     setSelectedServices((prev) =>

@@ -1,6 +1,7 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
 import { motion, useInView } from "framer-motion"
@@ -8,32 +9,23 @@ import {
   Heart,
   Star,
   ShoppingCart,
-  Filter,
   Grid3X3,
   List,
   ChevronRight,
   Phone,
   MessageCircle,
-  Menu,
-  X,
   Search,
-  ArrowRight,
   Check,
-  Clock,
-  MapPin,
-  Mail,
-  Facebook,
-  Instagram,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { CONTACT } from "@/lib/constants"
-import { useCart } from "@/lib/cart-context"
+import { useOrderRedirect } from "@/lib/order-utils"
 import { convertApiProductToLibProduct } from "@/lib/product-adapter"
+import { filterProducts, getProductCountByCategory, getProductCountByOccasion, getProductCountByGiftGuide, scenarioToOccasionMap, giftGuideToIdMap } from "@/lib/product-filters"
 import { FooterSection } from "@/components/footer"
 import { HeaderSection } from "@/components/header"
 import { Product } from "@/api/api.type"
 import { FirebaseApi } from "@/api/firebase"
-import { useEffect } from "react"
 
 // ================================================================
 // ANIMATION VARIANTS
@@ -95,7 +87,7 @@ function ProductCard({
   index: number
   onConfetti: (e: React.MouseEvent) => void
 }) {
-  const { addToCart } = useCart()
+  const { addToCart } = useOrderRedirect()
   const [isAdding, setIsAdding] = useState(false)
 
   const handleAddToCart = (e: React.MouseEvent) => {
@@ -213,7 +205,11 @@ function ProductCard({
 export default function CollectionPage() {
   const ref = useRef<HTMLElement>(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
+  const searchParams = useSearchParams()
+  
   const [selectedCategory, setSelectedCategory] = useState<string>("all")
+  const [selectedOccasion, setSelectedOccasion] = useState<string>("all")
+  const [selectedGiftGuide, setSelectedGiftGuide] = useState<string>("all")
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
   const [confettiState, setConfettiState] = useState<{ active: boolean; position: { x: number; y: number } }>({
     active: false,
@@ -224,12 +220,30 @@ export default function CollectionPage() {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
 
+  // Get initial filters from URL params
+  useEffect(() => {
+    const scenario = searchParams.get('scenario')
+    const category = searchParams.get('category')
+    const giftGuide = searchParams.get('giftGuide')
+    
+    if (scenario && scenarioToOccasionMap[scenario]) {
+      setSelectedOccasion(scenarioToOccasionMap[scenario])
+    }
+    
+    if (category) {
+      setSelectedCategory(category)
+    }
+
+    if (giftGuide && giftGuideToIdMap[giftGuide]) {
+      setSelectedGiftGuide(giftGuideToIdMap[giftGuide])
+    }
+  }, [searchParams])
+
   // Fetch products from API
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const res = await FirebaseApi.getProduct()
-        console.log("API TEST: ", res.data)
         
         if (res.ok && Array.isArray(res.data)) {
           // Filter only active products
@@ -257,17 +271,31 @@ export default function CollectionPage() {
     setTimeout(() => setConfettiState({ ...confettiState, active: false }), 1000)
   }
 
-  // Filter products based on selected category
-  const filteredProducts = selectedCategory === "all" 
-    ? products 
-    : products.filter(product => product.categoryIds?.includes(selectedCategory))
+  // Filter products based on selected category, occasion, and gift guide
+  const filteredProducts = filterProducts(products, selectedCategory, selectedOccasion, selectedGiftGuide)
+  // Occasions for filtering
+  const occasions = [
+    { id: "all", name: "Tất cả dịp", count: products.length },
+    { id: "sinh-nhat", name: "Sinh nhật", count: getProductCountByOccasion(products, "sinh-nhat") },
+    { id: "tinh-yeu", name: "Tình yêu", count: getProductCountByOccasion(products, "tinh-yeu") },
+    { id: "cuoi", name: "Cưới hỏi", count: getProductCountByOccasion(products, "cuoi") },
+    { id: "khai-truong", name: "Khai trương", count: getProductCountByOccasion(products, "khai-truong") },
+    { id: "tang-me", name: "Tặng mẹ", count: getProductCountByOccasion(products, "tang-me") },
+    { id: "trang-tri", name: "Trang trí", count: getProductCountByOccasion(products, "trang-tri") },
+    { id: "chia-buon", name: "Chia buồn", count: getProductCountByOccasion(products, "chia-buon") },
+    { id: "tet", name: "Hoa Tết", count: getProductCountByOccasion(products, "tet") },
+    { id: "chuc-mung", name: "Chúc mừng", count: getProductCountByOccasion(products, "chuc-mung") },
+    { id: "su-kien", name: "Sự kiện", count: getProductCountByOccasion(products, "su-kien") },
+  ]
 
-  const categories = [
+  // Gift guides for filtering
+  const giftGuides = [
     { id: "all", name: "Tất cả", count: products.length },
-    { id: "bo-hoa", name: "Bó hoa", count: products.filter(p => p.categoryIds?.includes("bo-hoa")).length },
-    { id: "lang-hoa", name: "Lẵng hoa", count: products.filter(p => p.categoryIds?.includes("lang-hoa")).length },
-    { id: "hoa-cuoi", name: "Hoa cưới", count: products.filter(p => p.categoryIds?.includes("hoa-cuoi")).length },
-    { id: "hoa-tet", name: "Hoa Tết", count: products.filter(p => p.categoryIds?.includes("hoa-tet")).length },
+    { id: "nguoi-yeu", name: "Cho người yêu", count: getProductCountByGiftGuide(products, "nguoi-yeu") },
+    { id: "me", name: "Cho mẹ", count: getProductCountByGiftGuide(products, "me") },
+    { id: "ban-than", name: "Cho bạn thân", count: getProductCountByGiftGuide(products, "ban-than") },
+    { id: "sep", name: "Cho sếp", count: getProductCountByGiftGuide(products, "sep") },
+    { id: "vo-chong", name: "Cho vợ/chồng", count: getProductCountByGiftGuide(products, "vo-chong") },
   ]
 
   return (
@@ -320,28 +348,57 @@ export default function CollectionPage() {
       <section ref={ref} className="pb-16 lg:pb-24">
         <div className="mx-auto max-w-[1200px] px-4 lg:px-8">
           {/* Filter Bar */}
-          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 mb-12">
-            {/* Categories */}
-            <div className="flex flex-wrap gap-3">
-              {categories.map((category) => (
-                <button
-                  key={category.id}
-                  onClick={() => setSelectedCategory(category.id)}
-                  className={cn(
-                    "px-6 py-3 rounded-full font-body font-medium transition-all duration-300",
-                    selectedCategory === category.id
-                      ? "bg-[var(--primary)] text-white"
-                      : "bg-gray-100 text-[var(--text-secondary)] hover:bg-gray-200"
-                  )}
-                  style={{ fontSize: "14px" }}
-                >
-                  {category.name} ({category.count})
-                </button>
-              ))}
+          <div className="flex flex-col gap-6 mb-12">
+   
+            {/* Occasions */}
+            <div>
+              <h3 className="font-medium text-[var(--text-primary)] mb-3">Dịp sử dụng:</h3>
+              <div className="flex flex-wrap gap-3">
+                {occasions.map((occasion) => (
+                  <button
+                    key={occasion.id}
+                    onClick={() => setSelectedOccasion(occasion.id)}
+                    className={cn(
+                      "px-6 py-3 rounded-full font-body font-medium transition-all duration-300",
+                      selectedOccasion === occasion.id
+                        ? "bg-[var(--primary)] text-white"
+                        : "bg-gray-100 text-[var(--text-secondary)] hover:bg-gray-200"
+                    )}
+                    style={{ fontSize: "14px" }}
+                  >
+                    {occasion.name} ({occasion.count})
+                  </button>
+                ))}
+              </div>
             </div>
 
-            {/* View Mode & Search */}
-            <div className="flex items-center gap-4">
+            {/* Gift Guides */}
+            <div>
+              <h3 className="font-medium text-[var(--text-primary)] mb-3">Tặng cho ai:</h3>
+              <div className="flex flex-wrap gap-3">
+                {giftGuides.map((guide) => (
+                  <button
+                    key={guide.id}
+                    onClick={() => setSelectedGiftGuide(guide.id)}
+                    className={cn(
+                      "px-6 py-3 rounded-full font-body font-medium transition-all duration-300",
+                      selectedGiftGuide === guide.id
+                        ? "bg-[var(--primary)] text-white"
+                        : "bg-gray-100 text-[var(--text-secondary)] hover:bg-gray-200"
+                    )}
+                    style={{ fontSize: "14px" }}
+                  >
+                    {guide.name} ({guide.count})
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* View Mode */}
+            <div className="flex items-center justify-between">
+              <div className="text-sm text-[var(--text-secondary)]">
+                Hiển thị {filteredProducts.length} sản phẩm
+              </div>
               <div className="flex items-center bg-gray-100 rounded-lg p-1">
                 <button
                   onClick={() => setViewMode("grid")}

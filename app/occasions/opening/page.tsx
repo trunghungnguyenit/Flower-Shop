@@ -23,7 +23,7 @@ import { HeaderSection } from "@/components/header"
 import { FooterSection } from "@/components/footer"
 import { Product } from "@/api/api.type"
 import { FirebaseApi } from "@/api/firebase"
-import { useCart } from "@/lib/cart-context"
+import { useOrderRedirect } from "@/lib/order-utils"
 import { convertApiProductToLibProduct } from "@/lib/product-adapter"
 
 // ================================================================
@@ -97,7 +97,7 @@ export default function OpeningFlowersPage() {
   })
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
-  const { addToCart } = useCart()
+  const { addToCart } = useOrderRedirect()
   const [addingStates, setAddingStates] = useState<Record<string, boolean>>({})
 
   const handleConfetti = (e: React.MouseEvent) => {
@@ -112,13 +112,13 @@ export default function OpeningFlowersPage() {
   const handleAddToCart = (e: React.MouseEvent, product: Product) => {
     e.preventDefault()
     e.stopPropagation()
-    
+
     setAddingStates(prev => ({ ...prev, [product.id]: true }))
-    
+
     // Convert API product to lib product format for cart
     const cartProduct = convertApiProductToLibProduct(product)
     addToCart(cartProduct, 1, [], "")
-    
+
     setTimeout(() => {
       setAddingStates(prev => ({ ...prev, [product.id]: false }))
     }, 1000)
@@ -234,7 +234,7 @@ export default function OpeningFlowersPage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
               </div>
-              
+
               {/* Floating elements */}
               <div className="absolute -top-4 -right-4 w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center text-2xl animate-bounce">
                 🎊
@@ -386,46 +386,47 @@ export default function OpeningFlowersPage() {
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-                </Link>
 
-                <div className="p-6">
-                  <h3
-                    className="font-display text-[var(--text-primary)] font-semibold mb-2"
-                    style={{ fontSize: "20px" }}
-                  >
-                    {product.name}
-                  </h3>
 
-                  <p
-                    className="font-body text-[var(--text-secondary)] mb-4 line-clamp-2"
-                    style={{ fontSize: "15px", lineHeight: 1.6 }}
-                  >
-                    {product.description}
-                  </p>
-
-                  <div className="flex items-center justify-between">
-                    <span className="font-semibold text-orange-600">
-                      {product.price.toLocaleString("vi-VN")}đ
-                    </span>
-
-                    <motion.button
-                      onClick={(e) => handleAddToCart(e, product)}
-                      className={cn(
-                        "w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300",
-                        addingStates[product.id]
-                          ? "bg-green-500 text-white"
-                          : "bg-[var(--primary)]/10 text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white"
-                      )}
-                      whileTap={{ scale: 0.9 }}
+                  <div className="p-6">
+                    <h3
+                      className="font-display text-[var(--text-primary)] font-semibold mb-2"
+                      style={{ fontSize: "20px" }}
                     >
-                      {addingStates[product.id] ? (
-                        <Check className="w-4 h-4" />
-                      ) : (
-                        <ShoppingCart className="w-4 h-4" strokeWidth={1.5} />
-                      )}
-                    </motion.button>
+                      {product.name}
+                    </h3>
+
+                    <p
+                      className="font-body text-[var(--text-secondary)] mb-4 line-clamp-2"
+                      style={{ fontSize: "15px", lineHeight: 1.6 }}
+                    >
+                      {product.description}
+                    </p>
+
+                    <div className="flex items-center justify-between">
+                      <span className="font-semibold text-orange-600">
+                        {product.price.toLocaleString("vi-VN")}đ
+                      </span>
+
+                      <motion.button
+                        onClick={(e) => handleAddToCart(e, product)}
+                        className={cn(
+                          "w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300",
+                          addingStates[product.id]
+                            ? "bg-green-500 text-white"
+                            : "bg-[var(--primary)]/10 text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white"
+                        )}
+                        whileTap={{ scale: 0.9 }}
+                      >
+                        {addingStates[product.id] ? (
+                          <Check className="w-4 h-4" />
+                        ) : (
+                          <ShoppingCart className="w-4 h-4" strokeWidth={1.5} />
+                        )}
+                      </motion.button>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </motion.div>
             ))}
           </div>

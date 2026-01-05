@@ -1,11 +1,10 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { Menu, X, Phone, MessageCircle } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { CONTACT } from "@/lib/constants"
-import { CartButton } from "@/components/cart/cart-button"
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { Menu, X, Phone, MessageCircle } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { CONTACT } from "@/lib/constants";
 
 // ================================================================
 // NAVIGATION DATA
@@ -15,21 +14,21 @@ const navigation = [
   { name: "Dịch vụ", href: "/occasions" },
   { name: "Bộ sưu tập", href: "/collection" },
   { name: "Blog", href: "/blog" },
-  { name: "Liên hệ", href: "#lien-he" },
-]
+  { name: "Liên hệ", href: "/#lien-he" },
+];
 
 // ================================================================
 // HEADER SECTION
 // ================================================================
 export function HeaderSection() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50)
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <header
@@ -46,10 +45,14 @@ export function HeaderSection() {
           <div
             className={cn(
               "w-11 h-11 rounded-full flex items-center justify-center transition-all duration-300",
-              isScrolled ? "bg-[var(--primary)]/15" : "bg-white/20 backdrop-blur-sm"
+              isScrolled
+                ? "bg-[var(--primary)]/15"
+                : "bg-white/20 backdrop-blur-sm"
             )}
           >
-            <span className="text-2xl group-hover:scale-110 transition-transform duration-300">🌸</span>
+            <span className="text-2xl group-hover:scale-110 transition-transform duration-300">
+              🌸
+            </span>
           </div>
           <div className="flex flex-col">
             <span
@@ -125,26 +128,10 @@ export function HeaderSection() {
             <MessageCircle className="h-4 w-4" strokeWidth={1.5} />
             Zalo
           </a>
-
-          <CartButton 
-            className={cn(
-              "text-pink-300",
-              isScrolled ? "text-pink-300" : "text-pink-300"
-            )}
-            variant="header"
-          />
         </div>
 
         {/* Mobile menu button */}
-        <div className="lg:hidden flex items-center gap-2">
-          <CartButton 
-            className={cn(
-              "text-pink-300",
-              isScrolled ? "text-pink-300" : "text-pink-300"
-            )}
-            variant="header"
-          />
-
+        <div className="lg:hidden">
           <button
             className={cn(
               "p-2 transition-colors duration-300",
@@ -152,7 +139,11 @@ export function HeaderSection() {
             )}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {mobileMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
           </button>
         </div>
       </nav>
@@ -160,8 +151,10 @@ export function HeaderSection() {
       {/* Mobile Navigation */}
       <div
         className={cn(
-          "lg:hidden overflow-hidden transition-all duration-300 bg-white/98 backdrop-blur-xl",
-          mobileMenuOpen ? "max-h-[400px] border-t border-[var(--border-soft)]" : "max-h-0"
+          "lg:hidden transition-all duration-300 bg-white/98 backdrop-blur-xl",
+          mobileMenuOpen
+            ? "max-h-[70vh] border-t border-[var(--border-soft)] overflow-y-auto"
+            : "max-h-0 overflow-hidden"
         )}
       >
         <div className="px-4 py-6 space-y-1">
@@ -169,7 +162,7 @@ export function HeaderSection() {
             <Link
               key={item.name}
               href={item.href}
-              className="block text-base font-body font-medium text-pink-300 hover:text-[var(--primary)] py-3 transition-colors"
+              className="block py-3 text-base font-body font-medium text-pink-300 hover:text-[var(--primary)] transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               {item.name}
@@ -177,17 +170,24 @@ export function HeaderSection() {
           ))}
 
           <div className="pt-6 mt-4 border-t border-[var(--border-soft)] flex flex-col gap-3">
-            <a href={CONTACT.phoneLink} className="flex items-center gap-3 text-pink-300 py-2">
-              <Phone className="h-5 w-5 text-[var(--primary)]" strokeWidth={1.5} />
-              <span className="font-body font-medium">{CONTACT.phoneDisplay}</span>
+            <a
+              href={CONTACT.phoneLink}
+              className="flex items-center gap-3 py-2 text-pink-300"
+            >
+              <Phone
+                className="h-5 w-5 text-[var(--primary)]"
+                strokeWidth={1.5}
+              />
+              <span className="font-body font-medium">
+                {CONTACT.phoneDisplay}
+              </span>
             </a>
 
             <a
               href={CONTACT.zaloLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full flex items-center justify-center gap-2 px-5 py-3 bg-[var(--primary)] text-pink-300 font-body font-medium"
-              style={{ borderRadius: "var(--radius-medium)" }}
+              className="flex items-center justify-center gap-2 px-5 py-3 bg-[var(--primary)] text-pink-300 font-body font-medium rounded-[var(--radius-medium)]"
             >
               <MessageCircle className="h-5 w-5" strokeWidth={1.5} />
               Chat Zalo
@@ -196,5 +196,5 @@ export function HeaderSection() {
         </div>
       </div>
     </header>
-  )
+  );
 }
