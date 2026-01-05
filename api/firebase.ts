@@ -10,7 +10,7 @@ import {
   DocumentData,
   QueryDocumentSnapshot,
 } from "firebase/firestore";
-import { Product } from "./api.type";
+import { Product, Blog } from "./api.type";
 
 
 
@@ -111,6 +111,7 @@ const mapProduct = (docId: string, p: AnyObject): Product => {
 
     categoryIds: normalizeStringArray(p.categoryIds),
     occasionIds: normalizeStringArray(p.occasionIds),
+    giftGuideIds: normalizeStringArray(p.giftGuideIds),
 
     rating: normalizeNumber(p.rating),
     sold: normalizeNumber(p.sold),
@@ -120,21 +121,36 @@ const mapProduct = (docId: string, p: AnyObject): Product => {
   }
 }
 
+const mapBlog = (docId: string, b: AnyObject): Blog => {
+  return {
+    id: docId,
+    slug: String(b.slug ?? ""),
+    title: String(b.title ?? ""),
+    excerpt: String(b.excerpt ?? ""),
+    image: String(b.image ?? ""),
+    category: String(b.category ?? ""),
+    author: String(b.author ?? ""),
+    content: String(b.content ?? ""),
+    publishedAt: b.publishedAt ?? null,
+    isActive: b.isActive ?? true,
+  }
+}
 
-const fetchAll = async (
+
+const fetchAll = async <T>(
   colName: string,
-  mapper: (id: string, data: AnyObject) => Product
-): Promise<Product[]> => {
+  mapper: (id: string, data: AnyObject) => T
+): Promise<T[]> => {
   const { db } = ensureFirebase();
   const snap = await getDocs(collection(db, colName));
   return snap.docs.map((d: QueryDocumentSnapshot<DocumentData>) => mapper(d.id, d.data()));
 };
 
-const fetchBySlug = async (
+const fetchBySlug = async <T>(
   colName: string,
   slug: string,
-  mapper: (id: string, data: AnyObject) => Product
-): Promise<Product | null> => {
+  mapper: (id: string, data: AnyObject) => T
+): Promise<T | null> => {
   const { db } = ensureFirebase();
   const q = query(collection(db, colName), where("slug", "==", slug), limit(1));
   const snap = await getDocs(q);
@@ -162,12 +178,32 @@ const create = () => {
     }
   };
 
+  const getBlog = async () => {
+    try {
+      const items = await fetchAll("Blog", mapBlog);
+      return okResponse(items);
+    } catch (e: any) {
+      return errorResponse(e?.message || "Failed to load blogs");
+    }
+  };
+
+  const getBlogBySlug = async (slug: string) => {
+    try {
+      const item = await fetchBySlug("Blog", slug, mapBlog);
+      return okResponse(item);
+    } catch (e: any) {
+      return errorResponse(e?.message || "Failed to load blog detail");
+    }
+  };
+
   return {
     getProduct,
     getProductBySlug,
+    getBlog,
+    getBlogBySlug,
   };
 };
 
 const FirebaseApi = create();
 
-export { FirebaseApi, mapProduct };
+export { FirebaseApi, mapProduct, mapBlog };

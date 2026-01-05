@@ -27,7 +27,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { CONTACT, SHOP_INFO } from "@/lib/constants"
-import { useCart } from "@/lib/cart-context"
+import { useOrderRedirect } from "@/lib/order-utils"
 import { convertApiProductToLibProduct } from "@/lib/product-adapter"
 import { HeaderSection } from "@/components/header"
 import { FooterSection } from "@/components/footer"
@@ -90,7 +90,7 @@ export default function BirthdayFlowersPage() {
     active: false,
     position: { x: 0, y: 0 },
   })
-  const { addToCart } = useCart()
+  const { addToCart } = useOrderRedirect()
   const [addingStates, setAddingStates] = useState<Record<string, boolean>>({})
 
   const handleConfetti = (e: React.MouseEvent) => {
@@ -105,45 +105,45 @@ export default function BirthdayFlowersPage() {
   const handleAddToCart = (e: React.MouseEvent, product: Product) => {
     e.preventDefault()
     e.stopPropagation()
-    
+
     setAddingStates(prev => ({ ...prev, [product.id]: true }))
-    
+
     // Convert API product to lib product format for cart
     const cartProduct = convertApiProductToLibProduct(product)
     addToCart(cartProduct, 1, [], "")
-    
+
     setTimeout(() => {
       setAddingStates(prev => ({ ...prev, [product.id]: false }))
     }, 1000)
   }
 
-const [products, setProducts] = useState<Product[]>([])
-const [loading, setLoading] = useState(true)
-useEffect(() => {
-  const occasionBirthday = async () => {
-    try {
-      const res = await FirebaseApi.getProduct()
+  const [products, setProducts] = useState<Product[]>([])
+  const [loading, setLoading] = useState(true)
+  useEffect(() => {
+    const occasionBirthday = async () => {
+      try {
+        const res = await FirebaseApi.getProduct()
 
-      if (res.ok && Array.isArray(res.data)) {
-        const filteredProducts = res.data.filter(
-          (item: Product) =>
-            Array.isArray(item.occasionIds) &&
-            item.occasionIds.includes("sinh-nhat")
-        )
+        if (res.ok && Array.isArray(res.data)) {
+          const filteredProducts = res.data.filter(
+            (item: Product) =>
+              Array.isArray(item.occasionIds) &&
+              item.occasionIds.includes("sinh-nhat")
+          )
 
-        setProducts(filteredProducts)
-      } else {
-        console.error("API error:", res)
+          setProducts(filteredProducts)
+        } else {
+          console.error("API error:", res)
+        }
+      } catch (error) {
+        console.error("Error fetching products:", error)
+      } finally {
+        setLoading(false)
       }
-    } catch (error) {
-      console.error("Error fetching products:", error)
-    } finally {
-      setLoading(false)
     }
-  }
 
-  occasionBirthday()
-}, [])
+    occasionBirthday()
+  }, [])
 
   return (
     <main className="min-h-screen bg-white">
@@ -230,7 +230,7 @@ useEffect(() => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
               </div>
-              
+
               {/* Floating elements */}
               <div className="absolute -top-4 -right-4 w-20 h-20 bg-pink-400 rounded-full flex items-center justify-center text-2xl animate-bounce">
                 🎂
@@ -328,108 +328,109 @@ useEffect(() => {
       </section>
 
       {/* Popular Flowers Section */}
-<section className="py-16 lg:py-24">
-  <div className="mx-auto max-w-[1100px] px-4 lg:px-8">
-    <motion.div
-      className="text-center mb-16"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.7, ease: premiumEase }}
-    >
-      <span className="inline-block font-body text-pink-600 tracking-[0.25em] uppercase mb-4 text-sm font-medium">
-        Hoa phổ biến
-      </span>
-      <h2
-        className="font-display text-[var(--text-primary)] mb-6"
-        style={{ fontSize: "clamp(28px, 4vw, 36px)", fontWeight: 600 }}
-      >
-        Loại Hoa Sinh Nhật Được Yêu Thích
-      </h2>
-    </motion.div>
-
-    {/* Loading */}
-    {loading && (
-      <p className="text-center text-gray-500">Đang tải dữ liệu...</p>
-    )}
-
-    {/* Empty */}
-    {!loading && products.length === 0 && (
-      <p className="text-center text-gray-500">
-        Chưa có sản phẩm cho dịp sinh nhật
-      </p>
-    )}
-
-    {/* Products */}
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {products.map((product, index) => (
-        <motion.div
-          key={product.id}
-          className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{
-            duration: 0.5,
-            delay: index * 0.1,
-            ease: premiumEase,
-          }}
-          whileHover={{ y: -8 }}
-        >
-          <Link href={`/product/${product.slug}`}>
-            <div className="relative aspect-[4/3] overflow-hidden">
-              <Image
-                src={product.images?.[0] || "/placeholder.svg"}
-                alt={product.name}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-          </Link>
-
-          <div className="p-6">
-            <h3
-              className="font-display text-[var(--text-primary)] font-semibold mb-2"
-              style={{ fontSize: "20px" }}
+      <section className="py-16 lg:py-24">
+        <div className="mx-auto max-w-[1100px] px-4 lg:px-8">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: premiumEase }}
+          >
+            <span className="inline-block font-body text-pink-600 tracking-[0.25em] uppercase mb-4 text-sm font-medium">
+              Hoa phổ biến
+            </span>
+            <h2
+              className="font-display text-[var(--text-primary)] mb-6"
+              style={{ fontSize: "clamp(28px, 4vw, 36px)", fontWeight: 600 }}
             >
-              {product.name}
-            </h3>
+              Loại Hoa Sinh Nhật Được Yêu Thích
+            </h2>
+          </motion.div>
 
-            <p
-              className="font-body text-[var(--text-secondary)] mb-4 line-clamp-2"
-              style={{ fontSize: "15px", lineHeight: 1.6 }}
-            >
-              {product.description}
+          {/* Loading */}
+          {loading && (
+            <p className="text-center text-gray-500">Đang tải dữ liệu...</p>
+          )}
+
+          {/* Empty */}
+          {!loading && products.length === 0 && (
+            <p className="text-center text-gray-500">
+              Chưa có sản phẩm cho dịp sinh nhật
             </p>
+          )}
 
-            <div className="flex items-center justify-between">
-              <span className="font-semibold text-pink-600">
-                {product.price.toLocaleString("vi-VN")}đ
-              </span>
-
-              <motion.button
-                onClick={(e) => handleAddToCart(e, product)}
-                className={cn(
-                  "w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300",
-                  addingStates[product.id]
-                    ? "bg-green-500 text-white"
-                    : "bg-[var(--primary)]/10 text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white"
-                )}
-                whileTap={{ scale: 0.9 }}
+          {/* Products */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {products.map((product, index) => (
+              <motion.div
+                key={product.id}
+                className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.5,
+                  delay: index * 0.1,
+                  ease: premiumEase,
+                }}
+                whileHover={{ y: -8 }}
               >
-                {addingStates[product.id] ? (
-                  <Check className="w-4 h-4" />
-                ) : (
-                  <ShoppingCart className="w-4 h-4" strokeWidth={1.5} />
-                )}
-              </motion.button>
-            </div>
+                <Link href={`/product/${product.slug}`}>
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <Image
+                      src={product.images?.[0] || "/placeholder.svg"}
+                      alt={product.name}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+
+
+                  <div className="p-6">
+                    <h3
+                      className="font-display text-[var(--text-primary)] font-semibold mb-2"
+                      style={{ fontSize: "20px" }}
+                    >
+                      {product.name}
+                    </h3>
+
+                    <p
+                      className="font-body text-[var(--text-secondary)] mb-4 line-clamp-2"
+                      style={{ fontSize: "15px", lineHeight: 1.6 }}
+                    >
+                      {product.description}
+                    </p>
+
+                    <div className="flex items-center justify-between">
+                      <span className="font-semibold text-pink-600">
+                        {product.price.toLocaleString("vi-VN")}đ
+                      </span>
+
+                      <motion.button
+                        onClick={(e) => handleAddToCart(e, product)}
+                        className={cn(
+                          "w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300",
+                          addingStates[product.id]
+                            ? "bg-green-500 text-white"
+                            : "bg-[var(--primary)]/10 text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white"
+                        )}
+                        whileTap={{ scale: 0.9 }}
+                      >
+                        {addingStates[product.id] ? (
+                          <Check className="w-4 h-4" />
+                        ) : (
+                          <ShoppingCart className="w-4 h-4" strokeWidth={1.5} />
+                        )}
+                      </motion.button>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
           </div>
-        </motion.div>
-      ))}
-    </div>
-  </div>
-</section>
+        </div>
+      </section>
 
 
       {/* CTA Section */}

@@ -1,17 +1,18 @@
 "use client"
 
-import { useRef, useState } from "react"
+"use client"
+
+import { useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { motion, useInView } from "framer-motion"
-import { ArrowRight, Heart, ShoppingCart, Check } from "lucide-react"
+import { ArrowRight, Heart, ShoppingCart } from "lucide-react"
 import { Product } from "@/api/api.type"
 import { formatImageUrl } from "@/api/firebase"
 import { staggerContainer, staggerItem, staggerItemScale, premiumEase } from "@/components/animations/framer-variants"
 import { ParticleGlow } from "@/components/animations/background-effects"
 import { BestSellerSkeleton } from "./best-seller-skeleton"
-import { useCart } from "@/lib/cart-context"
-import { convertApiProductToLibProduct } from "@/lib/product-adapter"
 import { cn } from "@/lib/utils"
 
 // ================================================================
@@ -27,8 +28,7 @@ interface BestSellerSectionProps {
 export function BestSellerSection({ products, loading }: BestSellerSectionProps) {
   const sectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 })
-  const { addToCart } = useCart()
-  const [addingStates, setAddingStates] = useState<Record<string, boolean>>({})
+  const router = useRouter()
 
   // Process products: filter active, sort by sold, limit to 5
   const bestSellerProducts = products
@@ -36,18 +36,10 @@ export function BestSellerSection({ products, loading }: BestSellerSectionProps)
     .sort((a, b) => (b.sold || 0) - (a.sold || 0))
     .slice(0, 5)
 
-  const handleAddToCart = (e: React.MouseEvent, product: Product) => {
+  const handleQuickOrder = (e: React.MouseEvent, productSlug: string) => {
     e.preventDefault()
     e.stopPropagation()
-    
-    setAddingStates(prev => ({ ...prev, [product.id]: true }))
-    
-    const cartProduct = convertApiProductToLibProduct(product)
-    addToCart(cartProduct, 1, [], "")
-    
-    setTimeout(() => {
-      setAddingStates(prev => ({ ...prev, [product.id]: false }))
-    }, 1000)
+    router.push(`/product/${productSlug}`)
   }
 
   return (
@@ -140,29 +132,19 @@ export function BestSellerSection({ products, loading }: BestSellerSectionProps)
                   {/* Wishlist Button */}
                   <button
                     className="absolute top-3 right-3 w-9 h-9 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white hover:scale-110"
-                    onClick={(e) => e.preventDefault()}
+                    onClick={(e: React.MouseEvent) => e.preventDefault()}
                   >
                     <Heart className="w-4 h-4 text-[var(--text-secondary)]" strokeWidth={1.5} />
                   </button>
 
-                  {/* Quick Add */}
+                  {/* Quick Order Button */}
                   <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                    <motion.button
-                      onClick={(e) => handleAddToCart(e, product)}
-                      className={cn(
-                        "w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300",
-                        addingStates[product.id]
-                          ? "bg-green-500 text-white"
-                          : "bg-[var(--primary)]/10 text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white"
-                      )}
-                      whileTap={{ scale: 0.9 }}
+                    <button
+                      onClick={(e) => handleQuickOrder(e, product.slug)}
+                      className="w-9 h-9 rounded-full flex items-center justify-center bg-[var(--primary)]/10 text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white transition-all duration-300"
                     >
-                      {addingStates[product.id] ? (
-                        <Check className="w-4 h-4" />
-                      ) : (
-                        <ShoppingCart className="w-4 h-4" strokeWidth={1.5} />
-                      )}
-                    </motion.button>
+                      <ShoppingCart className="w-4 h-4" strokeWidth={1.5} />
+                    </button>
                   </div>
                 </div>
 

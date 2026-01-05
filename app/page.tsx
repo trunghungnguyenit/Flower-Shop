@@ -18,7 +18,7 @@ import { FooterSection } from "@/components/footer"
 import { StickyContact } from "@/components/home/sticky-contact"
 import { useEffect, useState } from "react"
 import { FirebaseApi } from "@/api/firebase"
-import { Product } from "@/api/api.type"
+import { Product, Blog } from "@/api/api.type"
 
 // ================================================================
 // MAIN PAGE COMPONENT
@@ -27,12 +27,15 @@ import { Product } from "@/api/api.type"
 export default function HomePage() {
 
 const [products, setProducts] = useState<Product[]>([])
+const [blogs, setBlogs] = useState<Blog[]>([])
 const [loading, setLoading] = useState(true)
+const [blogLoading, setBlogLoading] = useState(true)
+
 useEffect(() => {
     const fetchProducts = async () => {
       try {
         const res = await FirebaseApi.getProduct()
-        console.log("API TEST: ", res.data)
+        // console.log("API TEST: ", res.data)
         if (res.ok && Array.isArray(res.data)) {
           setProducts(res.data)
         } else {
@@ -48,6 +51,27 @@ useEffect(() => {
     fetchProducts()
   }, [])
 
+  // API Blog
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const res = await FirebaseApi.getBlog()
+        console.log("Blog API TEST: ", res.data)
+        if (res.ok && Array.isArray(res.data)) {
+          setBlogs(res.data.filter((blog: Blog) => blog.isActive))
+        } else {
+          console.error("Blog API error:", res)
+        }
+      } catch (error) {
+        console.error("Error fetching blogs:", error)
+      } finally {
+        setBlogLoading(false)
+      }
+    }
+
+    fetchBlogs()
+  }, [])
+
 
   return (
     <main className="min-h-screen bg-white">
@@ -61,13 +85,13 @@ useEffect(() => {
       <BestSellerSection products={products} loading={loading} />
 
       {/* Real Cases - Khoảnh Khắc Thật */}
-      <RealCasesSection />
+      {/* <RealCasesSection /> */}
 
       {/* Scenarios - Bạn Đang Ở Hoàn Cảnh Nào? */}
       <ScenariosSection />
 
       {/* Decor Ideas - Trang Trí Ngôi Nhà */}
-      <DecorSection />
+      {/* <DecorSection /> */}
 
       {/* Gift Guide - Gợi Ý Quà Theo Người Nhận */}
       <GiftGuideSection />
@@ -82,10 +106,10 @@ useEffect(() => {
       <ReviewsSection />
 
       {/* Blog */}
-      <BlogSection />
+      <BlogSection blogs={blogs} loading={blogLoading} />
 
       {/* Quick Order Form */}
-      <QuickOrderSection />
+      <QuickOrderSection products={products} loading={loading} />
 
       {/* Footer */}
       <FooterSection />
