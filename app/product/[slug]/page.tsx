@@ -17,7 +17,10 @@ import {
   Clock,
   Gift,
   MessageCircle,
-  Phone
+  Phone,
+  Copy,
+  Facebook,
+  Check
 } from "lucide-react"
 
 import { HeaderSection } from "@/components/header"
@@ -56,6 +59,8 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
   const [selectedImage, setSelectedImage] = useState(0)
   const [isWishlisted, setIsWishlisted] = useState(false)
   const [showOrderForm, setShowOrderForm] = useState(false)
+  const [shareMenuOpen, setShareMenuOpen] = useState(false)
+  const [copySuccess, setCopySuccess] = useState(false)
 
   // Fetch product data from API
   useEffect(() => {
@@ -120,6 +125,18 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [selectedImage, product?.images])
 
+  // Close share menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (shareMenuOpen && !(event.target as Element).closest('.share-menu-container')) {
+        setShareMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [shareMenuOpen])
+
   // Show loading state
   if (loading) {
     return (
@@ -164,6 +181,25 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
   const basePrice = product.price || 0
 
   // Handle service selection - removed (moved to ProductOrderForm)
+
+  // Handle share functionality
+  const handleShare = (platform: string) => {
+    const url = window.location.href
+    const title = product?.name || "Sản phẩm Hoa Tươi"
+
+    switch (platform) {
+      case 'facebook':
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank')
+        break
+      case 'copy':
+        navigator.clipboard.writeText(url).then(() => {
+          setCopySuccess(true)
+          setTimeout(() => setCopySuccess(false), 2000)
+        })
+        break
+    }
+    setShareMenuOpen(false)
+  }
 
   
   return (
@@ -246,24 +282,44 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
                     {selectedImage + 1} / {product.images.length}
                   </div>
                 )}
-                
-                {/* Wishlist Button */}
-                <button
-                  onClick={() => setIsWishlisted(!isWishlisted)}
-                  className={cn(
-                    "absolute top-4 right-4 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300",
-                    isWishlisted 
-                      ? "bg-red-500 text-white" 
-                      : "bg-white/90 backdrop-blur-sm text-[var(--text-secondary)] hover:text-red-500"
-                  )}
-                >
-                  <Heart className={cn("w-5 h-5", isWishlisted && "fill-current")} strokeWidth={1.5} />
-                </button>
 
                 {/* Share Button */}
-                <button className="absolute top-16 right-4 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors">
-                  <Share2 className="w-5 h-5" strokeWidth={1.5} />
-                </button>
+                <div className="absolute top-16 right-4 share-menu-container">
+                  <button
+                    onClick={() => setShareMenuOpen(!shareMenuOpen)}
+                    className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors"
+                  >
+                    <Share2 className="w-5 h-5" strokeWidth={1.5} />
+                  </button>
+
+                  {shareMenuOpen && (
+                    <div className="absolute top-full right-0 mt-2 bg-white rounded-lg shadow-lg border border-[var(--border-soft)] p-2 z-10">
+                      <button
+                        onClick={() => handleShare('facebook')}
+                        className="flex items-center gap-2 w-full px-3 py-2 text-sm hover:bg-gray-100 rounded-md transition-colors whitespace-nowrap"
+                      >
+                        <Facebook className="w-4 h-4 text-blue-600" />
+                        Facebook
+                      </button>
+                      <button
+                        onClick={() => handleShare('copy')}
+                        className="flex items-center gap-2 w-full px-3 py-2 text-sm hover:bg-gray-100 rounded-md transition-colors whitespace-nowrap"
+                      >
+                        {copySuccess ? (
+                          <>
+                            <Check className="w-4 h-4 text-green-600" />
+                            Đã sao chép!
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-4 h-4" />
+                            Sao chép link
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* Thumbnail Images */}
@@ -333,12 +389,20 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <span className="font-display text-3xl font-bold text-[var(--primary)]">
-                    {product.price.toLocaleString("vi-VN")}đ
-                  </span>
-                  <span className="px-3 py-1 bg-green-100 text-green-700 text-sm font-medium rounded-full">
-                    {product.badge || "Còn hàng"}
-                  </span>
+                  {product.price > 0 ? (
+                    <>
+                      <span className="font-display text-3xl font-bold text-[var(--primary)]">
+                        {product.price.toLocaleString("vi-VN")}đ
+                      </span>
+                      <span className="px-3 py-1 bg-green-100 text-green-700 text-sm font-medium rounded-full">
+                        {product.badge || "Còn hàng"}
+                      </span>
+                    </>
+                  ) : (
+                    <span className="font-display text-2xl font-bold text-[var(--text-secondary)]">
+                      Liên hệ để biết giá
+                    </span>
+                  )}
                 </div>
               </div>
 
@@ -372,13 +436,26 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
               ) : (
                 <div className="space-y-4">
                   {/* Action Buttons */}
-                  <Button
-                    onClick={() => setShowOrderForm(true)}
-                    className="w-full h-14 text-lg font-semibold bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white"
-                    size="lg"
-                  >
-                    🌺 Đặt Hoa Ngay
-                  </Button>
+                  {product.price > 0 ? (
+                    <Button
+                      onClick={() => setShowOrderForm(true)}
+                      className="w-full h-14 text-lg font-semibold bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white"
+                      size="lg"
+                    >
+                      🌺 Đặt Hoa Ngay
+                    </Button>
+                  ) : (
+                    <Button
+                      asChild
+                      className="w-full h-14 text-lg font-semibold bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white"
+                      size="lg"
+                    >
+                      <a href={CONTACT.zaloLink} target="_blank" rel="noopener noreferrer">
+                        <MessageCircle className="w-5 h-5 mr-2" strokeWidth={1.5} />
+                        Liên Hệ
+                      </a>
+                    </Button>
+                  )}
 
                   <div className="grid grid-cols-2 gap-3">
                     <Button variant="outline" size="lg" asChild>
@@ -390,7 +467,7 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
                     <Button variant="outline" size="lg" asChild>
                       <a href={CONTACT.phoneLink}>
                         <Phone className="w-5 h-5 mr-2" strokeWidth={1.5} />
-                        Gọi ngay
+                        Gọi ngay: 0901 333 434
                       </a>
                     </Button>
                   </div>

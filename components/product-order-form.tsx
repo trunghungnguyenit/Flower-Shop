@@ -2,67 +2,54 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, Minus, Check, Send, MapPin, Clock, Gift } from 'lucide-react';
+import { Plus, Minus, Check, Send, MapPin, Gift } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { premiumEase } from '@/components/animations/framer-variants';
-import type { Product } from '@/api/api.type';
+import type { Product, OrderFormData } from '@/api/api.type';
+import { extraServices, deliveryAreas, paymentMethods, orderFormValidationSchema } from '@/lib/order-constants';
 
 interface ProductOrderFormProps {
   product: Product;
   onClose?: () => void;
 }
 
-interface OrderFormData {
-  name: string;
-  phone: string;
-  quantity: number;
-  senderAddress: string;
-  receiverAddress: string;
-  deliveryTime: string;
-  additionalServices: string[];
-  note: string;
-}
-
-// Dịch vụ thêm
-const additionalServices = [
-  { id: "gift-wrap", name: "Gói quà cao cấp", price: 50000 },
-  { id: "card", name: "Thiệp chúc mừng", price: 20000 },
-  { id: "delivery-express", name: "Giao hàng nhanh (2h)", price: 100000 },
-  { id: "setup", name: "Trang trí tại chỗ", price: 200000 },
-];
-
-// Thời gian giao hàng
-const deliveryTimes = [
-  "Sáng (8:00 - 12:00)",
-  "Chiều (13:00 - 17:00)",
-  "Tối (18:00 - 21:00)",
-  "Cả ngày (8:00 - 21:00)",
-  "Theo yêu cầu"
-];
-
 export default function ProductOrderForm({ product, onClose }: ProductOrderFormProps) {
   const [formData, setFormData] = useState<OrderFormData>({
-    name: '',
-    phone: '',
+    // Thông tin người đặt
+    senderName: '',
+    senderPhone: '',
+    
+    // Thông tin đơn hoa
     quantity: 1,
-    senderAddress: '',
+    extraServices: [],
+    deliveryDateTime: '',
+    deliveryArea: '',
+    
+    // Thông tin người nhận
+    receiverName: '',
+    receiverPhone: '',
     receiverAddress: '',
-    deliveryTime: '',
-    additionalServices: [],
+    cardMessage: '',
+    
+    // Ghi chú
     note: '',
+    
+    // Thanh toán
+    paymentMethod: '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   // Tính tổng tiền
   const calculateTotal = () => {
     const productTotal = product.price * formData.quantity;
-    const servicesTotal = formData.additionalServices.reduce((total, serviceId) => {
-      const service = additionalServices.find(s => s.id === serviceId);
+    const servicesTotal = formData.extraServices.reduce((total, serviceId) => {
+      const service = extraServices.find(s => s.id === serviceId);
       return total + (service?.price || 0);
     }, 0);
     return productTotal + servicesTotal;
@@ -75,6 +62,13 @@ export default function ProductOrderForm({ product, onClose }: ProductOrderFormP
       [name]: value,
     }));
     setErrorMessage('');
+    // Clear field error when user starts typing
+    if (fieldErrors[name]) {
+      setFieldErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }));
+    }
   };
 
   const handleQuantityChange = (delta: number) => {
@@ -87,40 +81,55 @@ export default function ProductOrderForm({ product, onClose }: ProductOrderFormP
   const handleServiceToggle = (serviceId: string) => {
     setFormData(prev => ({
       ...prev,
-      additionalServices: prev.additionalServices.includes(serviceId)
-        ? prev.additionalServices.filter(id => id !== serviceId)
-        : [...prev.additionalServices, serviceId]
+      extraServices: prev.extraServices.includes(serviceId)
+        ? prev.extraServices.filter(id => id !== serviceId)
+        : [...prev.extraServices, serviceId]
     }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validate required fields
-    if (!formData.name || !formData.phone || !formData.receiverAddress) {
-      setErrorMessage('Vui lòng điền đầy đủ thông tin bắt buộc');
-      return;
-    }
-
     setIsSubmitting(true);
     setErrorMessage('');
+    setFieldErrors({});
 
     try {
+      // Validate form data with Yup
+      await orderFormValidationSchema.validate(formData, { 
+        abortEarly: false,
+        context: { isQuickOrder: false }
+      });
+      
       const orderData = {
-        name: formData.name,
-        phone: formData.phone,
-        note: formData.note,
-        productName: product.name,
-        productPrice: product.price,
+        // 2.1. Thông tin người đặt
+        senderName: formData.senderName,
+        senderPhone: formData.senderPhone,
+        
+        // 2.2. Thông tin đơn hoa
+        product: product.name,
         quantity: formData.quantity,
-        senderAddress: formData.senderAddress,
-        receiverAddress: formData.receiverAddress,
-        deliveryTime: formData.deliveryTime,
-        additionalServices: formData.additionalServices.map(id => {
-          const service = additionalServices.find(s => s.id === id);
+        productPrice: product.price,
+        extraServices: formData.extraServices.map(id => {
+          const service = extraServices.find(s => s.id === id);
           return service ? `${service.name} (+${service.price.toLocaleString('vi-VN')}đ)` : id;
         }),
+        deliveryDate: formData.deliveryDateTime.split('T')[0], // Tách ngày từ datetime
+        deliveryTimeSlot: formData.deliveryDateTime.split('T')[1] || '', // Tách giờ từ datetime
+        deliveryArea: formData.deliveryArea,
         totalAmount: calculateTotal(),
+        
+        // 2.3. Thông tin người nhận
+        receiverName: formData.receiverName,
+        receiverPhone: formData.receiverPhone,
+        receiverAddress: formData.receiverAddress,
+        cardMessage: formData.cardMessage,
+        
+        // 2.4. Ghi chú
+        note: formData.note,
+        
+        // 2.5. Thanh toán
+        paymentMethod: formData.paymentMethod,
       };
 
       const response = await fetch('/api/order', {
@@ -134,16 +143,59 @@ export default function ProductOrderForm({ product, onClose }: ProductOrderFormP
       const result = await response.json();
 
       if (result.success) {
-        setIsSuccess(true);
-        setTimeout(() => {
-          setIsSuccess(false);
-          onClose?.();
-        }, 3000);
+        // Save order data to localStorage for the order info page
+        const orderInfoData = {
+          // 1.1. Thông tin người đặt
+          senderName: formData.senderName,
+          senderPhone: formData.senderPhone,
+          
+          // 1.2. Thông tin đơn hoa
+          product: product.name,
+          quantity: formData.quantity,
+          productPrice: product.price,
+          extraServices: formData.extraServices.map(id => {
+            const service = extraServices.find(s => s.id === id);
+            return service ? `${service.name} (+${service.price.toLocaleString('vi-VN')}đ)` : id;
+          }),
+          deliveryDate: formData.deliveryDateTime.split('T')[0], // Tách ngày từ datetime
+          deliveryTimeSlot: formData.deliveryDateTime.split('T')[1] || '', // Tách giờ từ datetime
+          deliveryArea: formData.deliveryArea,
+          totalAmount: calculateTotal(),
+          
+          // 1.3. Thông tin người nhận
+          receiverName: formData.receiverName,
+          receiverPhone: formData.receiverPhone,
+          receiverAddress: formData.receiverAddress,
+          cardMessage: formData.cardMessage,
+          
+          // 1.4. Thông tin khác
+          note: formData.note,
+          paymentMethod: formData.paymentMethod,
+        };
+
+        // Save to localStorage
+        localStorage.setItem('currentOrder', JSON.stringify(orderInfoData));
+        
+        // Redirect to order info page
+        window.location.href = '/order-info';
       } else {
         setErrorMessage(result.message || 'Có lỗi xảy ra khi gửi đơn hàng');
       }
     } catch (error) {
-      setErrorMessage('Không thể gửi đơn đặt hàng. Vui lòng thử lại.');
+      if (error instanceof Error && 'inner' in error) {
+        // Handle validation errors
+        const validationError = error as any;
+        const errors: Record<string, string> = {};
+        validationError.inner.forEach((err: any) => {
+          if (err.path) {
+            errors[err.path] = err.message;
+          }
+        });
+        setFieldErrors(errors);
+        setErrorMessage('Vui lòng kiểm tra lại thông tin đã nhập');
+      } else {
+        setErrorMessage('Không thể gửi đơn đặt hàng. Vui lòng thử lại.');
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -204,130 +256,331 @@ export default function ProductOrderForm({ product, onClose }: ProductOrderFormP
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Thông tin khách hàng */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Tên khách hàng <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleInputChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
-              placeholder="Nhập tên của bạn"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Số điện thoại <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="tel"
-              name="phone"
-              value={formData.phone}
-              onChange={handleInputChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
-              placeholder="090xxxxxxx"
-              required
-            />
-          </div>
-        </div>
-
-        {/* Số lượng */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Số lượng
-          </label>
-          <div className="flex items-center gap-3">
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() => handleQuantityChange(-1)}
-              disabled={formData.quantity <= 1}
-            >
-              <Minus className="w-4 h-4" />
-            </Button>
-            <span className="px-4 py-2 border border-gray-300 rounded-md min-w-[60px] text-center">
-              {formData.quantity}
-            </span>
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() => handleQuantityChange(1)}
-            >
-              <Plus className="w-4 h-4" />
-            </Button>
+        {/* 2.1. Thông tin người đặt */}
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">
+            Thông tin người đặt
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Tên người gửi <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                name="senderName"
+                value={formData.senderName}
+                onChange={handleInputChange}
+                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${
+                  fieldErrors.senderName 
+                    ? 'border-red-500 focus:ring-red-500' 
+                    : 'border-gray-300 focus:ring-pink-500'
+                }`}
+                placeholder="Nhập tên người gửi"
+              />
+              {fieldErrors.senderName && (
+                <p className="text-red-500 text-sm mt-1">{fieldErrors.senderName}</p>
+              )}
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Số điện thoại người gửi <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="tel"
+                name="senderPhone"
+                value={formData.senderPhone}
+                onChange={handleInputChange}
+                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${
+                  fieldErrors.senderPhone 
+                    ? 'border-red-500 focus:ring-red-500' 
+                    : 'border-gray-300 focus:ring-pink-500'
+                }`}
+                placeholder="0905123456"
+                maxLength={10}
+              />
+              {fieldErrors.senderPhone && (
+                <p className="text-red-500 text-sm mt-1">{fieldErrors.senderPhone}</p>
+              )}
+            </div>
           </div>
         </div>
 
-        {/* Địa chỉ */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* 2.2. Thông tin đơn hoa */}
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">
+            Thông tin đơn hoa
+          </h3>
+          
+          {/* Sản phẩm / mẫu hoa */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Sản phẩm / mẫu hoa
+            </label>
+            <div className="p-3 bg-gray-50 rounded-md border">
+              <div className="font-medium text-gray-800">{product.name}</div>
+              <div className="text-sm text-gray-600">Đơn giá: {product.price.toLocaleString('vi-VN')}đ</div>
+            </div>
+          </div>
+
+          {/* Số lượng */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Số lượng <span className="text-red-500">*</span>
+            </label>
+            <div className="flex items-center gap-3">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => handleQuantityChange(-1)}
+                disabled={formData.quantity <= 1}
+              >
+                <Minus className="w-4 h-4" />
+              </Button>
+              <span className={`px-4 py-2 border rounded-md min-w-[60px] text-center ${
+                fieldErrors.quantity ? 'border-red-500' : 'border-gray-300'
+              }`}>
+                {formData.quantity}
+              </span>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => handleQuantityChange(1)}
+              >
+                <Plus className="w-4 h-4" />
+              </Button>
+            </div>
+            {fieldErrors.quantity && (
+              <p className="text-red-500 text-sm mt-1">{fieldErrors.quantity}</p>
+            )}
+          </div>
+
+          {/* Dịch vụ thêm */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-3">
+              <Gift className="w-4 h-4 inline mr-1" />
+              Dịch vụ thêm
+            </label>
+            <div className="space-y-2">
+              {extraServices.map((service) => (
+                <div key={service.id} className="flex items-center space-x-2">
+                  <Checkbox
+                    id={service.id}
+                    checked={formData.extraServices.includes(service.id)}
+                    onCheckedChange={() => handleServiceToggle(service.id)}
+                  />
+                  <label htmlFor={service.id} className="text-sm text-gray-700 cursor-pointer">
+                    {service.name} (+{service.price.toLocaleString('vi-VN')}đ)
+                  </label>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Thời gian giao hàng */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Thời gian giao hàng <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="datetime-local"
+              name="deliveryDateTime"
+              value={formData.deliveryDateTime}
+              onChange={handleInputChange}
+              min={new Date().toISOString().slice(0, 16)}
+              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${
+                fieldErrors.deliveryDateTime 
+                  ? 'border-red-500 focus:ring-red-500' 
+                  : 'border-gray-300 focus:ring-pink-500'
+              }`}
+            />
+            {fieldErrors.deliveryDateTime && (
+              <p className="text-red-500 text-sm mt-1">{fieldErrors.deliveryDateTime}</p>
+            )}
+            <p className="text-xs text-gray-500 mt-1">
+              Ví dụ: 22:20 07/01/2026
+            </p>
+          </div>
+
+          {/* Khu vực giao hàng */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Khu vực giao hàng <span className="text-red-500">*</span>
+            </label>
+            <select
+              name="deliveryArea"
+              value={formData.deliveryArea}
+              onChange={handleInputChange}
+              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${
+                fieldErrors.deliveryArea 
+                  ? 'border-red-500 focus:ring-red-500' 
+                  : 'border-gray-300 focus:ring-pink-500'
+              }`}
+            >
+              <option value="">Chọn khu vực giao hàng</option>
+              {deliveryAreas.map((area) => (
+                <option key={area.id} value={area.id}>
+                  {area.name}
+                </option>
+              ))}
+            </select>
+            <p className="text-xs text-gray-500 mt-1">
+              Chỉ nhận giao hàng khu vực Đà Nẵng & Quảng Nam
+            </p>
+            {fieldErrors.deliveryArea && (
+              <p className="text-red-500 text-sm mt-1">{fieldErrors.deliveryArea}</p>
+            )}
+          </div>
+
+          {/* Tổng tiền */}
+          <div className="bg-gray-50 p-4 rounded-lg">
+            <div className="flex justify-between items-center text-lg font-semibold">
+              <span>Tổng tiền:</span>
+              <span className="text-pink-600">
+                {calculateTotal().toLocaleString('vi-VN')}đ
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* 2.3. Thông tin người nhận */}
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">
+            Thông tin người nhận
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Tên người nhận <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                name="receiverName"
+                value={formData.receiverName}
+                onChange={handleInputChange}
+                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${
+                  fieldErrors.receiverName 
+                    ? 'border-red-500 focus:ring-red-500' 
+                    : 'border-gray-300 focus:ring-pink-500'
+                }`}
+                placeholder="Nhập tên người nhận"
+              />
+              {fieldErrors.receiverName && (
+                <p className="text-red-500 text-sm mt-1">{fieldErrors.receiverName}</p>
+              )}
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Số điện thoại người nhận <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="tel"
+                name="receiverPhone"
+                value={formData.receiverPhone}
+                onChange={handleInputChange}
+                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${
+                  fieldErrors.receiverPhone 
+                    ? 'border-red-500 focus:ring-red-500' 
+                    : 'border-gray-300 focus:ring-pink-500'
+                }`}
+                placeholder="0905123456"
+                maxLength={10}
+              />
+              {fieldErrors.receiverPhone && (
+                <p className="text-red-500 text-sm mt-1">{fieldErrors.receiverPhone}</p>
+              )}
+            </div>
+          </div>
+          
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               <MapPin className="w-4 h-4 inline mr-1" />
-              Địa chỉ nhận <span className="text-red-500">*</span>
+              Địa chỉ cụ thể <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
               name="receiverAddress"
               value={formData.receiverAddress}
               onChange={handleInputChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${
+                fieldErrors.receiverAddress 
+                  ? 'border-red-500 focus:ring-red-500' 
+                  : 'border-gray-300 focus:ring-pink-500'
+              }`}
               placeholder="Địa chỉ giao hoa"
-              required
+            />
+            {fieldErrors.receiverAddress && (
+              <p className="text-red-500 text-sm mt-1">{fieldErrors.receiverAddress}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Lời nhắn trên thiệp / banner
+            </label>
+            <Textarea
+              name="cardMessage"
+              value={formData.cardMessage}
+              onChange={handleInputChange}
+              rows={2}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+              placeholder="Lời nhắn gửi đến người nhận..."
             />
           </div>
         </div>
 
-        {/* Dịch vụ thêm */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-3">
-            <Gift className="w-4 h-4 inline mr-1" />
-            Dịch vụ thêm
-          </label>
-          <div className="space-y-2">
-            {additionalServices.map((service) => (
-              <div key={service.id} className="flex items-center space-x-2">
-                <Checkbox
-                  id={service.id}
-                  checked={formData.additionalServices.includes(service.id)}
-                  onCheckedChange={() => handleServiceToggle(service.id)}
-                />
-                <label htmlFor={service.id} className="text-sm text-gray-700 cursor-pointer">
-                  {service.name} (+{service.price.toLocaleString('vi-VN')}đ)
-                </label>
-              </div>
-            ))}
+        {/* 2.4. Ghi chú */}
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">
+            Ghi chú
+          </h3>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Ghi chú thêm về đơn hàng (optional)
+            </label>
+            <Textarea
+              name="note"
+              value={formData.note}
+              onChange={handleInputChange}
+              rows={3}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
+              placeholder="Ghi chú về màu sắc, yêu cầu đặc biệt..."
+            />
           </div>
         </div>
 
-        {/* Ghi chú */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Ghi chú thêm
-          </label>
-          <Textarea
-            name="note"
-            value={formData.note}
-            onChange={handleInputChange}
-            rows={3}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500"
-            placeholder="Ghi chú về màu sắc, yêu cầu đặc biệt..."
-          />
-        </div>
-
-        {/* Tổng tiền */}
-        <div className="bg-gray-50 p-4 rounded-lg">
-          <div className="flex justify-between items-center text-lg font-semibold">
-            <span>Tổng tiền:</span>
-            <span className="text-pink-600">
-              {calculateTotal().toLocaleString('vi-VN')}đ
-            </span>
+        {/* 2.5. Thanh toán */}
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">
+            Thanh toán
+          </h3>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-3">
+              Phương thức thanh toán <span className="text-red-500">*</span>
+            </label>
+            <div className="space-y-2">
+              {paymentMethods.map((method) => (
+                <div key={method.id} className="flex items-center space-x-2">
+                  <input
+                    type="radio"
+                    id={method.id}
+                    name="paymentMethod"
+                    value={method.id}
+                    checked={formData.paymentMethod === method.id}
+                    onChange={handleInputChange}
+                    className="text-pink-500 focus:ring-pink-500"
+                  />
+                  <label htmlFor={method.id} className="text-sm text-gray-700 cursor-pointer">
+                    {method.name}
+                  </label>
+                </div>
+              ))}
+            </div>
+            {fieldErrors.paymentMethod && (
+              <p className="text-red-500 text-sm mt-1">{fieldErrors.paymentMethod}</p>
+            )}
           </div>
         </div>
 

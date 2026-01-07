@@ -18,6 +18,7 @@ import {
   Copy,
   Facebook,
   Twitter,
+  Check,
 } from "lucide-react"
 import { CONTACT } from "@/lib/constants"
 import { HeaderSection } from "@/components/header"
@@ -42,6 +43,7 @@ export default function BlogPostPage() {
   const [blog, setBlog] = useState<Blog | null>(null)
   const [loading, setLoading] = useState(true)
   const [notFound, setNotFound] = useState(false)
+  const [copySuccess, setCopySuccess] = useState(false)
 
   // Fetch blog by slug from Firebase
   useEffect(() => {
@@ -65,6 +67,18 @@ export default function BlogPostPage() {
       fetchBlog()
     }
   }, [slug])
+
+  // Close share menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (shareMenuOpen && !(event.target as Element).closest('.share-menu-container')) {
+        setShareMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [shareMenuOpen])
 
   // Format date helper
   const formatDate = (publishedAt: any) => {
@@ -144,12 +158,11 @@ export default function BlogPostPage() {
       case 'facebook':
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank')
         break
-      case 'twitter':
-        window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`, '_blank')
-        break
       case 'copy':
-        navigator.clipboard.writeText(url)
-        alert('Đã sao chép link!')
+        navigator.clipboard.writeText(url).then(() => {
+          setCopySuccess(true)
+          setTimeout(() => setCopySuccess(false), 2000)
+        })
         break
     }
     setShareMenuOpen(false)
@@ -212,7 +225,7 @@ export default function BlogPostPage() {
             {/* Share */}
             <div className="flex items-center gap-4">
               <span className="text-sm text-[var(--text-muted)]">Chia sẻ:</span>
-              <div className="relative">
+              <div className="relative share-menu-container">
                 <button
                   onClick={() => setShareMenuOpen(!shareMenuOpen)}
                   className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-[var(--text-primary)] rounded-lg transition-colors"
@@ -231,18 +244,20 @@ export default function BlogPostPage() {
                       Facebook
                     </button>
                     <button
-                      onClick={() => handleShare('twitter')}
-                      className="flex items-center gap-2 w-full px-3 py-2 text-sm hover:bg-gray-100 rounded-md transition-colors"
-                    >
-                      <Twitter className="w-4 h-4 text-blue-400" />
-                      Twitter
-                    </button>
-                    <button
                       onClick={() => handleShare('copy')}
                       className="flex items-center gap-2 w-full px-3 py-2 text-sm hover:bg-gray-100 rounded-md transition-colors"
                     >
-                      <Copy className="w-4 h-4" />
-                      Sao chép link
+                      {copySuccess ? (
+                        <>
+                          <Check className="w-4 h-4 text-green-600" />
+                          Đã sao chép!
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-4 h-4" />
+                          Sao chép link
+                        </>
+                      )}
                     </button>
                   </div>
                 )}

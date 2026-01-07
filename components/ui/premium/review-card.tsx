@@ -197,7 +197,7 @@ export function ReviewCardCompact({
                 key={i}
                 className={cn("text-xs", i < rating ? "opacity-100" : "opacity-30")}
               >
-                ⭐
+                🌸
               </span>
             ))}
           </div>

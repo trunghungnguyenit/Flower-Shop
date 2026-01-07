@@ -66,11 +66,11 @@ Comprehensive guide for image creation, editing, and composition using Imagen 4 
 
 | Model | Quality | Speed | Cost | Best For |
 |-------|---------|-------|------|----------|
-| imagen-4.0-ultra | ⭐⭐⭐⭐⭐ | 🐢 Slow | 💰💰 High | Production assets |
-| imagen-4.0-standard | ⭐⭐⭐⭐ | ⚡ Medium | 💰 Medium | General use |
-| imagen-4.0-fast | ⭐⭐⭐ | 🚀 Fast | 💵 Low | Rapid iteration |
-| gemini-3-pro-image | ⭐⭐⭐⭐ | ⚡ Medium | 💰 Medium | Text rendering |
-| gemini-2.5-flash-image | ⭐⭐⭐ | ⚡ Medium | 💵 Low | Legacy (deprecated) |
+| imagen-4.0-ultra | 🌸🌸🌸🌸🌸 | 🐢 Slow | 💰💰 High | Production assets |
+| imagen-4.0-standard | 🌸🌸🌸🌸 | ⚡ Medium | 💰 Medium | General use |
+| imagen-4.0-fast | 🌸🌸🌸 | 🚀 Fast | 💵 Low | Rapid iteration |
+| gemini-3-pro-image | 🌸🌸🌸🌸 | ⚡ Medium | 💰 Medium | Text rendering |
+| gemini-2.5-flash-image | 🌸🌸🌸 | ⚡ Medium | 💵 Low | Legacy (deprecated) |
 
 **Selection Guide**:
 - **Marketing/Production**: Use `imagen-4.0-ultra` for final deliverables

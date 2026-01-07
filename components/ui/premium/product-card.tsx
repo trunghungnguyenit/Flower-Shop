@@ -214,7 +214,7 @@ export function ProductCard({
             <div className="flex items-center gap-3 mb-2">
               {rating && (
                 <div className="flex items-center gap-1">
-                  <span className="text-sm">⭐</span>
+                  <span className="text-sm">🌸</span>
                   <span
                     className="font-body text-[var(--text-secondary)]"
                     style={{ fontSize: "13px" }}

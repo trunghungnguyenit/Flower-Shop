@@ -1,4 +1,3 @@
-// api/firebase.ts
 import { initializeApp, getApps, getApp } from "firebase/app"
 import {
   getFirestore,
@@ -11,10 +10,6 @@ import {
   type QueryDocumentSnapshot,
 } from "firebase/firestore"
 import { Product, Blog } from "./api.type"
-
-/* =========================
-   Helpers
-========================= */
 
 type AnyObject = Record<string, any>
 
@@ -48,9 +43,7 @@ export const formatPrice = (gia: number | string | null | undefined): string => 
   return "Liên hệ báo giá"
 }
 
-/* =========================
-   Firebase init
-========================= */
+//Firebase init
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
@@ -70,9 +63,7 @@ const ensureFirebase = () => {
   return { db }
 }
 
-/* =========================
-   Response helpers
-========================= */
+//Response helpers
 
 const okResponse = (data: any, status = 200) => ({
   ok: true,
@@ -86,9 +77,7 @@ const errorResponse = (message: string, status = 500) => ({
   data: { error: { message } },
 })
 
-/* =========================
-   Normalizers
-========================= */
+//Normalizers
 
 const normalizeStringArray = (v: any): string[] => {
   if (!v) return []
@@ -106,9 +95,7 @@ const normalizeNumber = (v: any): number | undefined => {
   return undefined
 }
 
-/* =========================
-   Mappers
-========================= */
+//Mappers
 
 export const mapProduct = (docId: string, p: AnyObject): Product => ({
   id: docId,
@@ -139,9 +126,7 @@ export const mapBlog = (docId: string, b: AnyObject): Blog => ({
   isActive: b.isActive ?? true,
 })
 
-/* =========================
-   Firestore fetchers
-========================= */
+//Firestore fetchers
 
 const fetchAll = async <T>(
   colName: string,
@@ -167,10 +152,7 @@ const fetchBySlug = async <T>(
   return mapper(d.id, d.data())
 }
 
-/* =========================
-   Public API
-========================= */
-
+//  Public API
 const create = () => {
   const getProduct = async () => {
     try {

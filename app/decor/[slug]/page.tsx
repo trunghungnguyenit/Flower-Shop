@@ -501,16 +501,6 @@ function ProductCard({
                 Phù hợp
               </span>
             </div>
-            {/* Wishlist */}
-            <button
-              className="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-[var(--primary)] hover:text-white"
-              onClick={(e) => {
-                e.preventDefault()
-                e.stopPropagation()
-              }}
-            >
-              <Heart className="w-4 h-4" strokeWidth={1.5} />
-            </button>
           </div>
 
           {/* Content */}

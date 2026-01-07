@@ -56,7 +56,7 @@ useEffect(() => {
     const fetchBlogs = async () => {
       try {
         const res = await FirebaseApi.getBlog()
-        console.log("Blog API TEST: ", res.data)
+        //console.log("Blog API TEST: ", res.data)
         if (res.ok && Array.isArray(res.data)) {
           setBlogs(res.data.filter((blog: Blog) => blog.isActive))
         } else {

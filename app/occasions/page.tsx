@@ -94,7 +94,7 @@ export default function OccasionsPage() {
       id: "event-flowers",
       title: "Hoa Sự Kiện",
       description: "Trang trí hoa cho các sự kiện, hội nghị và tiệc tùng",
-      image: "/event-flower-decoration.jpg",
+      image: "/hoa-su-kien.jpg",
       href: "/occasions/event-flowers",
       icon: Calendar,
       color: "purple",

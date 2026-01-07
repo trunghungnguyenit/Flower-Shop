@@ -154,11 +154,13 @@ export function FooterSection() {
             {/* Social */}
             <div className="flex gap-3">
               {[
-                { icon: Facebook, color: "#1877F2" },
+                { icon: Facebook, color: "#1877F2", href: CONTACT.facebook },
               ].map((social, index) => (
                 <motion.a
                   key={index}
-                  href="#"
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-10 h-10 flex items-center justify-center bg-white/10 rounded-full text-white/80 hover:text-white transition-colors duration-300"
                   whileHover={{
                     scale: 1.15,
@@ -171,7 +173,9 @@ export function FooterSection() {
                 </motion.a>
               ))}
               <motion.a
-                href="#"
+                href={CONTACT.zaloLink}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 flex items-center justify-center bg-white/10 rounded-full text-white/80 hover:text-white transition-colors duration-300"
                 whileHover={{
                   scale: 1.15,
@@ -258,6 +262,20 @@ export function FooterSection() {
                   {CONTACT.email}
                 </a>
               </li>
+              <li className="flex items-center gap-3">
+                <div className="w-5 h-5 flex items-center justify-center">
+                  <span className="text-[var(--primary)] text-xs font-bold">Z</span>
+                </div>
+                <a
+                  href={CONTACT.zaloLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-body text-white/70 hover:text-[var(--primary)] transition-colors"
+                  style={{ fontSize: "14px" }}
+                >
+                  Chat Zalo: {CONTACT.zalo}
+                </a>
+              </li>
               <li className="flex items-start gap-3">
                 <Clock
                   className="w-5 h-5 text-[var(--primary)] flex-shrink-0 mt-0.5"
@@ -294,22 +312,6 @@ export function FooterSection() {
               <span className="text-[var(--primary)]">♥</span> bởi đội ngũ yêu
               hoa.
             </p>
-            {/* <div className="flex items-center gap-6">
-              {[
-                "Chính sách giao hàng",
-                "Chính sách đổi trả",
-                "Chính sách bảo mật",
-              ].map((policy, index) => (
-                <Link
-                  key={index}
-                  href="#"
-                  className="font-body text-white/50 hover:text-[var(--primary)] transition-colors"
-                  style={{ fontSize: "13px" }}
-                >
-                  {policy}
-                </Link>
-              ))}
-            </div> */}
           </div>
         </div>
       </motion.div>
