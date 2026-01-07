@@ -137,6 +137,12 @@
       "regex": "^/occasions/wedding(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/occasions/wedding(?:/)?$"
+    },
+    {
+      "page": "/order-info",
+      "regex": "^/order\\-info(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/order\\-info(?:/)?$"
     }
   ],
   "dataRoutes": [],

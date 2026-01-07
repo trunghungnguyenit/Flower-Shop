@@ -15,6 +15,7 @@
   "/occasions/opening/page": "app/occasions/opening/page.js",
   "/occasions/page": "app/occasions/page.js",
   "/occasions/wedding/page": "app/occasions/wedding/page.js",
+  "/order-info/page": "app/order-info/page.js",
   "/page": "app/page.js",
   "/product/[slug]/page": "app/product/[slug]/page.js"
 }
