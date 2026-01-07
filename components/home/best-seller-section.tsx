@@ -7,9 +7,10 @@ import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { motion, useInView } from "framer-motion"
-import { ArrowRight, Heart, ShoppingCart } from "lucide-react"
+import { ArrowRight, Heart, ShoppingCart, MessageCircle } from "lucide-react"
 import { Product } from "@/api/api.type"
 import { formatImageUrl } from "@/api/firebase"
+import { CONTACT } from "@/lib/constants"
 import { staggerContainer, staggerItem, staggerItemScale, premiumEase } from "@/components/animations/framer-variants"
 import { ParticleGlow } from "@/components/animations/background-effects"
 import { BestSellerSkeleton } from "./best-seller-skeleton"
@@ -129,14 +130,6 @@ export function BestSellerSection({ products, loading }: BestSellerSectionProps)
                       </span>
                     )}
 
-                  {/* Wishlist Button */}
-                  <button
-                    className="absolute top-3 right-3 w-9 h-9 flex items-center justify-center bg-white/90 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white hover:scale-110"
-                    onClick={(e: React.MouseEvent) => e.preventDefault()}
-                  >
-                    <Heart className="w-4 h-4 text-[var(--text-secondary)]" strokeWidth={1.5} />
-                  </button>
-
                   {/* Quick Order Button */}
                   <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300">
                     <button
@@ -166,13 +159,37 @@ export function BestSellerSection({ products, loading }: BestSellerSectionProps)
                     </div>
 
                     {/* Price */}
-                    <div className="flex items-center gap-2">
-                      <span
-                        className="font-display text-[var(--primary)]"
-                        style={{ fontSize: "16px", fontWeight: 600 }}
-                      >
-                        {product.price.toLocaleString()}đ
-                      </span>
+                    <div className="flex items-center justify-between">
+                      {product.price > 0 ? (
+                        <span
+                          className="font-display text-[var(--primary)]"
+                          style={{ fontSize: "16px", fontWeight: 600 }}
+                        >
+                          {product.price.toLocaleString()}đ
+                        </span>
+                      ) : (
+                        <span
+                          className="font-body text-[var(--text-secondary)]"
+                          style={{ fontSize: "14px", fontWeight: 500 }}
+                        >
+                          Liên hệ để biết giá
+                        </span>
+                      )}
+                      
+                      {/* Contact button for zero price products */}
+                      {product.price === 0 && (
+                        <button
+                          onClick={(e) => {
+                            e.preventDefault()
+                            e.stopPropagation()
+                            window.open(CONTACT.zaloLink, '_blank', 'noopener,noreferrer')
+                          }}
+                          className="inline-flex items-center gap-1 px-3 py-1 bg-[var(--primary)] text-white text-xs font-medium rounded-full hover:bg-[var(--primary-dark)] transition-colors duration-300"
+                        >
+                          <MessageCircle className="w-3 h-3" strokeWidth={1.5} />
+                          Liên hệ
+                        </button>
+                      )}
                     </div>
                   </div>
                 </Link>

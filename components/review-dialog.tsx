@@ -45,7 +45,7 @@ export function ReviewDialog({ isOpen, onClose }: ReviewDialogProps) {
       const message = `🌸 ĐÁNH GIÁ MỚI\n\n`
         + `👤 Tên: ${formData.name}\n`
         + `📍 Địa điểm: ${formData.location || "Không có"}\n`
-        + `⭐ Đánh giá: ${"🌸".repeat(rating)} (${rating}/5)\n\n`
+        + `🌸 Đánh giá: ${"🌸".repeat(rating)} (${rating}/5)\n\n`
         + `💬 Nội dung:\n${formData.comment}`
 
       // Open Zalo

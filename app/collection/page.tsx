@@ -134,16 +134,6 @@ function ProductCard({
                 {product.badge || "Hoa tươi"}
               </span>
             </div>
-            {/* Wishlist */}
-            <button
-              className="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-[var(--primary)] hover:text-white"
-              onClick={(e) => {
-                e.preventDefault()
-                e.stopPropagation()
-              }}
-            >
-              <Heart className="w-4 h-4" strokeWidth={1.5} />
-            </button>
           </div>
 
           {/* Content */}
@@ -168,28 +158,53 @@ function ProductCard({
 
             {/* Price & CTA */}
             <div className="flex items-center justify-between">
-              <span
-                className="font-display text-[var(--primary)] font-semibold"
-                style={{ fontSize: "17px" }}
-              >
-                {product.price.toLocaleString("vi-VN")}đ
-              </span>
-              <motion.button
-                onClick={handleAddToCart}
-                className={cn(
-                  "w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300",
-                  isAdding
-                    ? "bg-green-500 text-white"
-                    : "bg-[var(--primary)]/10 text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white"
-                )}
-                whileTap={{ scale: 0.9 }}
-              >
-                {isAdding ? (
-                  <Check className="w-4 h-4" />
-                ) : (
-                  <ShoppingCart className="w-4 h-4" strokeWidth={1.5} />
-                )}
-              </motion.button>
+              {product.price > 0 ? (
+                <>
+                  <span
+                    className="font-display text-[var(--primary)] font-semibold"
+                    style={{ fontSize: "17px" }}
+                  >
+                    {product.price.toLocaleString("vi-VN")}đ
+                  </span>
+                  <motion.button
+                    onClick={handleAddToCart}
+                    className={cn(
+                      "w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300",
+                      isAdding
+                        ? "bg-green-500 text-white"
+                        : "bg-[var(--primary)]/10 text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white"
+                    )}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    {isAdding ? (
+                      <Check className="w-4 h-4" />
+                    ) : (
+                      <ShoppingCart className="w-4 h-4" strokeWidth={1.5} />
+                    )}
+                  </motion.button>
+                </>
+              ) : (
+                <>
+                  <span
+                    className="font-body text-[var(--text-secondary)] font-medium"
+                    style={{ fontSize: "14px" }}
+                  >
+                    Liên hệ để biết giá
+                  </span>
+                  <motion.button
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      window.open(CONTACT.zaloLink, '_blank', 'noopener,noreferrer')
+                    }}
+                    className="inline-flex items-center gap-1 px-3 py-1 bg-[var(--primary)] text-white text-xs font-medium rounded-full hover:bg-[var(--primary-dark)] transition-colors duration-300"
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <MessageCircle className="w-3 h-3" strokeWidth={1.5} />
+                    Liên hệ
+                  </motion.button>
+                </>
+              )}
             </div>
           </div>
         </div>

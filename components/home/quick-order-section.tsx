@@ -5,11 +5,12 @@ import Image from "next/image"
 import { motion, useInView, AnimatePresence } from "framer-motion"
 import { Clock, MapPin, Check, Phone, MessageCircle, Send, Plus, Minus, Gift, X } from "lucide-react"
 import { CONTACT } from "@/lib/constants"
-import { Product } from "@/api/api.type"
+import { Product, OrderFormData } from "@/api/api.type"
 import { formatImageUrl } from "@/api/firebase"
 import { staggerContainer, staggerItemLeft, premiumEase } from "@/components/animations/framer-variants"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
+import { extraServices, deliveryAreas, paymentMethods, orderFormValidationSchema } from "@/lib/order-constants"
 
 // ================================================================
 // QUICK ORDER SECTION
@@ -20,55 +21,40 @@ interface QuickOrderSectionProps {
   loading: boolean
 }
 
-interface OrderFormData {
-  name: string;
-  phone: string;
-  productId: string;
-  quantity: number;
-  senderAddress: string;
-  receiverAddress: string;
-  deliveryTime: string;
-  additionalServices: string[];
-  note: string;
-}
-
-// Dịch vụ thêm
-const additionalServices = [
-  { id: "gift-wrap", name: "Gói quà cao cấp", price: 50000 },
-  { id: "card", name: "Thiệp chúc mừng", price: 20000 },
-  { id: "delivery-express", name: "Giao hàng nhanh (2h)", price: 100000 },
-  { id: "setup", name: "Trang trí tại chỗ", price: 200000 },
-];
-
-// Thời gian giao hàng
-const deliveryTimes = [
-  "Sáng (8:00 - 12:00)",
-  "Chiều (13:00 - 17:00)",
-  "Tối (18:00 - 21:00)",
-  "Cả ngày (8:00 - 21:00)",
-  "Theo yêu cầu"
-];
-
 export function QuickOrderSection({ products, loading }: QuickOrderSectionProps) {
   const [formData, setFormData] = useState<OrderFormData>({
-    name: '',
-    phone: '',
+    // Thông tin người đặt
+    senderName: '',
+    senderPhone: '',
+    
+    // Thông tin đơn hoa
     productId: '',
     quantity: 1,
-    senderAddress: '',
+    extraServices: [],
+    deliveryDateTime: '',
+    deliveryArea: '',
+    
+    // Thông tin người nhận
+    receiverName: '',
+    receiverPhone: '',
     receiverAddress: '',
-    deliveryTime: '',
-    additionalServices: [],
+    cardMessage: '',
+    
+    // Ghi chú
     note: '',
+    
+    // Thanh toán
+    paymentMethod: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string>('')
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({})
   const sectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.15 })
 
-  // Lọc sản phẩm active
-  const activeProducts = products.filter(p => p.isActive)
+  // Lọc sản phẩm active và có giá > 0 (không hiển thị sản phẩm liên hệ trong quick order)
+  const activeProducts = products.filter(p => p.isActive && p.price > 0)
 
   // Tìm sản phẩm được chọn
   const selectedProduct = activeProducts.find(p => p.id === formData.productId)
@@ -77,8 +63,8 @@ export function QuickOrderSection({ products, loading }: QuickOrderSectionProps)
   const calculateTotal = () => {
     if (!selectedProduct) return 0
     const productTotal = selectedProduct.price * formData.quantity
-    const servicesTotal = formData.additionalServices.reduce((total, serviceId) => {
-      const service = additionalServices.find(s => s.id === serviceId)
+    const servicesTotal = formData.extraServices.reduce((total, serviceId) => {
+      const service = extraServices.find(s => s.id === serviceId)
       return total + (service?.price || 0)
     }, 0)
     return productTotal + servicesTotal
@@ -91,6 +77,13 @@ export function QuickOrderSection({ products, loading }: QuickOrderSectionProps)
       [name]: value,
     }));
     setErrorMessage(''); // Clear error when user types
+    // Clear field error when user starts typing
+    if (fieldErrors[name]) {
+      setFieldErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }));
+    }
   };
 
   const handleQuantityChange = (delta: number) => {
@@ -103,9 +96,9 @@ export function QuickOrderSection({ products, loading }: QuickOrderSectionProps)
   const handleServiceToggle = (serviceId: string) => {
     setFormData(prev => ({
       ...prev,
-      additionalServices: prev.additionalServices.includes(serviceId)
-        ? prev.additionalServices.filter(id => id !== serviceId)
-        : [...prev.additionalServices, serviceId]
+      extraServices: prev.extraServices.includes(serviceId)
+        ? prev.extraServices.filter(id => id !== serviceId)
+        : [...prev.extraServices, serviceId]
     }));
   };
 
@@ -114,8 +107,15 @@ export function QuickOrderSection({ products, loading }: QuickOrderSectionProps)
       ...prev,
       productId,
       quantity: 1, // Reset quantity when product changes
-      additionalServices: [], // Reset services when product changes
+      extraServices: [], // Reset services when product changes
     }));
+    // Clear product selection error
+    if (fieldErrors.productId) {
+      setFieldErrors(prev => ({
+        ...prev,
+        productId: ''
+      }));
+    }
   };
 
   const handleClearProduct = () => {
@@ -123,43 +123,59 @@ export function QuickOrderSection({ products, loading }: QuickOrderSectionProps)
       ...prev,
       productId: '',
       quantity: 1,
-      additionalServices: [],
+      extraServices: [],
     }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
-    // Validate required fields
-    if (!formData.name || !formData.phone || !formData.productId || !formData.receiverAddress) {
-      setErrorMessage('Vui lòng điền đầy đủ thông tin bắt buộc');
-      return;
-    }
-
-    if (!selectedProduct) {
-      setErrorMessage('Vui lòng chọn sản phẩm');
-      return;
-    }
-
     setIsSubmitting(true)
     setErrorMessage('')
+    setFieldErrors({})
 
     try {
+      // Validate form data with Yup
+      await orderFormValidationSchema.validate(formData, { 
+        abortEarly: false,
+        context: { isQuickOrder: true }
+      });
+
+      const selectedProduct = activeProducts.find(p => p.id === formData.productId);
+      if (!selectedProduct) {
+        setErrorMessage('Sản phẩm không tồn tại');
+        return;
+      }
+
       const orderData = {
-        name: formData.name,
-        phone: formData.phone,
-        note: formData.note,
-        productName: selectedProduct.name,
-        productPrice: selectedProduct.price,
+        // 2.1. Thông tin người đặt
+        senderName: formData.senderName,
+        senderPhone: formData.senderPhone,
+        
+        // 2.2. Thông tin đơn hoa
+        product: selectedProduct.name,
         quantity: formData.quantity,
-        senderAddress: formData.senderAddress,
-        receiverAddress: formData.receiverAddress,
-        deliveryTime: formData.deliveryTime,
-        additionalServices: formData.additionalServices.map(id => {
-          const service = additionalServices.find(s => s.id === id)
+        productPrice: selectedProduct.price,
+        extraServices: formData.extraServices.map(id => {
+          const service = extraServices.find(s => s.id === id)
           return service ? `${service.name} (+${service.price.toLocaleString('vi-VN')}đ)` : id
         }),
+        deliveryDate: formData.deliveryDateTime.split('T')[0], // Tách ngày từ datetime
+        deliveryTimeSlot: formData.deliveryDateTime.split('T')[1] || '', // Tách giờ từ datetime
+        deliveryArea: formData.deliveryArea,
         totalAmount: calculateTotal(),
+        
+        // 2.3. Thông tin người nhận
+        receiverName: formData.receiverName,
+        receiverPhone: formData.receiverPhone,
+        receiverAddress: formData.receiverAddress,
+        cardMessage: formData.cardMessage,
+        
+        // 2.4. Ghi chú
+        note: formData.note,
+        
+        // 2.5. Thanh toán
+        paymentMethod: formData.paymentMethod,
       };
 
       const response = await fetch('/api/order', {
@@ -173,25 +189,59 @@ export function QuickOrderSection({ products, loading }: QuickOrderSectionProps)
       const result = await response.json();
 
       if (result.success) {
-        setIsSuccess(true)
-        // Reset form
-        setFormData({
-          name: '',
-          phone: '',
-          productId: '',
-          quantity: 1,
-          senderAddress: '',
-          receiverAddress: '',
-          deliveryTime: '',
-          additionalServices: [],
-          note: '',
-        });
-        setTimeout(() => setIsSuccess(false), 5000)
+        // Save order data to localStorage for the order info page
+        const orderInfoData = {
+          // 1.1. Thông tin người đặt
+          senderName: formData.senderName,
+          senderPhone: formData.senderPhone,
+          
+          // 1.2. Thông tin đơn hoa
+          product: selectedProduct.name,
+          quantity: formData.quantity,
+          productPrice: selectedProduct.price,
+          extraServices: formData.extraServices.map(id => {
+            const service = extraServices.find(s => s.id === id)
+            return service ? `${service.name} (+${service.price.toLocaleString('vi-VN')}đ)` : id
+          }),
+          deliveryDate: formData.deliveryDateTime.split('T')[0], // Tách ngày từ datetime
+          deliveryTimeSlot: formData.deliveryDateTime.split('T')[1] || '', // Tách giờ từ datetime
+          deliveryArea: formData.deliveryArea,
+          totalAmount: calculateTotal(),
+          
+          // 1.3. Thông tin người nhận
+          receiverName: formData.receiverName,
+          receiverPhone: formData.receiverPhone,
+          receiverAddress: formData.receiverAddress,
+          cardMessage: formData.cardMessage,
+          
+          // 1.4. Thông tin khác
+          note: formData.note,
+          paymentMethod: formData.paymentMethod,
+        };
+
+        // Save to localStorage
+        localStorage.setItem('currentOrder', JSON.stringify(orderInfoData));
+        
+        // Redirect to order info page
+        window.location.href = '/order-info';
       } else {
         setErrorMessage(result.message || 'Có lỗi xảy ra khi gửi đơn hàng');
       }
     } catch (error) {
-      setErrorMessage('Không thể gửi đơn đặt hàng. Vui lòng thử lại.');
+      if (error instanceof Error && 'inner' in error) {
+        // Handle validation errors
+        const validationError = error as any;
+        const errors: Record<string, string> = {};
+        validationError.inner.forEach((err: any) => {
+          if (err.path) {
+            errors[err.path] = err.message;
+          }
+        });
+        setFieldErrors(errors);
+        setErrorMessage('Vui lòng kiểm tra lại thông tin đã nhập');
+      } else {
+        setErrorMessage('Không thể gửi đơn đặt hàng. Vui lòng thử lại.');
+      }
     } finally {
       setIsSubmitting(false)
     }
@@ -377,32 +427,39 @@ export function QuickOrderSection({ products, loading }: QuickOrderSectionProps)
               </div>
 
               {/* Form */}
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Chọn sản phẩm */}
                 <div>
-                  <label className="block font-body text-[var(--text-primary)] mb-2" style={{ fontSize: "14px", fontWeight: 500 }}>
-                    Chọn sản phẩm <span className="text-[var(--danger)]">*</span>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Chọn sản phẩm <span className="text-red-500">*</span>
                   </label>
                   {loading ? (
-                    <div className="w-full h-12 px-4 bg-[var(--background-muted)] border border-[var(--border-soft)] rounded-md flex items-center justify-center">
-                      <div className="w-5 h-5 border-2 border-[var(--primary)]/30 border-t-[var(--primary)] rounded-full animate-spin" />
+                    <div className="w-full h-12 px-4 bg-gray-50 border border-gray-300 rounded-md flex items-center justify-center">
+                      <div className="w-5 h-5 border-2 border-pink-300 border-t-pink-500 rounded-full animate-spin" />
                     </div>
                   ) : (
-                    <select
-                      name="productId"
-                      value={formData.productId}
-                      onChange={(e) => handleProductChange(e.target.value)}
-                      className="w-full h-12 px-4 bg-[var(--background-muted)] border border-[var(--border-soft)] font-body text-[var(--text-primary)] focus:outline-none focus:border-[var(--primary)] transition-colors duration-300 appearance-none"
-                      style={{ borderRadius: "var(--radius-medium)", fontSize: "15px" }}
-                      required
-                    >
-                      <option value="">Chọn sản phẩm...</option>
-                      {activeProducts.map((product) => (
-                        <option key={product.id} value={product.id}>
-                          {product.name} - {product.price.toLocaleString('vi-VN')}đ
-                        </option>
-                      ))}
-                    </select>
+                    <>
+                      <select
+                        name="productId"
+                        value={formData.productId}
+                        onChange={(e) => handleProductChange(e.target.value)}
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${
+                          fieldErrors.productId 
+                            ? 'border-red-500 focus:ring-red-500' 
+                            : 'border-gray-300 focus:ring-pink-500'
+                        }`}
+                      >
+                        <option value="">Chọn sản phẩm...</option>
+                        {activeProducts.map((product) => (
+                          <option key={product.id} value={product.id}>
+                            {product.name} - {product.price.toLocaleString('vi-VN')}đ
+                          </option>
+                        ))}
+                      </select>
+                      {fieldErrors.productId && (
+                        <p className="text-red-500 text-sm mt-1">{fieldErrors.productId}</p>
+                      )}
+                    </>
                   )}
                 </div>
 
@@ -413,7 +470,7 @@ export function QuickOrderSection({ products, loading }: QuickOrderSectionProps)
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
-                      className="bg-[var(--background-muted)] p-4 rounded-lg border border-[var(--border-soft)] overflow-hidden"
+                      className="bg-gray-50 p-4 rounded-lg border border-gray-200 overflow-hidden"
                     >
                       <div className="flex items-start gap-4">
                         {selectedProduct.images && selectedProduct.images[0] && (
@@ -428,18 +485,18 @@ export function QuickOrderSection({ products, loading }: QuickOrderSectionProps)
                         )}
                         <div className="flex-1 min-w-0">
                           <div className="flex items-start justify-between gap-2 mb-2">
-                            <h4 className="font-body text-[var(--text-primary)] font-medium" style={{ fontSize: "15px" }}>
+                            <h4 className="text-gray-800 font-medium text-sm">
                               {selectedProduct.name}
                             </h4>
                             <button
                               type="button"
                               onClick={handleClearProduct}
-                              className="text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
+                              className="text-gray-400 hover:text-gray-600 transition-colors"
                             >
                               <X className="w-4 h-4" />
                             </button>
                           </div>
-                          <p className="font-body text-[var(--primary)] font-semibold" style={{ fontSize: "16px" }}>
+                          <p className="text-pink-600 font-semibold">
                             {selectedProduct.price.toLocaleString('vi-VN')}đ
                           </p>
                         </div>
@@ -448,50 +505,69 @@ export function QuickOrderSection({ products, loading }: QuickOrderSectionProps)
                   )}
                 </AnimatePresence>
 
-                {/* Thông tin khách hàng */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="block font-body text-[var(--text-primary)] mb-2" style={{ fontSize: "14px", fontWeight: 500 }}>
-                      Họ tên <span className="text-[var(--danger)]">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      placeholder="Nguyễn Văn A"
-                      className="w-full h-12 px-4 bg-[var(--background-muted)] border border-[var(--border-soft)] font-body text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary)] transition-colors duration-300"
-                      style={{ borderRadius: "var(--radius-medium)", fontSize: "15px" }}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block font-body text-[var(--text-primary)] mb-2" style={{ fontSize: "14px", fontWeight: 500 }}>
-                      Số điện thoại <span className="text-[var(--danger)]">*</span>
-                    </label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      placeholder="0905 xxx xxx"
-                      className="w-full h-12 px-4 bg-[var(--background-muted)] border border-[var(--border-soft)] font-body text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary)] transition-colors duration-300"
-                      style={{ borderRadius: "var(--radius-medium)", fontSize: "15px" }}
-                      required
-                    />
-                  </div>
-                </div>
-
-                {/* Số lượng */}
+                {/* Thông tin người đặt */}
                 {selectedProduct && (
-                  <AnimatePresence>
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                    >
-                      <label className="block font-body text-[var(--text-primary)] mb-2" style={{ fontSize: "14px", fontWeight: 500 }}>
-                        Số lượng
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">
+                      Thông tin người đặt
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Tên người gửi <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          name="senderName"
+                          value={formData.senderName}
+                          onChange={handleInputChange}
+                          placeholder="Nguyễn Văn A"
+                          className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${
+                            fieldErrors.senderName 
+                              ? 'border-red-500 focus:ring-red-500' 
+                              : 'border-gray-300 focus:ring-pink-500'
+                          }`}
+                        />
+                        {fieldErrors.senderName && (
+                          <p className="text-red-500 text-sm mt-1">{fieldErrors.senderName}</p>
+                        )}
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Số điện thoại <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="tel"
+                          name="senderPhone"
+                          value={formData.senderPhone}
+                          onChange={handleInputChange}
+                          placeholder="0905123456"
+                          maxLength={10}
+                          className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${
+                            fieldErrors.senderPhone 
+                              ? 'border-red-500 focus:ring-red-500' 
+                              : 'border-gray-300 focus:ring-pink-500'
+                          }`}
+                        />
+                        {fieldErrors.senderPhone && (
+                          <p className="text-red-500 text-sm mt-1">{fieldErrors.senderPhone}</p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Thông tin đơn hoa */}
+                {selectedProduct && (
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">
+                      Thông tin đơn hoa
+                    </h3>
+                    
+                    {/* Số lượng */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Số lượng <span className="text-red-500">*</span>
                       </label>
                       <div className="flex items-center gap-3">
                         <Button
@@ -500,11 +576,12 @@ export function QuickOrderSection({ products, loading }: QuickOrderSectionProps)
                           size="sm"
                           onClick={() => handleQuantityChange(-1)}
                           disabled={formData.quantity <= 1}
-                          className="h-10 w-10 p-0"
                         >
                           <Minus className="w-4 h-4" />
                         </Button>
-                        <span className="px-4 py-2 border border-[var(--border-soft)] rounded-md min-w-[60px] text-center font-body text-[var(--text-primary)]">
+                        <span className={`px-4 py-2 border rounded-md min-w-[60px] text-center ${
+                          fieldErrors.quantity ? 'border-red-500' : 'border-gray-300'
+                        }`}>
                           {formData.quantity}
                         </span>
                         <Button
@@ -512,165 +589,276 @@ export function QuickOrderSection({ products, loading }: QuickOrderSectionProps)
                           variant="outline"
                           size="sm"
                           onClick={() => handleQuantityChange(1)}
-                          className="h-10 w-10 p-0"
                         >
                           <Plus className="w-4 h-4" />
                         </Button>
                       </div>
-                    </motion.div>
-                  </AnimatePresence>
-                )}
+                      {fieldErrors.quantity && (
+                        <p className="text-red-500 text-sm mt-1">{fieldErrors.quantity}</p>
+                      )}
+                    </div>
 
-                {/* Địa chỉ */}
-                {selectedProduct && (
-                  <AnimatePresence>
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      className="grid grid-cols-1 gap-5"
-                    >
-                      <div>
-                        <label className="block font-body text-[var(--text-primary)] mb-2" style={{ fontSize: "14px", fontWeight: 500 }}>
-                          <MapPin className="w-4 h-4 inline mr-1" />
-                          Địa chỉ nhận <span className="text-[var(--danger)]">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          name="receiverAddress"
-                          value={formData.receiverAddress}
-                          onChange={handleInputChange}
-                          placeholder="Địa chỉ giao hoa"
-                          className="w-full h-12 px-4 bg-[var(--background-muted)] border border-[var(--border-soft)] font-body text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary)] transition-colors duration-300"
-                          style={{ borderRadius: "var(--radius-medium)", fontSize: "15px" }}
-                          required={!!selectedProduct}
-                        />
-                      </div>
-                      <div>
-                        <label className="block font-body text-[var(--text-primary)] mb-2" style={{ fontSize: "14px", fontWeight: 500 }}>
-                          Thời gian giao hàng
-                        </label>
-                        <select
-                          name="deliveryTime"
-                          value={formData.deliveryTime}
-                          onChange={handleInputChange}
-                          className="w-full h-12 px-4 bg-[var(--background-muted)] border border-[var(--border-soft)] font-body text-[var(--text-primary)] focus:outline-none focus:border-[var(--primary)] transition-colors duration-300 appearance-none"
-                          style={{ borderRadius: "var(--radius-medium)", fontSize: "15px" }}
-                        >
-                          <option value="">Chọn thời gian...</option>
-                          {deliveryTimes.map((time) => (
-                            <option key={time} value={time}>
-                              {time}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </motion.div>
-                  </AnimatePresence>
-                )}
-
-                {/* Dịch vụ thêm */}
-                {selectedProduct && (
-                  <AnimatePresence>
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      className="space-y-2"
-                    >
-                      <label className="block font-body text-[var(--text-primary)] mb-2" style={{ fontSize: "14px", fontWeight: 500 }}>
+                    {/* Dịch vụ thêm */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-3">
                         <Gift className="w-4 h-4 inline mr-1" />
                         Dịch vụ thêm
                       </label>
                       <div className="space-y-2">
-                        {additionalServices.map((service) => (
+                        {extraServices.map((service) => (
                           <div key={service.id} className="flex items-center space-x-2">
                             <Checkbox
                               id={service.id}
-                              checked={formData.additionalServices.includes(service.id)}
+                              checked={formData.extraServices.includes(service.id)}
                               onCheckedChange={() => handleServiceToggle(service.id)}
                             />
-                            <label htmlFor={service.id} className="text-sm font-body text-[var(--text-primary)] cursor-pointer">
+                            <label htmlFor={service.id} className="text-sm text-gray-700 cursor-pointer">
                               {service.name} (+{service.price.toLocaleString('vi-VN')}đ)
                             </label>
                           </div>
                         ))}
                       </div>
-                    </motion.div>
-                  </AnimatePresence>
-                )}
+                    </div>
 
-                {/* Tổng tiền */}
-                {selectedProduct && (
-                  <AnimatePresence>
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      className="bg-[var(--background-muted)] p-4 rounded-lg border border-[var(--border-soft)]"
-                    >
-                      <div className="flex justify-between items-center font-body" style={{ fontSize: "16px", fontWeight: 600 }}>
-                        <span className="text-[var(--text-primary)]">Tổng tiền:</span>
-                        <span className="text-[var(--primary)]">
+                    {/* Thời gian giao hàng */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Thời gian giao hàng <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="datetime-local"
+                        name="deliveryDateTime"
+                        value={formData.deliveryDateTime}
+                        onChange={handleInputChange}
+                        min={new Date().toISOString().slice(0, 16)}
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${
+                          fieldErrors.deliveryDateTime 
+                            ? 'border-red-500 focus:ring-red-500' 
+                            : 'border-gray-300 focus:ring-pink-500'
+                        }`}
+                      />
+                      {fieldErrors.deliveryDateTime && (
+                        <p className="text-red-500 text-sm mt-1">{fieldErrors.deliveryDateTime}</p>
+                      )}
+                      <p className="text-xs text-gray-500 mt-1">
+                        Ví dụ: 22:20 07/01/2026
+                      </p>
+                    </div>
+
+                    {/* Khu vực giao hàng */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Khu vực giao hàng <span className="text-red-500">*</span>
+                      </label>
+                      <select
+                        name="deliveryArea"
+                        value={formData.deliveryArea}
+                        onChange={handleInputChange}
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${
+                          fieldErrors.deliveryArea 
+                            ? 'border-red-500 focus:ring-red-500' 
+                            : 'border-gray-300 focus:ring-pink-500'
+                        }`}
+                      >
+                        <option value="">Chọn khu vực giao hàng</option>
+                        {deliveryAreas.map((area) => (
+                          <option key={area.id} value={area.id}>
+                            {area.name}
+                          </option>
+                        ))}
+                      </select>
+                      <p className="text-xs text-gray-500 mt-1">
+                        Chỉ nhận giao hàng khu vực Đà Nẵng & Quảng Nam
+                      </p>
+                      {fieldErrors.deliveryArea && (
+                        <p className="text-red-500 text-sm mt-1">{fieldErrors.deliveryArea}</p>
+                      )}
+                    </div>
+
+                    {/* Tổng tiền */}
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <div className="flex justify-between items-center text-lg font-semibold">
+                        <span>Tổng tiền:</span>
+                        <span className="text-pink-600">
                           {calculateTotal().toLocaleString('vi-VN')}đ
                         </span>
                       </div>
-                    </motion.div>
-                  </AnimatePresence>
+                    </div>
+                  </div>
+                )}
+
+                {/* Thông tin người nhận */}
+                {selectedProduct && (
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">
+                      Thông tin người nhận
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Tên người nhận <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          name="receiverName"
+                          value={formData.receiverName}
+                          onChange={handleInputChange}
+                          placeholder="Tên người nhận hoa"
+                          className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${
+                            fieldErrors.receiverName 
+                              ? 'border-red-500 focus:ring-red-500' 
+                              : 'border-gray-300 focus:ring-pink-500'
+                          }`}
+                        />
+                        {fieldErrors.receiverName && (
+                          <p className="text-red-500 text-sm mt-1">{fieldErrors.receiverName}</p>
+                        )}
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Số điện thoại người nhận <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="tel"
+                          name="receiverPhone"
+                          value={formData.receiverPhone}
+                          onChange={handleInputChange}
+                          placeholder="0905123456"
+                          maxLength={10}
+                          className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${
+                            fieldErrors.receiverPhone 
+                              ? 'border-red-500 focus:ring-red-500' 
+                              : 'border-gray-300 focus:ring-pink-500'
+                          }`}
+                        />
+                        {fieldErrors.receiverPhone && (
+                          <p className="text-red-500 text-sm mt-1">{fieldErrors.receiverPhone}</p>
+                        )}
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <MapPin className="w-4 h-4 inline mr-1" />
+                        Địa chỉ cụ thể <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="receiverAddress"
+                        value={formData.receiverAddress}
+                        onChange={handleInputChange}
+                        placeholder="Địa chỉ giao hoa"
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${
+                          fieldErrors.receiverAddress 
+                            ? 'border-red-500 focus:ring-red-500' 
+                            : 'border-gray-300 focus:ring-pink-500'
+                        }`}
+                      />
+                      {fieldErrors.receiverAddress && (
+                        <p className="text-red-500 text-sm mt-1">{fieldErrors.receiverAddress}</p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Lời nhắn trên thiệp / banner
+                      </label>
+                      <textarea
+                        name="cardMessage"
+                        value={formData.cardMessage}
+                        onChange={handleInputChange}
+                        placeholder="Lời nhắn gửi đến người nhận..."
+                        rows={2}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 resize-none"
+                      />
+                    </div>
+                  </div>
                 )}
 
                 {/* Ghi chú */}
-                <div>
-                  <label className="block font-body text-[var(--text-primary)] mb-2" style={{ fontSize: "14px", fontWeight: 500 }}>
-                    Ghi chú thêm
-                  </label>
-                  <textarea
-                    name="note"
-                    value={formData.note}
-                    onChange={handleInputChange}
-                    placeholder="Ghi chú về màu sắc, thời gian giao hàng, yêu cầu đặc biệt..."
-                    rows={3}
-                    className="w-full px-4 py-3 bg-[var(--background-muted)] border border-[var(--border-soft)] font-body text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary)] transition-colors duration-300 resize-none"
-                    style={{ borderRadius: "var(--radius-medium)", fontSize: "15px" }}
-                  />
-                </div>
+                {selectedProduct && (
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">
+                      Ghi chú
+                    </h3>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Ghi chú thêm về đơn hàng (optional)
+                      </label>
+                      <textarea
+                        name="note"
+                        value={formData.note}
+                        onChange={handleInputChange}
+                        placeholder="Ghi chú về màu sắc, yêu cầu đặc biệt..."
+                        rows={3}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 resize-none"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {/* Thanh toán */}
+                {selectedProduct && (
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold text-gray-800 border-b pb-2">
+                      Thanh toán
+                    </h3>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-3">
+                        Phương thức thanh toán <span className="text-red-500">*</span>
+                      </label>
+                      <div className="space-y-2">
+                        {paymentMethods.map((method) => (
+                          <div key={method.id} className="flex items-center space-x-2">
+                            <input
+                              type="radio"
+                              id={method.id}
+                              name="paymentMethod"
+                              value={method.id}
+                              checked={formData.paymentMethod === method.id}
+                              onChange={handleInputChange}
+                              className="text-pink-500 focus:ring-pink-500"
+                            />
+                            <label htmlFor={method.id} className="text-sm text-gray-700 cursor-pointer">
+                              {method.name}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                      {fieldErrors.paymentMethod && (
+                        <p className="text-red-500 text-sm mt-1">{fieldErrors.paymentMethod}</p>
+                      )}
+                    </div>
+                  </div>
+                )}
 
                 {/* Error Message */}
                 {errorMessage && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="p-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg"
-                  >
+                  <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg">
                     {errorMessage}
-                  </motion.div>
+                  </div>
                 )}
 
-                <motion.button
+                {/* Submit Button */}
+                <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full h-14 flex items-center justify-center gap-2 bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white font-body font-medium transition-colors duration-300 disabled:opacity-70"
-                  style={{ borderRadius: "var(--radius-round)", fontSize: "16px" }}
-                  whileHover={{ scale: 1.02, boxShadow: "0 8px 30px rgba(var(--primary-rgb), 0.3)", transition: { duration: 0.2 } }}
-                  whileTap={{ scale: 0.98 }}
+                  className="w-full bg-pink-500 hover:bg-pink-600 text-white py-3 text-lg"
                 >
                   {isSubmitting ? (
                     <>
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2" />
                       Đang gửi...
                     </>
                   ) : (
                     <>
                       🌺 Đặt Hoa Ngay
-                      <Send className="w-5 h-5" />
+                      <Send className="w-5 h-5 ml-2" />
                     </>
                   )}
-                </motion.button>
+                </Button>
 
-                <p
-                  className="font-body text-[var(--text-muted)] text-center"
-                  style={{ fontSize: "12px" }}
-                >
+                <p className="text-xs text-gray-500 text-center">
                   Thông tin sẽ được gửi trực tiếp đến đội ngũ tư vấn
                 </p>
               </form>

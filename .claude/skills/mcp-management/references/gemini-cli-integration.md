@@ -202,9 +202,9 @@ Shows detailed MCP communication logs.
 
 | Method | Speed | Flexibility | Setup | Best For |
 |--------|-------|-------------|-------|----------|
-| Gemini CLI | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | All tasks |
-| Direct Scripts | ⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | Specific tools |
-| mcp-manager | ⭐ | ⭐⭐ | ⭐⭐⭐ | Fallback |
+| Gemini CLI | 🌸🌸🌸 | 🌸🌸🌸 | 🌸🌸 | All tasks |
+| Direct Scripts | 🌸🌸 | 🌸🌸🌸 | 🌸🌸🌸 | Specific tools |
+| mcp-manager | 🌸 | 🌸🌸 | 🌸🌸🌸 | Fallback |
 
 **Recommendation**: Use Gemini CLI as primary method, fallback to scripts/subagent when unavailable.
 

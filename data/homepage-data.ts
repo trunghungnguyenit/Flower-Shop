@@ -197,7 +197,7 @@ export const categories = [
   { name: "Trang trí", image: "/decorative-flowers-interior-design.jpg", href: "/collection?scenario=trang-tri", count: 35, occasionId: "trang-tri" },
   { name: "Hoa Tết", image: "/vietnamese-tet-flowers-mai-dao.jpg", href: "/collection?scenario=tet", count: 40, occasionId: "tet" },
   { name: "Chúc mừng", image: "/congratulation-flower-basket.jpg", href: "/collection?scenario=chuc-mung", count: 32, occasionId: "chuc-mung" },
-  { name: "Sự kiện", image: "/event-flower-decoration.jpg", href: "/collection?scenario=su-kien", count: 25, occasionId: "su-kien" },
+  { name: "Sự kiện", image: "/hoa-su-kien.jpg", href: "/collection?scenario=su-kien", count: 25, occasionId: "su-kien" },
 ]
 
 export const uspItems = [

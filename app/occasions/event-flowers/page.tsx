@@ -230,7 +230,7 @@ export default function EventFlowersPage() {
             >
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
                 <Image
-                  src="event-hero.jpg"
+                  src="/logo-hoa-su-kien.jpg"
                   alt="Hoa trang trí sự kiện"
                   fill
                   className="object-cover"
@@ -408,26 +408,44 @@ export default function EventFlowersPage() {
                     </p>
 
                     <div className="flex items-center justify-between">
-                      <span className="font-semibold text-purple-600">
-                        {product.price.toLocaleString("vi-VN")}đ
-                      </span>
+                      {product.price > 0 ? (
+                        <span className="font-semibold text-purple-600">
+                          {product.price.toLocaleString("vi-VN")}đ
+                        </span>
+                      ) : (
+                        <span className="text-sm text-gray-600">Liên hệ để biết giá</span>
+                      )}
 
-                      <motion.button
-                        onClick={(e) => handleAddToCart(e, product)}
-                        className={cn(
-                          "w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300",
-                          addingStates[product.id]
-                            ? "bg-green-500 text-white"
-                            : "bg-[var(--primary)]/10 text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white"
-                        )}
-                        whileTap={{ scale: 0.9 }}
-                      >
-                        {addingStates[product.id] ? (
-                          <Check className="w-4 h-4" />
-                        ) : (
-                          <ShoppingCart className="w-4 h-4" strokeWidth={1.5} />
-                        )}
-                      </motion.button>
+                      {product.price > 0 ? (
+                        <motion.button
+                          onClick={(e) => handleAddToCart(e, product)}
+                          className={cn(
+                            "w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300",
+                            addingStates[product.id]
+                              ? "bg-green-500 text-white"
+                              : "bg-[var(--primary)]/10 text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white"
+                          )}
+                          whileTap={{ scale: 0.9 }}
+                        >
+                          {addingStates[product.id] ? (
+                            <Check className="w-4 h-4" />
+                          ) : (
+                            <ShoppingCart className="w-4 h-4" strokeWidth={1.5} />
+                          )}
+                        </motion.button>
+                      ) : (
+                        <motion.button
+                          onClick={(e) => {
+                            e.preventDefault()
+                            e.stopPropagation()
+                            window.open(CONTACT.zaloLink, '_blank', 'noopener,noreferrer')
+                          }}
+                          className="px-3 py-1 bg-purple-600 text-white text-xs rounded-full hover:bg-purple-700 transition-colors"
+                          whileTap={{ scale: 0.9 }}
+                        >
+                          Liên hệ
+                        </motion.button>
+                      )}
                     </div>
                   </div>
                 </Link>
