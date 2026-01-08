@@ -44,4 +44,4 @@ export const SHOP_INFO = {
 // Type exports for TypeScript
 export type ContactType = typeof CONTACT
 export type ShopInfoType = typeof SHOP_INFO
->>>>>>> 8f928fefbe4710ada5a72f07b7fe669fed0cef51
+
