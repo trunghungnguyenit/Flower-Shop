@@ -1,0 +1,8 @@
+{
+  "/bo-suu-tap/page": "app/bo-suu-tap/page.js",
+  "/dich-vu/hoa-tet/page": "app/dich-vu/hoa-tet/page.js",
+  "/dich-vu/page": "app/dich-vu/page.js",
+  "/gio-hang/page": "app/gio-hang/page.js",
+  "/page": "app/page.js",
+  "/san-pham/[slug]/page": "app/san-pham/[slug]/page.js"
+}

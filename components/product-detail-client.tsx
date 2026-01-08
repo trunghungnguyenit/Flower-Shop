@@ -9,8 +9,15 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Minus, Plus, Phone, MessageCircle, Truck, ChevronLeft, ShoppingCart, Check } from "lucide-react"
 import { ProductCard } from "@/components/product-card"
+<<<<<<< HEAD
+import { useCart } from "@/lib/cart-context"
+import { CONTACT_INFO } from "@/lib/constants"
+import type { SanPham } from "@/api/api.type"
+import { formatPrice, getFirstImage, formatImageUrl } from "@/api/firebase"
+=======
 import { useOrderRedirect } from "@/lib/order-utils"
 import type { Product } from "@/lib/products"
+>>>>>>> 8f928fefbe4710ada5a72f07b7fe669fed0cef51
 
 const additionalServices = [
   { id: "card", name: "Thiệp chúc mừng", price: "20.000đ" },
@@ -19,8 +26,8 @@ const additionalServices = [
 ]
 
 interface ProductDetailClientProps {
-  product: Product
-  relatedProducts: Product[]
+  product: SanPham
+  relatedProducts: SanPham[]
 }
 
 export function ProductDetailClient({ product, relatedProducts }: ProductDetailClientProps) {
@@ -30,6 +37,10 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
   const [note, setNote] = useState("")
   const [isAdded, setIsAdded] = useState(false)
   const { addToCart } = useOrderRedirect()
+
+  const productImages = Array.isArray(product.image) 
+    ? product.image.map(img => typeof img === 'string' ? img : img.url)
+    : []
 
   const toggleService = (serviceId: string) => {
     setSelectedServices((prev) =>
@@ -69,38 +80,40 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
             <div className="space-y-4">
               <div className="relative aspect-square overflow-hidden rounded-lg bg-muted">
                 <Image
-                  src={product.images[selectedImage] || "/placeholder.svg"}
-                  alt={product.name}
+                  src={formatImageUrl(productImages[selectedImage] || productImages[0] || null)}
+                  alt={product.TenHoa}
                   fill
                   className="object-cover"
                   priority
                 />
               </div>
-              <div className="grid grid-cols-4 gap-3">
-                {product.images.map((image, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedImage(index)}
-                    className={`relative aspect-square overflow-hidden rounded-lg ${
-                      selectedImage === index ? "ring-2 ring-primary" : "ring-1 ring-border"
-                    }`}
-                  >
-                    <Image
-                      src={image || "/placeholder.svg"}
-                      alt={`${product.name} ${index + 1}`}
-                      fill
-                      className="object-cover"
-                    />
-                  </button>
-                ))}
-              </div>
+              {productImages.length > 1 && (
+                <div className="grid grid-cols-4 gap-3">
+                  {productImages.map((imageUrl, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setSelectedImage(index)}
+                      className={`relative aspect-square overflow-hidden rounded-lg ${
+                        selectedImage === index ? "ring-2 ring-primary" : "ring-1 ring-border"
+                      }`}
+                    >
+                      <Image
+                        src={formatImageUrl(imageUrl)}
+                        alt={`${product.TenHoa} ${index + 1}`}
+                        fill
+                        className="object-cover"
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Info */}
             <div>
-              <h1 className="text-2xl lg:text-3xl font-semibold text-foreground mb-4">{product.name}</h1>
-              <p className="text-2xl font-bold text-primary mb-6">{product.price}</p>
-              <p className="text-muted-foreground leading-relaxed mb-8">{product.description}</p>
+              <h1 className="text-2xl lg:text-3xl font-semibold text-foreground mb-4">{product.TenHoa}</h1>
+              <p className="text-2xl font-bold text-primary mb-6">{formatPrice(product.Gia)}</p>
+              <p className="text-muted-foreground leading-relaxed mb-8">{product.MoTa}</p>
 
               {/* Quantity */}
               <div className="mb-6">
@@ -200,9 +213,9 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
                     className="flex-1 border-primary text-primary hover:bg-primary/10"
                     asChild
                   >
-                    <a href="tel:0901234567">
+                    <a href={CONTACT_INFO.phoneHref}>
                       <Phone className="h-4 w-4 mr-2" />
-                      Gọi: 090 123 4567
+                      Gọi: {CONTACT_INFO.phone}
                     </a>
                   </Button>
                   <Button
@@ -227,7 +240,14 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
             <h2 className="text-2xl font-semibold text-foreground mb-8">Sản phẩm tương tự</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
               {relatedProducts.map((p) => (
-                <ProductCard key={p.id} id={p.id} name={p.name} price={p.price} image={p.image} slug={p.slug} />
+                <ProductCard 
+                  key={p.id} 
+                  id={p.id} 
+                  name={p.TenHoa} 
+                  price={formatPrice(p.Gia)} 
+                  image={formatImageUrl(getFirstImage(p.image))} 
+                  slug={p.slug || ''} 
+                />
               ))}
             </div>
           </div>
