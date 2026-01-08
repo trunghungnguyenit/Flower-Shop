@@ -1,5 +1,6 @@
 rules_version = '2';
 
+<<<<<<< HEAD
 service firebase.storage {
   match /b/{bucket}/o {
     // Allow public read access to images
@@ -9,6 +10,13 @@ service firebase.storage {
     }
     
     // Block all other paths by default
+=======
+// Craft rules based on data in your Firestore database
+// allow write: if firestore.get(
+//    /databases/(default)/documents/users/$(request.auth.uid)).data.isAdmin;
+service firebase.storage {
+  match /b/{bucket}/o {
+>>>>>>> 8f928fefbe4710ada5a72f07b7fe669fed0cef51
     match /{allPaths=**} {
       allow read, write: if false;
     }

@@ -2,6 +2,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { getSafeImageSrc, getSafeAltText } from "@/lib/image-utils"
+import { CONTACT } from "@/lib/constants"
 
 interface ProductCardProps {
   id: string
@@ -12,14 +14,18 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ name, price, image, slug }: ProductCardProps) {
+  // Check if price is 0 or empty (handle both "0đ" and "0" formats)
+  const numericPrice = parseInt(price.replace(/[^\d]/g, '')) || 0
+  const isZeroPrice = numericPrice === 0
+  
   return (
-    <Link href={`/san-pham/${slug}`}>
+    <Link href={`/product/${slug}`}>
       <Card className="group border-0 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden bg-card">
         <CardContent className="p-0">
           <div className="relative aspect-square overflow-hidden">
             <Image
-              src={image || "/placeholder.svg"}
-              alt={name}
+              src={getSafeImageSrc(image, "/placeholder.svg")}
+              alt={getSafeAltText(name, "Sản phẩm")}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
@@ -27,14 +33,32 @@ export function ProductCard({ name, price, image, slug }: ProductCardProps) {
           <div className="p-4">
             <h3 className="font-medium text-foreground text-base mb-2 line-clamp-2 min-h-[3rem]">{name}</h3>
             <div className="flex items-center justify-between">
-              <p className="text-primary font-semibold">{price}</p>
-              <Button
-                size="sm"
-                variant="outline"
-                className="text-xs border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent"
-              >
-                Xem chi tiết
-              </Button>
+              {isZeroPrice ? (
+                <p className="text-muted-foreground font-medium text-sm">Liên hệ để biết giá</p>
+              ) : (
+                <p className="text-primary font-semibold">{price}</p>
+              )}
+              {isZeroPrice ? (
+                <Button
+                  size="sm"
+                  className="text-xs bg-primary text-primary-foreground hover:bg-primary/90"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    window.open(CONTACT.zaloLink, '_blank', 'noopener,noreferrer')
+                  }}
+                >
+                  Liên hệ
+                </Button>
+              ) : (
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="text-xs border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent"
+                >
+                  Xem chi tiết
+                </Button>
+              )}
             </div>
           </div>
         </CardContent>

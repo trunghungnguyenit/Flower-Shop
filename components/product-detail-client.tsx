@@ -9,10 +9,15 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Minus, Plus, Phone, MessageCircle, Truck, ChevronLeft, ShoppingCart, Check } from "lucide-react"
 import { ProductCard } from "@/components/product-card"
+<<<<<<< HEAD
 import { useCart } from "@/lib/cart-context"
 import { CONTACT_INFO } from "@/lib/constants"
 import type { SanPham } from "@/api/api.type"
 import { formatPrice, getFirstImage, formatImageUrl } from "@/api/firebase"
+=======
+import { useOrderRedirect } from "@/lib/order-utils"
+import type { Product } from "@/lib/products"
+>>>>>>> 8f928fefbe4710ada5a72f07b7fe669fed0cef51
 
 const additionalServices = [
   { id: "card", name: "Thiệp chúc mừng", price: "20.000đ" },
@@ -31,7 +36,7 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
   const [selectedServices, setSelectedServices] = useState<string[]>([])
   const [note, setNote] = useState("")
   const [isAdded, setIsAdded] = useState(false)
-  const { addToCart } = useCart()
+  const { addToCart } = useOrderRedirect()
 
   const productImages = Array.isArray(product.image) 
     ? product.image.map(img => typeof img === 'string' ? img : img.url)
@@ -58,7 +63,7 @@ export function ProductDetailClient({ product, relatedProducts }: ProductDetailC
       <div className="bg-secondary/30 py-4">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <Link
-            href="/bo-suu-tap"
+            href="/collection"
             className="inline-flex items-center text-sm text-muted-foreground hover:text-primary"
           >
             <ChevronLeft className="h-4 w-4 mr-1" />

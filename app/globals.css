@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -196,3 +197,346 @@
 .animate-slide-in-right {
   animation: slide-in-right 0.3s ease-out forwards;
 }
+=======
+@import "tailwindcss";
+
+/* ============================================
+   DESIGN TOKENS - Hoa Tươi Đà Nẵng
+   ============================================ */
+
+:root {
+  /* === BRAND COLORS === */
+  --primary: #D97C8A;
+  --primary-dark: #C56A79;
+  --primary-light: #E8A4AF;
+
+  /* === ACCENT COLORS === */
+  --secondary: #FAF7F8;
+  --accent-gold: #F7D88A;
+  --accent-rose: #E8C4C8;
+
+  /* === SEMANTIC COLORS === */
+  --success: #4CAF50;
+  --danger: #E64A4A;
+  --info: #5C9CE5;
+
+  /* === TEXT COLORS === */
+  --text-primary: #2A2A2A;
+  --text-secondary: #6F6F6F;
+  --text-muted: #9A9A9A;
+
+  /* === UI COLORS === */
+  --border-soft: #EAEAEA;
+  --background: #FFFFFF;
+  --background-muted: #FDF9FA;
+
+  /* === SPACING === */
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-section: clamp(80px, 10vw, 140px);
+
+  /* === BORDER RADIUS === */
+  --radius-medium: 12px;
+  --radius-round: 999px;
+
+  /* === ANIMATION === */
+  --ease-default: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+
+  /* === LAYOUT === */
+  --max-width: 1240px;
+
+  /* === SHADCN COMPATIBILITY === */
+  --foreground: var(--text-primary);
+  --card: var(--background);
+  --card-foreground: var(--text-primary);
+  --popover: var(--background);
+  --popover-foreground: var(--text-primary);
+  --primary-foreground: white;
+  --secondary-foreground: var(--text-primary);
+  --muted: var(--background-muted);
+  --muted-foreground: var(--text-secondary);
+  --accent: var(--accent-rose);
+  --accent-foreground: var(--text-primary);
+  --destructive: var(--danger);
+  --destructive-foreground: white;
+  --border: var(--border-soft);
+  --input: var(--secondary);
+  --ring: var(--primary);
+  --radius: var(--radius-medium);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* Dark mode */
+.dark {
+  --primary: #E8939F;
+  --primary-dark: #D97C8A;
+  --primary-light: #F0B5BD;
+  --secondary: #2A2428;
+  --accent-gold: #D4B96A;
+  --accent-rose: #8B6B70;
+  --text-primary: #F5F0F1;
+  --text-secondary: #A89B9D;
+  --text-muted: #7A6E70;
+  --border-soft: #3D3539;
+  --background: #1A1618;
+  --background-muted: #231F21;
+  --foreground: #F5F0F1;
+  --border: #3D3539;
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+@layer base {
+  * {
+    border-color: var(--border-soft);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--text-primary);
+    font-family: var(--font-be-vietnam), "Be Vietnam Pro", system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  /* Typography */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--text-primary);
+  }
+
+  h1 {
+    font-size: clamp(48px, 5vw, 64px);
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    font-size: clamp(36px, 4vw, 44px);
+    letter-spacing: -0.01em;
+  }
+
+  h3 {
+    font-size: clamp(26px, 3vw, 30px);
+    font-weight: 500;
+  }
+
+  h4 {
+    font-size: clamp(20px, 2.5vw, 24px);
+    font-weight: 500;
+  }
+
+  p {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text-secondary);
+  }
+
+  /* Selection */
+  ::selection {
+    background: var(--primary);
+    color: white;
+  }
+
+  /* Focus visible */
+  :focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+@layer utilities {
+  /* Container */
+  .container-premium {
+    max-width: var(--max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
+  }
+
+  @media (min-width: 1024px) {
+    .container-premium {
+      padding-left: var(--spacing-lg);
+      padding-right: var(--spacing-lg);
+    }
+  }
+
+  /* Section Spacing */
+  .section-padding {
+    padding-top: var(--spacing-section);
+    padding-bottom: var(--spacing-section);
+  }
+
+  /* Transitions */
+  .transition-premium {
+    transition: all var(--duration-normal) var(--ease-default);
+  }
+
+  .transition-fast {
+    transition: all var(--duration-fast) var(--ease-default);
+  }
+
+  /* Text gradient */
+  .text-gradient-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Hover effects */
+  .hover-lift {
+    transition: transform var(--duration-normal) var(--ease-default);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+  }
+
+  .hover-scale {
+    transition: transform var(--duration-normal) var(--ease-default);
+  }
+
+  .hover-scale:hover {
+    transform: scale(1.03);
+  }
+
+  /* Hide scrollbar */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slide-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to { background-position: 200% 0; }
+}
+
+/* Animation Classes */
+.animate-fade-up {
+  animation: fade-up 0.6s var(--ease-default) forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s var(--ease-default) forwards;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.3s var(--ease-default) forwards;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.4s var(--ease-default) forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, var(--background-muted) 25%, var(--background) 50%, var(--background-muted) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Animation Delays */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+
+/* Prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+>>>>>>> 8f928fefbe4710ada5a72f07b7fe669fed0cef51
