@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-export interface ImageData {
-  url: string
-}
-
-export type SuKien = string
-
-export interface SanPham {
-  id: string 
-  documentId?: string
-  TenHoa: string
-  MoTa?: string
-  Gia: number | string
-  slug?: string
-  image?: string[] | ImageData[] | null
-  loai_hoa?: string
-  su_kiens?: SuKien[]
-  [k: string]: any
-=======
 export interface Product {
   id: string                 // Document ID
   name: string
@@ -82,5 +63,5 @@ export interface OrderFormData {
   
   // 2.6. Thời gian đặt (auto-generated)
   orderTime?: string;
->>>>>>> 8f928fefbe4710ada5a72f07b7fe669fed0cef51
 }
+
