@@ -10,16 +10,14 @@ import { Product } from "@/api/api.type";
 import {
   staggerContainer,
   staggerItem,
-  staggerItemScale,
-  premiumEase,
 } from "@/components/animations/framer-variants";
 
 // ================================================================
-// SCENARIOS SECTION - "Bạn Đang Ở Hoàn Cảnh Nào?"
+// SCENARIOS SECTION - "Bạn Đang Ở Tình Huống Nào?" với Signature Layout
 // ================================================================
 export function ScenariosSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
+  const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -41,134 +39,132 @@ export function ScenariosSection() {
     fetchProducts();
   }, []);
 
+  // Sample images for each scenario
+  const scenarioImages = [
+    "/romantic-red-roses-bouquet-luxury-gift.jpg",
+    "/birthday-flower-bouquet-celebration.jpg", 
+    "/mixed-pastel-flowers-bouquet-soft-colors.jpg",
+    "/grand-opening-flower-stand.jpg",
+    "/wedding-flowers-bridal-bouquet-elegant.jpg",
+    "/decorative-flowers-interior-design.jpg"
+  ];
+
   return (
     <section
       ref={sectionRef}
-      className="relative bg-white overflow-hidden"
-      style={{ padding: "clamp(80px, 10vw, 140px) 0" }}
+      className="relative bg-white overflow-hidden py-16 lg:py-20"
     >
-      <div className="mx-auto max-w-[1240px] px-4 lg:px-8">
+      <div className="mx-auto max-w-6xl px-4 lg:px-8">
         {/* Section Header */}
-        <motion.div
-          className="text-center mb-12"
-          initial="initial"
-          animate={isInView ? "animate" : "initial"}
-          variants={staggerContainer}
-        >
-          <motion.span
-            className="inline-block font-body text-[var(--primary)] tracking-[0.25em] uppercase mb-4"
-            style={{ fontSize: "13px", fontWeight: 500 }}
-            variants={staggerItem}
+        <div className="text-center mb-12">
+          <span
+            className="inline-block font-body text-[var(--primary)] tracking-[0.25em] uppercase mb-3 text-xs"
           >
             Tìm hoa phù hợp
-          </motion.span>
+          </span>
 
-          <motion.h2
-            className="font-display text-[var(--text-primary)] mb-4"
-            style={{ fontSize: "clamp(32px, 4vw, 44px)", fontWeight: 600 }}
-            variants={staggerItem}
+          <h2
+            className="font-display text-[var(--text-primary)] mb-3 text-2xl lg:text-3xl font-semibold"
           >
             Bạn Đang Ở Tình Huống Nào?
-          </motion.h2>
+          </h2>
 
-          <motion.p
-            className="font-body text-[var(--text-secondary)] max-w-2xl mx-auto"
-            style={{ fontSize: "17px", lineHeight: 1.7 }}
-            variants={staggerItem}
+          <p
+            className="font-body text-[var(--text-secondary)] max-w-xl mx-auto text-sm leading-relaxed"
           >
             Chúng tôi giúp bạn chọn mẫu hoa phù hợp nhất cho từng khoảnh khắc.
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
-        {/* Scenarios Grid */}
-        {/* Scenarios Grid */}
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
-          initial="initial"
-          animate={isInView ? "animate" : "initial"}
-          variants={staggerContainer}
-        >
+        {/* Scenarios List */}
+        <div className="rounded-3xl overflow-hidden shadow-xl bg-white">
           {scenarios.map((scenario, index) => {
-            const IconComponent = scenario.icon;
+            const image = scenarioImages[index] || scenarioImages[0];
+            const isEven = index % 2 === 0;
 
             return (
-              <motion.div
-                key={index}
-                variants={staggerItemScale}
-                whileHover={{ y: -4 }}
-                className="h-full"
+              <Link
+                key={scenario.occasionId}
+                href={scenario.href}
+                className="block group"
               >
-                <Link
-                  href={scenario.href}
-                  className="
-            group relative h-full
-            flex flex-col items-center justify-between
-            p-6
-            bg-white
-            border border-[var(--border-soft)]
-            rounded-[var(--radius-medium)]
-            shadow-[var(--shadow-sm)]
-            transition-all duration-300
-            hover:border-[var(--primary)]/40
-            hover:shadow-[0_8px_30px_rgba(217,124,138,0.15)]
-          "
+                <div
+                  className={`
+                    flex flex-col lg:flex-row
+                    ${!isEven ? 'lg:flex-row-reverse' : ''}
+                    ${isEven ? 'bg-[#F8F6F4]' : 'bg-[#F5F5F5]'}
+                    transition-all duration-300 hover:shadow-lg hover:z-10 relative
+                    min-h-[200px] lg:min-h-[240px]
+                    ${index !== scenarios.length - 1 ? 'border-b border-white/20' : ''}
+                  `}
                 >
-                  {/* Icon */}
-                  <div
-                    className="
-              w-16 h-16
-              flex items-center justify-center
-              rounded-full
-              bg-[var(--secondary)]
-              border border-[var(--border-soft)]
-              transition-all duration-300
-              group-hover:bg-[var(--primary)]/10
-              group-hover:border-[var(--primary)]/20
-            "
-                  >
-                    <IconComponent
-                      className="w-7 h-7 text-[var(--primary-dark)]"
-                      strokeWidth={1.75}
-                    />
-                  </div>
-
                   {/* Content */}
-                  <div className="mt-4 flex-1 flex flex-col items-center">
-                    <h4 className="text-center text-base font-semibold text-[var(--text-primary)] group-hover:text-[var(--primary-dark)]">
+                  <div className="flex-1 p-6 lg:p-8 flex flex-col justify-center">
+                    {/* Title */}
+                    <h3 className="text-lg lg:text-xl font-display text-[var(--text-primary)] mb-3 group-hover:text-[var(--primary)] transition-colors">
                       {scenario.title}
-                    </h4>
+                    </h3>
 
-                    <p className="mt-2 text-center text-sm text-[var(--text-secondary)] line-clamp-2">
+                    {/* Description */}
+                    <p className="text-sm text-[var(--text-secondary)] mb-4 max-w-sm leading-relaxed">
                       {scenario.tagline}
                     </p>
+
+                    {/* Count Badge */}
+                    <div className="mb-4">
+                      <span className="inline-flex items-center px-4 py-2 rounded-full text-xs font-medium bg-[var(--primary)]/10 text-[var(--primary-dark)] group-hover:bg-[var(--primary)]/20 transition-colors">
+                        {loading
+                          ? "Đang tải..."
+                          : `${getProductCountByOccasion(
+                              products,
+                              scenario.occasionId
+                            )}+ mẫu hoa`}
+                      </span>
+                    </div>
+
+                    {/* CTA Text */}
+                    <div className="inline-flex items-center text-[var(--primary)] font-body text-sm tracking-wider uppercase group-hover:text-[var(--primary-dark)] transition-colors font-medium">
+                      XEM HOA
+                      <svg 
+                        className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
                   </div>
 
-                  {/* Badge */}
-                  <span
-                    className="
-            mt-4
-            inline-flex items-center
-            px-3 py-1
-            rounded-full
-            text-xs font-medium
-            bg-[var(--primary)]/10
-            text-[var(--primary-dark)]
-            transition-colors duration-300
-            group-hover:bg-[var(--primary)]/20
-          "
-                  >
-                    {loading
-                      ? "..."
-                      : `${getProductCountByOccasion(
-                          products,
-                          scenario.occasionId
-                        )}+ mẫu hoa`}
-                  </span>
-                </Link>
-              </motion.div>
+                  {/* Image */}
+                  <div className="flex-1 relative min-h-[200px] lg:min-h-[240px] overflow-hidden">
+                    <div className="absolute inset-0">
+                      <img
+                        src={image}
+                        alt={`${scenario.title} - hoa tươi`}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                      />
+                    </div>
+
+                    {/* Text Overlay */}
+                    <div className={`absolute bottom-6 ${!isEven ? 'left-6' : 'right-6'} max-w-[180px]`}>
+                      <div className="bg-white/95 backdrop-blur-sm p-4 rounded-xl shadow-lg border border-white/20">
+                        <p className="text-xs text-[var(--text-secondary)] leading-relaxed font-medium">
+                          Mỗi bó hoa là một câu chuyện.
+                          <br />
+                          Hãy để chúng tôi kể câu chuyện
+                          <br />
+                          của riêng bạn.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Link>
             );
           })}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

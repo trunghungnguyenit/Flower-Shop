@@ -28,19 +28,19 @@ export const navigation = [
 
 export const heroSlides = [
   {
-    image: "/pastel-pink-roses-bouquet-soft-elegant.jpg",
+    image: "/anh-nen/hoa-nen.jpg",
     title: "Trao Yêu Thương",
     subtitle: "Gửi Trọn Cảm Xúc Bằng Hoa Tươi",
     description: "Hoa tươi 100% mỗi ngày • Thiết kế tinh tế • Giao nhanh trong 2 giờ tại Đà Nẵng – Quảng Nam",
   },
   {
-    image: "/red-roses-luxury-basket-arrangement.jpg",
+    image: "/anh-nen/hoa-nen-2.jpg",
     title: "Lãng Mạn Từng Cánh Hoa",
     subtitle: "Dành Tặng Người Thương",
     description: "Hàng ngàn mẫu hoa đẹp • Thiết kế riêng theo yêu cầu",
   },
   {
-    image: "/white-wedding-bouquet-elegant-roses.jpg",
+    image: "/anh-nen/hoa-nen-4.jpg",
     title: "Ngày Trọng Đại",
     subtitle: "Hoàn Hảo Với Hoa Tươi",
     description: "Chuyên hoa cưới • Trang trí sự kiện cao cấp",

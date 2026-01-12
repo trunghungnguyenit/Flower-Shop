@@ -75,7 +75,7 @@ export function ReviewDialog({ isOpen, onClose }: ReviewDialogProps) {
       <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg z-[101] p-4">
         <div className="bg-white rounded-2xl shadow-2xl max-h-[90vh] overflow-y-auto animate-scale-in">
           {/* Header */}
-          <div className="sticky top-0 bg-gradient-to-r from-pink-500 to-purple-500 text-white p-6 rounded-t-2xl">
+          <div className="sticky top-0 bg-gradient-to-r from-pink-500 to-purple-500 text-black p-6 rounded-t-2xl">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-2xl font-bold mb-1">Đánh Giá Của Bạn</h2>
@@ -85,7 +85,7 @@ export function ReviewDialog({ isOpen, onClose }: ReviewDialogProps) {
                 variant="ghost"
                 size="icon"
                 onClick={onClose}
-                className="text-white hover:bg-white/20 rounded-full"
+                className="text-black hover:bg-white/20 rounded-full"
               >
                 <X className="h-5 w-5" />
               </Button>
@@ -193,7 +193,7 @@ export function ReviewDialog({ isOpen, onClose }: ReviewDialogProps) {
               </Button>
               <Button
                 type="submit"
-                className="flex-1 bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white"
+                className="flex-1 bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-black"
                 disabled={isSubmitting || formData.comment.length < 20}
               >
                 {isSubmitting ? (

@@ -79,7 +79,7 @@ export function CaseCard({
             className="w-10 h-10 mb-4 flex items-center justify-center bg-[var(--primary)]/20 backdrop-blur-sm opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500"
             style={{ borderRadius: "var(--radius-medium)" }}
           >
-            <Quote className="w-5 h-5 text-white" strokeWidth={1.5} />
+            <Quote className="w-5 h-5 text-black" strokeWidth={1.5} />
           </div>
 
           {/* Customer Name */}
@@ -94,7 +94,7 @@ export function CaseCard({
 
           {/* Title */}
           <h3
-            className="font-display text-white mb-2 line-clamp-2"
+            className="font-display text-black mb-2 line-clamp-2"
             style={{ fontSize: "20px", fontWeight: 600, lineHeight: 1.3 }}
           >
             {title}
@@ -102,7 +102,7 @@ export function CaseCard({
 
           {/* Subtitle */}
           <p
-            className="font-body text-white/80 mb-4 line-clamp-2"
+            className="font-body text-black/80 mb-4 line-clamp-2"
             style={{ fontSize: "14px", lineHeight: 1.6 }}
           >
             {subtitle}
@@ -110,7 +110,7 @@ export function CaseCard({
 
           {/* CTA */}
           <div
-            className="inline-flex items-center gap-2 text-white/90 group-hover:text-white transition-colors duration-300"
+            className="inline-flex items-center gap-2 text-black/90 group-hover:text-black transition-colors duration-300"
             style={{ fontSize: "13px", fontWeight: 500 }}
           >
             <span className="font-body">Xem chi tiết</span>

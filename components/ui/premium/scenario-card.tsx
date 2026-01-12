@@ -69,13 +69,13 @@ export function ScenarioCard({
         {/* Content */}
         <div className="absolute bottom-0 left-0 right-0 p-5">
           <h3
-            className="font-display text-white mb-1"
+            className="font-display text-black mb-1"
             style={{ fontSize: "20px", fontWeight: 600 }}
           >
             {title}
           </h3>
           <p
-            className="font-body text-white/80 mb-3"
+            className="font-body text-black/80 mb-3"
             style={{ fontSize: "14px", lineHeight: 1.5 }}
           >
             {tagline}

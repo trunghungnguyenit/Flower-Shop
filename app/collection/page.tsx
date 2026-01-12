@@ -295,12 +295,9 @@ function CollectionPageContent() {
     { id: "tinh-yeu", name: "Tình yêu", count: getProductCountByOccasion(products, "tinh-yeu") },
     { id: "cuoi", name: "Cưới hỏi", count: getProductCountByOccasion(products, "cuoi") },
     { id: "khai-truong", name: "Khai trương", count: getProductCountByOccasion(products, "khai-truong") },
-    { id: "tang-me", name: "Tặng mẹ", count: getProductCountByOccasion(products, "tang-me") },
     { id: "trang-tri", name: "Trang trí", count: getProductCountByOccasion(products, "trang-tri") },
     { id: "chia-buon", name: "Chia buồn", count: getProductCountByOccasion(products, "chia-buon") },
     { id: "tet", name: "Hoa Tết", count: getProductCountByOccasion(products, "tet") },
-    { id: "chuc-mung", name: "Chúc mừng", count: getProductCountByOccasion(products, "chuc-mung") },
-    { id: "su-kien", name: "Sự kiện", count: getProductCountByOccasion(products, "su-kien") },
   ]
 
   // Gift guides for filtering

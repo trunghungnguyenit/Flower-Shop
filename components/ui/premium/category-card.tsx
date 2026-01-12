@@ -102,7 +102,7 @@ export function CategoryCard({
             {productCount && (
               <span
                 className={cn(
-                  "self-start px-3 py-1 bg-white/20 backdrop-blur-sm text-white/90 mb-3 transition-all duration-300",
+                  "self-start px-3 py-1 bg-white/20 backdrop-blur-sm text-black/90 mb-3 transition-all duration-300",
                   isHovered ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
                 )}
                 style={{ borderRadius: "var(--radius-round)", fontSize: "12px" }}
@@ -113,7 +113,7 @@ export function CategoryCard({
 
             {/* Name */}
             <h3
-              className="font-display text-white mb-2"
+              className="font-display text-black mb-2"
               style={{ fontSize: "22px", fontWeight: 600 }}
             >
               {name}
@@ -123,7 +123,7 @@ export function CategoryCard({
             {description && (
               <p
                 className={cn(
-                  "font-body text-white/80 mb-4 transition-all duration-300",
+                  "font-body text-black/80 mb-4 transition-all duration-300",
                   isHovered ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
                 )}
                 style={{ fontSize: "14px", lineHeight: 1.5 }}
@@ -135,7 +135,7 @@ export function CategoryCard({
             {/* Arrow */}
             <div
               className={cn(
-                "flex items-center gap-2 text-white transition-all duration-300",
+                "flex items-center gap-2 text-black transition-all duration-300",
                 isHovered ? "translate-x-0 opacity-100" : "-translate-x-4 opacity-0"
               )}
             >
@@ -197,7 +197,7 @@ export function CategoryCard({
           {/* Content */}
           <div className="absolute inset-0 flex flex-col items-center justify-end p-8 text-center">
             <h3
-              className="font-display text-white mb-2"
+              className="font-display text-black mb-2"
               style={{ fontSize: "clamp(24px, 3vw, 32px)", fontWeight: 600 }}
             >
               {name}
@@ -205,7 +205,7 @@ export function CategoryCard({
 
             {description && (
               <p
-                className="font-body text-white/90 mb-6 max-w-xs"
+                className="font-body text-black/90 mb-6 max-w-xs"
                 style={{ fontSize: "15px", lineHeight: 1.6 }}
               >
                 {description}

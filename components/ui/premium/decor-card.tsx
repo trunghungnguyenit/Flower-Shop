@@ -163,14 +163,14 @@ export function DecorCardLarge({
             </span>
 
             <h3
-              className="font-display text-white mb-4"
+              className="font-display text-black mb-4"
               style={{ fontSize: "32px", fontWeight: 600, lineHeight: 1.2 }}
             >
               {title}
             </h3>
 
             <p
-              className="font-body text-white/80 mb-6"
+              className="font-body text-black/80 mb-6"
               style={{ fontSize: "15px", lineHeight: 1.7 }}
             >
               {description}
@@ -179,7 +179,7 @@ export function DecorCardLarge({
             {/* Color Palette */}
             {toneColors.length > 0 && (
               <div className="flex items-center gap-3 mb-6">
-                <span className="font-body text-white/60" style={{ fontSize: "13px" }}>
+                <span className="font-body text-black/60" style={{ fontSize: "13px" }}>
                   Tone màu gợi ý:
                 </span>
                 <div className="flex gap-1.5">
@@ -196,7 +196,7 @@ export function DecorCardLarge({
 
             {/* CTA */}
             <div
-              className="inline-flex items-center gap-2 text-white group-hover:gap-3 transition-all duration-300"
+              className="inline-flex items-center gap-2 text-black group-hover:gap-3 transition-all duration-300"
               style={{ fontSize: "15px", fontWeight: 600 }}
             >
               <span className="font-body">Khám phá ý tưởng</span>

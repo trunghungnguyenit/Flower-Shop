@@ -21,9 +21,9 @@
   --info: #5C9CE5;
 
   /* === TEXT COLORS === */
-  --text-primary: #2A2A2A;
-  --text-secondary: #6F6F6F;
-  --text-muted: #9A9A9A;
+  --text-primary: #000000;
+  --text-secondary: #000000;
+  --text-muted: #000000;
 
   /* === UI COLORS === */
   --border-soft: #EAEAEA;
@@ -101,9 +101,9 @@
   --secondary: #2A2428;
   --accent-gold: #D4B96A;
   --accent-rose: #8B6B70;
-  --text-primary: #F5F0F1;
-  --text-secondary: #A89B9D;
-  --text-muted: #7A6E70;
+  --text-primary: #000000;
+  --text-secondary: #000000;
+  --text-muted: #000000;
   --border-soft: #3D3539;
   --background: #1A1618;
   --background-muted: #231F21;

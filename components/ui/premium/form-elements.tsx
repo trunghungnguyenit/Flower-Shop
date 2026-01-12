@@ -265,7 +265,7 @@ export const FormCheckbox = forwardRef<HTMLInputElement, FormCheckboxProps>(
             style={{ borderRadius: "4px" }}
           />
           <svg
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 text-white opacity-0 peer-checked:opacity-100 transition-opacity duration-200"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 text-black opacity-0 peer-checked:opacity-100 transition-opacity duration-200"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

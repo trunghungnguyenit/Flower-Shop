@@ -39,7 +39,7 @@ export function StickyContact() {
         href={CONTACT.phoneLink}
         className="w-12 h-12 flex items-center justify-center bg-[var(--primary)] rounded-full shadow-lg hover:scale-110 transition-transform duration-300"
       >
-        <Phone className="w-5 h-5 text-white" strokeWidth={1.5} />
+        <Phone className="w-5 h-5 text-black" strokeWidth={1.5} />
       </a>
 
       {/* Zalo */}
@@ -49,7 +49,7 @@ export function StickyContact() {
         rel="noopener noreferrer"
         className="w-12 h-12 flex items-center justify-center bg-[#0068FF] rounded-full shadow-lg hover:scale-110 transition-transform duration-300"
       >
-        <span className="text-white font-bold text-sm">Z</span>
+        <span className="text-black font-bold text-sm">Z</span>
       </a>
     </div>
   )
