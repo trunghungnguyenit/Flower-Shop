@@ -2,7 +2,7 @@
   "name": "my-v0-project",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@8.15.6",
+  "packageManager": "pnpm@10.28.0",
   "engines": {
     "node": ">=18.0.0",
     "pnpm": ">=8.0.0"
@@ -11,7 +11,8 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "eslint .",
-    "start": "next start"
+    "start": "next start",
+    "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
