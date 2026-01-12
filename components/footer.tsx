@@ -106,7 +106,7 @@ export function FooterSection() {
   ];
 
   return (
-    <footer className="bg-[var(--text-primary)] text-white">
+    <footer className="bg-white text-black">
       {/* Main Footer */}
       <div
         ref={mainFooterRef}
@@ -134,17 +134,17 @@ export function FooterSection() {
                 <span className="text-2xl">🌸</span>
               </div>
               <div className="flex flex-col">
-                <span className="text-xl font-display font-semibold text-white">
+                <span className="text-xl font-display font-semibold text-black">
                   Hoa Tươi
                 </span>
-                <span className="text-[10px] tracking-[0.2em] uppercase text-white/60 font-body">
+                <span className="text-[10px] tracking-[0.2em] uppercase text-black/60 font-body">
                   Đà Nẵng • Quảng Nam
                 </span>
               </div>
             </Link>
 
             <p
-              className="font-body text-white/70 mb-6"
+              className="font-body text-black/70 mb-6"
               style={{ fontSize: "14px", lineHeight: 1.7 }}
             >
               Mang vẻ đẹp của thiên nhiên vào cuộc sống. Hoa tươi mỗi ngày, giao
@@ -161,7 +161,7 @@ export function FooterSection() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 flex items-center justify-center bg-white/10 rounded-full text-white/80 hover:text-white transition-colors duration-300"
+                  className="w-10 h-10 flex items-center justify-center bg-black/10 rounded-full text-black/80 hover:text-black transition-colors duration-300"
                   whileHover={{
                     scale: 1.15,
                     backgroundColor: "rgba(255,255,255,0.2)",
@@ -176,7 +176,7 @@ export function FooterSection() {
                 href={CONTACT.zaloLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 flex items-center justify-center bg-white/10 rounded-full text-white/80 hover:text-white transition-colors duration-300"
+                className="w-10 h-10 flex items-center justify-center bg-black/10 rounded-full text-black/80 hover:text-black transition-colors duration-300"
                 whileHover={{
                   scale: 1.15,
                   backgroundColor: "rgba(255,255,255,0.2)",
@@ -192,7 +192,7 @@ export function FooterSection() {
           {/* Links */}
           {footerLinks.map((column, index) => (
             <motion.div key={index} variants={staggerItem}>
-              <h4 className="font-display text-white mb-5 text-base font-semibold">
+              <h4 className="font-display text-black mb-5 text-base font-semibold">
                 {column.title}
               </h4>
 
@@ -201,7 +201,7 @@ export function FooterSection() {
                   <li key={linkIndex}>
                     <Link
                       href={link.href}
-                      className="font-body text-sm text-white/70 hover:text-[var(--primary)] transition-colors duration-300 flex items-center gap-2 group"
+                      className="font-body text-sm text-black/70 hover:text-[var(--primary)] transition-colors duration-300 flex items-center gap-2 group"
                     >
                       <ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
                       {link.label}
@@ -218,7 +218,7 @@ export function FooterSection() {
             variants={staggerItem}
           >
             <h4
-              className="font-display text-white mb-5"
+              className="font-display text-black mb-5"
               style={{ fontSize: "16px", fontWeight: 600 }}
             >
               Liên hệ
@@ -230,7 +230,7 @@ export function FooterSection() {
                   strokeWidth={1.5}
                 />
                 <span
-                  className="font-body text-white/70"
+                  className="font-body text-black/70"
                   style={{ fontSize: "14px" }}
                 >
                   {CONTACT.address}
@@ -243,7 +243,7 @@ export function FooterSection() {
                 />
                 <a
                   href={CONTACT.phoneLink}
-                  className="font-body text-white/70 hover:text-[var(--primary)] transition-colors"
+                  className="font-body text-black/70 hover:text-[var(--primary)] transition-colors"
                   style={{ fontSize: "14px" }}
                 >
                   {CONTACT.phoneDisplay}
@@ -256,7 +256,7 @@ export function FooterSection() {
                 />
                 <a
                   href={CONTACT.emailLink}
-                  className="font-body text-white/70 hover:text-[var(--primary)] transition-colors"
+                  className="font-body text-black/70 hover:text-[var(--primary)] transition-colors"
                   style={{ fontSize: "14px" }}
                 >
                   {CONTACT.email}
@@ -270,7 +270,7 @@ export function FooterSection() {
                   href={CONTACT.zaloLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-body text-white/70 hover:text-[var(--primary)] transition-colors"
+                  className="font-body text-black/70 hover:text-[var(--primary)] transition-colors"
                   style={{ fontSize: "14px" }}
                 >
                   Chat Zalo: {CONTACT.zalo}
@@ -282,7 +282,7 @@ export function FooterSection() {
                   strokeWidth={1.5}
                 />
                 <span
-                  className="font-body text-white/70"
+                  className="font-body text-black/70"
                   style={{ fontSize: "14px" }}
                 >
                   {CONTACT.workingHours} ({CONTACT.workingDays})
@@ -305,7 +305,7 @@ export function FooterSection() {
         <div className="mx-auto max-w-[1240px] px-4 lg:px-8 py-">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p
-              className="font-body text-white/50 text-center md:text-left"
+              className="font-body text-black/50 text-center md:text-left"
               style={{ fontSize: "13px" }}
             >
               © 2025 Hoa Tươi Đà Nẵng. Thiết kế với{" "}

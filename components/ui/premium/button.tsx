@@ -65,7 +65,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variantStyles = {
       primary: `
-        bg-[var(--primary)] text-white
+        bg-[var(--primary)] text-black
         hover:bg-[var(--primary-dark)] hover:scale-[1.03]
         focus:ring-[var(--primary)]/50
         shadow-[0_4px_16px_rgba(217,124,138,0.3)]
@@ -74,7 +74,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       outline: `
         bg-transparent text-[var(--primary)]
         border-[1.5px] border-[var(--primary)]
-        hover:bg-[var(--primary)] hover:text-white hover:scale-[1.03]
+        hover:bg-[var(--primary)] hover:text-black hover:scale-[1.03]
         focus:ring-[var(--primary)]/50
       `,
       ghost: `
@@ -188,14 +188,14 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
 
     const variantStyles = {
       primary: `
-        bg-[var(--primary)] text-white
+        bg-[var(--primary)] text-black
         hover:bg-[var(--primary-dark)] hover:scale-110
         focus:ring-[var(--primary)]/50
       `,
       outline: `
         bg-transparent text-[var(--primary)]
         border-[1.5px] border-[var(--primary)]
-        hover:bg-[var(--primary)] hover:text-white hover:scale-110
+        hover:bg-[var(--primary)] hover:text-black hover:scale-110
         focus:ring-[var(--primary)]/50
       `,
       ghost: `

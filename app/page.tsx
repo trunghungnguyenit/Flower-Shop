@@ -7,12 +7,12 @@ import { RealCasesSection } from "@/components/home/real-cases-section"
 import { ScenariosSection } from "@/components/home/scenarios-section"
 import { DecorSection } from "@/components/home/decor-section"
 import { 
-  GiftGuideSection, 
-  CategoriesSection, 
   UspSection, 
   ReviewsSection, 
   BlogSection 
 } from "@/components/home/other-sections"
+import { GiftGuideSection } from "@/components/home/gift-guide-section"
+import { CategoriesSection } from "@/components/home/categories-section"
 import { QuickOrderSection } from "@/components/home/quick-order-section"
 import { FooterSection } from "@/components/footer"
 import { StickyContact } from "@/components/home/sticky-contact"

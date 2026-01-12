@@ -31,17 +31,17 @@ export function ProductCard({ name, price, image, slug }: ProductCardProps) {
             />
           </div>
           <div className="p-4">
-            <h3 className="font-medium text-foreground text-base mb-2 line-clamp-2 min-h-[3rem]">{name}</h3>
+            <h3 className="font-medium text-black text-base mb-2 line-clamp-2 min-h-[3rem]">{name}</h3>
             <div className="flex items-center justify-between">
               {isZeroPrice ? (
-                <p className="text-muted-foreground font-medium text-sm">Liên hệ để biết giá</p>
+                <p className="text-black font-medium text-sm">Liên hệ để biết giá</p>
               ) : (
                 <p className="text-primary font-semibold">{price}</p>
               )}
               {isZeroPrice ? (
                 <Button
                   size="sm"
-                  className="text-xs bg-primary text-primary-foreground hover:bg-primary/90"
+                  className="text-xs bg-primary text-black hover:bg-primary/90"
                   onClick={(e) => {
                     e.preventDefault()
                     e.stopPropagation()
@@ -54,7 +54,7 @@ export function ProductCard({ name, price, image, slug }: ProductCardProps) {
                 <Button
                   size="sm"
                   variant="outline"
-                  className="text-xs border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent"
+                  className="text-xs border-primary text-primary hover:bg-primary hover:text-black bg-transparent"
                 >
                   Xem chi tiết
                 </Button>

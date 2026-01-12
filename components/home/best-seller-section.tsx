@@ -119,7 +119,7 @@ export function BestSellerSection({ products, loading }: BestSellerSectionProps)
                     {product.badge && (
                       <span
                         className={cn(
-                          "absolute top-3 left-3 px-3 py-1 text-white text-xs font-body font-medium",
+                          "absolute top-3 left-3 px-3 py-1 text-black text-xs font-body font-medium",
                           product.badge === "Best Seller" && "bg-[var(--primary)]",
                           product.badge === "Hot" && "bg-[var(--danger)]",
                           product.badge === "Sale" && "bg-[var(--accent-gold)] text-[var(--text-primary)]"
@@ -134,7 +134,7 @@ export function BestSellerSection({ products, loading }: BestSellerSectionProps)
                   <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300">
                     <button
                       onClick={(e) => handleQuickOrder(e, product.slug)}
-                      className="w-9 h-9 rounded-full flex items-center justify-center bg-[var(--primary)]/10 text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white transition-all duration-300"
+                      className="w-9 h-9 rounded-full flex items-center justify-center bg-[var(--primary)]/10 text-[var(--primary)] hover:bg-[var(--primary)] hover:text-black transition-all duration-300"
                     >
                       <ShoppingCart className="w-4 h-4" strokeWidth={1.5} />
                     </button>
@@ -184,7 +184,7 @@ export function BestSellerSection({ products, loading }: BestSellerSectionProps)
                             e.stopPropagation()
                             window.open(CONTACT.zaloLink, '_blank', 'noopener,noreferrer')
                           }}
-                          className="inline-flex items-center gap-1 px-3 py-1 bg-[var(--primary)] text-white text-xs font-medium rounded-full hover:bg-[var(--primary-dark)] transition-colors duration-300"
+                          className="inline-flex items-center gap-1 px-3 py-1 bg-[var(--primary)] text-black text-xs font-medium rounded-full hover:bg-[var(--primary-dark)] transition-colors duration-300"
                         >
                           <MessageCircle className="w-3 h-3" strokeWidth={1.5} />
                           Liên hệ
@@ -207,7 +207,7 @@ export function BestSellerSection({ products, loading }: BestSellerSectionProps)
         >
           <Link
             href="/collection"
-            className="inline-flex items-center gap-2 px-8 py-3 border-2 border-[var(--primary)] text-[var(--primary)] font-body font-medium hover:bg-[var(--primary)] hover:text-white transition-all duration-300"
+            className="inline-flex items-center gap-2 px-8 py-3 border-2 border-[var(--primary)] text-[var(--primary)] font-body font-medium hover:bg-[var(--primary)] hover:text-black transition-all duration-300"
             style={{ borderRadius: "var(--radius-round)", fontSize: "15px" }}
           >
             Xem tất cả

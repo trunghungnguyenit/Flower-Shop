@@ -58,7 +58,7 @@ export function HeaderSection() {
             <span
               className={cn(
                 "text-xl font-display font-semibold tracking-wide transition-colors duration-300",
-                isScrolled ? "text-pink-300" : "text-pink-300"
+                isScrolled ? "text-black" : "text-black"
               )}
             >
               Hoa Tươi
@@ -66,7 +66,7 @@ export function HeaderSection() {
             <span
               className={cn(
                 "text-[10px] tracking-[0.25em] uppercase font-body transition-colors duration-300",
-                isScrolled ? "text-pink-300" : "text-pink-300/80"
+                isScrolled ? "text-black" : "text-black/80"
               )}
             >
               Đà Nẵng • Quảng Nam
@@ -83,8 +83,8 @@ export function HeaderSection() {
               className={cn(
                 "relative text-sm font-body font-medium transition-colors duration-300 py-2 group",
                 isScrolled
-                  ? "text-pink-300 hover:text-[var(--primary)]"
-                  : "text-pink-300/90 hover:text-pink-300"
+                  ? "text-black hover:text-[var(--primary)]"
+                  : "text-black/90 hover:text-black"
               )}
             >
               {item.name}
@@ -105,8 +105,8 @@ export function HeaderSection() {
             className={cn(
               "flex items-center gap-2 text-sm font-body font-medium transition-colors duration-300",
               isScrolled
-                ? "text-pink-300 hover:text-[var(--primary)]"
-                : "text-pink-300/90 hover:text-pink-300"
+                ? "text-black hover:text-[var(--primary)]"
+                : "text-black/90 hover:text-black"
             )}
           >
             <Phone className="h-4 w-4" strokeWidth={1.5} />
@@ -120,8 +120,8 @@ export function HeaderSection() {
             className={cn(
               "flex items-center gap-2 px-5 py-2.5 font-body font-medium text-sm transition-all duration-300 hover:scale-105",
               isScrolled
-                ? "bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-pink-300"
-                : "bg-white/20 backdrop-blur-sm hover:bg-white/30 text-pink-300 border border-white/30"
+                ? "bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-black"
+                : "bg-white/20 backdrop-blur-sm hover:bg-white/30 text-black border border-white/30"
             )}
             style={{ borderRadius: "var(--radius-round)" }}
           >
@@ -135,7 +135,7 @@ export function HeaderSection() {
           <button
             className={cn(
               "p-2 transition-colors duration-300",
-              isScrolled ? "text-pink-300" : "text-pink-300"
+              isScrolled ? "text-black" : "text-black"
             )}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
@@ -162,7 +162,7 @@ export function HeaderSection() {
             <Link
               key={item.name}
               href={item.href}
-              className="block py-3 text-base font-body font-medium text-pink-300 hover:text-[var(--primary)] transition-colors"
+              className="block py-3 text-base font-body font-medium text-black hover:text-[var(--primary)] transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               {item.name}
@@ -172,7 +172,7 @@ export function HeaderSection() {
           <div className="pt-6 mt-4 border-t border-[var(--border-soft)] flex flex-col gap-3">
             <a
               href={CONTACT.phoneLink}
-              className="flex items-center gap-3 py-2 text-pink-300"
+              className="flex items-center gap-3 py-2 text-black"
             >
               <Phone
                 className="h-5 w-5 text-[var(--primary)]"
@@ -187,7 +187,7 @@ export function HeaderSection() {
               href={CONTACT.zaloLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 px-5 py-3 bg-[var(--primary)] text-pink-300 font-body font-medium rounded-[var(--radius-medium)]"
+              className="flex items-center justify-center gap-2 px-5 py-3 bg-[var(--primary)] text-black font-body font-medium rounded-[var(--radius-medium)]"
             >
               <MessageCircle className="h-5 w-5" strokeWidth={1.5} />
               Chat Zalo

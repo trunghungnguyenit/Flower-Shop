@@ -91,7 +91,7 @@ export function HeroSection() {
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
                 transition={{ duration: 0.8, ease: premiumEase }}
-                className="font-display text-white mb-4"
+                className="font-display text-black mb-4"
                 style={{ fontSize: "clamp(40px, 6vw, 64px)", fontWeight: 600, lineHeight: 1.1 }}
               >
                 {heroSlides[currentSlide].title}
@@ -115,7 +115,7 @@ export function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.6, delay: 0.2, ease: premiumEase }}
-                className="font-body text-white/80 mb-8 max-w-lg"
+                className="font-body text-black/80 mb-8 max-w-lg"
                 style={{ fontSize: "18px", lineHeight: 1.7 }}
               >
                 {heroSlides[currentSlide].description}
@@ -132,7 +132,7 @@ export function HeroSection() {
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                 <Link
                   href="/collection"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white font-body font-medium transition-colors duration-300"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-black font-body font-medium transition-colors duration-300"
                   style={{ borderRadius: "var(--radius-round)", fontSize: "15px" }}
                 >
                   Xem Bộ Sưu Tập
@@ -150,7 +150,7 @@ export function HeroSection() {
                   href={CONTACT.zaloLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-body font-medium border border-white/30 transition-colors duration-300"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-black font-body font-medium border border-white/30 transition-colors duration-300"
                   style={{ borderRadius: "var(--radius-round)", fontSize: "15px" }}
                 >
                   <MessageCircle className="w-5 h-5" />
@@ -186,12 +186,12 @@ export function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 0.8 }}
-        className="absolute bottom-8 right-8 hidden lg:flex flex-col items-center gap-2 text-white/60"
+        className="absolute bottom-8 right-8 hidden lg:flex flex-col items-center gap-2 text-black/60"
       >
         <span className="font-body text-xs tracking-wider uppercase">Cuộn xuống</span>
-        <motion.div className="w-px h-12 bg-white/30 relative overflow-hidden">
+        <motion.div className="w-px h-12 bg-black/30 relative overflow-hidden">
           <motion.div
-            className="w-full h-4 bg-white"
+            className="w-full h-4 bg-black"
             animate={{ y: ["-100%", "400%"] }}
             transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
           />

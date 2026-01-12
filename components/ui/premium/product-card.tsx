@@ -132,7 +132,7 @@ export function ProductCard({
           {badge && (
             <span
               className={cn(
-                "absolute top-3 left-3 px-3 py-1.5 text-white text-xs font-semibold tracking-wide",
+                "absolute top-3 left-3 px-3 py-1.5 text-black text-xs font-semibold tracking-wide",
                 badgeConfig[badge].bg
               )}
               style={{ borderRadius: "var(--radius-soft)" }}
@@ -198,7 +198,7 @@ export function ProductCard({
                 e.preventDefault()
                 onAddToCart?.()
               }}
-              className="w-full flex items-center justify-center gap-2 bg-white/95 backdrop-blur-sm text-[var(--text-primary)] py-3 font-medium transition-all duration-300 hover:bg-[var(--primary)] hover:text-white"
+              className="w-full flex items-center justify-center gap-2 bg-white/95 backdrop-blur-sm text-[var(--text-primary)] py-3 font-medium transition-all duration-300 hover:bg-[var(--primary)] hover:text-black"
               style={{ borderRadius: "var(--radius-soft)" }}
             >
               <ShoppingBag className="w-4 h-4" />

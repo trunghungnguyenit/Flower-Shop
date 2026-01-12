@@ -79,7 +79,7 @@ export function USPItem({
               : "0 4px 16px rgba(217,124,138,0.25)",
           }}
         >
-          <Icon className="w-7 h-7 text-white" strokeWidth={1.5} />
+          <Icon className="w-7 h-7 text-black" strokeWidth={1.5} />
         </div>
 
         {/* Title */}
@@ -126,7 +126,7 @@ export function USPItem({
         <div
           className={cn(
             "w-14 h-14 flex items-center justify-center mb-5 transition-all duration-400",
-            isHovered ? "bg-[var(--primary)] text-white" : "bg-[var(--primary)]/10 text-[var(--primary)]"
+            isHovered ? "bg-[var(--primary)] text-black" : "bg-[var(--primary)]/10 text-[var(--primary)]"
           )}
           style={{ borderRadius: "var(--radius-medium)" }}
         >
@@ -172,7 +172,7 @@ export function USPItem({
           boxShadow: "0 4px 12px rgba(217,124,138,0.3)",
         }}
       >
-        <Icon className="w-5 h-5 text-white" strokeWidth={1.5} />
+        <Icon className="w-5 h-5 text-black" strokeWidth={1.5} />
       </div>
 
       {/* Content */}
