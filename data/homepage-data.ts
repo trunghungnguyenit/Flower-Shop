@@ -74,7 +74,7 @@ export const bestSellers = [
     name: "Hoa Cưới Trắng Tinh Khôi",
     description: "Tối giản – trang nhã – điểm nhấn cho ngày trọng đại.",
     price: 850000,
-    image: "/white-wedding-bouquet-elegant-roses.jpg",
+    image: "/tang-nguoi-yeu/nguoi-iu-11.jpg",
     rating: 5.0,
     sold: 156,
   },
@@ -84,7 +84,7 @@ export const bestSellers = [
     description: "Kết hợp nhiều sắc pastel, trẻ trung và thanh lịch.",
     price: 520000,
     originalPrice: 600000,
-    image: "/mixed-pastel-flowers-bouquet-soft-colors.jpg",
+    image: "/tang-me/me-8.jpg",
     badge: "Sale",
     rating: 4.7,
     sold: 201,
@@ -116,14 +116,14 @@ export const realCases = [
     occasion: "Khai trương",
   },
   {
-    image: "/white-wedding-bouquet-elegant-roses.jpg",
+    image: "/tang-nguoi-yeu/nguoi-iu-11.jpg",
     customerName: "Cô dâu Linh",
     title: "Ngày cưới trong mơ",
     subtitle: "Thiết kế hoa cưới nhẹ nhàng, thanh thoát – hoàn thiện vẻ đẹp của cô dâu trong khoảnh khắc trọng đại.",
     occasion: "Cưới hỏi",
   },
   {
-    image: "/mixed-pastel-flowers-bouquet-soft-colors.jpg",
+    image: "/tang-me/me-8.jpg",
     customerName: "Bé Na",
     title: "Sinh nhật tuổi 5",
     subtitle: "Bó hoa pastel dễ thương – mang đến trọn vẹn niềm vui cho bé suốt cả ngày dài.",
@@ -161,7 +161,7 @@ export const decorIdeas = [
     toneColors: ["#FFFFFF", "#F7D88A", "#E8C4C8"],
   },
   {
-    image: "/mixed-pastel-flowers-bouquet-soft-colors.jpg",
+    image: "/tang-me/me-8.jpg",
     title: "Hoa tone pastel",
     subtitle: "Thanh lịch – nhẹ nhàng – hoàn hảo cho căn hộ phong cách hiện đại.",
     toneColors: ["#E8A4AF", "#F7D88A", "#C9E4DE"],
@@ -189,15 +189,15 @@ export const giftGuides: {
 ]
 
 export const categories = [
-  { name: "Sinh nhật", image: "/birthday-flower-bouquet-celebration.jpg", href: "/collection?scenario=sinh-nhat", count: 45, occasionId: "sinh-nhat" },
-  { name: "Tình yêu", image: "/romantic-red-roses-bouquet-luxury-gift.jpg", href: "/collection?scenario=tinh-yeu", count: 62, occasionId: "tinh-yeu" },
-  { name: "Cưới hỏi", image: "/wedding-flowers-bridal-bouquet-elegant.jpg", href: "/collection?scenario=cuoi", count: 38, occasionId: "cuoi" },
-  { name: "Khai trương", image: "/grand-opening-flower-stand.jpg", href: "/collection?scenario=khai-truong", count: 28, occasionId: "khai-truong" },
-  { name: "Chia buồn", image: "/sympathy-white-flowers-arrangement.jpg", href: "/collection?scenario=chia-buon", count: 22, occasionId: "chia-buon" },
-  { name: "Trang trí", image: "/decorative-flowers-interior-design.jpg", href: "/collection?scenario=trang-tri", count: 35, occasionId: "trang-tri" },
-  { name: "Hoa Tết", image: "/vietnamese-tet-flowers-mai-dao.jpg", href: "/collection?scenario=tet", count: 40, occasionId: "tet" },
-  { name: "Chúc mừng", image: "/congratulation-flower-basket.jpg", href: "/collection?scenario=chuc-mung", count: 32, occasionId: "chuc-mung" },
-  { name: "Sự kiện", image: "/hoa-su-kien.jpg", href: "/collection?scenario=su-kien", count: 25, occasionId: "su-kien" },
+  { name: "Sinh nhật", image: "/tang-sinh-nhat/sinh-nhat-5.jpg", href: "/collection?scenario=sinh-nhat", count: 45, occasionId: "sinh-nhat" },
+  { name: "Tình yêu", image: "/tang-nguoi-yeu/nguoi-iu-13.jpg", href: "/collection?scenario=tinh-yeu", count: 62, occasionId: "tinh-yeu" },
+  { name: "Cưới hỏi", image: "/cuoi/cuoi-9.jpg", href: "/collection?scenario=cuoi", count: 38, occasionId: "cuoi" },
+  { name: "Khai trương", image: "/khai-truong/khai-truong.jpg", href: "/collection?scenario=khai-truong", count: 28, occasionId: "khai-truong" },
+  { name: "Chia buồn", image: "/chia-buon/chia-buon-1.jpg", href: "/collection?scenario=chia-buon", count: 22, occasionId: "chia-buon" },
+  { name: "Trang trí", image: "/trang-tri/trang-tri-4.jpg", href: "/collection?scenario=trang-tri", count: 35, occasionId: "trang-tri" },
+  { name: "Hoa Tết", image: "/tet/tet-2.jpg", href: "/collection?scenario=tet", count: 40, occasionId: "tet" },
+  // { name: "Chúc mừng", image: "/khai-truong/khai-truong-6.jpg", href: "/collection?scenario=chuc-mung", count: 32, occasionId: "chuc-mung" },
+  { name: "Sự kiện", image: "/su-kien/hoa-su-kien.jpg", href: "/collection?scenario=su-kien", count: 25, occasionId: "su-kien" },
 ]
 
 export const uspItems = [
@@ -226,10 +226,10 @@ export const reviews = [
   },
   {
     name: "Lê Thị Mai",
-    avatar: "/white-wedding-bouquet-elegant-roses.jpg",
+    avatar: "/tang-nguoi-yeu/nguoi-iu-11.jpg",
     rating: 5,
     content: "Hoa cưới đẹp xuất sắc. Đội ngũ tư vấn nhiệt tình và dễ thương.",
-    productImage: "/white-wedding-bouquet-elegant-roses.jpg",
+    productImage: "/tang-nguoi-yeu/nguoi-iu-11.jpg",
     date: "2 tuần trước",
   },
 ]
@@ -237,6 +237,6 @@ export const reviews = [
 export const blogPosts = [
   { title: "Cách chọn hoa theo tính cách người nhận", subtitle: "Gợi ý riêng cho từng cá tính – chọn đúng mẫu, đúng thông điệp.", image: "/pastel-pink-roses-bouquet-soft-elegant.jpg", href: "#" },
   { title: "Ý nghĩa 7 màu hoa phổ biến", subtitle: "Mỗi màu hoa là một câu chuyện – hãy khám phá điều phù hợp nhất.", image: "/red-roses-luxury-basket-arrangement.jpg", href: "#" },
-  { title: "Mẹo giữ hoa tươi lâu đến 2 tuần", subtitle: "Các bước đơn giản nhưng hiệu quả cao – ai cũng áp dụng được.", image: "/white-wedding-bouquet-elegant-roses.jpg", href: "#" },
-  { title: "Top 10 bó hoa tặng người yêu", subtitle: "Lựa chọn tinh tế giúp nàng cảm thấy được yêu thương hơn.", image: "/mixed-pastel-flowers-bouquet-soft-colors.jpg", href: "#" },
+  { title: "Mẹo giữ hoa tươi lâu đến 2 tuần", subtitle: "Các bước đơn giản nhưng hiệu quả cao – ai cũng áp dụng được.", image: "/tang-nguoi-yeu/nguoi-iu-11.jpg", href: "#" },
+  { title: "Top 10 bó hoa tặng người yêu", subtitle: "Lựa chọn tinh tế giúp nàng cảm thấy được yêu thương hơn.", image: "/tang-me/me-8.jpg", href: "#" },
 ]

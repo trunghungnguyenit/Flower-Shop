@@ -229,7 +229,7 @@ export default function NewYearFlowersPage() {
             >
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
                 <Image
-                  src="/logo-tet.jpg"
+                  src="/tet/tet-3.jpg"
                   alt="Hoa Tết Nguyên Đán"
                   fill
                   className="object-cover"

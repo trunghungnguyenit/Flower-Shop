@@ -177,7 +177,7 @@ export default function CondolenceFlowersPage() {
             >
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
                 <Image
-                  src="/logo-hoa-chia-buon.jpg"
+                  src="/chia-buon/logo-hoa-chia-buon.jpg"
                   alt="Hoa chia buồn"
                   fill
                   className="object-cover"

@@ -226,7 +226,7 @@ export default function OpeningFlowersPage() {
             >
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
                 <Image
-                  src="/logo-hoa-khai-truong.jpg"
+                  src="/khai-truong/logo-hoa-khai-truong.jpg"
                   alt="Hoa khai trương"
                   fill
                   className="object-cover"

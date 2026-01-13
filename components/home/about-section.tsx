@@ -30,12 +30,12 @@ const masonryImages = [
     size: "small",
   },
   {
-    src: "/white-wedding-bouquet-elegant-roses.jpg",
+    src: "/tang-nguoi-yeu/nguoi-iu-11.jpg",
     alt: "Hoa cưới cao cấp",
     size: "small",
   },
   {
-    src: "/mixed-pastel-flowers-bouquet-soft-colors.jpg",
+    src: "/tang-me/me-8.jpg",
     alt: "Giao hoa tận nơi",
     size: "medium",
   },

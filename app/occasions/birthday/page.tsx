@@ -222,7 +222,7 @@ export default function BirthdayFlowersPage() {
             >
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
                 <Image
-                  src="/logo-hoa-sinh-nhat.jpg"
+                  src="/tang-sinh-nhat/logo-hoa-sinh-nhat.jpg"
                   alt="Hoa sinh nhật"
                   fill
                   className="object-cover"

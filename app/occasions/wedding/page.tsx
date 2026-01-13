@@ -230,7 +230,7 @@ export default function WeddingFlowersPage() {
             >
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
                 <Image
-                  src="/logo-hoa-cuoi.jpg"
+                  src="/cuoi/logo-hoa-cuoi.jpg"
                   alt="Hoa cưới"
                   fill
                   className="object-cover"

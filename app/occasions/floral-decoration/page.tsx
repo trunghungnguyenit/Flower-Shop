@@ -230,7 +230,7 @@ export default function FloralDecorationPage() {
             >
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
                 <Image
-                  src="/logo-hoa-trang-tri.jpg"
+                  src="/trang-tri/logo-hoa-trang-tri.jpg"
                   alt="Trang trí hoa"
                   fill
                   className="object-cover"

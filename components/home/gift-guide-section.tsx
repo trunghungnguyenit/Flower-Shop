@@ -35,11 +35,11 @@ export function GiftGuideSection() {
 
   // Sample images for gift guides
   const giftGuideImages = [
-    "/romantic-red-roses-bouquet-luxury-gift.jpg",
-    "/mixed-pastel-flowers-bouquet-soft-colors.jpg",
+    "/tang-nguoi-yeu/nguoi-iu-13.jpg",
+    "/tang-me/me-8.jpg",
     "/sunflower-birthday-bouquet.jpg",
-    "/grand-opening-flower-stand.jpg",
-    "/wedding-flowers-bridal-bouquet-elegant.jpg"
+    "/khai-truong/khai-truong.jpg",
+    "/cuoi/cuoi-9.jpg"
   ];
 
   return (

@@ -230,7 +230,7 @@ export default function EventFlowersPage() {
             >
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
                 <Image
-                  src="/logo-hoa-su-kien.jpg"
+                  src="/su-kien/logo-hoa-su-kien.jpg"
                   alt="Hoa trang trí sự kiện"
                   fill
                   className="object-cover"
