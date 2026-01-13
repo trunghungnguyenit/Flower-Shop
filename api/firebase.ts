@@ -1,6 +1,4 @@
-import { initializeApp, getApps, getApp } from "firebase/app"
 import {
-  getFirestore,
   collection,
   getDocs,
   query,
@@ -9,6 +7,7 @@ import {
   type DocumentData,
   type QueryDocumentSnapshot,
 } from "firebase/firestore"
+import { db } from "@/lib/firebase-client"
 import { Product, Blog } from "./api.type"
 
 type AnyObject = Record<string, any>
@@ -41,26 +40,6 @@ export const formatPrice = (gia: number | string | null | undefined): string => 
   }
 
   return "Liên hệ báo giá"
-}
-
-//Firebase init
-
-const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN!,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID!,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET!,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID!,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID!,
-}
-
-const ensureFirebase = () => {
-  const app = getApps().length
-    ? getApp()
-    : initializeApp(firebaseConfig as AnyObject)
-
-  const db = getFirestore(app)
-  return { db }
 }
 
 //Response helpers
@@ -132,7 +111,6 @@ const fetchAll = async <T>(
   colName: string,
   mapper: (id: string, data: AnyObject) => T
 ): Promise<T[]> => {
-  const { db } = ensureFirebase()
   const snap = await getDocs(collection(db, colName))
   return snap.docs.map((d: QueryDocumentSnapshot<DocumentData>) =>
     mapper(d.id, d.data())
@@ -144,7 +122,6 @@ const fetchBySlug = async <T>(
   slug: string,
   mapper: (id: string, data: AnyObject) => T
 ): Promise<T | null> => {
-  const { db } = ensureFirebase()
   const q = query(collection(db, colName), where("slug", "==", slug), limit(1))
   const snap = await getDocs(q)
   if (snap.empty) return null
