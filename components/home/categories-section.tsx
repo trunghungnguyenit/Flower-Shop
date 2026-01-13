@@ -44,8 +44,7 @@ export function CategoriesSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-[var(--background-muted)] overflow-hidden"
-      style={{ padding: "clamp(80px, 10vw, 140px) 0" }}
+      className="relative bg-white overflow-hidden py-16 lg:py-20"
     >
       <div className="mx-auto max-w-[1240px] px-4 lg:px-8">
         {/* Section Header */}
@@ -55,13 +54,6 @@ export function CategoriesSection() {
           animate={isInView ? "animate" : "initial"}
           variants={staggerContainer}
         >
-          <motion.span
-            className="inline-block font-body text-[var(--primary)] tracking-[0.25em] uppercase mb-4"
-            style={{ fontSize: "13px", fontWeight: 500 }}
-            variants={staggerItem}
-          >
-            Danh mục
-          </motion.span>
 
           <motion.h2
             className="font-display text-[var(--text-primary)] mb-4"

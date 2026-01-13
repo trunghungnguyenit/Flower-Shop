@@ -83,7 +83,7 @@ export function HeaderSection() {
               className={cn(
                 "relative text-sm font-body font-medium transition-colors duration-300 py-2 group",
                 isScrolled
-                  ? "text-black hover:text-[var(--primary)]"
+                  ? "text-black hover:text-[var(--text-primary)]"
                   : "text-black/90 hover:text-black"
               )}
             >
@@ -91,7 +91,7 @@ export function HeaderSection() {
               <span
                 className={cn(
                   "absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] w-0 group-hover:w-full transition-all duration-300",
-                  isScrolled ? "bg-[var(--primary)]" : "bg-white"
+                  isScrolled ? "bg-[var(--text-primary)]" : "bg-white"
                 )}
               />
             </Link>
@@ -105,7 +105,7 @@ export function HeaderSection() {
             className={cn(
               "flex items-center gap-2 text-sm font-body font-medium transition-colors duration-300",
               isScrolled
-                ? "text-black hover:text-[var(--primary)]"
+                ? "text-black hover:text-[var(--primary-success)]"
                 : "text-black/90 hover:text-black"
             )}
           >
@@ -120,7 +120,7 @@ export function HeaderSection() {
             className={cn(
               "flex items-center gap-2 px-5 py-2.5 font-body font-medium text-sm transition-all duration-300 hover:scale-105",
               isScrolled
-                ? "bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-black"
+                ? "bg-[var(--primary)] hover:bg-[var(--primary-success)] text-black"
                 : "bg-white/20 backdrop-blur-sm hover:bg-white/30 text-black border border-white/30"
             )}
             style={{ borderRadius: "var(--radius-round)" }}

@@ -7,7 +7,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { motion, useInView } from "framer-motion"
-import { ArrowRight, Heart, ShoppingCart, MessageCircle } from "lucide-react"
+import { ArrowRight, ShoppingCart, MessageCircle } from "lucide-react"
 import { Product } from "@/api/api.type"
 import { formatImageUrl } from "@/api/firebase"
 import { CONTACT } from "@/lib/constants"
@@ -46,8 +46,7 @@ export function BestSellerSection({ products, loading }: BestSellerSectionProps)
   return (
     <section
       ref={sectionRef}
-      className="relative bg-white overflow-hidden"
-      style={{ padding: "clamp(80px, 10vw, 140px) 0" }}
+      className="relative bg-white overflow-hidden py-16 lg:py-20"
     >
       {/* Particle Glow Animation */}
       <ParticleGlow />
@@ -61,7 +60,7 @@ export function BestSellerSection({ products, loading }: BestSellerSectionProps)
           variants={staggerContainer}
         >
           <motion.span
-            className="inline-block font-body text-[var(--primary)] tracking-[0.25em] uppercase mb-4"
+            className="inline-block font-body text-[var(--text-primary)] tracking-[0.25em] uppercase mb-4"
             style={{ fontSize: "13px", fontWeight: 500 }}
             variants={staggerItem}
           >
@@ -98,14 +97,14 @@ export function BestSellerSection({ products, loading }: BestSellerSectionProps)
             {bestSellerProducts.map((product) => (
               <motion.div
                 key={product.id}
-                className="group"
+                className="group h-full product-card-equal"
                 variants={staggerItemScale}
                 whileHover={{ y: -8, transition: { duration: 0.3, ease: premiumEase } }}
               >
-                <Link href={`/product/${product.slug}`} className="block">
-                  {/* Image */}
+                <Link href={`/product/${product.slug}`} className="block h-full product-card-equal">
+                  {/* Image - Fixed aspect ratio */}
                   <div
-                    className="relative aspect-[3/4] overflow-hidden mb-4"
+                    className="relative aspect-[3/4] overflow-hidden mb-4 flex-shrink-0"
                     style={{ borderRadius: "var(--radius-medium)" }}
                   >
                     <Image
@@ -120,7 +119,7 @@ export function BestSellerSection({ products, loading }: BestSellerSectionProps)
                       <span
                         className={cn(
                           "absolute top-3 left-3 px-3 py-1 text-black text-xs font-body font-medium",
-                          product.badge === "Best Seller" && "bg-[var(--primary)]",
+                          product.badge === "Best Seller" && "bg-[var(--primary-red)]",
                           product.badge === "Hot" && "bg-[var(--danger)]",
                           product.badge === "Sale" && "bg-[var(--accent-gold)] text-[var(--text-primary)]"
                         )}
@@ -130,39 +129,40 @@ export function BestSellerSection({ products, loading }: BestSellerSectionProps)
                       </span>
                     )}
 
-                  {/* Quick Order Button */}
-                  <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                    <button
-                      onClick={(e) => handleQuickOrder(e, product.slug)}
-                      className="w-9 h-9 rounded-full flex items-center justify-center bg-[var(--primary)]/10 text-[var(--primary)] hover:bg-[var(--primary)] hover:text-black transition-all duration-300"
-                    >
-                      <ShoppingCart className="w-4 h-4" strokeWidth={1.5} />
-                    </button>
+                    {/* Quick Order Button */}
+                    <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                      <button
+                        onClick={(e) => handleQuickOrder(e, product.slug)}
+                        className="w-9 h-9 rounded-full flex items-center justify-center bg-[var(--text-primary)]/10 text-[var(--text-primary)] hover:bg-[var(--text-white)] hover:text-black transition-all duration-300"
+                      >
+                        <ShoppingCart className="w-4 h-4" strokeWidth={1.5} />
+                      </button>
+                    </div>
                   </div>
-                </div>
 
-                  {/* Info */}
-                  <div>
+                  {/* Info - Flexible content area */}
+                  <div className="product-info">
+                    {/* Product Name - Fixed height with line clamp */}
                     <h3
-                      className="font-display text-[var(--text-primary)] mb-1 line-clamp-2 group-hover:text-[var(--primary)] transition-colors duration-300"
+                      className="font-display text-[var(--text-primary)] mb-1 line-clamp-2 group-hover:text-[var(--text-primary)] transition-colors duration-300 product-title"
                       style={{ fontSize: "15px", fontWeight: 600 }}
                     >
                       {product.name}
                     </h3>
 
-                    {/* Rating */}
-                    <div className="flex items-center gap-1 mb-2">
+                    {/* Rating - Fixed height */}
+                    <div className="flex items-center gap-1 mb-2 product-rating">
                       <span className="text-sm">🌸</span>
                       <span className="font-body text-[var(--text-secondary)]" style={{ fontSize: "13px" }}>
                         {product.rating || 4.8} ({product.sold || 0} đã bán)
                       </span>
                     </div>
 
-                    {/* Price */}
-                    <div className="flex items-center justify-between">
+                    {/* Price & Action - Push to bottom */}
+                    <div className="product-price">
                       {product.price > 0 ? (
                         <span
-                          className="font-display text-[var(--primary)]"
+                          className="font-display text-[var(--text-primary)]"
                           style={{ fontSize: "16px", fontWeight: 600 }}
                         >
                           {product.price.toLocaleString()}đ
@@ -184,7 +184,7 @@ export function BestSellerSection({ products, loading }: BestSellerSectionProps)
                             e.stopPropagation()
                             window.open(CONTACT.zaloLink, '_blank', 'noopener,noreferrer')
                           }}
-                          className="inline-flex items-center gap-1 px-3 py-1 bg-[var(--primary)] text-black text-xs font-medium rounded-full hover:bg-[var(--primary-dark)] transition-colors duration-300"
+                          className="inline-flex items-center gap-1 px-3 py-1 bg-[var(--primary-red)] text-black text-xs font-medium rounded-full hover:bg-[var(--primary-success)] transition-colors duration-300 flex-shrink-0"
                         >
                           <MessageCircle className="w-3 h-3" strokeWidth={1.5} />
                           Liên hệ
@@ -207,7 +207,7 @@ export function BestSellerSection({ products, loading }: BestSellerSectionProps)
         >
           <Link
             href="/collection"
-            className="inline-flex items-center gap-2 px-8 py-3 border-2 border-[var(--primary)] text-[var(--primary)] font-body font-medium hover:bg-[var(--primary)] hover:text-black transition-all duration-300"
+            className="inline-flex items-center gap-2 px-8 py-3 border-2 border-[var(--text-primary)] text-[var(--text-primary)] font-body font-medium hover:bg-[var(--text-primary)] hover:text-white transition-all duration-300"
             style={{ borderRadius: "var(--radius-round)", fontSize: "15px" }}
           >
             Xem tất cả

@@ -251,8 +251,7 @@ export function QuickOrderSection({ products, loading }: QuickOrderSectionProps)
     <section
       ref={sectionRef}
       id="lien-he"
-      className="relative bg-[var(--background-muted)] overflow-hidden"
-      style={{ padding: "clamp(80px, 10vw, 140px) 0" }}
+       className="relative bg-white overflow-hidden py-16 lg:py-20"
     >
       <div className="mx-auto max-w-[1240px] px-4 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -262,14 +261,6 @@ export function QuickOrderSection({ products, loading }: QuickOrderSectionProps)
             animate={isInView ? "animate" : "initial"}
             variants={staggerContainer}
           >
-            <motion.span
-              variants={staggerItemLeft}
-              className="inline-block font-body text-[var(--primary)] tracking-[0.25em] uppercase mb-4"
-              style={{ fontSize: "13px", fontWeight: 500 }}
-            >
-              Đặt hoa nhanh
-            </motion.span>
-
             <motion.h2
               variants={staggerItemLeft}
               className="font-display text-[var(--text-primary)] mb-6"
@@ -277,7 +268,7 @@ export function QuickOrderSection({ products, loading }: QuickOrderSectionProps)
             >
               Gửi Yêu Thương
               <br />
-              <span className="text-gradient-primary">Chỉ 3 Bước Đơn Giản</span>
+              <span className="text-[var(--text-primary)]">Chỉ 3 Bước Đơn Giản</span>
             </motion.h2>
 
             <motion.p
@@ -307,7 +298,7 @@ export function QuickOrderSection({ products, loading }: QuickOrderSectionProps)
                     className="w-10 h-10 flex items-center justify-center"
                     style={{
                       borderRadius: "var(--radius-medium)",
-                      background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%)",
+                      background: "var(--primary)",
                     }}
                   >
                     <benefit.icon className="w-5 h-5 text-white" strokeWidth={1.5} />
@@ -329,7 +320,7 @@ export function QuickOrderSection({ products, loading }: QuickOrderSectionProps)
             >
               <motion.a
                 href={CONTACT.phoneLink}
-                className="inline-flex items-center gap-2 px-5 py-3 bg-white rounded-full border border-[var(--border-soft)] text-[var(--text-primary)] hover:border-[var(--primary)] hover:text-[var(--primary)] transition-colors duration-300"
+                className="inline-flex items-center gap-2 px-5 py-3 bg-white rounded-full border border-[var(--border-soft)] text-[var(--text-primary)] hover:border-[var(--primary-success)] hover:text-[var(--primary-success)] transition-colors duration-300"
                 style={{ fontSize: "14px", fontWeight: 500 }}
                 whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
                 whileTap={{ scale: 0.98 }}
@@ -382,9 +373,9 @@ export function QuickOrderSection({ products, loading }: QuickOrderSectionProps)
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ duration: 0.4, delay: 0.1, type: "spring", stiffness: 200 }}
-                      className="w-20 h-20 mb-6 flex items-center justify-center bg-[var(--success)]/10 rounded-full"
+                      className="w-20 h-20 mb-6 flex items-center justify-center bg-[var(--primary-success)]/10 rounded-full"
                     >
-                      <Check className="w-10 h-10 text-[var(--success)]" strokeWidth={1.5} />
+                      <Check className="w-10 h-10 text-[var(--primary-success)]" strokeWidth={1.5} />
                     </motion.div>
 
                     <motion.h3

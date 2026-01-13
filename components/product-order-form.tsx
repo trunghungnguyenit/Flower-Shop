@@ -217,9 +217,9 @@ export default function ProductOrderForm({ product, onClose }: ProductOrderFormP
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.4, delay: 0.1, type: "spring", stiffness: 200 }}
-              className="w-20 h-20 mb-6 flex items-center justify-center bg-[var(--success)]/10 rounded-full"
+              className="w-20 h-20 mb-6 flex items-center justify-center bg-[var(--primary-success)]/10 rounded-full"
             >
-              <Check className="w-10 h-10 text-[var(--success)]" strokeWidth={1.5} />
+              <Check className="w-10 h-10 text-[var(--primary-success)]" strokeWidth={1.5} />
             </motion.div>
 
             <motion.h3

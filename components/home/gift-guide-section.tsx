@@ -51,7 +51,7 @@ export function GiftGuideSection() {
         {/* Section Header */}
         <div className="text-center mb-12">
           <span
-            className="inline-block font-body text-[var(--primary)] tracking-[0.25em] uppercase mb-3 text-xs"
+            className="inline-block font-body text-[var(--text-primary)] tracking-[0.25em] uppercase mb-4"
           >
             Chọn quà dễ dàng
           </span>
@@ -107,38 +107,54 @@ export function GiftGuideSection() {
                   <div className="flex-1 p-6 flex flex-col">
 
                     {/* Title */}
-                    <h3 className="text-base font-display text-[var(--text-primary)] mb-2 group-hover:text-[var(--primary)] transition-colors font-semibold">
+                    <h3 className="text-base font-display text-[var(--text-primary)] mb-2 transition-colors font-semibold">
                       {guide.title}
                     </h3>
 
                     {/* Description */}
-                    <p className="text-sm text-[var(--text-secondary)] mb-4 leading-relaxed line-clamp-3 flex-1">
+                    <p className="text-sm text-[var(--text-primary)] mb-4 leading-relaxed line-clamp-3 flex-1">
                       {guide.description}
                     </p>
 
                     {/* Count Badge */}
                     <div className="mb-4">
-                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-[var(--primary)]/10 text-[var(--primary-dark)] group-hover:bg-[var(--primary)]/20 transition-colors">
-                        {loading
-                          ? "Đang tải..."
-                          : `${getProductCountByGiftGuide(
-                              products,
-                              guide.giftGuideId
-                            )} mẫu hoa`}
-                      </span>
-                    </div>
+                      {/* Wrapper phải có group */}
+                      <div className="group">
 
-                    {/* CTA Text */}
-                    <div className="inline-flex items-center text-[var(--primary)] font-body text-sm tracking-wider uppercase group-hover:text-[var(--primary-dark)] transition-colors font-medium">
-                      XEM HOA
-                      <svg 
-                        className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" 
-                        fill="none" 
-                        stroke="currentColor" 
-                        viewBox="0 0 24 24"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
-                      </svg>
+                        {/* CTA */}
+                        <div className="relative inline-flex items-center font-body text-sm tracking-wider uppercase font-medium text-[var(--text-primary)] h-5 overflow-hidden">
+
+                          {/* Default text */}
+                          <span className="inline-flex items-center transition-all duration-300 group-hover:-translate-y-5">
+                            XEM HOA
+                            <svg
+                              className="ml-2 w-4 h-4"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={1.5}
+                                d="M9 5l7 7-7 7"
+                              />
+                            </svg>
+                          </span>
+
+                          {/* Hover text */}
+                          <span className="absolute left-0 top-5 inline-flex items-center text-[var(--text-primary)] transition-all duration-300 group-hover:top-0">
+                            {loading
+                              ? "ĐANG TẢI..."
+                              : `${getProductCountByGiftGuide(
+                                products,
+                                guide.giftGuideId
+                              )} MẪU HOA`}
+                          </span>
+
+                        </div>
+                      </div>
+
                     </div>
                   </div>
                 </div>

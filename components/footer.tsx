@@ -128,7 +128,7 @@ export function FooterSection() {
                 className="w-12 h-12 rounded-full flex items-center justify-center"
                 style={{
                   background:
-                    "linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%)",
+                    "var(--primary-red)",
                 }}
               >
                 <span className="text-2xl">🌸</span>
@@ -201,7 +201,7 @@ export function FooterSection() {
                   <li key={linkIndex}>
                     <Link
                       href={link.href}
-                      className="font-body text-sm text-black/70 hover:text-[var(--primary)] transition-colors duration-300 flex items-center gap-2 group"
+                      className="font-body text-sm text-black/70 hover:text-[var(--primary-red)] transition-colors duration-300 flex items-center gap-2 group"
                     >
                       <ArrowRight className="w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
                       {link.label}
@@ -226,7 +226,7 @@ export function FooterSection() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin
-                  className="w-5 h-5 text-[var(--primary)] flex-shrink-0 mt-0.5"
+                  className="w-5 h-5 text-[var(--primary-red)] flex-shrink-0 mt-0.5"
                   strokeWidth={1.5}
                 />
                 <span
@@ -238,12 +238,12 @@ export function FooterSection() {
               </li>
               <li className="flex items-center gap-3">
                 <Phone
-                  className="w-5 h-5 text-[var(--primary)]"
+                  className="w-5 h-5 text-[var(--primary-red)]"
                   strokeWidth={1.5}
                 />
                 <a
                   href={CONTACT.phoneLink}
-                  className="font-body text-black/70 hover:text-[var(--primary)] transition-colors"
+                  className="font-body text-black/70 hover:text-[var(--primary-red)] transition-colors"
                   style={{ fontSize: "14px" }}
                 >
                   {CONTACT.phoneDisplay}
@@ -251,12 +251,12 @@ export function FooterSection() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail
-                  className="w-5 h-5 text-[var(--primary)]"
+                  className="w-5 h-5 text-[var(--primary-red)]"
                   strokeWidth={1.5}
                 />
                 <a
                   href={CONTACT.emailLink}
-                  className="font-body text-black/70 hover:text-[var(--primary)] transition-colors"
+                  className="font-body text-black/70 hover:text-[var(--primary-red)] transition-colors"
                   style={{ fontSize: "14px" }}
                 >
                   {CONTACT.email}
@@ -264,13 +264,13 @@ export function FooterSection() {
               </li>
               <li className="flex items-center gap-3">
                 <div className="w-5 h-5 flex items-center justify-center">
-                  <span className="text-[var(--primary)] text-xs font-bold">Z</span>
+                  <span className="text-[var(--primary-red)] text-xs font-bold">Z</span>
                 </div>
                 <a
                   href={CONTACT.zaloLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-body text-black/70 hover:text-[var(--primary)] transition-colors"
+                  className="font-body text-black/70 hover:text-[var(--primary-red)] transition-colors"
                   style={{ fontSize: "14px" }}
                 >
                   Chat Zalo: {CONTACT.zalo}
@@ -278,7 +278,7 @@ export function FooterSection() {
               </li>
               <li className="flex items-start gap-3">
                 <Clock
-                  className="w-5 h-5 text-[var(--primary)] flex-shrink-0 mt-0.5"
+                  className="w-5 h-5 text-[var(--primary-red)] flex-shrink-0 mt-0.5"
                   strokeWidth={1.5}
                 />
                 <span
@@ -287,7 +287,7 @@ export function FooterSection() {
                 >
                   {CONTACT.workingHours} ({CONTACT.workingDays})
                   <br />
-                  <span className="text-[var(--primary)]">Nhận đặt 24/7</span>
+                  <span className="text-[var(--primary-red)]">Nhận đặt 24/7</span>
                 </span>
               </li>
             </ul>
@@ -309,7 +309,7 @@ export function FooterSection() {
               style={{ fontSize: "13px" }}
             >
               © 2025 Hoa Tươi Đà Nẵng. Thiết kế với{" "}
-              <span className="text-[var(--primary)]">♥</span> bởi đội ngũ yêu
+              <span className="text-[var(--primary-red)]">♥</span> bởi đội ngũ yêu
               hoa.
             </p>
           </div>

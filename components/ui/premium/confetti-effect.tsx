@@ -205,7 +205,7 @@ export function SuccessCheck({ active, size = 80 }: SuccessCheckProps) {
           cy="50"
           r="45"
           fill="none"
-          stroke="var(--success)"
+          stroke="var(--primary-success)"
           strokeWidth="3"
           strokeLinecap="round"
           strokeDasharray="283"
@@ -225,7 +225,7 @@ export function SuccessCheck({ active, size = 80 }: SuccessCheckProps) {
         <path
           d="M25 50 L45 70 L75 30"
           fill="none"
-          stroke="var(--success)"
+          stroke="var(--primary-success)"
           strokeWidth="6"
           strokeLinecap="round"
           strokeLinejoin="round"
