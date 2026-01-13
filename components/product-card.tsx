@@ -36,7 +36,7 @@ export function ProductCard({ name, price, image, slug }: ProductCardProps) {
               {isZeroPrice ? (
                 <p className="text-black font-medium text-sm">Liên hệ để biết giá</p>
               ) : (
-                <p className="text-primary font-semibold">{price}</p>
+                <p className="text-[var(--text-primary)] font-semibold">{price}</p>
               )}
               {isZeroPrice ? (
                 <Button
@@ -54,7 +54,7 @@ export function ProductCard({ name, price, image, slug }: ProductCardProps) {
                 <Button
                   size="sm"
                   variant="outline"
-                  className="text-xs border-primary text-primary hover:bg-primary hover:text-black bg-transparent"
+                  className="text-xs border-primary text-[var(--text-primary)] hover:bg-primary hover:text-black bg-transparent"
                 >
                   Xem chi tiết
                 </Button>
