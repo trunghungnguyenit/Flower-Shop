@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   description:
     "Cửa hàng hoa tươi cao cấp tại Đà Nẵng & Quảng Nam. Freeship khu vực gần, giao nhanh trong ngày. Hoa sinh nhật, hoa cưới, hoa khai trương, hoa chia buồn.",
   keywords: "hoa tươi, đà nẵng, quảng nam, giao hoa, hoa sinh nhật, hoa cưới",
-    generator: 'v0.app'
+  generator: 'v0.app'
 }
 
 export default function RootLayout({
