@@ -391,7 +391,7 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
                 <div className="flex items-center gap-3">
                   {product.price > 0 ? (
                     <>
-                      <span className="font-display text-3xl font-bold text-[var(--primary)]">
+                      <span className="font-display text-3xl font-bold text-[var(--text-primary)]">
                         {product.price.toLocaleString("vi-VN")}đ
                       </span>
                       <span className="px-3 py-1 bg-green-100 text-green-700 text-sm font-medium rounded-full">
@@ -439,7 +439,7 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
                   {product.price > 0 ? (
                     <Button
                       onClick={() => setShowOrderForm(true)}
-                      className="w-full h-14 text-lg font-semibold bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white"
+                      className="w-full h-14 text-lg font-semibold bg-[var(--primary)] hover:bg-[var(--primary)] text-white"
                       size="lg"
                     >
                       🌺 Đặt Hoa Ngay
@@ -447,7 +447,7 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
                   ) : (
                     <Button
                       asChild
-                      className="w-full h-14 text-lg font-semibold bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white"
+                      className="w-full h-14 text-lg font-semibold bg-[var(--primary)] hover:bg-[var(--primary)] text-white"
                       size="lg"
                     >
                       <a href={CONTACT.zaloLink} target="_blank" rel="noopener noreferrer">
@@ -506,7 +506,7 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
                 <h2 className="font-display text-2xl lg:text-3xl font-semibold text-[var(--text-primary)] mb-4">
                   Sản phẩm liên quan
                 </h2>
-                <p className="text-[var(--text-secondary)] max-w-2xl mx-auto">
+                <p className="text-[var(--text-primary)] max-w-2xl mx-auto">
                   Khám phá thêm những sản phẩm tương tự trong cùng danh mục
                 </p>
               </motion.div>

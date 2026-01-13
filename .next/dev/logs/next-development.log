@@ -1,1 +1,17 @@
-[00:00:01.362] Server  LOG      ✓ Ready in 817ms
+[00:00:01.221] Server  LOG      ✓ Ready in 768ms
+[00:00:06.382] Server  LOG      ○ Compiling / ...
+[00:00:07.587] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:07.867] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[00:00:16.880] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[00:02:17.727] Server  LOG      ✓ Compiled in 249ms
+[00:02:31.993] Server  LOG      ✓ Compiled in 216ms
+[00:02:43.466] Server  LOG      ✓ Compiled in 237ms
+[00:02:51.487] Server  LOG      ✓ Compiled in 257ms
+[00:03:10.635] Server  LOG      ✓ Compiled in 218ms
+[00:03:14.983] Server  LOG      ✓ Compiled in 191ms
+[00:04:32.124] Server  LOG      ✓ Compiled in 199ms
+[00:05:25.742] Server  LOG      ✓ Compiled in 205ms
+[00:06:21.342] Server  LOG      ✓ Compiled in 201ms
+[00:06:23.439] Server  LOG      ✓ Compiled in 200ms
+[00:06:55.466] Server  LOG      ✓ Compiled in 226ms
+[00:07:10.512] Server  LOG      ✓ Compiled in 189ms

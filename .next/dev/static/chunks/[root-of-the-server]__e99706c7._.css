@@ -1534,6 +1534,10 @@
     margin-bottom: calc(var(--spacing) * 12);
   }
 
+  .mb-14 {
+    margin-bottom: calc(var(--spacing) * 14);
+  }
+
   .mb-16 {
     margin-bottom: calc(var(--spacing) * 16);
   }
@@ -1767,6 +1771,14 @@
 
   .h-64 {
     height: calc(var(--spacing) * 64);
+  }
+
+  .h-72 {
+    height: calc(var(--spacing) * 72);
+  }
+
+  .h-96 {
+    height: calc(var(--spacing) * 96);
   }
 
   .h-\[1\.2rem\] {
@@ -2021,6 +2033,10 @@
     width: calc(var(--spacing) * 64);
   }
 
+  .w-72 {
+    width: calc(var(--spacing) * 72);
+  }
+
   .w-96 {
     width: calc(var(--spacing) * 96);
   }
@@ -2181,7 +2197,7 @@
     flex-shrink: 0;
   }
 
-  .flex-grow, .grow {
+  .grow {
     flex-grow: 1;
   }
 
@@ -3061,20 +3077,6 @@
 
   .bg-\[var\(--secondary\)\] {
     background-color: var(--secondary);
-  }
-
-  .bg-\[var\(--success\)\] {
-    background-color: var(--success);
-  }
-
-  .bg-\[var\(--success\)\]\/10 {
-    background-color: var(--success);
-  }
-
-  @supports (color: color-mix(in lab, red, red)) {
-    .bg-\[var\(--success\)\]\/10 {
-      background-color: color-mix(in oklab, var(--success) 10%, transparent);
-    }
   }
 
   .bg-\[var\(--text-primary\)\] {
@@ -4029,6 +4031,10 @@
     padding-block: calc(var(--spacing) * 8);
   }
 
+  .py-10 {
+    padding-block: calc(var(--spacing) * 10);
+  }
+
   .py-12 {
     padding-block: calc(var(--spacing) * 12);
   }
@@ -4368,10 +4374,6 @@
 
   .text-\[var\(--primary-success\)\] {
     color: var(--primary-success);
-  }
-
-  .text-\[var\(--success\)\] {
-    color: var(--success);
   }
 
   .text-\[var\(--text-light\)\] {
@@ -4756,6 +4758,10 @@
 
   .opacity-10 {
     opacity: .1;
+  }
+
+  .opacity-20 {
+    opacity: .2;
   }
 
   .opacity-25 {
@@ -5436,12 +5442,6 @@
   }
 
   @media (hover: hover) {
-    .hover\:border-\[var\(--success\)\]:hover {
-      border-color: var(--success);
-    }
-  }
-
-  @media (hover: hover) {
     .hover\:bg-\[\#0058DD\]:hover {
       background-color: #0058dd;
     }
@@ -5522,12 +5522,6 @@
   @media (hover: hover) {
     .hover\:bg-\[var\(--primary-success\)\]:hover {
       background-color: var(--primary-success);
-    }
-  }
-
-  @media (hover: hover) {
-    .hover\:bg-\[var\(--success\)\]:hover {
-      background-color: var(--success);
     }
   }
 
@@ -5788,12 +5782,6 @@
   @media (hover: hover) {
     .hover\:text-\[var\(--primary-success\)\]:hover {
       color: var(--primary-success);
-    }
-  }
-
-  @media (hover: hover) {
-    .hover\:text-\[var\(--success\)\]:hover {
-      color: var(--success);
     }
   }
 
