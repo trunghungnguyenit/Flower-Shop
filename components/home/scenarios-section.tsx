@@ -55,7 +55,7 @@ export function ScenariosSection() {
       ref={sectionRef}
       className="relative bg-white overflow-hidden py-16 lg:py-20"
     >
-      <div className="mx-auto max-w-6xl px-4 lg:px-8">
+      <div className="mx-auto max-w-[1240px] px-4 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12">
           <span
