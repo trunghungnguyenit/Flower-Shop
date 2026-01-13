@@ -120,7 +120,7 @@ export function CategoriesSection() {
                   <div className="absolute bottom-0 left-0 right-0 p-5">
                     <h3
                       className={cn(
-                        "font-display text-black font-semibold leading-tight",
+                        "font-display text-white font-semibold leading-tight",
                         index === 0
                           ? "text-xl lg:text-2xl"
                           : "text-base lg:text-lg"
@@ -129,7 +129,7 @@ export function CategoriesSection() {
                       {category.name}
                     </h3>
 
-                    <p className="mt-1 text-xs lg:text-sm text-black/80">
+                    <p className="mt-1 text-xs lg:text-sm text-white">
                       {loading
                         ? "..."
                         : `${getProductCountByOccasion(

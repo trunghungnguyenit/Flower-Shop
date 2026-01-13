@@ -298,6 +298,7 @@ function CollectionPageContent() {
     { id: "trang-tri", name: "Trang trí", count: getProductCountByOccasion(products, "trang-tri") },
     { id: "chia-buon", name: "Chia buồn", count: getProductCountByOccasion(products, "chia-buon") },
     { id: "tet", name: "Hoa Tết", count: getProductCountByOccasion(products, "tet") },
+    { id: "su-kien", name: "Hoa sự kiện", count: getProductCountByOccasion(products, "su-kien") },
   ]
 
   // Gift guides for filtering

@@ -41,11 +41,11 @@ export function ScenariosSection() {
 
   // Sample images for each scenario
   const scenarioImages = [
-    "/romantic-red-roses-bouquet-luxury-gift.jpg",
-    "/birthday-flower-bouquet-celebration.jpg", 
-    "/mixed-pastel-flowers-bouquet-soft-colors.jpg",
-    "/grand-opening-flower-stand.jpg",
-    "/wedding-flowers-bridal-bouquet-elegant.jpg",
+    "/tang-nguoi-yeu/nguoi-iu-7.jpg",
+    "/tang-sinh-nhat/sinh-nhat-7.jpg", 
+    "/tang-me/me-8.jpg",
+    "/khai-truong/khai-truong.jpg",
+    "/cuoi/cuoi-9.jpg",
     "/decorative-flowers-interior-design.jpg"
   ];
 
@@ -145,19 +145,6 @@ export function ScenariosSection() {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         loading="lazy"
                       />
-                    </div>
-
-                    {/* Text Overlay */}
-                    <div className={`absolute bottom-6 ${!isEven ? 'left-6' : 'right-6'} max-w-[180px]`}>
-                      <div className="bg-white/95 backdrop-blur-sm p-4 rounded-xl shadow-lg border border-white/20">
-                        <p className="text-xs text-[var(--text-secondary)] leading-relaxed font-medium">
-                          Mỗi bó hoa là một câu chuyện.
-                          <br />
-                          Hãy để chúng tôi kể câu chuyện
-                          <br />
-                          của riêng bạn.
-                        </p>
-                      </div>
                     </div>
                   </div>
                 </div>

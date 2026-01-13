@@ -41,7 +41,7 @@ const reviews = [
     rating: 5,
     text: "Lần đầu đặt hoa từ Đà Nẵng giao về Hội An, không nghĩ nhanh và đẹp như vậy. Chất lượng tuyệt vời!",
     avatar: "/placeholder.svg?height=80&width=80",
-    productImage: "/mixed-pastel-flowers-bouquet-soft-colors.jpg",
+    productImage: "/tang-me/me-8.jpg",
     productName: "Bó hoa pastel mix",
   },
   {
@@ -52,7 +52,7 @@ const reviews = [
     rating: 5,
     text: "Đặt lẵng hoa khai trương cho công ty, rất ấn tượng! Thiết kế sang trọng, giao đúng hẹn. Highly recommend!",
     avatar: "/placeholder.svg?height=80&width=80",
-    productImage: "/white-wedding-bouquet-elegant-roses.jpg",
+    productImage: "/tang-nguoi-yeu/nguoi-iu-11.jpg",
     productName: "Lẵng hoa khai trương",
   },
 ]
