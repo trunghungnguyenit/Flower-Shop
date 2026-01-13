@@ -20,8 +20,35 @@ export function ContactForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
-    console.log(formData)
+    
+    // Validate required fields
+    if (!formData.name || !formData.phone) {
+      alert("Vui lòng điền đầy đủ thông tin bắt buộc!")
+      return
+    }
+
+    // Create message for Zalo
+    let message = `🌸 YÊU CẦU ĐẶT HOA\n\n`
+    message += `👤 Khách hàng: ${formData.name}\n`
+    message += `📱 SĐT: ${formData.phone}\n`
+    if (formData.address) message += `📍 Địa chỉ: ${formData.address}\n`
+    if (formData.flowerType) message += `🌺 Loại hoa: ${formData.flowerType}\n`
+    if (formData.note) message += `📝 Ghi chú: ${formData.note}\n`
+
+    // Open Zalo with message
+    const phoneNumber = "0901234567"
+    const zaloUrl = `https://zalo.me/${phoneNumber}?text=${encodeURIComponent(message)}`
+    window.open(zaloUrl, "_blank")
+    
+    // Reset form
+    setFormData({
+      name: "",
+      phone: "",
+      address: "",
+      flowerType: "",
+      note: "",
+    })
+    
     alert("Cảm ơn bạn! Chúng tôi sẽ liên hệ lại sớm nhất.")
   }
 
