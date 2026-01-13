@@ -377,7 +377,7 @@ function FooterSection() {
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "w-12 h-12 rounded-full flex items-center justify-center",
                                             style: {
-                                                background: "linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%)"
+                                                background: "var(--primary-red)"
                                             },
                                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 className: "text-2xl",
@@ -528,7 +528,7 @@ function FooterSection() {
                                         children: column.links.map((link, linkIndex)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                                     href: link.href,
-                                                    className: "font-body text-sm text-black/70 hover:text-[var(--primary)] transition-colors duration-300 flex items-center gap-2 group",
+                                                    className: "font-body text-sm text-black/70 hover:text-[var(--primary-red)] transition-colors duration-300 flex items-center gap-2 group",
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$lucide$2d$react$40$0$2e$454$2e$0_react$40$19$2e$2$2e$0$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$arrow$2d$right$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ArrowRight$3e$__["ArrowRight"], {
                                                             className: "w-3 h-3 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300"
@@ -583,7 +583,7 @@ function FooterSection() {
                                             className: "flex items-start gap-3",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$lucide$2d$react$40$0$2e$454$2e$0_react$40$19$2e$2$2e$0$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$map$2d$pin$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__MapPin$3e$__["MapPin"], {
-                                                    className: "w-5 h-5 text-[var(--primary)] flex-shrink-0 mt-0.5",
+                                                    className: "w-5 h-5 text-[var(--primary-red)] flex-shrink-0 mt-0.5",
                                                     strokeWidth: 1.5
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/footer.tsx",
@@ -611,7 +611,7 @@ function FooterSection() {
                                             className: "flex items-center gap-3",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$lucide$2d$react$40$0$2e$454$2e$0_react$40$19$2e$2$2e$0$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$phone$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Phone$3e$__["Phone"], {
-                                                    className: "w-5 h-5 text-[var(--primary)]",
+                                                    className: "w-5 h-5 text-[var(--primary-red)]",
                                                     strokeWidth: 1.5
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/footer.tsx",
@@ -620,7 +620,7 @@ function FooterSection() {
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
                                                     href: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$constants$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CONTACT"].phoneLink,
-                                                    className: "font-body text-black/70 hover:text-[var(--primary)] transition-colors",
+                                                    className: "font-body text-black/70 hover:text-[var(--primary-red)] transition-colors",
                                                     style: {
                                                         fontSize: "14px"
                                                     },
@@ -640,7 +640,7 @@ function FooterSection() {
                                             className: "flex items-center gap-3",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$lucide$2d$react$40$0$2e$454$2e$0_react$40$19$2e$2$2e$0$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$mail$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Mail$3e$__["Mail"], {
-                                                    className: "w-5 h-5 text-[var(--primary)]",
+                                                    className: "w-5 h-5 text-[var(--primary-red)]",
                                                     strokeWidth: 1.5
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/footer.tsx",
@@ -649,7 +649,7 @@ function FooterSection() {
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
                                                     href: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$constants$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CONTACT"].emailLink,
-                                                    className: "font-body text-black/70 hover:text-[var(--primary)] transition-colors",
+                                                    className: "font-body text-black/70 hover:text-[var(--primary-red)] transition-colors",
                                                     style: {
                                                         fontSize: "14px"
                                                     },
@@ -671,7 +671,7 @@ function FooterSection() {
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                     className: "w-5 h-5 flex items-center justify-center",
                                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        className: "text-[var(--primary)] text-xs font-bold",
+                                                        className: "text-[var(--primary-red)] text-xs font-bold",
                                                         children: "Z"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/footer.tsx",
@@ -687,7 +687,7 @@ function FooterSection() {
                                                     href: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$constants$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CONTACT"].zaloLink,
                                                     target: "_blank",
                                                     rel: "noopener noreferrer",
-                                                    className: "font-body text-black/70 hover:text-[var(--primary)] transition-colors",
+                                                    className: "font-body text-black/70 hover:text-[var(--primary-red)] transition-colors",
                                                     style: {
                                                         fontSize: "14px"
                                                     },
@@ -710,7 +710,7 @@ function FooterSection() {
                                             className: "flex items-start gap-3",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$lucide$2d$react$40$0$2e$454$2e$0_react$40$19$2e$2$2e$0$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$clock$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Clock$3e$__["Clock"], {
-                                                    className: "w-5 h-5 text-[var(--primary)] flex-shrink-0 mt-0.5",
+                                                    className: "w-5 h-5 text-[var(--primary-red)] flex-shrink-0 mt-0.5",
                                                     strokeWidth: 1.5
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/footer.tsx",
@@ -733,7 +733,7 @@ function FooterSection() {
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                            className: "text-[var(--primary)]",
+                                                            className: "text-[var(--primary-red)]",
                                                             children: "Nhận đặt 24/7"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/footer.tsx",
@@ -803,7 +803,7 @@ function FooterSection() {
                                 "© 2025 Hoa Tươi Đà Nẵng. Thiết kế với",
                                 " ",
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                    className: "text-[var(--primary)]",
+                                    className: "text-[var(--primary-red)]",
                                     children: "♥"
                                 }, void 0, false, {
                                     fileName: "[project]/components/footer.tsx",
@@ -1031,7 +1031,7 @@ function HeaderSection() {
                                 href: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$constants$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CONTACT"].zaloLink,
                                 target: "_blank",
                                 rel: "noopener noreferrer",
-                                className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cn"])("flex items-center gap-2 px-5 py-2.5 font-body font-medium text-sm transition-all duration-300 hover:scale-105", isScrolled ? "bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-black" : "bg-white/20 backdrop-blur-sm hover:bg-white/30 text-black border border-white/30"),
+                                className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cn"])("flex items-center gap-2 px-5 py-2.5 font-body font-medium text-sm transition-all duration-300 hover:scale-105", isScrolled ? "bg-[var(--primary)] hover:bg-[var(--primary-success)] text-black" : "bg-white/20 backdrop-blur-sm hover:bg-white/30 text-black border border-white/30"),
                                 style: {
                                     borderRadius: "var(--radius-round)"
                                 },
@@ -1540,7 +1540,7 @@ function ProductCard({ product, index, onConfetti }) {
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "absolute top-3 left-3",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                    className: "px-3 py-1 bg-[var(--primary)] text-white text-xs font-body font-medium rounded-full",
+                                    className: "px-3 py-1 bg-[var(--text-white)] text-black text-xs font-body font-medium rounded-full",
                                     children: product.badge || "Hoa tươi"
                                 }, void 0, false, {
                                     fileName: "[project]/app/collection/page.tsx",
@@ -1607,7 +1607,7 @@ function ProductCard({ product, index, onConfetti }) {
                                 children: product.price > 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                            className: "font-display text-[var(--primary)] font-semibold",
+                                            className: "font-display text-[var(--text-primary)] font-semibold",
                                             style: {
                                                 fontSize: "17px"
                                             },
@@ -1906,7 +1906,7 @@ function CollectionPageContent() {
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                     href: "/",
-                                    className: "text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors",
+                                    className: "text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors",
                                     children: "Trang chủ"
                                 }, void 0, false, {
                                     fileName: "[project]/app/collection/page.tsx",
@@ -1949,38 +1949,6 @@ function CollectionPageContent() {
                                 ease: premiumEase
                             },
                             children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "flex items-center justify-center gap-3 mb-6",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "w-12 h-12 rounded-xl bg-[var(--primary)]/10 flex items-center justify-center",
-                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$lucide$2d$react$40$0$2e$454$2e$0_react$40$19$2e$2$2e$0$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$grid$2d$3x3$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Grid3X3$3e$__["Grid3X3"], {
-                                                className: "w-6 h-6 text-[var(--primary)]",
-                                                strokeWidth: 1.5
-                                            }, void 0, false, {
-                                                fileName: "[project]/app/collection/page.tsx",
-                                                lineNumber: 340,
-                                                columnNumber: 17
-                                            }, this)
-                                        }, void 0, false, {
-                                            fileName: "[project]/app/collection/page.tsx",
-                                            lineNumber: 339,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                            className: "font-body text-[var(--primary)] tracking-[0.25em] uppercase text-sm font-medium",
-                                            children: "Bộ sưu tập hoa tươi"
-                                        }, void 0, false, {
-                                            fileName: "[project]/app/collection/page.tsx",
-                                            lineNumber: 342,
-                                            columnNumber: 15
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/app/collection/page.tsx",
-                                    lineNumber: 338,
-                                    columnNumber: 13
-                                }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
                                     className: "font-display text-[var(--text-primary)] mb-6",
                                     style: {
@@ -1992,21 +1960,21 @@ function CollectionPageContent() {
                                         "Bộ Sưu Tập",
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
                                             fileName: "[project]/app/collection/page.tsx",
-                                            lineNumber: 349,
+                                            lineNumber: 341,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                            className: "text-[var(--primary)]",
+                                            className: "text-[var(--text-primary)]",
                                             children: "Hoa Tươi Đẹp Nhất"
                                         }, void 0, false, {
                                             fileName: "[project]/app/collection/page.tsx",
-                                            lineNumber: 350,
+                                            lineNumber: 342,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/collection/page.tsx",
-                                    lineNumber: 347,
+                                    lineNumber: 339,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2018,7 +1986,7 @@ function CollectionPageContent() {
                                     children: "Khám phá bộ sưu tập hoa tươi đa dạng với nhiều mẫu mã đẹp mắt, phù hợp cho mọi dịp và không gian."
                                 }, void 0, false, {
                                     fileName: "[project]/app/collection/page.tsx",
-                                    lineNumber: 353,
+                                    lineNumber: 345,
                                     columnNumber: 13
                                 }, this)
                             ]
@@ -2054,14 +2022,14 @@ function CollectionPageContent() {
                                             children: "Dịp sử dụng:"
                                         }, void 0, false, {
                                             fileName: "[project]/app/collection/page.tsx",
-                                            lineNumber: 368,
+                                            lineNumber: 360,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "flex flex-wrap gap-3",
                                             children: occasions.map((occasion)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                     onClick: ()=>setSelectedOccasion(occasion.id),
-                                                    className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cn"])("px-6 py-3 rounded-full font-body font-medium transition-all duration-300", selectedOccasion === occasion.id ? "bg-[var(--primary)] text-white" : "bg-gray-100 text-[var(--text-secondary)] hover:bg-gray-200"),
+                                                    className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cn"])("px-6 py-3 rounded-full font-body font-medium transition-all duration-300", selectedOccasion === occasion.id ? "bg-[var(--text-primary)] text-white" : "bg-gray-100 text-[var(--text-secondary)] hover:bg-gray-200"),
                                                     style: {
                                                         fontSize: "14px"
                                                     },
@@ -2073,18 +2041,18 @@ function CollectionPageContent() {
                                                     ]
                                                 }, occasion.id, true, {
                                                     fileName: "[project]/app/collection/page.tsx",
-                                                    lineNumber: 371,
+                                                    lineNumber: 363,
                                                     columnNumber: 19
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/collection/page.tsx",
-                                            lineNumber: 369,
+                                            lineNumber: 361,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/collection/page.tsx",
-                                    lineNumber: 367,
+                                    lineNumber: 359,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2094,14 +2062,14 @@ function CollectionPageContent() {
                                             children: "Tặng cho ai:"
                                         }, void 0, false, {
                                             fileName: "[project]/app/collection/page.tsx",
-                                            lineNumber: 390,
+                                            lineNumber: 382,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "flex flex-wrap gap-3",
                                             children: giftGuides.map((guide)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                     onClick: ()=>setSelectedGiftGuide(guide.id),
-                                                    className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cn"])("px-6 py-3 rounded-full font-body font-medium transition-all duration-300", selectedGiftGuide === guide.id ? "bg-[var(--primary)] text-white" : "bg-gray-100 text-[var(--text-secondary)] hover:bg-gray-200"),
+                                                    className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cn"])("px-6 py-3 rounded-full font-body font-medium transition-all duration-300", selectedGiftGuide === guide.id ? "bg-[var(--text-primary)] text-white" : "bg-gray-100 text-[var(--text-secondary)] hover:bg-gray-200"),
                                                     style: {
                                                         fontSize: "14px"
                                                     },
@@ -2113,18 +2081,18 @@ function CollectionPageContent() {
                                                     ]
                                                 }, guide.id, true, {
                                                     fileName: "[project]/app/collection/page.tsx",
-                                                    lineNumber: 393,
+                                                    lineNumber: 385,
                                                     columnNumber: 19
                                                 }, this))
                                         }, void 0, false, {
                                             fileName: "[project]/app/collection/page.tsx",
-                                            lineNumber: 391,
+                                            lineNumber: 383,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/collection/page.tsx",
-                                    lineNumber: 389,
+                                    lineNumber: 381,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2139,7 +2107,7 @@ function CollectionPageContent() {
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/collection/page.tsx",
-                                            lineNumber: 412,
+                                            lineNumber: 404,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2152,12 +2120,12 @@ function CollectionPageContent() {
                                                         className: "w-4 h-4"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/collection/page.tsx",
-                                                        lineNumber: 423,
+                                                        lineNumber: 415,
                                                         columnNumber: 19
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/collection/page.tsx",
-                                                    lineNumber: 416,
+                                                    lineNumber: 408,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2167,30 +2135,30 @@ function CollectionPageContent() {
                                                         className: "w-4 h-4"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/collection/page.tsx",
-                                                        lineNumber: 432,
+                                                        lineNumber: 424,
                                                         columnNumber: 19
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/collection/page.tsx",
-                                                    lineNumber: 425,
+                                                    lineNumber: 417,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/collection/page.tsx",
-                                            lineNumber: 415,
+                                            lineNumber: 407,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/collection/page.tsx",
-                                    lineNumber: 411,
+                                    lineNumber: 403,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/collection/page.tsx",
-                            lineNumber: 364,
+                            lineNumber: 356,
                             columnNumber: 11
                         }, this),
                         loading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2204,7 +2172,7 @@ function CollectionPageContent() {
                                             className: "aspect-square bg-gray-200 animate-pulse"
                                         }, void 0, false, {
                                             fileName: "[project]/app/collection/page.tsx",
-                                            lineNumber: 443,
+                                            lineNumber: 435,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2214,14 +2182,14 @@ function CollectionPageContent() {
                                                     className: "h-4 bg-gray-200 rounded animate-pulse"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/collection/page.tsx",
-                                                    lineNumber: 445,
+                                                    lineNumber: 437,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                     className: "h-3 bg-gray-200 rounded w-3/4 animate-pulse"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/collection/page.tsx",
-                                                    lineNumber: 446,
+                                                    lineNumber: 438,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2231,37 +2199,37 @@ function CollectionPageContent() {
                                                             className: "h-5 bg-gray-200 rounded w-20 animate-pulse"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/collection/page.tsx",
-                                                            lineNumber: 448,
+                                                            lineNumber: 440,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                             className: "w-9 h-9 bg-gray-200 rounded-full animate-pulse"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/collection/page.tsx",
-                                                            lineNumber: 449,
+                                                            lineNumber: 441,
                                                             columnNumber: 23
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/collection/page.tsx",
-                                                    lineNumber: 447,
+                                                    lineNumber: 439,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/collection/page.tsx",
-                                            lineNumber: 444,
+                                            lineNumber: 436,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, i, true, {
                                     fileName: "[project]/app/collection/page.tsx",
-                                    lineNumber: 442,
+                                    lineNumber: 434,
                                     columnNumber: 17
                                 }, this))
                         }, void 0, false, {
                             fileName: "[project]/app/collection/page.tsx",
-                            lineNumber: 440,
+                            lineNumber: 432,
                             columnNumber: 13
                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
                             children: [
@@ -2273,12 +2241,12 @@ function CollectionPageContent() {
                                             onConfetti: handleConfetti
                                         }, product.id, false, {
                                             fileName: "[project]/app/collection/page.tsx",
-                                            lineNumber: 465,
+                                            lineNumber: 457,
                                             columnNumber: 19
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/app/collection/page.tsx",
-                                    lineNumber: 458,
+                                    lineNumber: 450,
                                     columnNumber: 15
                                 }, this),
                                 filteredProducts.length === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2290,12 +2258,12 @@ function CollectionPageContent() {
                                                 className: "w-8 h-8 text-gray-400"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/collection/page.tsx",
-                                                lineNumber: 478,
+                                                lineNumber: 470,
                                                 columnNumber: 21
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/app/collection/page.tsx",
-                                            lineNumber: 477,
+                                            lineNumber: 469,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -2306,7 +2274,7 @@ function CollectionPageContent() {
                                             children: "Không tìm thấy sản phẩm"
                                         }, void 0, false, {
                                             fileName: "[project]/app/collection/page.tsx",
-                                            lineNumber: 480,
+                                            lineNumber: 472,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2317,13 +2285,13 @@ function CollectionPageContent() {
                                             children: "Thử chọn danh mục khác hoặc liên hệ với chúng tôi để được tư vấn."
                                         }, void 0, false, {
                                             fileName: "[project]/app/collection/page.tsx",
-                                            lineNumber: 483,
+                                            lineNumber: 475,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/collection/page.tsx",
-                                    lineNumber: 476,
+                                    lineNumber: 468,
                                     columnNumber: 17
                                 }, this)
                             ]
@@ -2331,12 +2299,12 @@ function CollectionPageContent() {
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/collection/page.tsx",
-                    lineNumber: 362,
+                    lineNumber: 354,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/collection/page.tsx",
-                lineNumber: 361,
+                lineNumber: 353,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -2368,12 +2336,12 @@ function CollectionPageContent() {
                                     strokeWidth: 1.5
                                 }, void 0, false, {
                                     fileName: "[project]/app/collection/page.tsx",
-                                    lineNumber: 504,
+                                    lineNumber: 496,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/collection/page.tsx",
-                                lineNumber: 503,
+                                lineNumber: 495,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -2385,7 +2353,7 @@ function CollectionPageContent() {
                                 children: "Cần Tư Vấn Chọn Hoa?"
                             }, void 0, false, {
                                 fileName: "[project]/app/collection/page.tsx",
-                                lineNumber: 507,
+                                lineNumber: 499,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2397,7 +2365,7 @@ function CollectionPageContent() {
                                 children: "Liên hệ với chúng tôi để được tư vấn miễn phí về các mẫu hoa phù hợp nhất cho nhu cầu của bạn."
                             }, void 0, false, {
                                 fileName: "[project]/app/collection/page.tsx",
-                                lineNumber: 511,
+                                lineNumber: 503,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2405,7 +2373,7 @@ function CollectionPageContent() {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
                                         href: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$constants$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CONTACT"].phoneLink,
-                                        className: "inline-flex items-center justify-center gap-2 px-8 py-4 bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white font-body font-medium transition-all duration-300 hover:scale-105",
+                                        className: "inline-flex items-center justify-center gap-2 px-8 py-4 bg-[var(--success)] hover:bg-[var(--success)] text-white font-body font-medium transition-all duration-300 hover:scale-105",
                                         style: {
                                             borderRadius: "var(--radius-round)",
                                             fontSize: "16px"
@@ -2415,7 +2383,7 @@ function CollectionPageContent() {
                                                 className: "w-5 h-5"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/collection/page.tsx",
-                                                lineNumber: 521,
+                                                lineNumber: 513,
                                                 columnNumber: 17
                                             }, this),
                                             "Gọi ngay: ",
@@ -2423,7 +2391,7 @@ function CollectionPageContent() {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/collection/page.tsx",
-                                        lineNumber: 516,
+                                        lineNumber: 508,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -2440,36 +2408,36 @@ function CollectionPageContent() {
                                                 className: "w-5 h-5"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/collection/page.tsx",
-                                                lineNumber: 531,
+                                                lineNumber: 523,
                                                 columnNumber: 17
                                             }, this),
                                             "Chat Zalo"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/collection/page.tsx",
-                                        lineNumber: 524,
+                                        lineNumber: 516,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/collection/page.tsx",
-                                lineNumber: 515,
+                                lineNumber: 507,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/collection/page.tsx",
-                        lineNumber: 496,
+                        lineNumber: 488,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/app/collection/page.tsx",
-                    lineNumber: 495,
+                    lineNumber: 487,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/collection/page.tsx",
-                lineNumber: 494,
+                lineNumber: 486,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(Confetti, {
@@ -2477,12 +2445,12 @@ function CollectionPageContent() {
                 position: confettiState.position
             }, void 0, false, {
                 fileName: "[project]/app/collection/page.tsx",
-                lineNumber: 540,
+                lineNumber: 532,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$footer$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FooterSection"], {}, void 0, false, {
                 fileName: "[project]/app/collection/page.tsx",
-                lineNumber: 543,
+                lineNumber: 535,
                 columnNumber: 11
             }, this)
         ]
@@ -2506,7 +2474,7 @@ function CollectionPage() {
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$header$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HeaderSection"], {}, void 0, false, {
                     fileName: "[project]/app/collection/page.tsx",
-                    lineNumber: 552,
+                    lineNumber: 544,
                     columnNumber: 9
                 }, void 0),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2518,7 +2486,7 @@ function CollectionPage() {
                                 className: "w-16 h-16 border-4 border-[var(--primary)] border-t-transparent rounded-full animate-spin mx-auto mb-4"
                             }, void 0, false, {
                                 fileName: "[project]/app/collection/page.tsx",
-                                lineNumber: 555,
+                                lineNumber: 547,
                                 columnNumber: 13
                             }, void 0),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2526,34 +2494,34 @@ function CollectionPage() {
                                 children: "Đang tải..."
                             }, void 0, false, {
                                 fileName: "[project]/app/collection/page.tsx",
-                                lineNumber: 556,
+                                lineNumber: 548,
                                 columnNumber: 13
                             }, void 0)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/collection/page.tsx",
-                        lineNumber: 554,
+                        lineNumber: 546,
                         columnNumber: 11
                     }, void 0)
                 }, void 0, false, {
                     fileName: "[project]/app/collection/page.tsx",
-                    lineNumber: 553,
+                    lineNumber: 545,
                     columnNumber: 9
                 }, void 0)
             ]
         }, void 0, true, {
             fileName: "[project]/app/collection/page.tsx",
-            lineNumber: 551,
+            lineNumber: 543,
             columnNumber: 7
         }, void 0),
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$7_$40$opentelemetry$2b$_ab12fbf9041281d71cca4574e50b85ac$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(CollectionPageContent, {}, void 0, false, {
             fileName: "[project]/app/collection/page.tsx",
-            lineNumber: 561,
+            lineNumber: 553,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/collection/page.tsx",
-        lineNumber: 550,
+        lineNumber: 542,
         columnNumber: 5
     }, this);
 }

@@ -124,7 +124,7 @@ export default function OccasionsPage() {
           <nav className="flex items-center gap-2 text-sm font-body mb-8">
             <Link
               href="/"
-              className="text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors"
+              className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
             >
               Trang chủ
             </Link>
@@ -141,17 +141,6 @@ export default function OccasionsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: premiumEase }}
           >
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-[var(--primary)]/10 flex items-center justify-center">
-                <Calendar
-                  className="w-6 h-6 text-[var(--primary)]"
-                  strokeWidth={1.5}
-                />
-              </div>
-              <span className="font-body text-[var(--primary)] tracking-[0.25em] uppercase text-sm font-medium">
-                Hoa cho mọi dịp lễ
-              </span>
-            </div>
 
             <h1
               className="font-display text-[var(--text-primary)] mb-6"
@@ -163,11 +152,11 @@ export default function OccasionsPage() {
             >
               Hoa Tươi Cho Mọi
               <br />
-              <span className="text-[var(--primary)]">Dịp Đặc Biệt</span>
+              <span className="text-[var(--text-primary)]">Dịp Đặc Biệt</span>
             </h1>
 
             <p
-              className="font-body text-[var(--text-secondary)] max-w-2xl mx-auto mb-8"
+              className="font-body text-[var(--text-primary)] max-w-2xl mx-auto mb-8"
               style={{ fontSize: "18px", lineHeight: 1.7 }}
             >
               Từ Tết Nguyên Đán đến sinh nhật, từ đám cưới đến khai trương -
@@ -178,7 +167,7 @@ export default function OccasionsPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="#danh-sach-dip-le"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white font-body font-medium transition-all duration-300 hover:scale-105"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-[var(--text-primary)] text-[var(--text-primary)] hover:bg-[var(--text-primary)] hover:text-white font-body font-medium transition-all duration-300"
                 style={{
                   borderRadius: "var(--radius-round)",
                   fontSize: "16px",
@@ -218,7 +207,7 @@ export default function OccasionsPage() {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.7, ease: premiumEase }}
           >
-            <span className="inline-block font-body text-[var(--primary)] tracking-[0.25em] uppercase mb-4 text-sm font-medium">
+            <span className="inline-block font-body text-[var(--text-primary)] tracking-[0.25em] uppercase mb-4 text-sm font-medium">
               Chọn dịp lễ phù hợp
             </span>
             <h2
@@ -317,10 +306,10 @@ export default function OccasionsPage() {
                       </p>
 
                       <div className="flex items-center justify-between">
-                        <span className="font-body text-[var(--primary)] font-medium text-sm">
+                        <span className="font-body text-[var(--text-primary)] font-medium text-sm">
                           Xem chi tiết
                         </span>
-                        <ArrowRight className="w-4 h-4 text-[var(--primary)] group-hover:translate-x-1 transition-transform duration-300" />
+                        <ArrowRight className="w-4 h-4 text-[var(--text-primary)] group-hover:translate-x-1 transition-transform duration-300" />
                       </div>
                     </div>
                   </div>

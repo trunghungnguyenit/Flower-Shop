@@ -61,7 +61,7 @@ export function UspSection() {
                     className="w-16 h-16 mb-4 mx-auto flex items-center justify-center rounded-2xl"
                     style={{
                       background:
-                        "linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%)",
+                        "linear-gradient(var(--primary))",
                     }}
                     whileHover={{ scale: 1.1, rotate: 3 }}
                     transition={{ duration: 0.25, ease: premiumEase }}
@@ -104,8 +104,7 @@ export function ReviewsSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-[var(--background-alt)] overflow-hidden"
-      style={{ padding: "clamp(80px, 10vw, 140px) 0" }}
+       className="relative bg-white overflow-hidden py-16 lg:py-20"
     >
       <div className="mx-auto max-w-[1240px] px-4 lg:px-8">
         {/* Section Header */}
@@ -115,14 +114,6 @@ export function ReviewsSection() {
           animate={isInView ? "animate" : "initial"}
           variants={staggerContainer}
         >
-          <motion.span
-            className="inline-block font-body text-[var(--primary)] tracking-[0.25em] uppercase mb-4"
-            style={{ fontSize: "13px", fontWeight: 500 }}
-            variants={staggerItem}
-          >
-            Khách hàng nói gì
-          </motion.span>
-
           <motion.h2
             className="font-display text-[var(--text-primary)] mb-4"
             style={{ fontSize: "clamp(32px, 4vw, 44px)", fontWeight: 600 }}
@@ -163,7 +154,7 @@ export function ReviewsSection() {
               }}
             >
               {/* Product Image */}
-              <div className="relative aspect-video overflow-hidden">
+              <div className="relative aspect-[4/3] lg:aspect-[1/1]">
                 <Image
                   src={review.productImage}
                   alt="Sản phẩm"
@@ -244,8 +235,7 @@ export function BlogSection({ blogs = [], loading = false }: BlogSectionProps) {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-white overflow-hidden"
-      style={{ padding: "clamp(80px, 10vw, 140px) 0" }}
+       className="relative bg-white overflow-hidden py-16 lg:py-20"
     >
       <div className="mx-auto max-w-[1240px] px-4 lg:px-8">
         {/* Section Header */}
@@ -255,13 +245,6 @@ export function BlogSection({ blogs = [], loading = false }: BlogSectionProps) {
           animate={isInView ? "animate" : "initial"}
           variants={staggerContainer}
         >
-          <motion.span
-            className="inline-block font-body text-[var(--primary)] tracking-[0.25em] uppercase mb-4"
-            style={{ fontSize: "13px", fontWeight: 500 }}
-            variants={staggerItem}
-          >
-            Kiến thức hoa
-          </motion.span>
 
           <motion.h2
             className="font-display text-[var(--text-primary)] mb-4"
@@ -341,7 +324,7 @@ export function BlogSection({ blogs = [], loading = false }: BlogSectionProps) {
                     {/* Category Badge */}
                     {blog.category && (
                       <div className="absolute top-3 left-3">
-                        <span className="px-3 py-1 bg-white/95 backdrop-blur-sm text-[var(--primary)] font-body font-medium text-xs rounded-full border border-white/20">
+                        <span className="px-3 py-1 bg-white/95 backdrop-blur-sm text-[var(--text-primary)] font-body font-medium text-xs rounded-full border border-white/20">
                           {blog.category}
                         </span>
                       </div>
@@ -351,7 +334,7 @@ export function BlogSection({ blogs = [], loading = false }: BlogSectionProps) {
                   {/* Content */}
                   <div className="p-4">
                     <h3
-                      className="font-display text-[var(--text-primary)] line-clamp-2 group-hover:text-[var(--primary)] transition-colors duration-300"
+                      className="font-display text-[var(--text-primary)] line-clamp-2 group-hover:text-[var(--text-primary)] transition-colors duration-300"
                       style={{
                         fontSize: "15px",
                         fontWeight: 600,
@@ -402,7 +385,7 @@ export function BlogSection({ blogs = [], loading = false }: BlogSectionProps) {
           >
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 text-[var(--primary)] font-body font-medium hover:gap-3 transition-all duration-300"
+              className="inline-flex items-center gap-2 px-8 py-3 border-2 border-[var(--text-primary)] rounded-full text-[var(--text-primary)] font-body font-medium hover:bg-[var(--text-primary)] hover:text-white transition-all duration-300"
               style={{ fontSize: "15px" }}
             >
               Xem tất cả bài viết

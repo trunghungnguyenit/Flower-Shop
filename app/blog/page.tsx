@@ -138,7 +138,7 @@ export default function BlogPage() {
           <nav className="flex items-center gap-2 text-sm font-body mb-8">
             <Link
               href="/"
-              className="text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors"
+              className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
             >
               Trang chủ
             </Link>
@@ -153,17 +153,6 @@ export default function BlogPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: premiumEase }}
           >
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-[var(--primary)]/10 flex items-center justify-center">
-                <BookOpen
-                  className="w-6 h-6 text-[var(--primary)]"
-                  strokeWidth={1.5}
-                />
-              </div>
-              <span className="font-body text-[var(--primary)] tracking-[0.25em] uppercase text-sm font-medium">
-                Blog hoa tươi
-              </span>
-            </div>
 
             <h1
               className="font-display text-[var(--text-primary)] mb-6"
@@ -175,11 +164,11 @@ export default function BlogPage() {
             >
               Blog Hoa Tươi
               <br />
-              <span className="text-[var(--primary)]">Kiến Thức & Chia Sẻ</span>
+              <span className="text-[var(--text-primary)]">Kiến Thức & Chia Sẻ</span>
             </h1>
 
             <p
-              className="font-body text-[var(--text-secondary)] max-w-2xl mx-auto mb-8"
+              className="font-body text-[var(--text-primary)] max-w-2xl mx-auto mb-8"
               style={{ fontSize: "18px", lineHeight: 1.7 }}
             >
               Khám phá thế giới hoa tươi qua những bài viết hữu ích về cách chăm
@@ -201,7 +190,7 @@ export default function BlogPage() {
                 className={cn(
                   "px-6 py-3 rounded-full font-body font-medium transition-all duration-300",
                   selectedCategory === category
-                    ? "bg-[var(--primary)] text-white"
+                    ? "bg-[var(--text-primary)] text-white"
                     : "bg-gray-100 text-[var(--text-secondary)] hover:bg-gray-200"
                 )}
                 style={{ fontSize: "14px" }}
@@ -257,7 +246,7 @@ export default function BlogPage() {
                         />
 
                         {blog.category && (
-                          <span className="absolute top-4 left-4 px-3 py-1 bg-[var(--primary)] text-white text-xs font-medium rounded-full">
+                          <span className="absolute top-4 left-4 px-3 py-1 bg-[var(--text-white)] text-black text-xs font-medium rounded-full">
                             {blog.category}
                           </span>
                         )}
@@ -278,7 +267,7 @@ export default function BlogPage() {
                         </div>
 
                         {/* Title */}
-                        <h2 className="font-display text-base font-semibold text-[var(--text-primary)] mb-3 line-clamp-2 group-hover:text-[var(--primary)] transition-colors">
+                        <h2 className="font-display text-base font-semibold text-[var(--text-primary)] mb-3 line-clamp-2 group-hover:text-[var(--text-primary)] transition-colors">
                           {blog.title}
                         </h2>
 
@@ -289,7 +278,7 @@ export default function BlogPage() {
 
                         {/* CTA */}
                         <div className="mt-auto pt-4 flex justify-end">
-                          <span className="flex items-center gap-1 text-sm font-medium text-[var(--primary)] group-hover:gap-2 transition-all">
+                          <span className="flex items-center gap-1 text-sm font-medium text-[var(--text-white)] group-hover:gap-2 transition-all">
                             Đọc thêm
                             <ArrowRight className="w-4 h-4" />
                           </span>

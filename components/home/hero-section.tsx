@@ -51,7 +51,7 @@ export function HeroSection() {
             src={heroSlides[currentSlide].image}
             alt={heroSlides[currentSlide].title}
             fill
-            className="object-cover"
+            className="relative object-cover"
             priority
           />
           {/* Multi-layer gradient for depth */}
@@ -77,7 +77,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2, ease: premiumEase }}
-              className="inline-block font-body text-[var(--primary-light)] tracking-[0.25em] uppercase mb-4"
+              className="inline-block font-body text-white tracking-[0.25em] uppercase mb-4"
               style={{ fontSize: "13px", fontWeight: 500 }}
             >
               Hoa tươi mỗi ngày
@@ -91,7 +91,7 @@ export function HeroSection() {
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
                 transition={{ duration: 0.8, ease: premiumEase }}
-                className="font-display text-black mb-4"
+                className="font-display text-white mb-4"
                 style={{ fontSize: "clamp(40px, 6vw, 64px)", fontWeight: 600, lineHeight: 1.1 }}
               >
                 {heroSlides[currentSlide].title}
@@ -100,7 +100,7 @@ export function HeroSection() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.3, duration: 0.6 }}
-                  className="text-[var(--primary-light)]"
+                  className="text-white"
                 >
                   {heroSlides[currentSlide].subtitle}
                 </motion.span>
@@ -115,7 +115,7 @@ export function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.6, delay: 0.2, ease: premiumEase }}
-                className="font-body text-black/80 mb-8 max-w-lg"
+                className="font-body text-white mb-8 max-w-lg"
                 style={{ fontSize: "18px", lineHeight: 1.7 }}
               >
                 {heroSlides[currentSlide].description}
@@ -132,7 +132,7 @@ export function HeroSection() {
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                 <Link
                   href="/collection"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-black font-body font-medium transition-colors duration-300"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-black font-body font-medium border border-white/30 transition-colors duration-300"
                   style={{ borderRadius: "var(--radius-round)", fontSize: "15px" }}
                 >
                   Xem Bộ Sưu Tập

@@ -129,7 +129,7 @@ function ProductCard({
             {/* Badge */}
             <div className="absolute top-3 left-3">
               <span
-                className="px-3 py-1 bg-[var(--primary)] text-white text-xs font-body font-medium rounded-full"
+                className="px-3 py-1 bg-[var(--text-white)] text-black text-xs font-body font-medium rounded-full"
               >
                 {product.badge || "Hoa tươi"}
               </span>
@@ -161,7 +161,7 @@ function ProductCard({
               {product.price > 0 ? (
                 <>
                   <span
-                    className="font-display text-[var(--primary)] font-semibold"
+                    className="font-display text-[var(--text-primary)] font-semibold"
                     style={{ fontSize: "17px" }}
                   >
                     {product.price.toLocaleString("vi-VN")}đ
@@ -321,7 +321,7 @@ function CollectionPageContent() {
         <div className="mx-auto max-w-[1200px] px-4 lg:px-8">
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-sm font-body mb-8">
-            <Link href="/" className="text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors">
+            <Link href="/" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
               Trang chủ
             </Link>
             <ChevronRight className="w-4 h-4 text-[var(--text-muted)]" />
@@ -335,19 +335,11 @@ function CollectionPageContent() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: premiumEase }}
           >
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-[var(--primary)]/10 flex items-center justify-center">
-                <Grid3X3 className="w-6 h-6 text-[var(--primary)]" strokeWidth={1.5} />
-              </div>
-              <span className="font-body text-[var(--primary)] tracking-[0.25em] uppercase text-sm font-medium">
-                Bộ sưu tập hoa tươi
-              </span>
-            </div>
 
             <h1 className="font-display text-[var(--text-primary)] mb-6" style={{ fontSize: "clamp(32px, 5vw, 48px)", fontWeight: 600, lineHeight: 1.2 }}>
               Bộ Sưu Tập
               <br />
-              <span className="text-[var(--primary)]">Hoa Tươi Đẹp Nhất</span>
+              <span className="text-[var(--text-primary)]">Hoa Tươi Đẹp Nhất</span>
             </h1>
 
             <p className="font-body text-[var(--text-secondary)] max-w-2xl mx-auto mb-8" style={{ fontSize: "18px", lineHeight: 1.7 }}>
@@ -374,7 +366,7 @@ function CollectionPageContent() {
                     className={cn(
                       "px-6 py-3 rounded-full font-body font-medium transition-all duration-300",
                       selectedOccasion === occasion.id
-                        ? "bg-[var(--primary)] text-white"
+                        ? "bg-[var(--text-primary)] text-white"
                         : "bg-gray-100 text-[var(--text-secondary)] hover:bg-gray-200"
                     )}
                     style={{ fontSize: "14px" }}
@@ -396,7 +388,7 @@ function CollectionPageContent() {
                     className={cn(
                       "px-6 py-3 rounded-full font-body font-medium transition-all duration-300",
                       selectedGiftGuide === guide.id
-                        ? "bg-[var(--primary)] text-white"
+                        ? "bg-[var(--text-primary)] text-white"
                         : "bg-gray-100 text-[var(--text-secondary)] hover:bg-gray-200"
                     )}
                     style={{ fontSize: "14px" }}
@@ -515,7 +507,7 @@ function CollectionPageContent() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href={CONTACT.phoneLink}
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white font-body font-medium transition-all duration-300 hover:scale-105"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[var(--primary-success)] hover:bg-[var(--primary-success)] text-white font-body font-medium transition-all duration-300 hover:scale-105"
                 style={{ borderRadius: "var(--radius-round)", fontSize: "16px" }}
               >
                 <Phone className="w-5 h-5" />

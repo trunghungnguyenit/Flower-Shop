@@ -1,15 +1,6 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/blog/[slug]/page": "app/blog/[slug]/page.js",
   "/blog/page": "app/blog/page.js",
   "/collection/page": "app/collection/page.js",
-  "/occasions/birthday/page": "app/occasions/birthday/page.js",
-  "/occasions/condolences/page": "app/occasions/condolences/page.js",
-  "/occasions/event-flowers/page": "app/occasions/event-flowers/page.js",
-  "/occasions/floral-decoration/page": "app/occasions/floral-decoration/page.js",
-  "/occasions/new-year/page": "app/occasions/new-year/page.js",
-  "/occasions/opening/page": "app/occasions/opening/page.js",
   "/occasions/page": "app/occasions/page.js",
-  "/occasions/wedding/page": "app/occasions/wedding/page.js",
   "/page": "app/page.js"
 }

@@ -6,24 +6,28 @@
 
 :root {
   /* === BRAND COLORS === */
-  --primary: #D97C8A;
+  --primary: #5ba2f3;
+  --primary-red: #fc082c;
   --primary-dark: #C56A79;
   --primary-light: #E8A4AF;
+  --primary-success: #58e95d;
 
   /* === ACCENT COLORS === */
   --secondary: #FAF7F8;
-  --accent-gold: #F7D88A;
+  --accent-gold: #f8f557;
   --accent-rose: #E8C4C8;
 
   /* === SEMANTIC COLORS === */
   --success: #4CAF50;
-  --danger: #E64A4A;
+  --danger: #f5913f;
   --info: #5C9CE5;
 
   /* === TEXT COLORS === */
   --text-primary: #000000;
   --text-secondary: #000000;
   --text-muted: #000000;
+  --text-white: #FFFFFF;
+
 
   /* === UI COLORS === */
   --border-soft: #EAEAEA;
@@ -337,5 +341,43 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+/* ============================================
+   PRODUCT CARD EQUAL HEIGHT
+   ============================================ */
+
+@layer components {
+  /* Product card consistent height */
+  .product-card-equal {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .product-card-equal .product-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .product-card-equal .product-title {
+    min-height: 2.4em;
+    line-height: 1.2;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .product-card-equal .product-rating {
+    height: 1.25rem; /* 20px */
+    display: flex;
+    align-items: center;
+  }
+
+  .product-card-equal .product-price {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 }

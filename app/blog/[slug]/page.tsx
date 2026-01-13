@@ -139,7 +139,7 @@ export default function BlogPostPage() {
             </p>
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--primary)] text-white font-body font-medium rounded-lg hover:bg-[var(--primary-dark)] transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--text-primary)] text-white font-body font-medium rounded-lg hover:bg-[var(--text-primary)] transition-colors"
             >
               <ArrowRight className="w-4 h-4 rotate-180" />
               Quay về Blog
@@ -178,11 +178,11 @@ export default function BlogPostPage() {
         <div className="mx-auto max-w-[800px] px-4 lg:px-8">
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-sm font-body mb-8">
-            <Link href="/" className="text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors">
+            <Link href="/" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
               Trang chủ
             </Link>
             <ChevronRight className="w-4 h-4 text-[var(--text-muted)]" />
-            <Link href="/blog" className="text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors">
+            <Link href="/blog" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
               Blog
             </Link>
             <ChevronRight className="w-4 h-4 text-[var(--text-muted)]" />
@@ -199,7 +199,7 @@ export default function BlogPostPage() {
             {/* Category */}
             {blog.category && (
               <div className="mb-4">
-                <span className="px-3 py-1 bg-[var(--primary)] text-white text-sm font-body font-medium rounded-full">
+                <span className="px-3 py-1 bg-[var(--text-primary)] text-white text-sm font-body font-medium rounded-full">
                   {blog.category}
                 </span>
               </div>
@@ -360,7 +360,7 @@ export default function BlogPostPage() {
           <div className="text-center">
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white font-body font-medium transition-all duration-300 hover:scale-105"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-[var(--text-primary)] hover:bg-[var(--text-primary)] text-white font-body font-medium transition-all duration-300 hover:scale-105"
               style={{ borderRadius: "var(--radius-round)", fontSize: "16px" }}
             >
               <BookOpen className="w-5 h-5" />

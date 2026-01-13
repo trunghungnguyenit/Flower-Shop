@@ -11,6 +11,7 @@ import {
   staggerContainer,
   staggerItem,
 } from "@/components/animations/framer-variants";
+import Image from "next/image";
 
 // ================================================================
 // SCENARIOS SECTION - "Bạn Đang Ở Tình Huống Nào?" với Signature Layout
@@ -42,7 +43,7 @@ export function ScenariosSection() {
   // Sample images for each scenario
   const scenarioImages = [
     "/tang-nguoi-yeu/nguoi-iu-7.jpg",
-    "/tang-sinh-nhat/sinh-nhat-7.jpg", 
+    "/tang-sinh-nhat/sinh-nhat-7.jpg",
     "/tang-me/me-8.jpg",
     "/khai-truong/khai-truong.jpg",
     "/cuoi/cuoi-9.jpg",
@@ -58,7 +59,7 @@ export function ScenariosSection() {
         {/* Section Header */}
         <div className="text-center mb-12">
           <span
-            className="inline-block font-body text-[var(--primary)] tracking-[0.25em] uppercase mb-3 text-xs"
+            className="inline-block font-body text-[var(--text-primary)] tracking-[0.25em] uppercase mb-4"
           >
             Tìm hoa phù hợp
           </span>
@@ -92,7 +93,7 @@ export function ScenariosSection() {
                   className={`
                     flex flex-col lg:flex-row
                     ${!isEven ? 'lg:flex-row-reverse' : ''}
-                    ${isEven ? 'bg-[#F8F6F4]' : 'bg-[#F5F5F5]'}
+                    ${isEven ? 'bg-white' : 'bg-white'}
                     transition-all duration-300 hover:shadow-lg hover:z-10 relative
                     min-h-[200px] lg:min-h-[240px]
                     ${index !== scenarios.length - 1 ? 'border-b border-white/20' : ''}
@@ -101,51 +102,51 @@ export function ScenariosSection() {
                   {/* Content */}
                   <div className="flex-1 p-6 lg:p-8 flex flex-col justify-center">
                     {/* Title */}
-                    <h3 className="text-lg lg:text-xl font-display text-[var(--text-primary)] mb-3 group-hover:text-[var(--primary)] transition-colors">
+                    <h3 className="text-lg lg:text-xl font-display text-[var(--text-primary)] mb-3 group-hover:text-[var(--text-primary)] transition-colors">
                       {scenario.title}
                     </h3>
 
                     {/* Description */}
-                    <p className="text-sm text-[var(--text-secondary)] mb-4 max-w-sm leading-relaxed">
+                    <p className="text-sm text-[var(--text-primary)] mb-4 max-w-sm leading-relaxed">
                       {scenario.tagline}
                     </p>
 
-                    {/* Count Badge */}
+                    {/* CTA Text */}
                     <div className="mb-4">
-                      <span className="inline-flex items-center px-4 py-2 rounded-full text-xs font-medium bg-[var(--primary)]/10 text-[var(--primary-dark)] group-hover:bg-[var(--primary)]/20 transition-colors">
-                        {loading
-                          ? "Đang tải..."
-                          : `${getProductCountByOccasion(
-                              products,
-                              scenario.occasionId
-                            )}+ mẫu hoa`}
-                      </span>
+                      <div className="inline-flex items-center gap-2 px-5 py-2 border border-[var(--text-primary)] 
+                  rounded-full
+                  text-sm font-body font-medium
+                  text-[var(--text-primary)]
+                  hover:bg-[var(--text-primary)] hover:text-white
+                  transition-all duration-300">
+                        XEM HOA
+                        <svg
+                          className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={1.5}
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </div>
                     </div>
 
-                    {/* CTA Text */}
-                    <div className="inline-flex items-center text-[var(--primary)] font-body text-sm tracking-wider uppercase group-hover:text-[var(--primary-dark)] transition-colors font-medium">
-                      XEM HOA
-                      <svg 
-                        className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" 
-                        fill="none" 
-                        stroke="currentColor" 
-                        viewBox="0 0 24 24"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </div>
+
                   </div>
 
                   {/* Image */}
-                  <div className="flex-1 relative min-h-[200px] lg:min-h-[240px] overflow-hidden">
-                    <div className="absolute inset-0">
-                      <img
+                  <div className="flex-1 relative h-full aspect-[4/3] lg:aspect-[1/1]">
+                      <Image
                         src={image}
                         alt={`${scenario.title} - hoa tươi`}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        loading="lazy"
+                        fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
                       />
-                    </div>
                   </div>
                 </div>
               </Link>
