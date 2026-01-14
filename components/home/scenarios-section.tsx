@@ -46,8 +46,8 @@ export function ScenariosSection() {
     "/tang-sinh-nhat/sinh-nhat-7.jpg",
     "/tang-me/me-8.jpg",
     "/khai-truong/khai-truong.jpg",
-    "/cuoi/cuoi-9.jpg",
-    "/decorative-flowers-interior-design.jpg"
+    "/cuoi/cuoi-10.jpg",
+    "/trang-tri/trang-tri-5.jpg"
   ];
 
   return (
@@ -140,7 +140,7 @@ export function ScenariosSection() {
                   </div>
 
                   {/* Image */}
-                  <div className="flex-1 relative h-full aspect-[4/3] lg:aspect-[1/1]">
+                  <div className="relative flex-1 relative h-full aspect-[4/3] lg:aspect-[1/1]">
                       <Image
                         src={image}
                         alt={`${scenario.title} - hoa tươi`}

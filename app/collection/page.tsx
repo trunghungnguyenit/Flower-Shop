@@ -189,7 +189,6 @@ function ProductCard({
                     className="font-body text-[var(--text-secondary)] font-medium"
                     style={{ fontSize: "14px" }}
                   >
-                    Liên hệ để biết giá
                   </span>
                   <motion.button
                     onClick={(e) => {
@@ -197,8 +196,7 @@ function ProductCard({
                       e.stopPropagation()
                       window.open(CONTACT.zaloLink, '_blank', 'noopener,noreferrer')
                     }}
-                    className="inline-flex items-center gap-1 px-3 py-1 bg-[var(--primary)] text-white text-xs font-medium rounded-full hover:bg-[var(--primary-dark)] transition-colors duration-300"
-                    whileTap={{ scale: 0.9 }}
+                    className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[var(--text-primary)] text-[var(--text-white)] text-xs font-medium rounded-full hover:bg-[var(--primary)] hover:text-[var(--text-primary)] transition-colors duration-300 flex-shrink-0"
                   >
                     <MessageCircle className="w-3 h-3" strokeWidth={1.5} />
                     Liên hệ

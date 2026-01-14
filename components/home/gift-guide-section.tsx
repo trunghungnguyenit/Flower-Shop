@@ -37,7 +37,7 @@ export function GiftGuideSection() {
   const giftGuideImages = [
     "/tang-nguoi-yeu/nguoi-iu-13.jpg",
     "/tang-me/me-8.jpg",
-    "/sunflower-birthday-bouquet.jpg",
+    "/tang-sinh-nhat/sinh-nhat-1.jpg",
     "/khai-truong/khai-truong.jpg",
     "/cuoi/cuoi-9.jpg"
   ];
