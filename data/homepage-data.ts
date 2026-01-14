@@ -195,9 +195,9 @@ export const categories = [
   { name: "Khai trương", image: "/khai-truong/khai-truong.jpg", href: "/collection?scenario=khai-truong", count: 28, occasionId: "khai-truong" },
   { name: "Chia buồn", image: "/chia-buon/chia-buon-1.jpg", href: "/collection?scenario=chia-buon", count: 22, occasionId: "chia-buon" },
   { name: "Trang trí", image: "/trang-tri/trang-tri-4.jpg", href: "/collection?scenario=trang-tri", count: 35, occasionId: "trang-tri" },
-  { name: "Hoa Tết", image: "/tet/tet-2.jpg", href: "/collection?scenario=tet", count: 40, occasionId: "tet" },
+  { name: "Hoa Tết", image: "/tet/tet-9.jpg", href: "/collection?scenario=tet", count: 40, occasionId: "tet" },
   // { name: "Chúc mừng", image: "/khai-truong/khai-truong-6.jpg", href: "/collection?scenario=chuc-mung", count: 32, occasionId: "chuc-mung" },
-  { name: "Sự kiện", image: "/su-kien/hoa-su-kien.jpg", href: "/collection?scenario=su-kien", count: 25, occasionId: "su-kien" },
+  { name: "Sự kiện", image: "/su-kien/hoa-su-kien-1.jpg", href: "/collection?scenario=su-kien", count: 25, occasionId: "su-kien" },
 ]
 
 export const uspItems = [
@@ -210,18 +210,18 @@ export const uspItems = [
 export const reviews = [
   {
     name: "Nguyễn Thị Hương",
-    avatar: "/pastel-pink-roses-bouquet-soft-elegant.jpg",
+    avatar: "/tang-nguoi-yeu/nguoi-iu-8.jpg",
     rating: 5,
     content: "Hoa tươi lâu, thiết kế đẹp hơn cả mong đợi. Giao nhanh và rất chuyên nghiệp.",
-    productImage: "/pastel-pink-roses-bouquet-soft-elegant.jpg",
+    productImage: "/tang-nguoi-yeu/nguoi-iu-8.jpg",
     date: "2 ngày trước",
   },
   {
     name: "Trần Văn Minh",
-    avatar: "/red-roses-luxury-basket-arrangement.jpg",
+    avatar: "/tang-me/me-6.jpg",
     rating: 5,
     content: "Vợ mình rất xúc động khi nhận hoa. Shop làm chỉn chu từng chi tiết.",
-    productImage: "/red-roses-luxury-basket-arrangement.jpg",
+    productImage: "/tang-me/me-6.jpg",
     date: "1 tuần trước",
   },
   {

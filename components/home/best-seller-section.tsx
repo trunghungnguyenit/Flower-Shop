@@ -117,13 +117,7 @@ export function BestSellerSection({ products, loading }: BestSellerSectionProps)
                     {/* Badge */}
                     {product.badge && (
                       <span
-                        className={cn(
-                          "absolute top-3 left-3 px-3 py-1 text-black text-xs font-body font-medium",
-                          product.badge === "Best Seller" && "bg-[var(--primary-red)]",
-                          product.badge === "Hot" && "bg-[var(--danger)]",
-                          product.badge === "Sale" && "bg-[var(--accent-gold)] text-[var(--text-primary)]"
-                        )}
-                        style={{ borderRadius: "var(--radius-round)" }}
+                        className="absolute top-3 left-3 px-3 py-1 text-xs font-body font-medium bg-transparent text-white rounded-full"
                       >
                         {product.badge}
                       </span>
@@ -172,7 +166,6 @@ export function BestSellerSection({ products, loading }: BestSellerSectionProps)
                           className="font-body text-[var(--text-secondary)]"
                           style={{ fontSize: "14px", fontWeight: 500 }}
                         >
-                          Liên hệ để biết giá
                         </span>
                       )}
                       
@@ -184,7 +177,7 @@ export function BestSellerSection({ products, loading }: BestSellerSectionProps)
                             e.stopPropagation()
                             window.open(CONTACT.zaloLink, '_blank', 'noopener,noreferrer')
                           }}
-                          className="inline-flex items-center gap-1 px-3 py-1 bg-[var(--primary-red)] text-black text-xs font-medium rounded-full hover:bg-[var(--primary-success)] transition-colors duration-300 flex-shrink-0"
+                          className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[var(--text-primary)] text-[var(--text-white)] text-xs font-medium rounded-full hover:bg-[var(--primary)] hover:text-[var(--text-primary)] transition-colors duration-300 flex-shrink-0"
                         >
                           <MessageCircle className="w-3 h-3" strokeWidth={1.5} />
                           Liên hệ

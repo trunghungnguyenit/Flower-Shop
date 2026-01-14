@@ -36,7 +36,7 @@ export function HeaderSection() {
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled
           ? "bg-white/95 backdrop-blur-xl shadow-[0_2px_20px_rgba(0,0,0,0.06)] py-3"
-          : "bg-transparent backdrop-blur-sm py-5"
+          : "bg-white/60 backdrop-blur-md backdrop-blur-sm py-2"
       )}
     >
       <nav className="mx-auto flex max-w-[1240px] items-center justify-between px-4 lg:px-8">
@@ -66,7 +66,7 @@ export function HeaderSection() {
             <span
               className={cn(
                 "text-[10px] tracking-[0.25em] uppercase font-body transition-colors duration-300",
-                isScrolled ? "text-black" : "text-black/80"
+                isScrolled ? "text-black" : "text-black"
               )}
             >
               Đà Nẵng • Quảng Nam

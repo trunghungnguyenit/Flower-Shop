@@ -34,14 +34,14 @@ export function ProductCard({ name, price, image, slug }: ProductCardProps) {
             <h3 className="font-medium text-black text-base mb-2 line-clamp-2 min-h-[3rem]">{name}</h3>
             <div className="flex items-center justify-between">
               {isZeroPrice ? (
-                <p className="text-black font-medium text-sm">Liên hệ để biết giá</p>
+                <p className="text-black font-medium text-sm"></p>
               ) : (
                 <p className="text-[var(--text-primary)] font-semibold">{price}</p>
               )}
               {isZeroPrice ? (
                 <Button
                   size="sm"
-                  className="text-xs bg-primary text-black hover:bg-primary/90"
+                  className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[var(--text-primary)] text-[var(--text-white)] text-xs font-medium rounded-full hover:bg-[var(--primary)] hover:text-[var(--text-primary)] transition-colors duration-300 flex-shrink-0"
                   onClick={(e) => {
                     e.preventDefault()
                     e.stopPropagation()

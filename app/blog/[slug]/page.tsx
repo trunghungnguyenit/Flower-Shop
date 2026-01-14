@@ -267,7 +267,7 @@ export default function BlogPostPage() {
 
           {/* Featured Image */}
           <motion.div
-            className="relative aspect-[16/9] rounded-2xl overflow-hidden mb-12"
+            className="relative flex-1 relative h-full aspect-[4/3] lg:aspect-[1/1]"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2, ease: premiumEase }}

@@ -43,7 +43,7 @@ export default function OccasionsPage() {
       title: "Tết Nguyên Đán",
       description:
         "Hoa tươi đón xuân, mang lại may mắn và thịnh vượng cho năm mới",
-      image: "/tet/tet-2.jpg",
+      image: "/tet/tet-9.jpg",
       href: "/occasions/new-year",
       icon: Sparkles,
       color: "red",
@@ -94,7 +94,7 @@ export default function OccasionsPage() {
       id: "event-flowers",
       title: "Hoa Sự Kiện",
       description: "Trang trí hoa cho các sự kiện, hội nghị và tiệc tùng",
-      image: "/su-kien/hoa-su-kien.jpg",
+      image: "/su-kien/hoa-su-kien-1.jpg",
       href: "/occasions/event-flowers",
       icon: Calendar,
       color: "purple",

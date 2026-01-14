@@ -404,11 +404,11 @@ export default function BirthdayFlowersPage() {
 
                     <div className="flex items-center justify-between">
                       {product.price > 0 ? (
-                        <span className="font-semibold text-pink-600">
+                        <span className="font-semibold text-[var(--text-primary)]">
                           {product.price.toLocaleString("vi-VN")}đ
                         </span>
                       ) : (
-                        <span className="text-sm text-gray-600">Liên hệ để biết giá</span>
+                        <span className="text-sm text-gray-600"></span>
                       )}
 
                       {product.price > 0 ? (
@@ -435,8 +435,7 @@ export default function BirthdayFlowersPage() {
                             e.stopPropagation()
                             window.open(CONTACT.zaloLink, '_blank', 'noopener,noreferrer')
                           }}
-                          className="px-3 py-1 bg-pink-600 text-white text-xs rounded-full hover:bg-pink-700 transition-colors"
-                          whileTap={{ scale: 0.9 }}
+                          className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[var(--text-primary)] text-[var(--text-white)] text-xs font-medium rounded-full hover:bg-[var(--primary)] hover:text-[var(--text-primary)] transition-colors duration-300 flex-shrink-0"
                         >
                           Liên hệ
                         </motion.button>
