@@ -104,7 +104,7 @@ export default function OccasionsPage() {
       id: "floral-decoration",
       title: "Trang Trí Hoa",
       description: "Dịch vụ trang trí hoa chuyên nghiệp cho mọi không gian",
-      image: "/decorative-flowers-interior-design.jpg",
+      image: "/trang-tri/trang-tri-9.jpg",
       href: "/occasions/floral-decoration",
       icon: Brush,
       color: "emerald",
