@@ -41,7 +41,7 @@ export function ProductCard({ name, price, image, slug }: ProductCardProps) {
               {isZeroPrice ? (
                 <Button
                   size="sm"
-                  className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[var(--text-primary)] text-[var(--text-white)] text-xs font-medium rounded-full hover:bg-[var(--primary)] hover:text-[var(--text-primary)] transition-colors duration-300 flex-shrink-0"
+                  className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[var(--primary-red)] text-[var(--text-white)] text-xs font-medium rounded-full hover:bg-[var(--primary)] hover:text-[var(--text-primary)] transition-colors duration-300 flex-shrink-0"
                   onClick={(e) => {
                     e.preventDefault()
                     e.stopPropagation()

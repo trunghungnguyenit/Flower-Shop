@@ -179,7 +179,7 @@ export const giftGuides: {
   title: string
   description: string
   href: string
-  giftGuideId: string  // Thêm field này để mapping
+  giftGuideId: string
 }[] = [
   { icon: Heart, title: "Cho người yêu", description: "Hoa hồng – hoa lan: đại diện cho tình yêu sâu đậm và chân thành.", href: "/collection?giftGuide=nguoi-yeu", giftGuideId: "nguoi-yeu" },
   { icon: Flower2, title: "Cho mẹ", description: "Hoa ly – cẩm chướng: gửi lời tri ân đến đấng sinh thành.", href: "/collection?giftGuide=me", giftGuideId: "me" },
