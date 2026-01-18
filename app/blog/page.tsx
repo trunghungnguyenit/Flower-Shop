@@ -7,25 +7,11 @@ import { motion, useInView } from "framer-motion";
 import {
   Calendar,
   User,
-  Clock,
-  Tag,
   ChevronRight,
-  Phone,
-  MessageCircle,
-  Menu,
-  X,
   Search,
   ArrowRight,
-  BookOpen,
-  TrendingUp,
-  Heart,
-  MapPin,
-  Mail,
-  Facebook,
-  Instagram,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { CONTACT } from "@/lib/constants";
 import { HeaderSection } from "@/components/header";
 import { FooterSection } from "@/components/footer";
 import { FirebaseApi } from "@/api/firebase";
@@ -36,31 +22,6 @@ import { Blog } from "@/api/api.type";
 // ================================================================
 
 const premiumEase = [0.25, 0.1, 0.25, 1] as const;
-
-const fadeInUp = {
-  initial: { opacity: 0, y: 30 },
-  animate: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: premiumEase },
-  },
-};
-
-const staggerContainer = {
-  initial: {},
-  animate: {
-    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
-  },
-};
-
-const staggerItem = {
-  initial: { opacity: 0, y: 24 },
-  animate: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: premiumEase },
-  },
-};
 
 // ================================================================
 // MAIN PAGE COMPONENT

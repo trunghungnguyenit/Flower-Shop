@@ -10,7 +10,6 @@ export const scenarioToOccasionMap: Record<string, string> = {
   "trang-tri": "trang-tri",
   "chia-buon": "chia-buon",
   "tet": "tet",
-  "chuc-mung": "chuc-mung",
   "su-kien": "su-kien"
 };
 

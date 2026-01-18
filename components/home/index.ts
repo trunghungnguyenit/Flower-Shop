@@ -1,7 +1,0 @@
-export { HeroSection } from "./hero-section"
-export { BestSellerSection } from "./best-seller-section"
-export { CategorySection } from "./category-section"
-export { UspSection } from "./usp-section"
-export { AboutSection } from "./about-section"
-export { ReviewsSection } from "./reviews-section"
-export { QuickOrderSection } from "./quick-order-section"
