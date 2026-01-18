@@ -2,23 +2,19 @@
 
 import { HeaderSection } from "@/components/header"
 import { HeroSection } from "@/components/home/hero-section"
-import { BestSellerSection } from "@/components/home/best-seller-section"
-import { RealCasesSection } from "@/components/home/real-cases-section"
-import { ScenariosSection } from "@/components/home/scenarios-section"
-import { DecorSection } from "@/components/home/decor-section"
-import { 
-  UspSection, 
-  ReviewsSection, 
-  BlogSection 
-} from "@/components/home/other-sections"
-import { GiftGuideSection } from "@/components/home/gift-guide-section"
-import { CategoriesSection } from "@/components/home/categories-section"
-import { QuickOrderSection } from "@/components/home/quick-order-section"
+import { BestSellerSection } from "@/components/home/best-seller/best-seller-section"
+import { ScenariosSection } from "@/components/home/scenarios/scenarios-section"
+import { GiftGuideSection } from "@/components/home/gift-guide/gift-guide-section"
+import { CategoriesSection } from "@/components/home/categories/categories-section"
+import { QuickOrderSection } from "@/components/home/quick-order/quick-order-section"
 import { FooterSection } from "@/components/footer"
-import { StickyContact } from "@/components/home/sticky-contact"
+import { StickyContact } from "@/components/home/sticky/sticky-contact"
 import { useEffect, useState } from "react"
 import { FirebaseApi } from "@/api/firebase"
 import { Product, Blog } from "@/api/api.type"
+import { ReviewsSection } from "@/components/home/reviews/reviews-section"
+import { BlogSection } from "@/components/home/blog/blog-section"
+import { UspSection } from "@/components/home/usp/usp-section"
 
 // ================================================================
 // MAIN PAGE COMPONENT
@@ -72,7 +68,6 @@ useEffect(() => {
     fetchBlogs()
   }, [])
 
-
   return (
     <main className="min-h-screen bg-white">
       {/* Header */}
@@ -84,20 +79,14 @@ useEffect(() => {
       {/* Best Seller - Sản phẩm nổi bật */}
       <BestSellerSection products={products} loading={loading} />
 
-      {/* Real Cases - Khoảnh Khắc Thật */}
-      {/* <RealCasesSection /> */}
-
       {/* Scenarios - Bạn Đang Ở Hoàn Cảnh Nào? */}
       <ScenariosSection />
 
-      {/* Decor Ideas - Trang Trí Ngôi Nhà */}
-      {/* <DecorSection /> */}
-
       {/* Gift Guide - Gợi Ý Quà Theo Người Nhận */}
-      <GiftGuideSection />
+      <GiftGuideSection products={products} loading={loading} />
 
       {/* Categories - Hoa Theo Dịp */}
-      <CategoriesSection />
+      <CategoriesSection products={products} loading={loading} />
 
       {/* USP */}
       <UspSection />
@@ -108,7 +97,7 @@ useEffect(() => {
       {/* Blog */}
       <BlogSection blogs={blogs} loading={blogLoading} />
 
-      {/* Quick Order Form */}
+      {/* Quick Order Form - đặt hàng nhanh */}
       <QuickOrderSection products={products} loading={loading} />
 
       {/* Footer */}

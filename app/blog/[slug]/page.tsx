@@ -8,7 +8,6 @@ import { useParams } from "next/navigation"
 import {
   Calendar,
   User,
-  Clock,
   ChevronRight,
   Phone,
   MessageCircle,
@@ -17,7 +16,6 @@ import {
   BookOpen,
   Copy,
   Facebook,
-  Twitter,
   Check,
 } from "lucide-react"
 import { CONTACT } from "@/lib/constants"
