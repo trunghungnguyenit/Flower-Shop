@@ -108,7 +108,7 @@ export async function POST(request: NextRequest) {
 
 **📝 GHI CHÚ:** ${body.note || 'Không có ghi chú'}
 
-⏰ **Thời gian đặt:** ${new Date().toLocaleString('vi-VN')}`;
+⏰ **Thời gian đặt:** ${new Date().toLocaleString('vi-VN', {timeZone: 'Asia/Ho_Chi_Minh'})}`;
 
     // Send to Discord webhook
     const discordResponse = await fetch(webhookUrl, {
@@ -152,4 +152,5 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
+
 }
