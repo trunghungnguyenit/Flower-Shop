@@ -380,4 +380,26 @@
     align-items: center;
     justify-content: space-between;
   }
+
+  /* Infinite Slider Styles */
+  .infinite-slider {
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .infinite-slider::-webkit-scrollbar {
+    display: none;
+  }
+
+  .infinite-slider-track {
+    display: flex;
+    transition: none;
+  }
+
+  .infinite-slider-item {
+    flex-shrink: 0;
+    scroll-snap-align: start;
+  }
 }
