@@ -42,12 +42,12 @@ export default function ProductDetailPage({ params }: ProductDetailPageProps) {
           // Fetch all products for related products
           const allProductsRes = await FirebaseApi.getProduct()
           if (allProductsRes.ok && Array.isArray(allProductsRes.data)) {
-            // Filter related products (same category, excluding current product, only active)
+            // Filter related products (same occasion, excluding current product, only active)
             const related = allProductsRes.data
               .filter((p: Product) => 
                 p.isActive && 
                 p.id !== productRes.data.id &&
-                p.categoryIds?.some(catId => productRes.data.categoryIds?.includes(catId))
+                p.occasionIds?.some(occasionId => productRes.data.occasionIds?.includes(occasionId))
               )
               .slice(0, 4)
             setRelatedProducts(related)
