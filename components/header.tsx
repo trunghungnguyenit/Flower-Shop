@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Phone, MessageCircle } from "lucide-react";
+import { Menu, X, Phone, MessageCircle, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { CONTACT } from "@/lib/constants";
+import { SearchDialog } from "@/components/products/search-product";
 
 // ================================================================
 // NAVIGATION DATA
@@ -23,6 +24,7 @@ const navigation = [
 export function HeaderSection() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -100,6 +102,24 @@ export function HeaderSection() {
 
         {/* CTA Buttons */}
         <div className="hidden lg:flex items-center gap-4">
+          {/* Search Button */}
+          <button
+            onClick={() => setSearchOpen(true)}
+            className={cn(
+              "flex items-center gap-2 text-sm font-body font-medium transition-colors duration-300 p-2 rounded-full hover:bg-white/10 group",
+              isScrolled
+                ? "text-black hover:text-[var(--primary)]"
+                : "text-black/90 hover:text-black"
+            )}
+            aria-label="Tìm kiếm sản phẩm (Ctrl+K)"
+            title="Tìm kiếm sản phẩm (Ctrl+K)"
+          >
+            <Search className="h-5 w-5" strokeWidth={1.5} />
+            <span className="hidden xl:inline text-xs opacity-60 group-hover:opacity-100 transition-opacity">
+              Tìm Kiếm
+            </span>
+          </button>
+
           <a
             href={CONTACT.phoneLink}
             className={cn(
@@ -131,7 +151,19 @@ export function HeaderSection() {
         </div>
 
         {/* Mobile menu button */}
-        <div className="lg:hidden">
+        <div className="lg:hidden flex items-center gap-2">
+          {/* Mobile Search Button */}
+          <button
+            onClick={() => setSearchOpen(true)}
+            className={cn(
+              "p-2 transition-colors duration-300 rounded-full hover:bg-white/10",
+              isScrolled ? "text-black" : "text-black"
+            )}
+            aria-label="Tìm kiếm sản phẩm"
+          >
+            <Search className="h-5 w-5" />
+          </button>
+
           <button
             className={cn(
               "p-2 transition-colors duration-300",
@@ -195,6 +227,9 @@ export function HeaderSection() {
           </div>
         </div>
       </div>
+
+      {/* Search Dialog */}
+      <SearchDialog open={searchOpen} onOpenChange={setSearchOpen} />
     </header>
   );
 }
