@@ -328,18 +328,6 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
               <p className="text-sm text-gray-500 mb-6 max-w-sm">
                 Nhập tên hoa, dịp lễ, người tặng hoặc mức giá để tìm kiếm
               </p>
-              <div className="text-xs text-gray-400 space-y-2 bg-white rounded-lg p-4 border border-gray-100">
-                <p className="font-medium text-gray-600"><strong>Ví dụ tìm kiếm:</strong></p>
-                <div className="flex flex-wrap gap-2 justify-center">
-                  <span className="px-2 py-1 bg-blue-50 text-blue-600 rounded-full text-xs">"hoa tặng mẹ"</span>
-                  <span className="px-2 py-1 bg-green-50 text-green-600 rounded-full text-xs">"trang trí"</span>
-                  <span className="px-2 py-1 bg-purple-50 text-purple-600 rounded-full text-xs">"sinh nhật"</span>
-                </div>
-                <div className="flex flex-wrap gap-2 justify-center">
-                  <span className="px-2 py-1 bg-orange-50 text-orange-600 rounded-full text-xs">"dưới 500k"</span>
-                  <span className="px-2 py-1 bg-pink-50 text-pink-600 rounded-full text-xs">"người yêu"</span>
-                </div>
-              </div>
             </div>
           )}
           </div>
